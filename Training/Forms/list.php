@@ -136,9 +136,9 @@ else $userfile = $username;
             </div>
         </div>
     </div>
-
-    <!--<a href="#" id="newbieLink" onclick="displayBlock(0)"><img src="../../Images/beginner.jpg" id='newbie' style="margin: 6% -4% 25% 24%"></a>
-    <a href="#" id="interLink" onclick="displayBlock(1)"><img src="../../Images/intermediate.png" id='intermediate' style="margin: 0% 0% 0% -23%"></a>-->
+    <input type="button" id="trainingButton" value="Continue">
+    <a href="#" id="newbieLink" href=""><img src="../../Images/beginner.jpg" id='newbie' style="margin: 6% -4% 25% 24%"></a>
+    <a href="#" id="interLink" href=""><img src="../../Images/intermediate.png" id='intermediate' style="margin: 0% 0% 0% -23%"></a>
     <div id="trainingProgress">
         <span>Progress Bar</span>
         <div id="progressBar"></div>
@@ -224,13 +224,25 @@ else $userfile = $username;
             }
         }
 
-        function displayBlock(block) {
-            if(block == 0) {
+        //Count the number of completed training documents to display in a progress bar
+        function trainingProgress() {
+            var xhttp = new XMLHttpRequest();
+            progress = 0;
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                   progress = progressComplete(this);
+                   if(this.readyState == 4) {
+                       xhttp.progress = progress;
+                       console.log(xhttp.progress);
+
+                       $('#trainingButton').click(function () {
+                           progress = xhttp.progress;
+                           if(progress < 50) {
+                               window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
 
                 var newType = {"col": '<?php echo $collection ?>', "type": 'newbie', "loc": "children", "user": '<?php echo $username?>'};
                 var welcomeMsg = '<h1 id="welcomeMsg">Welcome to your training list<h1>';
-                $('#newbieLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie');
-
+                               
                 $.ajax({
                     type: 'post',
                     url: "collectionTrainingXML.php",
@@ -238,7 +250,7 @@ else $userfile = $username;
                 });
             }
 
-            if(block ==1){
+            if(progress > 50){
 
                 var interType = {"col": '<?php echo $collection ?>', "type": 'inter', "loc": "children", "user": '<?php echo $username?>'};
                 $('#interLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter');
@@ -249,29 +261,17 @@ else $userfile = $username;
                     data: interType
                 });
             }
-        }
-        $(document).ready(function() {
-            oTable = $('#dtable').dataTable({
-                "bJQueryUI": true,
-                "order": [[3, "desc"]],
-                'sPaginationType': 'full_numbers'
-            });
-        } );
+                       });
 
-        $(function() {
-            $('#ddl_switch').change(function() {
-                this.form.submit();
-            });
-        });
 
-        //Count the number of completed training documents to display in a progress bar
-        function trainingProgress() {
-            var xhttp = new XMLHttpRequest();
-            progress = 0;
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    progressComplete(this);
+
+
+
+
+                   }
+
                 }
+
             };
             xhttp.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
             xhttp.send();
@@ -280,7 +280,6 @@ else $userfile = $username;
                 var xmlDoc = xml.responseXML;
                 completeTags = xmlDoc.getElementsByTagName('completed');
                 for(i=0; i < completeTags.length; i++) {
-                    //console.log(completeTags[i].childNodes[0].nodeValue);
                     if(completeTags[i].childNodes[0].nodeValue == 1)
                         progress++;
                 }
@@ -298,11 +297,60 @@ else $userfile = $username;
                         elem.style.textAlign = 'center';
                         elem.innerHTML = progress + ' %';
                     }
+                    return progress
                 }
+                progress = frame();
+                return progress;
             }
+            console.log(xhttp.readyState);
+//            do{
+//                console.log(xhttp.text);
+//            }
+//            while(xhttp.readyState <= 4)
         }
+        trainingProgress();
 
-        trainingProgress()
+//        function displayList(progress) {
+//            if(block == 0) {
+//
+//                var newType = {"col": '<?php //echo $collection ?>//', "type": 'newbie', "loc": "children", "user": '<?php //echo $username?>//'};
+//                var welcomeMsg = '<h1 id="welcomeMsg">Welcome to your training list<h1>';
+//                $('#newbieLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie');
+//
+//                $.ajax({
+//                    type: 'post',
+//                    url: "collectionTrainingXML.php",
+//                    data: newType
+//                });
+//            }
+//
+//            if(block ==1){
+//
+//                var interType = {"col": '<?php //echo $collection ?>//', "type": 'inter', "loc": "children", "user": '<?php //echo $username?>//'};
+//                $('#interLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter');
+//
+//                $.ajax({
+//                    type: 'post',
+//                    url: "collectionTrainingXML.php",
+//                    data: interType
+//                });
+//            }
+//        }
+        $(document).ready(function() {
+            oTable = $('#dtable').dataTable({
+                "bJQueryUI": true,
+                "order": [[3, "desc"]],
+                'sPaginationType': 'full_numbers'
+            });
+        } );
+
+        $(function() {
+            $('#ddl_switch').change(function() {
+                this.form.submit();
+            });
+        });
+
+
 
     </script>
 	</body>
