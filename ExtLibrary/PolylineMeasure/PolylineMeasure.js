@@ -3,7 +3,6 @@
     var _measureControlId = 'polyline-measure-control';
     var _unicodeClass = 'polyline-measure-unicode-icon';
     var measureMarker;
-    var boolMeasureMode;
     /**
      * Polyline Measure class
      * @extends L.Control
@@ -169,7 +168,7 @@
                  * @type {String}
                  * @default
                  */
-                color: '#000',
+                color: '#5aa23d',
                 /**
                  * Weight of the circle
                  * @type {Number}
@@ -540,7 +539,7 @@
                 }
                 self._updateTooltipPosition(e.latlng);
                 var distance = e.latlng.distanceTo(self._lastPoint);
-                self._updateTooltipDistance(self._distance + distance, distance);
+                self._updateTooltipDistance(self._distance + distance, distance, self._lastPoint, e.latlng);
             }
         },
         /**
@@ -572,7 +571,7 @@
                 }
                 self._updateTooltipPosition(e.latlng);
                 var distance = e.latlng.distanceTo(self._lastPoint);
-                self._updateTooltipDistance(self._distance + distance, distance);
+                self._updateTooltipDistance(self._distance + distance, distance, self._lastPoint, e.latlng);
                 self._distance += distance;
             }
             self._createTooltip(e.latlng);
@@ -585,15 +584,14 @@
                     weight: self.options.line.weight,
                     interactive: false
                 }).addTo(self._layerPaint);
-                self._startCircle = new L.marker(self._lastPoint, {
+                self._startCircle = new L.CircleMarker(self._lastPoint, {
                     // Style of the Circle marking the start of the Polyline
-                    // color: self.options.startingPoint.color,
-                    // weight: self.options.startingPoint.weight,
-                    // fillColor: self.options.startingPoint.fillColor,
-                    // fillOpacity: self.options.startingPoint.fillOpacity,
-                    // radius: self.options.startingPoint.radius,
-                    // interactive: false,
-                    icon: targetIcon
+                     color: self.options.startingPoint.color,
+                     weight: self.options.startingPoint.weight,
+                     fillColor: self.options.startingPoint.fillColor,
+                     fillOpacity: self.options.startingPoint.fillOpacity,
+                     radius: self.options.startingPoint.radius,
+                     interactive: false
                 }).addTo(self._layerPaint);
                 self._startCircle.on('click', function () {
                     gcpMarker(this._leaflet_events.click[0].context, 'measureMarker');
@@ -753,13 +751,47 @@
          * Update the tooltip distance
          * @param {Number} total        Total distance
          * @param {Number} difference   Difference in distance between 2 points
+         * @param {latlng} last created point
+         * @param {latlng} current hovering point
          * @private
          */
-        _updateTooltipDistance: function(total, difference) {
+        _updateTooltipDistance: function(total, difference, lastPoint, currentPoint) {
+            var bearing = L.GeometryUtil.bearing(lastPoint, currentPoint);
+            var bearingLat = '';
+            var bearingDept = '';
+            if(bearing > -90 && bearing < 90)
+                bearingLat = 'N';
+            if(bearing < -89.999 || bearing > 90.0001)
+                bearingLat = 'S';
+            if (bearing > 0)
+                bearingDept = 'E';
+            else if (bearing < 0){
+                bearingDept = 'W';
+                bearing = Math.abs(bearing);
+            }
+
+            if (bearingLat == 'S' && bearingDept == 'E')
+                bearing = 180 - bearing;
+            else if (bearingLat == 'S' && bearingDept == 'W')
+                bearing = Math.abs(bearing - 180);
+
+
+            bearingValue = String(bearing);
+            bearingArray = bearingValue.split('.');
+            degrees = bearingArray[0];
+            bearingDecimals = '0.'+bearingArray[1];
+            minutes = 60 * parseFloat(bearingDecimals);
+            minutesText = minutes.toFixed(0);
+            minutesValue = String(minutes);
+            minutesArray = minutesValue.split('.');
+            minutesDecimals = '0.' + minutesArray[1];
+            seconds = String(parseInt(60 * parseFloat(minutesDecimals)));
+
+
             var self = this;
             var totalRound = self._getDistance(total);
             var differenceRound = self._getDistance(difference);
-            var text = '<div class="polyline-measure-tooltip-total">' + totalRound.value + '&nbsp;' +  totalRound.unit + '</div>';
+            var text = '<div class="polyline-measure-tooltip-total">' + totalRound.value + '&nbsp;' +  totalRound.unit + '    ' + bearingLat + ' ' + degrees + '\xB0 ' + minutesText + "' " + seconds + '" ' + bearingDept +'</div>';
             if (differenceRound.value > 0 && totalRound.value != differenceRound.value) {
                 text += '<div class="polyline-measure-tooltip-difference">(+' + differenceRound.value + '&nbsp;' +  differenceRound.unit + ')</div>';
             }
