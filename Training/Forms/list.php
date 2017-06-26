@@ -65,9 +65,13 @@ else $userfile = $username;
             </div>
             <div id="divright">
                 <h2 id="page_title">Training</h2>
+
+                <!--Training Progress/Progress Bar-->
                 <div id="trainingProgress">
                     <div id="progressBar"></div>
                 </div>
+
+                <!--Document table list-->
                 <div id="divscroller" style="display: none;">
                     <table id="dtable" class="display compact cell-border hover stripe" cellspacing="0" width="100%" data-page-length='20'>
                         <thead>
@@ -83,117 +87,111 @@ else $userfile = $username;
 
                         <tbody>
                         <!--Block of code that load the information from the xml file to the table-->
-                        <?php
-                        $training_parent = "../Training_Collections";
-                        //Collection directory
-                        $training_collection_dir = $training_parent.'/'.$collection;
-                        //User directory
-                        $training_user_dir = $training_collection_dir.'/'.$userfile;
-                        $document = new DOMDocument();
-                        if ($_GET['type'] == 'newbie') {
-                            $document->load($training_user_dir.'/'.$userfile.'_newbie.xml');
-                        } elseif ($_GET['type'] == 'inter') {
-                            $document->load($training_user_dir.'/'.$userfile.'_inter.xml');
-                        }
-
-                        $nodes = $document->getElementsByTagName('document');
-                        $count = 0;
-                        //echo "<td align = 'center'><a href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type\">$libraryindex</a></td>";
-                        foreach ($nodes as $node) {
-                            foreach ($node->childNodes as $child) {
-                                if ($child->nodeName == 'libraryindex') {
-                                    $libraryindex = $child->nodeValue;
-                                }
-                                elseif ($child->nodeName == 'title') {
-                                    $title = $child->nodeValue;
-                                }
-                                elseif ($child->nodeName == 'classification') {
-                                    $classification = $child->nodeValue;
-                                }
-                                elseif ($child->nodeName == 'needsreview') {
-                                    $needsreview = $child->nodeValue;
-                                }
-                                elseif ($child->nodeName == 'id')
-                                {
-                                    $id = $child->nodeValue;
-                                }
+                            <?php
+                            $training_parent = "../Training_Collections";
+                            //Collection directory
+                            $training_collection_dir = $training_parent.'/'.$collection;
+                            //User directory
+                            $training_user_dir = $training_collection_dir.'/'.$userfile;
+                            $document = new DOMDocument();
+                            if ($_GET['type'] == 'newbie') {
+                                $document->load($training_user_dir.'/'.$userfile.'_newbie.xml');
+                            } elseif ($_GET['type'] == 'inter') {
+                                $document->load($training_user_dir.'/'.$userfile.'_inter.xml');
                             }
-                            $type = $_GET['type'];
+
+                            $nodes = $document->getElementsByTagName('document');
+                            $count = 0;
+                            foreach ($nodes as $node) {
+                                foreach ($node->childNodes as $child) {
+                                    if ($child->nodeName == 'libraryindex') {
+                                        $libraryindex = $child->nodeValue;
+                                    }
+                                    elseif ($child->nodeName == 'title') {
+                                        $title = $child->nodeValue;
+                                    }
+                                    elseif ($child->nodeName == 'classification') {
+                                        $classification = $child->nodeValue;
+                                    }
+                                    elseif ($child->nodeName == 'needsreview') {
+                                        $needsreview = $child->nodeValue;
+                                    }
+                                    elseif ($child->nodeName == 'id')
+                                    {
+                                        $id = $child->nodeValue;
+                                    }
+                                }
+                                $type = $_GET['type'];
 
 
-                            echo '<tr>';
-                            echo "<td align = 'center'><a href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type\">$libraryindex</a></td>";
-                            echo "<td align = 'center'>$libraryindex</td>";
-                            echo "<td align = 'center'>$title</td>";
-                            echo "<td align = 'center'>$classification</td>";
-                            echo "<td align = 'center'>".(($needsreview == 0) ? 'No' : 'Yes')."</td>";
-                            echo '</tr>';
-                        }
-                        ?>
+                                echo '<tr>';
+                                echo "<td align = 'center'><a href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type\">$libraryindex</a></td>";
+                                echo "<td align = 'center'>$libraryindex</td>";
+                                echo "<td align = 'center'>$title</td>";
+                                echo "<td align = 'center'>$classification</td>";
+                                echo "<td align = 'center'>".(($needsreview == 0) ? 'No' : 'Yes')."</td>";
+                                echo '</tr>';
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <input type="button" id="trainingButton" value="Continue">
-    <a href="#" id="newbieLink" href=""><img src="../../Images/beginner.jpg" id='newbie' style="margin: 6% -4% 25% 24%"></a>
-    <a href="#" id="interLink" href=""><img src="../../Images/intermediate.png" id='intermediate' style="margin: 0% 0% 0% -23%"></a>
-    <div id="trainingProgress">
-        <span>Progress Bar</span>
-        <div id="progressBar"></div>
-    </div>
-    <h1 id="welcomeMsg" style="display: none; position: absolute; left: 35%; top: 35%; z-index:2;">Welcome to the Document List</h1>
+
+    <!--Continue button-->
+    <div id="continue"><input type="button" class="bluebtn" id="trainingButton" value="Continue"></div>
 
 
     <!--Table container-->
-	<div id = "interContainer" style="display: none">
-	 		<?php if($_SESSION["role"] == 'Admin'){ ?>
-	 		 <form enctype="multipart/form-data" id="switch" name="switch" method="GET">
-	 			<p>Switch View:
-	 			<select id="ddl_switch" name="user">
-	 				<option value="">Select a file...</option>
-	 				<?php
-	 					foreach($file_arr as $a)
-	 					{
-	 						if(isset($_GET['user']) && $_GET['user'] == $a && $a != "") 
-	 							echo '<option selected value="' . $a . '">' . $a . '</option>';
-	 						else echo '<option value="' . $a . '">' . $a . '</option>';
-	 					}
-	 				?>
-	 			</select>
-	 		</form>
-	 		<?php } ?>
-	 		<form enctype="multipart/form-data" onsubmit = "return confirmReset()" action = ""  method = "POST">
-	 			<input  align="center" class="button button-blue" name="resetProfile" type="submit" value="Reset Training Session" />
-	 		</form>
-
-        <?php //Array with all the xml files in the directory
-
-
-        ?>
-
-	 		<?php
-	 			if (isset($_POST['resetProfile'])) {
-	 					if(copy("data.xml", $userfile . ".xml" ))
-	 					{
-	 						echo "<script>window.location = 'list.php'</script>";
-	 					}
-	 					else
-	 					{
-	 						print "<script type=\"text/javascript\">";
-							print "alert('An error has occured')";
-							print "</script>";
-	 					}
-	 			}
-	 		 ?>
-
-
-	     	<table id = "tableMap1" >
-
-	    	</table>
-	    <br><br>
-	</div>
+<!--	<!--<div id = "interContainer" style="display: none">-->
+<!--	 		--><?php //if($_SESSION["role"] == 'Admin'){ ?>
+<!--	 		 <form enctype="multipart/form-data" id="switch" name="switch" method="GET">-->
+<!--	 			<p>Switch View:-->
+<!--	 			<select id="ddl_switch" name="user">-->
+<!--	 				<option value="">Select a file...</option>-->
+<!--	 				--><?php
+//	 					foreach($file_arr as $a)
+//	 					{
+//	 						if(isset($_GET['user']) && $_GET['user'] == $a && $a != "")
+//	 							echo '<option selected value="' . $a . '">' . $a . '</option>';
+//	 						else echo '<option value="' . $a . '">' . $a . '</option>';
+//	 					}
+//	 				?>
+<!--	 			</select>-->
+<!--	 		</form>-->
+<!--	 		--><?php //} ?>
+<!--	 		<form enctype="multipart/form-data" onsubmit = "return confirmReset()" action = ""  method = "POST">-->
+<!--	 			<input  align="center" class="button button-blue" name="resetProfile" type="submit" value="Reset Training Session" />-->
+<!--	 		</form>-->
+<!---->
+<!--        --><?php ////Array with all the xml files in the directory
+//
+//
+//        ?>
+<!---->
+<!--	 		--><?php
+//	 			if (isset($_POST['resetProfile'])) {
+//	 					if(copy("data.xml", $userfile . ".xml" ))
+//	 					{
+//	 						echo "<script>window.location = 'list.php'</script>";
+//	 					}
+//	 					else
+//	 					{
+//	 						print "<script type=\"text/javascript\">";
+//							print "alert('An error has occured')";
+//							print "</script>";
+//	 					}
+//	 			}
+//	 		 ?>
+<!---->
+<!---->
+<!--	     	<table id = "tableMap1" >-->
+<!---->
+<!--	    	</table>-->
+<!--	    <br><br>-->
+<!--	</div>-->-->
 
     <script type="text/javascript">
 
@@ -205,6 +203,7 @@ else $userfile = $username;
             {
                 $('#newbie').css('display', 'none');
                 $('#intermediate').css('display', 'none');
+                $('#continue').css('display', 'none');
                 $('#divscroller').css('display', 'block');
             }
 
@@ -226,116 +225,155 @@ else $userfile = $username;
 
         //Count the number of completed training documents to display in a progress bar
         function trainingProgress() {
-            var xhttp = new XMLHttpRequest();
+            var xhttp_newbie = new XMLHttpRequest();
+            var xhttp_inter = new XMLHttpRequest();
             progress = 0;
-            xhttp.onreadystatechange = function() {
+            xhttp_newbie.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                   progress = progressComplete(this);
+                   //progress = progressComplete(this);
+                    completedTags = 0;
+                    completedTags = xmlGetComplete(this);
+
+
                    if(this.readyState == 4) {
-                       xhttp.progress = progress;
-                       console.log(xhttp.progress);
+                       xhttp_newbie.progress = progress;
+                       console.log(xhttp_newbie.progress);
 
                        $('#trainingButton').click(function () {
-                           progress = xhttp.progress;
+                           progress = xhttp_newbie.progress;
                            if(progress < 50) {
+
+                               var newType = {"col": '<?php echo $collection ?>', "type": 'newbie', "loc": "children", "user": '<?php echo $username?>'};
                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
 
-                var newType = {"col": '<?php echo $collection ?>', "type": 'newbie', "loc": "children", "user": '<?php echo $username?>'};
-                var welcomeMsg = '<h1 id="welcomeMsg">Welcome to your training list<h1>';
-                               
-                $.ajax({
-                    type: 'post',
-                    url: "collectionTrainingXML.php",
-                    data: newType
-                });
-            }
+                                $.ajax({
+                                    type: 'post',
+                                    url: "collectionTrainingXML.php",
+                                    data: newType
+                                });
+                           }
 
-            if(progress > 50){
+                            if(progress > 50){
 
-                var interType = {"col": '<?php echo $collection ?>', "type": 'inter', "loc": "children", "user": '<?php echo $username?>'};
-                $('#interLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter');
+                                var interType = {"col": '<?php echo $collection ?>', "type": 'inter', "loc": "children", "user": '<?php echo $username?>'};
+                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
 
-                $.ajax({
-                    type: 'post',
-                    url: "collectionTrainingXML.php",
-                    data: interType
-                });
-            }
+                                $.ajax({
+                                    type: 'post',
+                                    url: "collectionTrainingXML.php",
+                                    data: interType
+                                });
+                            }
                        });
-
-
-
-
-
 
                    }
 
                 }
 
             };
-            xhttp.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
-            xhttp.send();
 
-            function progressComplete(xml) {
+            xhttp_inter.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //progress = progressComplete(this);
+                    completedTags += xmlGetComplete(this);
+                    console.log(completedTags);
+                    if(this.readyState == 4) {
+                        xhttp_inter.progress = progress;
+
+//                        $('#trainingButton').click(function () {
+//                            progress = xhttp_inter.progress;
+//                            if(progress < 50) {
+//
+//                                var newType = {"col": '<?php //echo $collection ?>//', "type": 'newbie', "loc": "children", "user": '<?php //echo $username?>//'};
+//                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
+//
+//                                $.ajax({
+//                                    type: 'post',
+//                                    url: "collectionTrainingXML.php",
+//                                    data: newType
+//                                });
+//                            }
+//
+//                            if(progress > 50){
+//
+//                                var interType = {"col": '<?php //echo $collection ?>//', "type": 'inter', "loc": "children", "user": '<?php //echo $username?>//'};
+//                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
+//
+//                                $.ajax({
+//                                    type: 'post',
+//                                    url: "collectionTrainingXML.php",
+//                                    data: interType
+//                                });
+//                            }
+//                        });
+
+                    }
+
+                }
+
+            };
+            xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
+            xhttp_newbie.send();
+
+            xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml' ?>", true);
+            xhttp_inter.send();
+
+            function xmlGetComplete(xml) {
                 var xmlDoc = xml.responseXML;
-                completeTags = xmlDoc.getElementsByTagName('completed');
-                for(i=0; i < completeTags.length; i++) {
-                    if(completeTags[i].childNodes[0].nodeValue == 1)
+                elemCompleted = xmlDoc.getElementsByTagName('completed');
+                elemCompletedLenght = elemCompleted.length;
+                for(i=0; i < elemCompletedLenght ; i++) {
+                    if(elemCompleted[i].childNodes[0].nodeValue == 1)
                         progress++;
                 }
-                var elem = document.getElementById("progressBar");
-                var width = (progress/completeTags.length)*100;
-                progress = parseInt(width);
-                var id = setInterval(frame, 121);
-                function frame() {
-                    if (width >= progress+1) {
-                        clearInterval(id);
-                    } else {
-                        width++;
-                        elem.style.width = width + '%';
-                        elem.style.backgroundColor = 'green';
-                        elem.style.textAlign = 'center';
-                        elem.innerHTML = progress + ' %';
-                    }
-                    return progress
-                }
-                progress = frame();
                 return progress;
             }
-            console.log(xhttp.readyState);
-//            do{
-//                console.log(xhttp.text);
+
+//            function progressComplete(xml) {
+//
+//                for(i=0; i < completeTagsLenght; i++) {
+//                    if(completeTags[i].childNodes[0].nodeValue == 1)
+//                        progress++;
+//                }
+//                var elem = document.getElementById("progressBar");
+//                if(completeTagsLenght == 0) {
+//                    console.log('tags');
+//                    completeTagsLenght = .01;
+//                }
+//                var width = (progress/completeTagsLenght)*100;
+//                progress = parseInt(width);
+//
+//
+//                xmlURL = String(xml.responseXML.URL);
+//                if(xmlURL == 'http://localhost/BandoCat/Training/Training_Collections/jobfolder/JMartinez/JMartinez_newbie.xml') {
+//                    xml.completed = progress;
+//                }
+//
+//                else if (xmlURL == 'http://localhost/BandoCat/Training/Training_Collections/jobfolder/JMartinez/JMartinez_inter.xml') {
+//                    xml.completed = progress;
+//                }
+//
+//                var id = setInterval(frame, 121);
+//                function frame() {
+//                    if (width >= progress+1) {
+//                        clearInterval(id);
+//                    } else {
+//                        width++;
+//                        elem.style.width = width + '%';
+//                        elem.style.backgroundColor = 'green';
+//                        elem.style.textAlign = 'center';
+//                        elem.innerHTML = progress + ' %';
+//                    }
+//                    return progress
+//                }
+//                progress = frame();
+//                return progress;
 //            }
-//            while(xhttp.readyState <= 4)
-        }
+       }
+
         trainingProgress();
 
-//        function displayList(progress) {
-//            if(block == 0) {
-//
-//                var newType = {"col": '<?php //echo $collection ?>//', "type": 'newbie', "loc": "children", "user": '<?php //echo $username?>//'};
-//                var welcomeMsg = '<h1 id="welcomeMsg">Welcome to your training list<h1>';
-//                $('#newbieLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie');
-//
-//                $.ajax({
-//                    type: 'post',
-//                    url: "collectionTrainingXML.php",
-//                    data: newType
-//                });
-//            }
-//
-//            if(block ==1){
-//
-//                var interType = {"col": '<?php //echo $collection ?>//', "type": 'inter', "loc": "children", "user": '<?php //echo $username?>//'};
-//                $('#interLink').attr('href', 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter');
-//
-//                $.ajax({
-//                    type: 'post',
-//                    url: "collectionTrainingXML.php",
-//                    data: interType
-//                });
-//            }
-//        }
+
         $(document).ready(function() {
             oTable = $('#dtable').dataTable({
                 "bJQueryUI": true,
@@ -349,8 +387,6 @@ else $userfile = $username;
                 this.form.submit();
             });
         });
-
-
 
     </script>
 	</body>
