@@ -46,6 +46,7 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
     <script src="javascript/l.geosearch.provider.esri.js"></script>
     <script type="text/javascript" src="javascript/bandocatRectification.js"></script>
     <script src="../../ExtLibrary/PolylineMeasure/PolylineMeasure.js"></script>
+    <script src="../../ExtLibrary/L.GeometryUtil/L.GeometryUtil.js"></script>
     <script type="text/javascript" src="../../ExtLibrary/L.Control.MousePosition/L.Control.MousePosition.js"></script>
 </head>
 <style>
