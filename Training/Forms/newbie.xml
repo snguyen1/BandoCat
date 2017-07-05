@@ -15,11 +15,10 @@
 		<endday></endday>
 		<endyear></endyear>
 
-		<author1></author1>
-		<author2></author2>
-		<author3></author3>
-		<comments>
-		</comments>
+		<author></author>
+		<author></author>
+		<author></author>
+		<comments></comments>
 
 		<needsreview>1</needsreview>
 		<needsinput>1</needsinput>
@@ -49,8 +48,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -80,8 +78,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -111,8 +108,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -142,8 +138,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -173,8 +168,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -204,8 +198,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -235,8 +228,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -266,8 +258,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -297,8 +288,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -328,8 +318,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -359,8 +348,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -390,8 +378,7 @@
 	<author1></author1>
 	<author2></author2>
 	<author3></author3>
-	<comments>
-	</comments>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>

@@ -25,6 +25,7 @@
 		public $xmlfile;
 		public $url = "../Training_Newbie_Images/Images/";
 		public $thumb_url = "../Training_Newbie_Images/Thumbnails/";
+		public $completed;
 	}
 
 
@@ -70,6 +71,7 @@
 					$this->author1 = $a->author1;
 					$this->author2 = $a->author2;
 					$this->author3 = $a->author3;
+					$this->completed = $a->completed;
 
 					$this->libraryindex = $a->libraryindex;
 					$this->frontimage = $this->url. $a->frontimage;

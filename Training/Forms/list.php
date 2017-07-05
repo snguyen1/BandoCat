@@ -49,6 +49,7 @@ else $userfile = $username;
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="../../ExtLibrary/DataTables-1.10.12/css/jquery.dataTables_themeroller.css">
         <link rel = "stylesheet" type = "text/css" href = "../../Master/master.css" >
+    <link rel="stylesheet" type="text/css" href="../styles.css"/>
     <!--Script-->
     <!-- jQuery -->
     <script type="text/javascript" charset="utf8" src="../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.js"></script>
@@ -64,7 +65,7 @@ else $userfile = $username;
                 include '../../Master/sidemenu.php' ?>
             </div>
             <div id="divright">
-                <h2 id="page_title">Training</h2>
+                <h2 id="page_title">Training <?php if($_GET['type']== 'newbie' || $_GET['type'] == 'intern') echo $_GET['type'];?></h2>
 
                 <!--Training Progress/Progress Bar-->
                 <div id="trainingProgress">
@@ -136,12 +137,85 @@ else $userfile = $username;
                         </tbody>
                     </table>
                 </div>
+                <div class="slideshow-container" style="display: none">
+                    <div class="mySlides">
+                        <div class="numbertext">1 / 3</div>
+                        <img class="slideImg" src="../images/slide000.PNG" style="width:80%">
+                        </div>
+                    <div class="mySlides">
+                        <div class="numbertext">2 / 3</div>
+                        <img class="slideImg" src="../images/slide00.PNG" style="width:80%">
+                        <div class="text"><!--<h2>This is the Document Table List. <ul><li>Library Index</li></ul></h2>--></div>
+                    </div>
+                    <div class="mySlides">
+                        <div class="numbertext">2 / 3</div>
+                        <img class="slideImg" src="../images/slide01.PNG" style="width:100%">
+                        <div class="text">Welcome to your training. Through this sideshow you will have a quick glimpse about the cataloging process of Jobfolders</div>
+                    </div>
+                    <div class="mySlides">
+                        <div class="numbertext">4 / 3</div>
+                        <!--Continue button-->
+                        <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" value="Click to Continue To your Training"></div>
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <div style="text-align:center">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+                    </div>
+                </div>
+                <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" id="trainingButton" value="Click to Continue To your Training"></div>
+            </div>
             </div>
         </div>
     </div>
 
-    <!--Continue button-->
-    <div id="continue"><input type="button" class="bluebtn" id="trainingButton" value="Continue"></div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+    
+    
+    
+    
+    
 
 
     <!--Table container-->
@@ -191,7 +265,7 @@ else $userfile = $username;
 <!---->
 <!--	    	</table>-->
 <!--	    <br><br>-->
-<!--	</div>-->-->
+<!--	</div>-->
 
     <script type="text/javascript">
 
@@ -199,13 +273,24 @@ else $userfile = $username;
 
         //Function that creates the training directory by collection, user, and training type and it is triggered when the document is ready
         $( document ).ready(function() {
-            if("<?php echo $_GET['type']?>" == 'inter' || "<?php echo $_GET['type']?>" == 'newbie')
-            {
+            if("<?php echo $_GET['type']?>" == 'newbie' || "<?php echo $_GET['type']?>" == 'inter'){
                 $('#newbie').css('display', 'none');
                 $('#intermediate').css('display', 'none');
-                $('#continue').css('display', 'none');
+                $('div').remove('#continue');
                 $('#divscroller').css('display', 'block');
+                $('div').remove('.slideshow-container');
+                $( "#divscroller" ).after( "<div id='buttonList' style='padding: 5%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>" );
             }
+
+            var progressText = $("#progressBar").text();
+
+
+            oTable = $('#dtable').dataTable({
+                "bJQueryUI": true,
+                "order": [[3, "desc"]],
+                'sPaginationType': 'full_numbers'
+            });
+
 
             $.ajax({
                 type: 'post',
@@ -222,165 +307,120 @@ else $userfile = $username;
                 return false;
             }
         }
-
+        var progress = 0;
         //Count the number of completed training documents to display in a progress bar
         function trainingProgress() {
             var xhttp_newbie = new XMLHttpRequest();
             var xhttp_inter = new XMLHttpRequest();
-            progress = 0;
+
+
             xhttp_newbie.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                   //progress = progressComplete(this);
                     completedTags = 0;
+                    elemCompletedLenght = 0;
+                    completeTagsLenght = xmlGetLenght(this);
                     completedTags = xmlGetComplete(this);
-
-
-                   if(this.readyState == 4) {
-                       xhttp_newbie.progress = progress;
-                       console.log(xhttp_newbie.progress);
-
-                       $('#trainingButton').click(function () {
-                           progress = xhttp_newbie.progress;
-                           if(progress < 50) {
-
-                               var newType = {"col": '<?php echo $collection ?>', "type": 'newbie', "loc": "children", "user": '<?php echo $username?>'};
-                               window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
-
-                                $.ajax({
-                                    type: 'post',
-                                    url: "collectionTrainingXML.php",
-                                    data: newType
-                                });
-                           }
-
-                            if(progress > 50){
-
-                                var interType = {"col": '<?php echo $collection ?>', "type": 'inter', "loc": "children", "user": '<?php echo $username?>'};
-                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
-
-                                $.ajax({
-                                    type: 'post',
-                                    url: "collectionTrainingXML.php",
-                                    data: interType
-                                });
-                            }
-                       });
-
-                   }
+                    progress = progressComplete(completedTags, completeTagsLenght);
 
                 }
-
-            };
-
-            xhttp_inter.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    //progress = progressComplete(this);
-                    completedTags += xmlGetComplete(this);
-                    console.log(completedTags);
-                    if(this.readyState == 4) {
-                        xhttp_inter.progress = progress;
-
-//                        $('#trainingButton').click(function () {
-//                            progress = xhttp_inter.progress;
-//                            if(progress < 50) {
-//
-//                                var newType = {"col": '<?php //echo $collection ?>//', "type": 'newbie', "loc": "children", "user": '<?php //echo $username?>//'};
-//                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
-//
-//                                $.ajax({
-//                                    type: 'post',
-//                                    url: "collectionTrainingXML.php",
-//                                    data: newType
-//                                });
-//                            }
-//
-//                            if(progress > 50){
-//
-//                                var interType = {"col": '<?php //echo $collection ?>//', "type": 'inter', "loc": "children", "user": '<?php //echo $username?>//'};
-//                                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
-//
-//                                $.ajax({
-//                                    type: 'post',
-//                                    url: "collectionTrainingXML.php",
-//                                    data: interType
-//                                });
-//                            }
-//                        });
-
-                    }
-
-                }
-
             };
             xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
             xhttp_newbie.send();
 
+            xhttp_inter.onreadystatechange = function() {
+                console.log(this.readyState);
+                console.log(this.status);
+                console.log(xhttp_newbie.readyState);
+                if (this.readyState == 4 && this.status == 200) {
+                    completeTagsLenght = xmlGetLenght(this);
+                    completedTags = xmlGetComplete(this);
+                    progress = progressComplete(completedTags, completeTagsLenght);
+                }
+
+            };
             xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml' ?>", true);
             xhttp_inter.send();
 
-            function xmlGetComplete(xml) {
-                var xmlDoc = xml.responseXML;
-                elemCompleted = xmlDoc.getElementsByTagName('completed');
-                elemCompletedLenght = elemCompleted.length;
-                for(i=0; i < elemCompletedLenght ; i++) {
-                    if(elemCompleted[i].childNodes[0].nodeValue == 1)
-                        progress++;
-                }
-                return progress;
-            }
 
-//            function progressComplete(xml) {
+
 //
-//                for(i=0; i < completeTagsLenght; i++) {
-//                    if(completeTags[i].childNodes[0].nodeValue == 1)
-//                        progress++;
-//                }
-//                var elem = document.getElementById("progressBar");
-//                if(completeTagsLenght == 0) {
-//                    console.log('tags');
-//                    completeTagsLenght = .01;
-//                }
-//                var width = (progress/completeTagsLenght)*100;
-//                progress = parseInt(width);
-//
-//
-//                xmlURL = String(xml.responseXML.URL);
-//                if(xmlURL == 'http://localhost/BandoCat/Training/Training_Collections/jobfolder/JMartinez/JMartinez_newbie.xml') {
-//                    xml.completed = progress;
-//                }
-//
-//                else if (xmlURL == 'http://localhost/BandoCat/Training/Training_Collections/jobfolder/JMartinez/JMartinez_inter.xml') {
-//                    xml.completed = progress;
-//                }
-//
-//                var id = setInterval(frame, 121);
-//                function frame() {
-//                    if (width >= progress+1) {
-//                        clearInterval(id);
-//                    } else {
-//                        width++;
-//                        elem.style.width = width + '%';
-//                        elem.style.backgroundColor = 'green';
-//                        elem.style.textAlign = 'center';
-//                        elem.innerHTML = progress + ' %';
-//                    }
-//                    return progress
-//                }
-//                progress = frame();
-//                return progress;
-//            }
+            var sequence = 0;
+            function progressComplete(completedTags, completeTagsLength ) {
+                var width = 1;
+                progressLevel = (completedTags/completeTagsLength)*100;
+                sequence = parseInt(progressLevel);
+
+                if(progressLevel == 0) {
+                    progressLevel = 3;
+                    $('.slideshow-container').css('display', 'block');
+                    $('#trainingButton').css('display', 'none');
+                    if("<?php echo $_GET['type']?>" == 'newbie')
+                        $('.slideshow-container').css('display', 'none');
+                }
+
+                else{
+                    $('.slideshow-container').css('display', 'none')
+                }
+
+                if(sequence == 38 && '<?php echo $_GET['type']?>' == 'newbie'){
+                    $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
+                }
+
+                var id = setInterval(frame, 20);
+                function frame() {
+                    if (width >= progressLevel-1)
+                        clearInterval(id);
+
+                     else {
+                        width++;
+                        $('#progressBar').width(width+'%').height(20).css("background-color", "green").css("height", "").css("text-align", "center").text(sequence + ' %');
+
+                    }
+                }
+            }
        }
+var elemCompletedLenght = 0;
+        function xmlGetLenght(xml) {
+            var xmlDoc = xml.responseXML;
+            elemCompleted = xmlDoc.getElementsByTagName('completed');
+            elemCompletedLenght += elemCompleted.length;
+            return elemCompletedLenght
+        }
+
+var sumCompletedTags = 0;
+        function xmlGetComplete(xml) {
+            var xmlDoc = xml.responseXML;
+            elemCompleted = xmlDoc.getElementsByTagName('completed');
+            elemLenght = elemCompleted.length;
+            for (i = 0; i < elemLenght; i++) {
+                if (elemCompleted[i].childNodes[0].nodeValue == 1)
+                    sumCompletedTags++
+            }
+            return sumCompletedTags;
+        }
 
         trainingProgress();
 
+        //On click events
+        $('input[name="linkLists"]').click(function () {
+            var progressText = parseInt($('#progressBar').text());
 
-        $(document).ready(function() {
-            oTable = $('#dtable').dataTable({
-                "bJQueryUI": true,
-                "order": [[3, "desc"]],
-                'sPaginationType': 'full_numbers'
-            });
-        } );
+            if(progressText < 38) {
+                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
+            }
+
+            if(progressText >= 38){
+                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
+            }
+        });
+
+        function backList() {
+            window.location.href = "http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=none"
+        }
+
+       function linkInter() {
+            window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
+        }
 
         $(function() {
             $('#ddl_switch').change(function() {

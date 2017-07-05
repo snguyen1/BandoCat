@@ -30,9 +30,10 @@ if ($training_location == 'parent') {
 
 if ($training_location == 'children') {
     $training_user = $data['user'];
-    $training_type = $data['type'];
+    $training_newbie = $data['ntype'];
+    $training_inter = $data['itype'];
 
-    if ($training_type == 'newbie') {
+    if ($training_newbie == 'newbie') {
         $training_XML = $training_user_dir.'/'.$training_user . "_newbie.xml";
         if (file_exists($training_XML)) {
             echo "Welcome Back";
@@ -46,7 +47,7 @@ if ($training_location == 'children') {
         }
     }
 
-    if ($training_type == 'inter') {
+    if ($training_inter == 'inter') {
         $training_XML = $training_user_dir.'/'.$training_user . "_inter.xml";
         if (file_exists($training_XML)) {
             echo "Welcome Back";
