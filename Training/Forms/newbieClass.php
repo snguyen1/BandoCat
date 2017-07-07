@@ -32,9 +32,7 @@
 
 	class JobFolder extends Document
 	{
-		public $author1;
-		public $author2;
-		public $author3;
+		public $author;
 		public $inasubfolder; //bool
 		public $subfoldercomments;
 		public $classification;
@@ -48,8 +46,6 @@
 			$this->id = $mapid;
 
 			$xml = simplexml_load_file($this->xmlfile) or die("Cannot open file!");
-           // print_r($this);
-            //print_r($xml->document->frontimage);
 			foreach($xml->document as $a)
 			{
 				if($a->id == $this->id)
@@ -68,9 +64,7 @@
 					$this->endday = $a->endday;
 					$this->endmonth = $a->endmonth;
 					$this->endyear = $a->endyear;
-					$this->author1 = $a->author1;
-					$this->author2 = $a->author2;
-					$this->author3 = $a->author3;
+					$this->author = $a->author;
 					$this->completed = $a->completed;
 
 					$this->libraryindex = $a->libraryindex;

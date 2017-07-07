@@ -174,15 +174,6 @@ else $userfile = $username;
     </div>
 
 
-
-
-
-
-
-
-
-
-
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -328,9 +319,6 @@ else $userfile = $username;
             xhttp_newbie.send();
 
             xhttp_inter.onreadystatechange = function() {
-                console.log(this.readyState);
-                console.log(this.status);
-                console.log(xhttp_newbie.readyState);
                 if (this.readyState == 4 && this.status == 200) {
                     completeTagsLenght = xmlGetLenght(this);
                     completedTags = xmlGetComplete(this);

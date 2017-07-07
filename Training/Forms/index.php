@@ -162,11 +162,21 @@ foreach ($file->document as $a) {
                             </div>
                             <!-- DOCUMENT AUTHOR -->
                             <div class="cell">
-                                <span class="label">Document Author:</span>
-                                <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php if(count($doc1->author1) > 0)echo $doc1->author1 ?>"/>
-                                <span style="padding-right:5px"></span>
-                                <input type="button" id="more_fields" onclick="add_fields(null);" value="+"/>
-                                <span id="authorcell"></span>
+                                <div class='authorsCell' id="author0">
+                                    <span class="label">Document Author:</span>
+                                    <input type="text" class="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
+                                    <span style="padding-right:5px"></span>
+                                    <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null);" value="+"/>
+                                    <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
+                                </div>
+
+                                <?php $lenAuthors = count($doc1->author->name);
+                                for ($d = 1; $d < $lenAuthors; $d++) {
+                                    echo '<div class="authorsCell" id="author'.$d.'"><span class="label">Document Author:</span>
+                                    <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="'.$doc1->author->name[$d].'"/></div>';
+                                }
+                                ?>
+
                             </div>
                         </td>
 
@@ -260,10 +270,6 @@ foreach ($file->document as $a) {
 
 <?php
 $data = file_get_contents('php://input');
-var_dump($data);
-var_dump($_POST);
-
-
 ?>
 
 
@@ -300,16 +306,24 @@ var_dump($_POST);
       ***********************************************/
       var max = 5;
       var author_count = 0;
-      function add_fields(val) {
+      function add_fields(index, val) {
           if(val == null)
               val = "";
           if(author_count >= max)
               return false;
           author_count++;
-          var objTo = document.getElementById('authorcell');
-          var divtest = document.createElement("div");
-          divtest.innerHTML = '<br><span class="label">Document Author ' + (author_count+1) + '</span><input type = "text" name = "txtAuthor[]" autocomplete="off" id = "txtAuthor" size="26" value="' + val + '" list="lstAuthor" />';
-          objTo.appendChild(divtest);
+          $('#author'+(index-1)).after('' +
+              '<div class="authorsCell" id="author'+ index +'">' +
+              '<span class="label">Document Author: </span>' +
+              '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
+              '</div>')
+      }
+
+      function remove_fields(index) {
+          console.log(index);
+          if(index < 2)
+              return false;
+          $('.authorsCell').last().remove()
       }
 
       formArray = [];
@@ -334,9 +348,6 @@ var_dump($_POST);
           for(var e = 0; e < authorsName.length; e++) {
               formJSON.txtAuthor[e] = authorsName[e].value;
           }
-
-          console.log(formJSON);
-          console.log('e');
 
           $.ajax({
               type: 'post',
