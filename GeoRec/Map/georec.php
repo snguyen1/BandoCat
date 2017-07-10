@@ -424,7 +424,7 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
         //add tiles to raster viewer
         L.tileLayer(tiles, {
             noWrap: true,
-            attribution: ''
+            attribution: '<a href="http://spatialquerylab.com/">Spatial Query Lab {SQL}</a>'
         }).addTo(raster);
 
         L.control.polylineMeasure({

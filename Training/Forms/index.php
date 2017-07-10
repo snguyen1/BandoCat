@@ -70,25 +70,38 @@ foreach ($file->document as $a) {
             <div id="divleft">
                 <?php include '../../Master/header.php';
                 include '../../Master/sidemenu.php' ?>
-            </div>
+                <div id="descriptionBox">
+                    <table id="tableClass">
+                        <tr>
+                            <th>
+                                <p id="txtClass">Classifications</p>
+                                <select id="selClass"><?php classification($classification_arr, $doc1->classification);?></select></td>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td><p id="tdClass">td class</p></td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
         </div>
 
 
         <div id="divright">
             <h2> Input Training Session </h2>
-            <div id="divscroller" style="height: 776px;">
+            <div id="divscroller" style="height: 776px">
                 <!--<p id="field"> (*) required field <br><br> (Hover mouse on 'Needs Review' to know instruction) </p>-->
                 <form id="theform" name="theform" method="post">
                     <table class="Account_Table">
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
                             <div class="cell">
-                                <span class="label"><span style = "color:red;"> * </span>Library Index:</span>
+                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Library Index:</mark><p hidden><b></b><strong>Library Index:</strong>The library index is the name of a scanned document. Copy and paste the image’s name into the textbox exactly as you see it.<br><i>Example: </i><?php echo $doc1->libraryindex; ?></p></span>
                                 <input type = "text" name = "txtLibraryIndex" id = "txtLibraryIndex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
                             <!-- TITLE -->
                             <div class="cell">
-                                <span class="label"><span style = "color:red;"> * </span>Document Title:</span>
+                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Document Title:</mark><p hidden><b></b><strong>Document Title:</strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes:</strong>An envelope will always be given the title of the library index.</p></span>
                                 <input type = "text" name = "txtTitle" id = "txtTitle" size="26" required="true" value='<?php echo $doc1->title; ?>' />
                             </div>
                             <!-- NEEDS REVIEW -->
@@ -188,7 +201,8 @@ foreach ($file->document as $a) {
                                 <br><br><br>
                             </div>
                             <!-- THUMBNAIL LINKS -->
-                            <div class="cell">
+                            <div id="classificationDescription"></div>
+                            <div class="cell" id="scanThumbnails">
                                 <table>
                                     <tr>
                                         <!--SCAN OF FRONT-->
@@ -326,6 +340,29 @@ $data = file_get_contents('php://input');
           $('.authorsCell').last().remove()
       }
 
+
+
+      $('#descriptionBox').change(function () {
+          classification = $('#docClassifications option:selected').text();
+          var descriptionCheck = $('#descriptionCheck').is(':checked');
+
+          if(descriptionCheck) {
+              $('#scanThumbnails').hide();
+              if (classification == 'Field Note')
+                  $("#classificationDescription").text('This is a field note description.');
+              else if(classification == 'Survey Calculation')
+                  $("#classificationDescription").text('This is a Survey Calculation description.');
+              else
+                  $("#classificationDescription").text('')
+          }
+
+          else
+              $('#scanThumbnails').show();
+      });
+
+
+
+
       formArray = [];
       authorArray = [];
       $("#theform").on("submit", function (e) {
@@ -439,6 +476,24 @@ $data = file_get_contents('php://input');
         box-shadow: 4px 4px 4px #36c476;
         width: 200px;
         padding: 10px 10px;
+    }
+    descriptionBox{
+        color: #e62014;
+    }
+#tableClass {
+    width: 88%;
+    box-shadow: 1px -1px 3px;
+    margin: -11% 0% 0% 9%;
+    border-radius: 5%;
+}
+    #selClass {
+        width: 50%;
+        margin-left: 48%;
+    }
+
+    #txtClass {
+        position: absolute;
+        margin: 0% 0% 0% 0%;
     }
 
 </style>

@@ -73,5 +73,6 @@ function writeXMLtag($id, $tag, $data, $username){
             $tag->item($id)->nodeValue = $data;
 	}
 $document->save($filename);
+    clearstatcache();
 }
 ?>

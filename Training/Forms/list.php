@@ -175,6 +175,7 @@ else $userfile = $username;
 
 
     <script>
+
         var slideIndex = 1;
         showSlides(slideIndex);
 
@@ -312,26 +313,22 @@ else $userfile = $username;
                     completeTagsLenght = xmlGetLenght(this);
                     completedTags = xmlGetComplete(this);
                     progress = progressComplete(completedTags, completeTagsLenght);
+                    xhttp_inter.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            completeTagsLenght = xmlGetLenght(this);
+                            completedTags = xmlGetComplete(this);
+                            progress = progressComplete(completedTags, completeTagsLenght);
+                        }
 
+                    };
+                    xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml' ?>", true);
+                    xhttp_inter.send();
                 }
             };
             xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
             xhttp_newbie.send();
 
-            xhttp_inter.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    completeTagsLenght = xmlGetLenght(this);
-                    completedTags = xmlGetComplete(this);
-                    progress = progressComplete(completedTags, completeTagsLenght);
-                }
 
-            };
-            xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml' ?>", true);
-            xhttp_inter.send();
-
-
-
-//
             var sequence = 0;
             function progressComplete(completedTags, completeTagsLength ) {
                 var width = 1;
