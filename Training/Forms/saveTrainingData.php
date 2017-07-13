@@ -27,7 +27,7 @@ function writeXMLtag($id, $tag, $data, $username){
    	$document  = new DOMDocument();
 
 //Determine if the file exist so to create a new folder with the new xml files; newbie and intern
-    $filename = "../Training_Collections/jobfolder/" . $username . "/" . $username . "_newbie.xml";
+    $filename = "../Training_Collections/jobfolder/" . $username . "/" . $username . "_".$_POST['type'].".xml";
 	$document->load($filename);
     if ($tag == 'author') {
         $author = $document->getElementsByTagName($tag)->item($id);

@@ -47,6 +47,7 @@ else $userfile = $username;
 	<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
     <!-- Style CSS -->
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="../../ExtLibrary/DataTables-1.10.12/css/jquery.dataTables_themeroller.css">
         <link rel = "stylesheet" type = "text/css" href = "../../Master/master.css" >
     <link rel="stylesheet" type="text/css" href="../styles.css"/>
@@ -55,6 +56,8 @@ else $userfile = $username;
     <script type="text/javascript" charset="utf8" src="../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.js"></script>
     <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="../../ExtLibrary/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -65,7 +68,7 @@ else $userfile = $username;
                 include '../../Master/sidemenu.php' ?>
             </div>
             <div id="divright">
-                <h2 id="page_title">Training <?php if($_GET['type']== 'newbie' || $_GET['type'] == 'intern') echo $_GET['type'];?></h2>
+                <h2 id="page_title">Training <?php if($_GET['type']== 'newbie') echo $_GET['type']; else echo "Intermediate"; ?></h2>
 
                 <!--Training Progress/Progress Bar-->
                 <div id="trainingProgress">
@@ -74,10 +77,10 @@ else $userfile = $username;
 
                 <!--Document table list-->
                 <div id="divscroller" style="display: none;">
-                    <table id="dtable" class="display compact cell-border hover stripe" cellspacing="0" width="100%" data-page-length='20'>
+                    <table id="dtable" class="display compact cell-border hover stripe" cellspacing="0" width="100%" data-page-length='10'>
                         <thead>
                         <tr>
-                            <th>File Name</th>
+                            <th>Document Link</th>
                             <th>Library Index</th>
                             <th>Document Title</th>
                             <th>Classification</th>
@@ -154,12 +157,15 @@ else $userfile = $username;
                     </div>
                     <div class="mySlides">
                         <div class="numbertext">4 / 3</div>
-                        <!--Continue button-->
+
+
+                        <div id="continueInter"></div>
+                        
                         <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" value="Click to Continue To your Training"></div>
                     </div>
 
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <a class="prevSlide" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="nextSlide" onclick="plusSlides(1)">&#10095;</a>
                     <div style="text-align:center">
                         <span class="dot" onclick="currentSlide(1)"></span>
                         <span class="dot" onclick="currentSlide(2)"></span>
@@ -167,8 +173,54 @@ else $userfile = $username;
                         <span class="dot" onclick="currentSlide(4)"></span>
                     </div>
                 </div>
-                <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" id="trainingButton" value="Click to Continue To your Training"></div>
-            </div>
+                <!--Continue button-->
+                <div id="continueTraining">
+                    <span id="continueNewbi" class="continueSpan"><a href="http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie"><img src="../images/BandoCatScan.PNG" class="bandocatImage"></a></span>
+                    <span id="continueInter" class="continueSpan"><img src="../images/BandoCatScan.PNG" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
+                    <div id="trainingTabs">
+                        <ul>
+                            <li><a href="#tabs-1">Training Tips</a></li>
+                            <li><a href="#tabs-2">Help</a></li>
+                            <li><a href="#tabs-3">Admin</a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            <ul>
+                                <li>Always leave the Needs Review field as yes</li>
+                            </ul>
+                        </div>
+                        <div id="tabs-2">
+                            <p>Ana's contact Info</p>
+                        </div>
+                        <div id="tabs-3">
+                            <table width="100%" style="text-align:center">
+                                <tr>
+                                    <td><label class="unselectable" for="username">Username</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="txtUsername" name="username" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="unselectable" for="password">Password</label></td>
+                                    <td>
+                                        <input type="password" id="txtPassword" name="password" required>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="submit" name = "login" id="btnSubmit" value="Login" class="bluebtn"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><p id="txt_error"></p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -260,29 +312,31 @@ else $userfile = $username;
 <!--	</div>-->
 
     <script type="text/javascript">
-
-        var trainingCollectionsJSON =  {"col": '<?php echo $collection ?>', "user": '<?php echo $username?>', "loc": 'parent'};
+    var trainingCollectionsJSON =  {"col": '<?php echo $collection ?>', "user": '<?php echo $username?>', "loc": 'parent'};
 
         //Function that creates the training directory by collection, user, and training type and it is triggered when the document is ready
         $( document ).ready(function() {
             if("<?php echo $_GET['type']?>" == 'newbie' || "<?php echo $_GET['type']?>" == 'inter'){
                 $('#newbie').css('display', 'none');
                 $('#intermediate').css('display', 'none');
-                $('div').remove('#continue');
+                $('div').remove('#continueTraining');
                 $('#divscroller').css('display', 'block');
                 $('div').remove('.slideshow-container');
                 $( "#divscroller" ).after( "<div id='buttonList' style='padding: 5%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>" );
             }
 
-            var progressText = $("#progressBar").text();
 
-
-            oTable = $('#dtable').dataTable({
+            $('#dtable').dataTable({
                 "bJQueryUI": true,
                 "order": [[3, "desc"]],
-                'sPaginationType': 'full_numbers'
+                //'sPaginationType': 'full_numbers',
+                "lengthMenu": [10, 25, 50],
+                "iDisplayLength":10
             });
 
+            $( function() {
+                $( "#trainingTabs" ).tabs();
+            } );
 
             $.ajax({
                 type: 'post',
@@ -300,6 +354,7 @@ else $userfile = $username;
             }
         }
         var progress = 0;
+        var frameDisplay = 0;
         //Count the number of completed training documents to display in a progress bar
         function trainingProgress() {
             var xhttp_newbie = new XMLHttpRequest();
@@ -338,6 +393,7 @@ else $userfile = $username;
                 if(progressLevel == 0) {
                     progressLevel = 3;
                     $('.slideshow-container').css('display', 'block');
+                    $("#continueTraining").css('display', 'none');
                     $('#trainingButton').css('display', 'none');
                     if("<?php echo $_GET['type']?>" == 'newbie')
                         $('.slideshow-container').css('display', 'none');
@@ -347,14 +403,23 @@ else $userfile = $username;
                     $('.slideshow-container').css('display', 'none')
                 }
 
-                if(sequence == 38 && '<?php echo $_GET['type']?>' == 'newbie'){
-                    $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
-                }
-
-                var id = setInterval(frame, 20);
+                var id = setInterval(frame, 10);
                 function frame() {
-                    if (width >= progressLevel-1)
+                    if (width >= progressLevel-1){
+                        frameDisplay++;
                         clearInterval(id);
+                        if(sequence >= 38 && '<?php echo $_GET['type']?>' == 'newbie' && frameDisplay == 2){
+                            $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
+                        }
+                        if(sequence >= 38 && frameDisplay == 2) {
+                            $("#bandocatInter").css('opacity', '1');
+                            $("#bandocatInter").hover(function(){
+                                $(this).css("cursor", "pointer");
+                            });
+                        }
+
+                    }
+
 
                      else {
                         width++;
@@ -387,14 +452,15 @@ var sumCompletedTags = 0;
         trainingProgress();
 
         //On click events
-        $('input[name="linkLists"]').click(function () {
+        $('#bandocatInter').click(function () {
             var progressText = parseInt($('#progressBar').text());
 
             if(progressText < 38) {
-                window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=newbie';
+                return false;
             }
 
             if(progressText >= 38){
+                $("#bandocatInter").css('opacity', '1');
                 window.location.href = 'http://localhost/BandoCat/Training/Forms/list.php?col=jobfolder&action=training&type=inter';
             }
         });
@@ -412,6 +478,8 @@ var sumCompletedTags = 0;
                 this.form.submit();
             });
         });
+
+
 
     </script>
 	</body>

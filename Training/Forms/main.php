@@ -1,6 +1,6 @@
 <?php
 
-	$classification_arr = ["","Field Note","Survey Calculation","Legal Document","Map/Blueprint","Folder Cover","Separation Sheet","Envelope/Binding","Note","Stencil","Legal Document Draft","Correspondence","Legal Description"];
+	$classification_arr = ["None","Field Note","Survey Calculation","Legal Document","Map/Blueprint","Folder Cover","Separation Sheet","Envelope/Binding","Note","Stencil","Legal Document Draft","Correspondence","Legal Description"];
 	$classification_desc = ["",
 							"An actual page from a field book or a typed report of field book notes. They are often titled 'Field Notes' or is a list of survey point information.",
 							"Recorded arithmetic pertaining to a survey. Often contains sketches and on yellow legal paper.",

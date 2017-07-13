@@ -21,10 +21,10 @@
 		<needsreview>1</needsreview>
 		<needsinput>1</needsinput>
 
-		<frontimage></frontimage>
-		<backimage></backimage>
-		<frontthumbnail></frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<frontimage>SampleDocFront.tif</frontimage>
+		<backimage>SampleDocBack.tif</backimage>
+		<frontthumbnail>SampleDocFront.jpg</frontthumbnail>
+		<backthumbnail>SampleDocBack.jpg</backthumbnail>
 		<completed>0</completed>
 	</document>
 <document collection = "jobfolder">

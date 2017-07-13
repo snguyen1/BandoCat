@@ -18,20 +18,19 @@
 		public $needsinput; //bool
 		public $fronturl;
 		public $backurl;
+		public $frontimage;
+		public $backimage;
 		public $frontthumbnail;
 		public $backtthumbnail;
 		public $xmlfile;
 		public $url = "../jobfolder/maps/";
 		public $thumb_url = "../jobfolder/thumbnails/";
+		public $completed;
 	}
-
-
 
 	class JobFolder extends Document
 	{
-		public $author1;
-		public $author2;
-		public $author3;
+		public $author;
 		public $inasubfolder; //bool
 		public $subfoldercomments;
 		public $classification;
@@ -63,16 +62,14 @@
 					$this->endday = $a->endday;
 					$this->endmonth = $a->endmonth;
 					$this->endyear = $a->endyear;
-					$this->author1 = $a->author1;
-					$this->author2 = $a->author2;
-					$this->author3 = $a->author3;
+					$this->author = $a->author;
+					$this->completed = $a->completed;
 
 					$this->libraryindex = $a->libraryindex;
 					$this->frontimage = $this->url. $a->frontimage;
 					$this->backimage = $this->url . $a->backimage;
 					$this->frontthumbnail = $this->thumb_url . $a->frontthumbnail;
 					$this->backthumbnail = $this->thumb_url . $a->backthumbnail;
-
 					$found = 1;
 				}
 				if($found == 1)

@@ -28,8 +28,6 @@
 		public $completed;
 	}
 
-
-
 	class JobFolder extends Document
 	{
 		public $author;
