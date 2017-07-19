@@ -10,7 +10,10 @@ $training_collection_dir = $training_parent.'/'.$training_col;
 //User directory
 $training_user_dir = $training_collection_dir.'/'.$training_user;
 
-if ($training_location == 'parent') {
+
+//The parent attribute refers to the parent directory, with the user name as file name, which will store the
+// users' XML files
+
 
     $training_user = $data['user'];
 
@@ -26,9 +29,9 @@ if ($training_location == 'parent') {
     else
         mkdir($training_user_dir, 07000);
 
-}
 
-if ($training_location == 'children') {
+
+
     $training_user = $data['user'];
     $training_newbie = $data['ntype'];
     $training_inter = $data['itype'];
@@ -60,7 +63,6 @@ if ($training_location == 'children') {
             fclose($myfile);
             copy( "inter.xml", $training_XML);
         }
-    }
 }
 
 

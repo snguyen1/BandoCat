@@ -85,7 +85,7 @@ else header('Location: ../../');
 <script>
     //On click event that check for the existence of the users training XML documents
     $('#training').click(function () {
-        var newType = {"col": '<?php echo $collection ?>', "ntype": 'newbie', "itype": 'inter', "loc": "children", "user": '<?php echo $username?>'};
+        var newType = {"col": '<?php echo $collection ?>', "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
         $.ajax({
                 type: 'post',
                 url: "../../Training/Forms/collectionTrainingXML.php",

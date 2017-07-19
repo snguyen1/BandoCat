@@ -9,6 +9,7 @@ $session = new SessionManager();
 $username = $_GET["user"];
 $collection = $_GET['col'];
 $type = $_GET['type'];
+$priv = $_GET['priv'];
 
 
 
@@ -453,8 +454,16 @@ $data = file_get_contents('php://input')
                   console.log(error)
               }
           });
+          var trainLocation = function winLocation(type) {
+              var trainLoc = "";
+              if("<?php echo $priv?>" == 'admin')
+                  trainLoc = 'http://localhost/BandoCat/Training/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
+              else
+                  trainLoc = 'http://localhost/BandoCat/Training/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
+              return trainLoc;
+          }
 
-          window.location.replace("./list.php?col=<?php echo $_GET['col']; ?>&action=training&type=<?php echo $_GET['type']; ?>")
+          window.location.replace(trainLocation("<?php echo $type ?>"));
       })
 
 
