@@ -511,6 +511,7 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
                     gcpList[rastermarkerIndex].rlong = marker._latlng.lng;
                     rCoords =rc.project(event.target._latlng);
 
+                    //Georec Bug
                     gcpList[rastermarkerIndex].x = rCoords.x;
                     gcpList[rastermarkerIndex].y = rCoords.y;
                       rastermarkerIndex.text(gcpList[rastermarkerIndex].x);
