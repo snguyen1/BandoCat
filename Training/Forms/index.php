@@ -12,14 +12,6 @@ $type = $_GET['type'];
 $priv = $_GET['priv'];
 
 
-
-/*print_r($_GET['user']);
-if (isset($_GET["user"])) {
-    $userfile = str_replace(".xml", "", $_GET["user"]);
-    if ($userfile == "")
-        $userfile = $username;
-} else $userfile = $username;*/
-
 if ($type == 'newbie') {
     include 'newbieClass.php';
 } elseif ($type == 'inter') {
@@ -138,7 +130,7 @@ foreach ($file->document as $a) {
                                         <strong>Subfolder Comments: </strong>The first document of a subfolder will say what to expect within the subfolder. If looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.
                                     </p>
                                 </span>
-                                <textarea cols = "35" name="txtSubfolderComments" id="txtSubfolderComments"/><?php echo $doc1->subfoldercomments; ?></textarea>
+                                <textarea cols = "30" name="txtSubfolderComments" id="txtSubfolderComments"/><?php echo $doc1->subfoldercomments; ?></textarea>
                             </div>
                             <!-- CLASSIFICATION -->
                             <div class="cell">
@@ -168,7 +160,7 @@ foreach ($file->document as $a) {
                                         <strong>Classifications Comments: </strong>This is reserved only for the folder’s envelope. Copy what is seen on the envelope into this box.
                                     </p>
                                 </span>
-                                <textarea rows = "2" cols = "35" id="txtClassificationComments" name="txtClassificationComments"/><?php echo $doc1->classificationcomments; ?></textarea>
+                                <textarea rows = "2" cols = "30" id="txtClassificationComments" name="txtClassificationComments"/><?php echo $doc1->classificationcomments; ?></textarea>
                             </div>
                             <!-- GET START DDL MONTH -->
                             <div class="cell">
@@ -230,15 +222,18 @@ foreach ($file->document as $a) {
                                         <strong>Document Author: </strong>Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.
                                     </p>
                                 </span>
+                                    <div style="width: 110%">
                                     <input type="text" class="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
                                     <span style="padding-right:5px"></span>
-                                    <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null);" value="+"/>
-                                    <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
-                                </div>
+
+                                        <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null);" value="+"/>
+                                        <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
+                                    </div>
+                                    </div>
 
                                 <?php $lenAuthors = count($doc1->author->name);
                                 for ($d = 1; $d < $lenAuthors; $d++) {
-                                    echo '<div class="authorsCell" id="author'.$d.'"><span class="label">Document Author: </span>
+                                    echo '<div class="authorsCell" id="author'.$d.'" style="margin: 1% 0% 0% -1.5%"><span class="label">Document Author: </span>
                                     <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="'.$doc1->author->name[$d].'"/></div>';
                                 }
                                 ?>
@@ -258,7 +253,7 @@ foreach ($file->document as $a) {
                                         <strong>Comments: </strong>Any additional information that needs to be included from the document. This can include the individuals involved in a correspondence, metadata from a map, sheet number, and job folder number.
                                     </p>
                                 </span>
-                                <textarea rows = "4" cols = "35" id="txtComments" name="txtComments"/><?php echo $doc1->comments; ?></textarea>
+                                <textarea rows = "4" cols = "30" id="txtComments" name="txtComments"/><?php echo $doc1->comments; ?></textarea>
                                 <br><br><br>
                             </div>
                             <!-- THUMBNAIL LINKS -->
@@ -302,7 +297,6 @@ foreach ($file->document as $a) {
                             <td colspan="2">
                                 <div class="cell" style="text-align: center;padding-top:20px">
                                     <!-- Hidden inputs that are passed when the update button is hit -->
-                                    <span><input type="reset" id="btnReset" name="btnReset" value="Reset" class="bluebtn"/></span>
                                     <input type = "hidden" id="txtDocID" name = "txtDocID" value = "<?php echo $doc_id;?>" />
                                     <input type = "hidden" id="txtAction" name="txtAction" value="catalog" />  <!-- catalog or review -->
                                     <input type = "hidden" id="txtCollection" name="txtCollection" value="<?php echo $collection; ?>" />
@@ -389,7 +383,7 @@ $data = file_get_contents('php://input')
           if(author_count >= max)
               return false;
           $('#author'+(index-1)).after('' +
-              '<div class="authorsCell" id="author'+ index +'" style="margin-top: 1%">' +
+              '<div class="authorsCell" id="author'+ index +'" style="margin: 1% 0% 0% -1.5%">' +
               '<span class="label">Document Author: </span>' +
               '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
               '</div>')
@@ -403,6 +397,9 @@ $data = file_get_contents('php://input')
           author_count--;
       }
 
+      if("<?php echo $type?>" == "inter"){
+          $(".labelradio > p").remove();
+      }
 
 
       $('#ddlClassification').change(function () {
@@ -469,6 +466,7 @@ $data = file_get_contents('php://input')
 
 </script>
 </body>
+<?php include '../../Master/footer.php'; ?>
 <style>
 
 
@@ -511,9 +509,10 @@ $data = file_get_contents('php://input')
     .label
     {
         float:left;
-        width:150px;
-        min-width: 195px;
+        width:initial;
+        min-width: 120px;
         padding-top:2px;
+        margin-right: 12%;
     }
     .labelradio
     {
