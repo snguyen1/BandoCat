@@ -513,7 +513,7 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
 
                     gcpList[rastermarkerIndex].x = rCoords.x;
                     gcpList[rastermarkerIndex].y = rCoords.y;
-                      rastermarkerIndex).text(gcpList[rastermarkerIndex].x);
+                      rastermarkerIndex.text(gcpList[rastermarkerIndex].x);
                     $('#rasterY-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].y);
                     $('#rasterLat-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlat);
                     $('#rasterLong' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlong);
