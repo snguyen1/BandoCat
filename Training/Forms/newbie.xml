@@ -15,19 +15,16 @@
 		<endday></endday>
 		<endyear></endyear>
 
-		<author1></author1>
-		<author2></author2>
-		<author3></author3>
-		<comments>
-		</comments>
+		<author><name></name></author>
+		<comments></comments>
 
 		<needsreview>1</needsreview>
 		<needsinput>1</needsinput>
 
-		<frontimage></frontimage>
-		<backimage></backimage>
-		<frontthumbnail></frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<frontimage>SampleDocFront.tif</frontimage>
+		<backimage>SampleDocBack.tif</backimage>
+		<frontthumbnail>SampleDocFront.jpg</frontthumbnail>
+		<backthumbnail>SampleDocBack.jpg</backthumbnail>
 		<completed>0</completed>
 	</document>
 <document collection = "jobfolder">
@@ -46,11 +43,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -77,11 +71,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -108,11 +99,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -139,11 +127,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -170,11 +155,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -201,11 +183,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -232,11 +211,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -263,11 +239,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -294,11 +267,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -325,11 +295,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -356,11 +323,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -387,11 +351,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author><name></name></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>

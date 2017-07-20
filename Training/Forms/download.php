@@ -1,7 +1,9 @@
 <?php
 	$input = $_GET['file'];
+print_r($input);
 	$name = pathinfo($input);
 	$filename = $name['basename'];
+print_r($filename);
 	if(!$input)
 	{
 		die('File not found');

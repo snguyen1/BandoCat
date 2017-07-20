@@ -751,14 +751,18 @@
          * Update the tooltip distance
          * @param {Number} total        Total distance
          * @param {Number} difference   Difference in distance between 2 points
-         * @param {latlng} last created point
-         * @param {latlng} current hovering point
+         * @param {latlng} lastPoint    Last created point
+         * @param {latlng} currentPoint Current hovering point
          * @private
          */
         _updateTooltipDistance: function(total, difference, lastPoint, currentPoint) {
+
+            //Functions that returns raw bearing measurements (0, 90, -180, -90)
             var bearing = L.GeometryUtil.bearing(lastPoint, currentPoint);
             var bearingLat = '';
             var bearingDept = '';
+
+            //Declaration of the bearing quadrant
             if(bearing > -90 && bearing < 90)
                 bearingLat = 'N';
             if(bearing < -89.999 || bearing > 90.0001)
@@ -770,12 +774,13 @@
                 bearing = Math.abs(bearing);
             }
 
+            //Saves the correct bearing value for display
             if (bearingLat == 'S' && bearingDept == 'E')
                 bearing = 180 - bearing;
             else if (bearingLat == 'S' && bearingDept == 'W')
                 bearing = Math.abs(bearing - 180);
 
-
+            //Converts decimal bearing values to degree minutes and seconds
             bearingValue = String(bearing);
             bearingArray = bearingValue.split('.');
             degrees = bearingArray[0];

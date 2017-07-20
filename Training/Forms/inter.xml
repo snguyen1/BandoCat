@@ -15,11 +15,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -28,6 +25,7 @@
 	<backimage></backimage>
 	<frontthumbnail>0-_001.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>2</id>
@@ -45,11 +43,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -58,6 +53,7 @@
 	<backimage></backimage>
 	<frontthumbnail>0-A_002.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>3</id>
@@ -75,11 +71,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -88,6 +81,7 @@
 	<backimage></backimage>
 	<frontthumbnail>10-(envelope).jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>4</id>
@@ -105,11 +99,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -118,6 +109,7 @@
 	<backimage>10-_001_back.tif</backimage>
 	<frontthumbnail>10-_001.jpg</frontthumbnail>
 	<backthumbnail>10-_001_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>5</id>
@@ -135,11 +127,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -148,6 +137,7 @@
 	<backimage></backimage>
 	<frontthumbnail>10-_016.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>6</id>
@@ -165,11 +155,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -178,6 +165,7 @@
 	<backimage>12-A_007_back.tif</backimage>
 	<frontthumbnail>12-A_007.jpg</frontthumbnail>
 	<backthumbnail>12-A_007_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>7</id>
@@ -195,11 +183,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -208,6 +193,7 @@
 	<backimage></backimage>
 	<frontthumbnail>12D-_001.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>8</id>
@@ -225,11 +211,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -238,6 +221,7 @@
 	<backimage>13-_001_back.tif</backimage>
 	<frontthumbnail>13-_001.jpg</frontthumbnail>
 	<backthumbnail>13-_001_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>9</id>
@@ -255,11 +239,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -268,6 +249,7 @@
 	<backimage></backimage>
 	<frontthumbnail>13K-_020.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>10</id>
@@ -285,11 +267,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -298,6 +277,7 @@
 	<backimage></backimage>
 	<frontthumbnail>13-KA_001.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>11</id>
@@ -315,11 +295,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -328,6 +305,7 @@
 	<backimage>13-R_050_back.tif</backimage>
 	<frontthumbnail>13-R_050.jpg</frontthumbnail>
 	<backthumbnail>13-R_050_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>12</id>
@@ -345,11 +323,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -358,6 +333,7 @@
 	<backimage></backimage>
 	<frontthumbnail>13-Y_001.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>13</id>
@@ -375,11 +351,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -388,6 +361,7 @@
 	<backimage>16-_003.1_back.tif</backimage>
 	<frontthumbnail>16-_003.1.jpg</frontthumbnail>
 	<backthumbnail>16-_003.1_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>14</id>
@@ -405,11 +379,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -418,6 +389,7 @@
 	<backimage></backimage>
 	<frontthumbnail>21-_006.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>15</id>
@@ -435,11 +407,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -448,6 +417,7 @@
 	<backimage></backimage>
 	<frontthumbnail>32-K_035.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>16</id>
@@ -465,11 +435,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -478,6 +445,7 @@
 	<backimage></backimage>
 	<frontthumbnail>38-_057.12.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>17</id>
@@ -495,11 +463,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -508,6 +473,7 @@
 	<backimage></backimage>
 	<frontthumbnail>46-E_002.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>18</id>
@@ -525,11 +491,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -538,6 +501,7 @@
 	<backimage></backimage>
 	<frontthumbnail>75-_013.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>19</id>
@@ -555,11 +519,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -568,6 +529,7 @@
 	<backimage>93-_023_back.tif</backimage>
 	<frontthumbnail>93-_023.jpg</frontthumbnail>
 	<backthumbnail>93-_023_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>20</id>
@@ -585,11 +547,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -598,6 +557,7 @@
 	<backimage></backimage>
 	<frontthumbnail>93-_036.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
+	<completed>0</completed>
 </document>
 <document collection = "jobfolder">
 	<id>21</id>
@@ -615,11 +575,8 @@
 	<endday></endday>
 	<endyear></endyear>
 
-	<author1></author1>
-	<author2></author2>
-	<author3></author3>
-	<comments>
-	</comments>
+	<author></author>
+	<comments></comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -628,5 +585,6 @@
 	<backimage>93-_043_back.tif</backimage>
 	<frontthumbnail>93-_043.jpg</frontthumbnail>
 	<backthumbnail>93-_043_back.jpg</backthumbnail>
+	<completed>0</completed>
 </document>
 </data>

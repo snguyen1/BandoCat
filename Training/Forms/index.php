@@ -9,6 +9,9 @@ $session = new SessionManager();
 $username = $_GET["user"];
 $collection = $_GET['col'];
 $type = $_GET['type'];
+$priv = $_GET['priv'];
+
+
 
 /*print_r($_GET['user']);
 if (isset($_GET["user"])) {
@@ -25,23 +28,13 @@ if ($type == 'newbie') {
 
 include 'config.php';
 include 'main.php';
-include 'saveTrainingData.php';
-
-if (!isset($_GET["id"])) {
-    header('Location: list.php');
-}
 
 $doc_id = $_GET["id"];
-	// $progress_id = $_GET["id"];
-	// $userid = $_SESSION["user_id"];		
-	// $input_id = getUserIDInput($id);
-
-	//$doc_id = 2;
 $userType = $username . '_' . $type;
 $XMLfile = XMLfilename($userType);
 
-$file = simplexml_load_file('../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
 
+$file = simplexml_load_file('../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
 foreach ($file->document as $a) {
     if ($a->id == $doc_id) {
         if ($a["collection"] == $collection) {
@@ -50,9 +43,6 @@ foreach ($file->document as $a) {
         }
     }
 }
-//$_SESSION['currentId'] = $doc_id;
-
-	  
 
 ?>
 <!DOCTYPE html>
@@ -67,81 +57,134 @@ foreach ($file->document as $a) {
     <script type="text/javascript" src="../../Master/master.js"></script>
 </head>
 <body>
-	<!--<header>
-		<div id="logo"><img id = "image" src = "../BlucherScanning/Logos/4.png" /></div>
-		<div id="top-nav"><a href = "javascript:history.back()" id = "link">Go Back </a><a href = "../JobFolder" id = "link">Job Folder </a><a href = "../BlucherScanning/logoutFunctions.php" id = "link">Log Out</a></div>
-	</header>-->
     <div id="wrap">
         <div id="main">
             <div id="divleft">
                 <?php include '../../Master/header.php';
                 include '../../Master/sidemenu.php' ?>
-            </div>
+                <div id="descriptionBox">
+                    <table id="tableClass">
+                        <tr>
+                            <th>
+                                <h3 id="txtClass" style="margin: 2% 4% 0% 4%; background-color: #0067C5; color: white">Classification Description</h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 id="className" style="text-align: center; margin: 2% 0% 0% 0%"></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p id="tdClass" style="text-align: center; margin: -1% 0% 4% 0%"></p></td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
         </div>
 
 
         <div id="divright">
-            <h2> INPUT TRAINING SESSION </h2>
-            <div id="divscroller">
+            <h2> Input Training Session </h2>
+            <div id="divscroller" style="height: 776px">
                 <!--<p id="field"> (*) required field <br><br> (Hover mouse on 'Needs Review' to know instruction) </p>-->
-                <form id="theform" name="theform" enctype="multipart/form-data">
+                <form id="theform" name="theform" method="post">
                     <table class="Account_Table">
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
                             <div class="cell">
-                                <span class="label"><span style = "color:red;"> * </span>Library Index:</span>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        <span style = "color:red;"> * </span>
+                                        Library Index:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Library Index: </strong>The library index is the name of a scanned document. Copy and paste the image’s name into the textbox exactly as you see it.<br><i>Example: </i><?php echo $doc1->libraryindex; ?>
+                                    </p>
+                                </span>
                                 <input type = "text" name = "txtLibraryIndex" id = "txtLibraryIndex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
+                            <!-- TITLE -->
                             <div class="cell">
-                                <!-- TITLE -->
-                                <span class="label"><span style = "color:red;"> * </span>Document Title:</span>
+                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Document Title: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
                                 <input type = "text" name = "txtTitle" id = "txtTitle" size="26" required="true" value='<?php echo $doc1->title; ?>' />
                             </div>
-
-
+                            <!-- NEEDS REVIEW -->
                             <div class="cell">
-                                <!-- NEEDS REVIEW -->
                                 <span class="labelradio" >
-                                <mark>Needs Review:</mark>
+                                <mark>Needs Review: </mark>
                                 <p hidden><b></b>This is to signal if a review is needed</p>
                                 </span>
                                 <input type = "radio" name = "rbNeedsReview" id = "rbNeedsReview_yes" size="26" value="1" <?php if($doc1->needsreview == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbNeedsReview" id = "rbNeedsReview_no" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
                             </div>
+                            <!-- SUB FOLDER -->
                             <div class="cell">
-                                <!-- SUB FOLDER -->
                                 <span class="labelradio" >
-                                <mark>In A Subfolder:</mark>
+                                <mark>In A Subfolder: </mark>
                                 <p hidden><b></b>This document belongs in a subfolder</p>
                                 </span>
                                 <input type = "radio" name = "rbInASubfolder" id = "rbInASubfolder_yes" size="26" value="1" <?php if($doc1->inasubfolder == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbInASubfolder" id = "rbInASubfolder_no" size="26" value="0" <?php if($doc1->inasubfolder == 0) echo "checked"; ?> />No
                             </div>
+                            <!-- SUBFOLDER COMMENTS -->
                             <div class="cell">
-                                <!-- SUBFOLDER COMMENTS -->
-                                <span class="label">Subfolder Comments:</span>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Subfolder Comments:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Subfolder Comments: </strong>The first document of a subfolder will say what to expect within the subfolder. If looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.
+                                    </p>
+                                </span>
                                 <textarea cols = "35" name="txtSubfolderComments" id="txtSubfolderComments"/><?php echo $doc1->subfoldercomments; ?></textarea>
                             </div>
+                            <!-- CLASSIFICATION -->
                             <div class="cell">
-                                <!-- CLASSIFICATION -->
-                                <span class="label">Classification:</span>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Classification:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Classification: </strong>Classify the type of document. If you don’t know what it should be, consult the Classification Description box.
+                                    </p>
+                                </span>
                                 <select id="ddlClassification" name="ddlClassification" style="width:215px">
                                     <?php
                                     classification($classification_arr, $doc1->classification);
                                     ?>
                                 </select>
                             </div>
+                            <!-- CLASSIFICATION COMMENTS-->
                             <div class="cell">
-                                <!-- CLASSIFICATION COMMENTS-->
-                                <span class="label">Classification Comments:</span>
-                                <textarea rows = "2" cols = "35" id="txtClassificationComments" name="txtClassificationComments"/><?php echo $doc1->classification; ?></textarea>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Classifications Comments:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Classifications Comments: </strong>This is reserved only for the folder’s envelope. Copy what is seen on the envelope into this box.
+                                    </p>
+                                </span>
+                                <textarea rows = "2" cols = "35" id="txtClassificationComments" name="txtClassificationComments"/><?php echo $doc1->classificationcomments; ?></textarea>
                             </div>
+                            <!-- GET START DDL MONTH -->
                             <div class="cell">
-                                <!-- GET START DDL MONTH -->
+
                                 <select name="ddlStartMonth" id="ddlStartMonth" style="width:60px">
                                     <?php $Render->GET_DDL_MONTH($doc1->startmonth); ?>
                                 </select>
-                                <span class="label">Document Start Date:</span>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Document Start Date:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Document Start Date: </strong>The earliest date on the document- as it pertains to the creation of that document.</br><i>*If there is one date on the document, only fill out the Document End Date boxes.</i>
+                                    </p>
+                                </span>
                                 <!-- GET START DDL DAY -->
                                 <select name="ddlStartDay" id="ddlStartDay" style="width:60px">
                                     <?php $Render->GET_DDL_DAY($doc1->startday); ?>
@@ -152,12 +195,20 @@ foreach ($file->document as $a) {
                                 </select>
 
                             </div>
+                            <!-- GET END DDL MONTH -->
                             <div class="cell">
-                                <!-- GET END DDL MONTH -->
                                 <select name="ddlEndMonth" id="ddlEndMonth" style="width:60px">
                                     <?php $Render->GET_DDL_MONTH($doc1->endmonth); ?>
                                 </select>
-                                <span class="label">Document End Date:</span>
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Document Start Date:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Document Start Date: </strong>The latest date on the document- as it pertains to the creation of that document.
+                                    </p>
+                                </span>
                                 <!-- GET END DDL DAY -->
                                 <select name="ddlEndDay" id="ddlEndDay" style="width:60px">
                                     <?php $Render->GET_DDL_DAY($doc1->endday); ?>
@@ -167,44 +218,74 @@ foreach ($file->document as $a) {
                                     <?php $Render->GET_DDL_YEAR($doc1->endyear); ?>
                                 </select>
                             </div>
+                            <!-- DOCUMENT AUTHOR -->
                             <div class="cell">
-                                <!-- DOCUMENT AUTHOR -->
-                                <span class="label">Document Author:</span>
-                                <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php if(count($doc1->author1) > 0)echo $doc1->author1 ?>"/><span style="padding-right:5px"></span><input type="button" id="more_fields" onclick="add_fields(null);" value="+"/>
-                                <span id="authorcell"></span>
+                                <div class='authorsCell' id="author0">
+                                    <span class="labelradio">
+                                    <mark class="label">
+                                        Document Author:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Document Author: </strong>Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.
+                                    </p>
+                                </span>
+                                    <input type="text" class="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
+                                    <span style="padding-right:5px"></span>
+                                    <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null);" value="+"/>
+                                    <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
+                                </div>
+
+                                <?php $lenAuthors = count($doc1->author->name);
+                                for ($d = 1; $d < $lenAuthors; $d++) {
+                                    echo '<div class="authorsCell" id="author'.$d.'"><span class="label">Document Author: </span>
+                                    <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="'.$doc1->author->name[$d].'"/></div>';
+                                }
+                                ?>
+
                             </div>
                         </td>
 
                         <td id="col2" style="padding-left:40px">
+                            <!-- COMMENTS-->
                             <div class="cell">
-                                <span class="label">Comments:</span>
-                                <!-- COMMENTS-->
+                                <span class="labelradio">
+                                    <mark class="label">
+                                        Comments:
+                                    </mark>
+                                    <p hidden>
+                                        <b></b>
+                                        <strong>Comments: </strong>Any additional information that needs to be included from the document. This can include the individuals involved in a correspondence, metadata from a map, sheet number, and job folder number.
+                                    </p>
+                                </span>
                                 <textarea rows = "4" cols = "35" id="txtComments" name="txtComments"/><?php echo $doc1->comments; ?></textarea>
                                 <br><br><br>
                             </div>
-                            <div class="cell">
+                            <!-- THUMBNAIL LINKS -->
+                            <div class="cell" id="scanThumbnails">
                                 <table>
                                     <tr>
+                                        <!--SCAN OF FRONT-->
                                         <td style="text-align: center">
-                                            <!--SCAN OF FRONT-->
                                             <span class="label" style="text-align: center">Scan of Front</span><br>
                                             <?php
-                                            echo "<a id='download_front' href=\"download.php?file=$doc1->frontimage\"><br><img src='". $doc1->frontthumbnail . " ' alt = Error /></a>";
+                                            $frontImage = realpath($doc1->frontimage);
+                                            $backImage = realpath($doc1->backimage);
+                                            echo "<a id='download_front' href=\"download.php?file=$frontImage\"><br><img src='". $doc1->frontthumbnail . " ' alt = Error /></a>";
                                             echo "<br>Size: " . round(filesize($doc1->frontimage)/1024/1024, 2) . " MB";
-                                            echo "<br><a href=\"download.php?file=$doc1->frontimage\">(Click to download)</a>";
+                                            echo "<br><a href=\"download.php?file=$frontImage\">(Click to download)</a>";
                                             ?>
                                         </td>
-                                        <td style="padding-right:20px"></td>
+                                        <!--SCAN OF BACK-->
                                         <td style="text-align: center">
-                                            <!--SCAN OF BACK-->
                                             <?php
-                                            if($doc1->backimage != '../Training_Newbie_Images/Images/') //has Back Scan
+                                            if($backImage != '../Training_Newbie_Images/Images/') //has Back Scan
                                             {
 
                                                 echo '<span class="label" style="text-align: center">Scan of Back</span><br>';
-                                                echo "<a id='download_front' href=\"download.php?file=$doc1->backimage\"><br><img src='". $doc1->backthumbnail . " ' alt = Error /></a>";
+                                                echo "<a id='download_front' href=\"download.php?file=$backImage\"><br><img src='". $doc1->backthumbnail . " ' alt = Error /></a>";
                                                 echo "<br>Size: " . round(filesize($doc1->backimage) / 1024 / 1024, 2) . " MB";
-                                                echo "<br><a href=\"download.php?file=$doc1->backimage\">(Click to download)</a>";
+                                                echo "<br><a href=\"download.php?file=$backImage\">(Click to download)</a>";
                                             }
                                             else
                                             {
@@ -222,12 +303,12 @@ foreach ($file->document as $a) {
                                 <div class="cell" style="text-align: center;padding-top:20px">
                                     <!-- Hidden inputs that are passed when the update button is hit -->
                                     <span><input type="reset" id="btnReset" name="btnReset" value="Reset" class="bluebtn"/></span>
-                                    <input type = "hidden" id="txtDocID" name = "txtDocID" value = "<?php echo $docID;?>" />
+                                    <input type = "hidden" id="txtDocID" name = "txtDocID" value = "<?php echo $doc_id;?>" />
                                     <input type = "hidden" id="txtAction" name="txtAction" value="catalog" />  <!-- catalog or review -->
                                     <input type = "hidden" id="txtCollection" name="txtCollection" value="<?php echo $collection; ?>" />
                                     <span>
                                         <?php if($session->hasWritePermission()){
-                                            echo "<input type='submit' id='btnSubmit' name='btnSubmit' value='Update' class='bluebtn'/>";
+                                            echo "<input type='submit' id='btnSubmit' name='submit' value='Update' action='index.php' class='bluebtn'/>";
                                         }
                                         ?>
                                         <div class="bluebtn" id="loader" style="display: none">Updating
@@ -244,7 +325,7 @@ foreach ($file->document as $a) {
     </div>
 
 
-	<!--<div id="drag_classification" class="ui-widget-content">-->
+	<!--<div id="drag_classification" class="ui-widget-content">
 	<span id="title_class_desc">Classification Description</span>
 	<form id="class_form" name="class_form" method="post">
 		 <select id="ddl_class_desc" name="ddl_class_desc">
@@ -259,37 +340,14 @@ foreach ($file->document as $a) {
 		</div>
 	</form>
 	<div class = "navbar center">
-	</div>
+	</div>-->
 </body>
 
 
 <?php
-	if (isset($_POST['submit'])) 
-	{
-		$_SESSION[$userfile] = $doc_id;
-	  	writeXMLtag($doc_id, "title", $_POST['txtTitle'], $userfile);
-	  	writeXMLtag($doc_id, "needsreview", $_POST['rbNeedsReview'], $userfile);
-	  	writeXMLtag($doc_id, "inasubfolder", $_POST['rbInASubfolder'], $userfile);
-	  	writeXMLtag($doc_id, "author1", $_POST['author1'], $userfile);
-	  	writeXMLtag($doc_id, "author2", $_POST['author2'], $userfile);
-	  	writeXMLtag($doc_id, "author3", $_POST['author3'], $userfile);
-	  	writeXMLtag($doc_id, "subfoldercomments", $_POST['txtSubfolderComments'], $userfile);
-	  	writeXMLtag($doc_id, "classification", $_POST['ddlClassification'], $userfile);
-	  	writeXMLtag($doc_id, "classificationcomments", $_POST['txtClassificationComments'], $userfile);
-	  	writeXMLtag($doc_id, "comments", $_POST['comment'], $userfile);
-	  	writeXMLtag($doc_id, "startmonth", $_POST['ddlStartMonth'], $userfile);
-	  	writeXMLtag($doc_id, "startday", $_POST['ddlStartDay'], $userfile);
-	  	writeXMLtag($doc_id, "startyear", $_POST['ddlStartYear'], $userfile);
-	  	writeXMLtag($doc_id, "endmonth", $_POST['ddlEndMonth'], $userfile);
-	  	writeXMLtag($doc_id, "endday", $_POST['ddlEndDay'], $userfile);
-	  	writeXMLtag($doc_id, "endyear", $_POST['ddlEndYear'], $userfile);
-        writeXMLtag($doc_id, "completed", 1, $userfile);
-	  	echo "<script>window.location = 'mapEditingProcess.php'</script>";
-
-	}
- 
+$data = file_get_contents('php://input')
 ?>
-	  
+
 
 <script>
 	  $(function() {
@@ -298,6 +356,7 @@ foreach ($file->document as $a) {
   	});
 	  var ar_class = <?php echo json_encode($classification_arr); ?>;
 	 var ar_class_desc = <?php echo json_encode($classification_desc); ?>;
+
 	  $("#ddl_class_desc").change(function()
 	  {
 	  	var ddl_value = document.getElementById("ddl_class_desc").value;
@@ -313,6 +372,100 @@ foreach ($file->document as $a) {
 	  		}
 	  	}
 	  });
+
+      /**********************************************
+      * Function: add_fields
+      * Description: adds more fields for authors
+                                          * Parameter(s):
+      * val (in String ) - name of the author
+      * Return value(s):
+      * $result (assoc array) - return a document info in an associative array, or FALSE if failed
+      ***********************************************/
+      var max = 5;
+      var author_count = 0;
+      function add_fields(index, val) {
+          if(val == null)
+              val = "";
+          if(author_count >= max)
+              return false;
+          $('#author'+(index-1)).after('' +
+              '<div class="authorsCell" id="author'+ index +'" style="margin-top: 1%">' +
+              '<span class="label">Document Author: </span>' +
+              '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
+              '</div>')
+          author_count++;
+      }
+
+      function remove_fields(index) {
+          if(index < 2)
+              return false;
+          $('.authorsCell').last().remove();
+          author_count--;
+      }
+
+
+
+      $('#ddlClassification').change(function () {
+          var classification = $('#ddlClassification option:selected').text();
+          var classificationLenght = ar_class.length;
+          $("#className").text(classification);
+          for(var q = 0; q < classificationLenght; q++){
+                if(classification == ar_class[q])
+                    $("#tdClass").text(ar_class_desc[q]);
+          }
+      });
+
+
+
+
+      formArray = [];
+      authorArray = [];
+      $("#theform").on("submit", function (e) {
+          e.preventDefault();
+
+          var formSerialized = $(this).serializeArray();
+
+          $.each(formSerialized, function (i, field) {
+              if(field.name == 'txtAuthor[]')
+                  authorArray.push('"txtAuthor":[]');
+
+              else
+              formArray.push('"'+field.name + '":"' + field.value+'"' )
+          });
+          formArray.push(authorArray);
+          formArray.push('"type":"<?php echo $_GET['type']?>"');
+
+          var authorsName = document.getElementsByName('txtAuthor[]');
+
+          formJSON = JSON.parse("{" + formArray.toString() + "}");
+
+          for(var e = 0; e < authorsName.length; e++) {
+              formJSON.txtAuthor[e] = authorsName[e].value;
+          }
+
+          $.ajax({
+              type: 'post',
+              url: 'saveTrainingData.php',
+              data: formJSON,
+              success: function (result) {
+                  console.log(result)
+              },
+              error: function (error) {
+                  console.log(error)
+              }
+          });
+          var trainLocation = function winLocation(type) {
+              var trainLoc = "";
+              if("<?php echo $priv?>" == 'admin')
+                  trainLoc = 'http://localhost/BandoCat/Training/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
+              else
+                  trainLoc = 'http://localhost/BandoCat/Training/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
+              return trainLoc;
+          }
+
+          window.location.replace(trainLocation("<?php echo $type ?>"));
+      })
+
 
 </script>
 </body>
@@ -369,24 +522,43 @@ foreach ($file->document as $a) {
         min-width: 195px;
     }
     mark {
-        background-color: #ccf5ff;
+        background-color: rgba(34, 105, 172, 0.32);
+        color: black;
+        border-radius: 4%;
+        box-shadow: 0px 0px 2px;
+        margin-left: -7%;
+        padding: 2.05%;
     }
     span.labelradio:hover p{
         z-index: 10;
-        display: inline;
+        display: table;
+        text-align: initial;
         position: absolute;
         border: 1px solid #000000;
-        background: #bfe9ff;
+        background: #fefdff;
         font-size: 14px;
         font-style: normal;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px; -o-border-radius: 3px;
         border-radius: 3px;
-        -webkit-box-shadow: 4px 4px 4px #36c476;
-        -moz-box-shadow: 4px 4px 4px #36c476;
-        box-shadow: 4px 4px 4px #36c476;
-        width: 200px;
+        -webkit-box-shadow: 4px 4px 4px #175131;
+        -moz-box-shadow: 4px 4px 4px #154d2e;
+        box-shadow: 4px 4px 4px #175433;
+        width: 30%;
         padding: 10px 10px;
+    }
+    descriptionBox{
+        color: #e62014;
+    }
+#tableClass {
+    width: 88%;
+    box-shadow: 0px 0px 2px;
+    margin: -11% 0% 2% 9%;
+    border-radius: 5%;
+}
+    #selClass {
+        width: 50%;
+        margin-left: 48%;
     }
 
 </style>
