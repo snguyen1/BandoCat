@@ -196,6 +196,7 @@ if($_SESSION["role"] == 1) {
                         </div>
                         <div id="tabs-2">
                             <p>Ana's contact Info</p>
+                            <p>Link to procedures</p>
                         </div>
                         <?php if($priv == 'admin') echo '<div id="tabs-3"><input type="button" id="resetTraining" value="Reset Training"></div>'?>
                     </div>
@@ -205,7 +206,7 @@ if($_SESSION["role"] == 1) {
             </div>
         </div>
     </div>
-    <?php include '../../Master/footer.php'; ?>
+
 
     <script>
 
@@ -236,61 +237,6 @@ if($_SESSION["role"] == 1) {
             dots[slideIndex-1].className += " active";
         }
     </script>
-    
-    
-    
-    
-    
-
-
-    <!--Table container-->
-<!--	<!--<div id = "interContainer" style="display: none">-->
-<!--	 		--><?php //if($_SESSION["role"] == 'Admin'){ ?>
-<!--	 		 <form enctype="multipart/form-data" id="switch" name="switch" method="GET">-->
-<!--	 			<p>Switch View:-->
-<!--	 			<select id="ddl_switch" name="user">-->
-<!--	 				<option value="">Select a file...</option>-->
-<!--	 				--><?php
-//	 					foreach($file_arr as $a)
-//	 					{
-//	 						if(isset($_GET['user']) && $_GET['user'] == $a && $a != "")
-//	 							echo '<option selected value="' . $a . '">' . $a . '</option>';
-//	 						else echo '<option value="' . $a . '">' . $a . '</option>';
-//	 					}
-//	 				?>
-<!--	 			</select>-->
-<!--	 		</form>-->
-<!--	 		--><?php //} ?>
-<!--	 		<form enctype="multipart/form-data" onsubmit = "return confirmReset()" action = ""  method = "POST">-->
-<!--	 			<input  align="center" class="button button-blue" name="resetProfile" type="submit" value="Reset Training Session" />-->
-<!--	 		</form>-->
-<!---->
-<!--        --><?php ////Array with all the xml files in the directory
-//
-//
-//        ?>
-<!---->
-<!--	 		--><?php
-//	 			if (isset($_POST['resetProfile'])) {
-//	 					if(copy("data.xml", $userfile . ".xml" ))
-//	 					{
-//	 						echo "<script>window.location = 'list.php'</script>";
-//	 					}
-//	 					else
-//	 					{
-//	 						print "<script type=\"text/javascript\">";
-//							print "alert('An error has occured')";
-//							print "</script>";
-//	 					}
-//	 			}
-//	 		 ?>
-<!---->
-<!---->
-<!--	     	<table id = "tableMap1" >-->
-<!---->
-<!--	    	</table>-->
-<!--	    <br><br>-->
-<!--	</div>-->
 
     <script type="text/javascript">
     var trainingCollectionsJSON =  {"col": '<?php echo $collection ?>', "user": '<?php echo $username?>', "loc": 'parent'};
@@ -390,7 +336,7 @@ if($_SESSION["role"] == 1) {
                     if (width >= progressLevel-1){
                         frameDisplay++;
                         clearInterval(id);
-                        if(newbieCompletedTags >= 1 && '<?php echo $type ?>' == 'newbie' && frameDisplay == 2){
+                        if(newbieCompletedTags == 1 && '<?php echo $type ?>' == 'newbie' && frameDisplay == 2){
                             $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
                         }
                         if(newbieCompletedTags == 1 && frameDisplay == 2) {
@@ -399,7 +345,11 @@ if($_SESSION["role"] == 1) {
                                 $(this).css("cursor", "pointer");
                             });
                         }
-
+                        if (newbieCompletedTags <= 1 && frameDisplay == 2) {
+                            $("#bandocatNewbie").hover(function(){
+                                $(this).css("cursor", "pointer");
+                            });
+                        }
                     }
 
                      else {
