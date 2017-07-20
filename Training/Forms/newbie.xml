@@ -1,4 +1,5 @@
 <data>
+	<!--If the document libraryindex Tutorial is removed renumber all the documents' ids to zero-->
 	<document collection = "jobfolder">
 		<id>0</id>
 		<libraryindex>Tutorial</libraryindex>
