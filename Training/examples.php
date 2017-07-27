@@ -56,7 +56,7 @@
 	<?php 
 
 		if (!empty($_GET['exp'])) {
-			//fieldnote
+			//fieldbooks
 			if ($_GET['exp'] == $classification_arr[1]) {
 				foreach ($fieldnote as $temp) {
 					echo "<h4>Type: $temp</h4>";

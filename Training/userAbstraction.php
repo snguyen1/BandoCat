@@ -1,6 +1,6 @@
 <?php
 $collection = $_POST['collection'];
-$dir = "../Training_Collections";
+$dir = "Training_Collections";
 $usersDir = $dir . "/" . $collection;
 $rawUsers = scandir($usersDir);
 $users = array();
