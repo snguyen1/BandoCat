@@ -23,8 +23,8 @@
 		public $frontthumbnail;
 		public $backthumbnail;
 		public $xmlfile;
-		public $url = "../Training_Newbie_Images/Images/";
-		public $thumb_url = "../Training_Newbie_Images/Thumbnails/";
+		public $url = "../Images/Newbie/Documents/";
+		public $thumb_url = "../Images/Newbie/Thumbnails/";
 		public $completed;
 	}
 

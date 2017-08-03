@@ -88,7 +88,7 @@ else header('Location: ../../');
         var newType = {"col": '<?php echo $collection ?>', "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
         $.ajax({
                 type: 'post',
-                url: "../../Training/Forms/collectionTrainingXML.php",
+                url: "../../Training/"+ '<?php echo $collection ?>/' +"Forms/collectionTrainingXML.php",
                 data: newType
             });
         }

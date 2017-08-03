@@ -1,5 +1,5 @@
 <?php
-require '../../Library/SessionManager.php';
+require '../../../Library/SessionManager.php';
 $session = new SessionManager();
 $userfile = $_SESSION['username'];
 
@@ -27,7 +27,7 @@ function writeXMLtag($id, $tag, $data, $username){
    	$document  = new DOMDocument();
 
 //Determine if the file exist so to create a new folder with the new xml files; newbie and intern
-    $filename = "../Training_Collections/jobfolder/" . $username . "/" . $username . "_".$_POST['type'].".xml";
+    $filename = "../../Training_Collections/jobfolder/" . $username . "/" . $username . "_".$_POST['type'].".xml";
 	$document->load($filename);
     if ($tag == 'author') {
         $author = $document->getElementsByTagName($tag)->item($id);
@@ -72,7 +72,8 @@ function writeXMLtag($id, $tag, $data, $username){
 		    $tag = $document->getElementsByTagName($tag);
             $tag->item($id)->nodeValue = $data;
 	}
-$document->save($filename);
     clearstatcache();
+$document->save($filename);
+
 }
 ?>

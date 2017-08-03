@@ -25,7 +25,7 @@
             <li><a class="notificationBadge" data-badge='.$ticketCount.' id="adminNotificationBadge2" href="../../Forms/Ticket/">View Tickets </a></li>
             <li><a href="../../Forms/ManageUser/">Manage User</a></li>
             <li><a href="../../Forms/NewUser/">Create New User</a></li>
-            <li><a href="../../Training/Forms/admin.php">Training</a></li>
+            <li><a href="../../Training/admin/admin.php">Training</a></li>
             </ul>
         </div>
         <div class="menu-item menu-item_sub2">

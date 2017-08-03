@@ -1,17 +1,21 @@
 <?php
-include '../../Library/SessionManager.php';
-require('../../Library/DBHelper.php');
-require '../../Library/ControlsRender.php';
+include '../../../Library/SessionManager.php';
+require('../../../Library/DBHelper.php');
+require '../../../Library/ControlsRender.php';
 
 $Render = new ControlsRender();
 $session = new SessionManager();
 
+//User name
 $username = $_GET["user"];
+//Collection
 $collection = $_GET['col'];
+//Training type
 $type = $_GET['type'];
+//User's privilege
 $priv = $_GET['priv'];
 
-
+//Include Training type class
 if ($type == 'newbie') {
     include 'newbieClass.php';
 } elseif ($type == 'inter') {
@@ -19,18 +23,25 @@ if ($type == 'newbie') {
 }
 
 include 'config.php';
+//Classification information
 include 'main.php';
 
+//Document ID
 $doc_id = $_GET["id"];
-$userType = $username . '_' . $type;
-$XMLfile = XMLfilename($userType);
+//Filename
+$XMLname = $username . '_' . $type;
+$XMLfile = XMLfilename($XMLname);
 
-
-$file = simplexml_load_file('../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
+//Loads file
+$file = simplexml_load_file('../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
+//Loops through every document tag in the file
 foreach ($file->document as $a) {
+    //Conditions the document's Id
     if ($a->id == $doc_id) {
+        //Future Collections Implementations: $collection -> Collection Name (string)
         if ($a["collection"] == $collection) {
-            $doc1 = new JobFolder($collection,'../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile, $username, $doc_id);
+            //JobFolder class
+            $doc1 = new JobFolder($collection,'../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile, $username, $doc_id);
             break;
         }
     }
@@ -42,18 +53,24 @@ foreach ($file->document as $a) {
 <head>
 	<meta charset="UTF-8">
 	<title>[Training] Job Folder</title>
-    <link rel = "stylesheet" type = "text/css" href = "../../Master/master.css" >
+    <!--Training CSS-->
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <!--Master CSS-->
+    <link rel = "stylesheet" type = "text/css" href = "../../../Master/master.css" >
+    <!--JQuery UI CSS-->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script type="text/javascript" src="../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="../../ExtLibrary/jQueryUI-1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../Master/master.js"></script>
+    <!--JQuery Javascript-->
+    <script type="text/javascript" src="../../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
+    <!--JQuery UI Javascript-->
+    <script type="text/javascript" src="../../../ExtLibrary/jQueryUI-1.11.4/jquery-ui.js"></script>
+    <!--Master Javascript-->
+    <script type="text/javascript" src="../../../Master/master.js"></script>
 </head>
 <body>
     <div id="wrap">
         <div id="main">
             <div id="divleft">
-                <?php include '../../Master/header.php';
-                include '../../Master/sidemenu.php' ?>
+                <?php include '../../trainingMaster.php' ?>
                 <div id="descriptionBox">
                     <table id="tableClass">
                         <tr>
@@ -78,8 +95,7 @@ foreach ($file->document as $a) {
         <div id="divright">
             <h2> Input Training Session </h2>
             <div id="divscroller" style="height: 776px">
-                <!--<p id="field"> (*) required field <br><br> (Hover mouse on 'Needs Review' to know instruction) </p>-->
-                <form id="theform" name="theform" method="post">
+                <form id="form" name="form" method="post">
                     <table class="Account_Table">
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
@@ -194,11 +210,11 @@ foreach ($file->document as $a) {
                                 </select>
                                 <span class="labelradio">
                                     <mark class="label">
-                                        Document Start Date:
+                                        Document End Date:
                                     </mark>
                                     <p hidden>
                                         <b></b>
-                                        <strong>Document Start Date: </strong>The latest date on the document- as it pertains to the creation of that document.
+                                        <strong>Document End Date: </strong>The latest date on the document- as it pertains to the creation of that document.
                                     </p>
                                 </span>
                                 <!-- GET END DDL DAY -->
@@ -274,18 +290,16 @@ foreach ($file->document as $a) {
                                         <!--SCAN OF BACK-->
                                         <td style="text-align: center">
                                             <?php
-                                            if($backImage != '../Training_Newbie_Images/Images/') //has Back Scan
-                                            {
-
+                                            if($doc1->backimage != '../Images/Intermediate/Documents/' && $doc1->backimage != '../Images/Newbie/Documents/'){ //has Back Scan
                                                 echo '<span class="label" style="text-align: center">Scan of Back</span><br>';
                                                 echo "<a id='download_front' href=\"download.php?file=$backImage\"><br><img src='". $doc1->backthumbnail . " ' alt = Error /></a>";
                                                 echo "<br>Size: " . round(filesize($doc1->backimage) / 1024 / 1024, 2) . " MB";
                                                 echo "<br><a href=\"download.php?file=$backImage\">(Click to download)</a>";
                                             }
+
                                             else
-                                            {
                                                 echo '<span class="label" style="text-align: center">No Scan of Back</span><br>';
-                                            }
+
                                             ?>
                                         </td>
                                     </tr>
@@ -317,24 +331,6 @@ foreach ($file->document as $a) {
             </div>
         </div>
     </div>
-
-
-	<!--<div id="drag_classification" class="ui-widget-content">
-	<span id="title_class_desc">Classification Description</span>
-	<form id="class_form" name="class_form" method="post">
-		 <select id="ddl_class_desc" name="ddl_class_desc">
-		 <?php
-		 	for($i = 0; $i < count($classification_arr);$i++)
-		 	{
-		 		echo "<option value='" . $classification_arr[$i] . "'>" . $classification_arr[$i] . "</option>";
-		 	}
-		 ?>
-		 </select>
-		 <p id="txt_class_desc"></p>
-		</div>
-	</form>
-	<div class = "navbar center">
-	</div>-->
 </body>
 
 
@@ -344,98 +340,96 @@ $data = file_get_contents('php://input')
 
 
 <script>
-	  $(function() {
-	    $( "#drag_classification" ).draggable();
-	    $( "#drag_classification" ).resizable();
-  	});
-	  var ar_class = <?php echo json_encode($classification_arr); ?>;
-	 var ar_class_desc = <?php echo json_encode($classification_desc); ?>;
-
-	  $("#ddl_class_desc").change(function()
-	  {
-	  	var ddl_value = document.getElementById("ddl_class_desc").value;
-	  	
-	  	if (ddl_value == "none")
-	  		document.getElementById("txt_class_desc").innerHTML = "";
-	  	else
-	  	{ 
-	  		for (var i = 0; i < ar_class_desc.length; i++)
-	  		{
-	  			if(ddl_value == ar_class[i])
-	  				document.getElementById("txt_class_desc").innerHTML = ar_class_desc[i];
-	  		}
-	  	}
-	  });
-
       /**********************************************
       * Function: add_fields
       * Description: adds more fields for authors
-                                          * Parameter(s):
-      * val (in String ) - name of the author
-      * Return value(s):
-      * $result (assoc array) - return a document info in an associative array, or FALSE if failed
+      * Parameter(s): length (integer) Length of Author's cells
+      * val (String ) - name of the author
+      * Return value(s): None
       ***********************************************/
       var max = 5;
       var author_count = 0;
-      function add_fields(index, val) {
+      function add_fields(length, val) {
+          console.log(length);
           if(val == null)
               val = "";
           if(author_count >= max)
               return false;
-          $('#author'+(index-1)).after('' +
-              '<div class="authorsCell" id="author'+ index +'" style="margin: 1% 0% 0% -1.5%">' +
+          $('#author'+(length-1)).after('' +
+              '<div class="authorsCell" id="author'+ length +'" style="margin: 1% 0% 0% -1.5%">' +
               '<span class="label">Document Author: </span>' +
               '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
               '</div>')
           author_count++;
       }
 
-      function remove_fields(index) {
-          if(index < 2)
+    /**********************************************
+     *Function: remove_fields
+     *Description: removes fields from the Document Author field
+     * Parameter(s): length (integer) Length of Author's cells
+     * Return value(s): None
+     ***********************************************/
+      function remove_fields(length) {
+          //This will prevent for the function to delete all the authors' cells
+          if(length < 2)
               return false;
+          //Removes the las childrend of the authorsCell class
           $('.authorsCell').last().remove();
           author_count--;
       }
 
+      //Disables the labels' description marks
       if("<?php echo $type?>" == "inter"){
           $(".labelradio > p").remove();
       }
 
+      /*Function that displays, when the Classification drop down value is changed, a brief summary of the description
+      for that classification*/
+    var clName = <?php echo json_encode($classification_arr); ?>;
+    var clName_desc = <?php echo json_encode($classification_desc); ?>;
 
-      $('#ddlClassification').change(function () {
+    $('#ddlClassification').change(function () {
           var classification = $('#ddlClassification option:selected').text();
-          var classificationLenght = ar_class.length;
+          var classificationLenght = clName.length;
           $("#className").text(classification);
           for(var q = 0; q < classificationLenght; q++){
-                if(classification == ar_class[q])
-                    $("#tdClass").text(ar_class_desc[q]);
+                if(classification == clName[q])
+                    $("#tdClass").text(clName_desc[q]);
           }
       });
 
-
-
-
+    //Input form array without authors
       formArray = [];
+      //Authors Array
       authorArray = [];
-      $("#theform").on("submit", function (e) {
+
+      //Submit function that will convert the input form and author array into a single JSON
+      $("#form").on("submit", function (e) {
           e.preventDefault();
 
+          //Creates an array of objects by form values
           var formSerialized = $(this).serializeArray();
 
+          /*JQuery that iterates through the serialized array to create a JSON object that will be posted to save the
+          training input data*/
           $.each(formSerialized, function (i, field) {
+              //Creates an empty name instance of an Author
               if(field.name == 'txtAuthor[]')
                   authorArray.push('"txtAuthor":[]');
 
+              //Obtains the name and value of each input and stores it into the Input form array in a JSON format
               else
               formArray.push('"'+field.name + '":"' + field.value+'"' )
           });
+          //The Authors array is pushed to the Input Form array
           formArray.push(authorArray);
+          //Training type attribute is pushed to the Input Form Array
           formArray.push('"type":"<?php echo $_GET['type']?>"');
 
+          //The Authors Element is retrieved to obtain its values and store them into the JSON Input Form
           var authorsName = document.getElementsByName('txtAuthor[]');
-
+            //Input Form is parsed into a JSON
           formJSON = JSON.parse("{" + formArray.toString() + "}");
-
           for(var e = 0; e < authorsName.length; e++) {
               formJSON.txtAuthor[e] = authorsName[e].value;
           }
@@ -451,6 +445,13 @@ $data = file_get_contents('php://input')
                   console.log(error)
               }
           });
+
+          /**********************************************
+           *Function: winLocation
+           *Description: Declares the location on which the window will be replaced when the Submission is completed
+           * Parameter(string): Training Type
+           * Return value(string): URL that will replace the window
+           ***********************************************/
           var trainLocation = function winLocation(type) {
               var trainLoc = "";
               if("<?php echo $priv?>" == 'admin')
@@ -458,107 +459,12 @@ $data = file_get_contents('php://input')
               else
                   trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
               return trainLoc;
-          }
+          };
 
           window.location.replace(trainLocation("<?php echo $type ?>"));
       })
-
-
 </script>
+
 </body>
-<?php include '../../Master/footer.php'; ?>
-<style>
-
-
-    /*Account Stylesheet Adaptation from Collection Name */
-    .Account{
-        border-radius: 2%;
-        box-shadow: 0px 0px 4px;
-    }
-
-    .Account_Table{
-        background-color: white;
-        padding: 3%;
-        border-radius: 6%;
-        box-shadow: 0px 0px 2px;
-        margin: auto;
-        font-family: verdana;
-        text-align: left;
-        margin-top: 2%;
-        margin-bottom: 4%;
-
-    }
-
-    .Account_Table .Account_Title{
-        margin-top: 2px;
-        margin-bottom: 12px;
-        color: #008852;
-    }
-
-    .Account_Table .Collection_data{
-        width: 50%;
-    }
-    }
-    #row{float:bottom;width:2000px;height:52px;background-color: #ccf5ff;}
-
-    .cell
-    {
-        min-height: 52px;
-    }
-
-    .label
-    {
-        float:left;
-        width:initial;
-        min-width: 120px;
-        padding-top:2px;
-        margin-right: 12%;
-    }
-    .labelradio
-    {
-        float:left;
-        width:150px;
-        min-width: 195px;
-    }
-    mark {
-        background-color: rgba(34, 105, 172, 0.32);
-        color: black;
-        border-radius: 4%;
-        box-shadow: 0px 0px 2px;
-        margin-left: -7%;
-        padding: 2.05%;
-    }
-    span.labelradio:hover p{
-        z-index: 10;
-        display: table;
-        text-align: initial;
-        position: absolute;
-        border: 1px solid #000000;
-        background: #fefdff;
-        font-size: 14px;
-        font-style: normal;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px; -o-border-radius: 3px;
-        border-radius: 3px;
-        -webkit-box-shadow: 4px 4px 4px #175131;
-        -moz-box-shadow: 4px 4px 4px #154d2e;
-        box-shadow: 4px 4px 4px #175433;
-        width: 30%;
-        padding: 10px 10px;
-    }
-    descriptionBox{
-        color: #e62014;
-    }
-#tableClass {
-    width: 88%;
-    box-shadow: 0px 0px 2px;
-    margin: -14% 0% 1% 4%;
-    border-radius: 5%;
-}
-    #selClass {
-        width: 50%;
-        margin-left: 48%;
-    }
-
-</style>
+<?php include '../../../Master/footer.php'; ?>
 </html>

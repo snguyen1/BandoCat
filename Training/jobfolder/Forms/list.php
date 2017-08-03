@@ -3,15 +3,20 @@ include '../../../Library/SessionManager.php';
 require('../../../Library/DBHelper.php');
 $session = new SessionManager();
 //Get collection name and action
+
+/*Posted data from the admin.php page
+* Collection, Username
+* Type, Privilege
+*/
 if ( !empty($_POST) ) {
     $collection = $_POST["col"];
     $username = $_POST["user"];
     $type = $_POST["type"];
     $priv = $_POST["priv"];
     $userfile = $_POST["user"];
-
 }
 
+//If no Posted data, the privilege will be stored as none, and the user name will be defined from the session user name
 else{
     if (isset($_GET['user'])){
         $username = $_GET['user'];
@@ -41,7 +46,6 @@ if($_SESSION["role"] == 1) {
         $pos = -1;
         $pos = strpos($row, ".xml");
         if ($pos != 0) {
-            //echo '<a href="list.php?user='  . $row . '">' . $row . '</a>';
             array_push($file_arr, $row);
         }
     }
@@ -55,12 +59,15 @@ if($_SESSION["role"] == 1) {
 	<!-- <meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" /> -->
 	<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
-    <!-- Style CSS -->
+    <!--JQuery UI CSS-->
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+    <!--JQuery UI CSS-->
         <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--JQuery Datatables-->
 		<link rel="stylesheet" type="text/css" href="../../../ExtLibrary/DataTables-1.10.12/css/jquery.dataTables_themeroller.css">
+    <!--Master CSS-->
         <link rel = "stylesheet" type = "text/css" href = "../../../Master/master.css" >
-    <link rel="stylesheet" type="text/css" href="../../styles.css"/>
+    <link rel="stylesheet" type="text/css" href="../styles.css"/>
     <!--Script-->
     <!-- jQuery -->
     <script type="text/javascript" charset="utf8" src="../../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.js"></script>
@@ -74,167 +81,7 @@ if($_SESSION["role"] == 1) {
     <div id="wrap">
         <div id="main">
             <div id="divleft">
-                <img id="header_logo" width="260px" src="../../../Images/Logos/bando-logo-medium.png"/>
-                <nav>
-                    <div class="menu-item alpha">
-                        <h4><a href="../../../">Main Menu</a></h4>
-                    </div>
-                    <!-- Add admin section to side menu -->
-                    <?php
-                    //create a new unique instance of DBheler so we can use it for tickets
-                    require_once '../../../Library/DBHelper.php';
-                    $DB1 = new DBHelper();
-                    //if user is admin, then add Admin section to the menu
-                    $userid = $session-> getUserID();
-                    $userticketCount = $DB1->GET_USER_CLOSEDTICKET_COUNT($userid);
-                    $ticketCount = 0;
-                    $admin = $session->isAdmin();
-                    if($session->isAdmin())
-                    {
-                        //queries the database for the number of tickets currently active
-                        $ticketCount = $DB1->GET_ADMIN_OPENTICKET_COUNT();
-                        echo '<div class="menu-item menu-item_sub5">
-            <!--class for the visuals, data-badge to pass the number of tickets to the text in the badge -->
-            <h4><a class="notificationBadge" data-badge='.$ticketCount.' id="adminNotificationBadge" href="">Admin </a></h4>    
-             <div></div>
-            <ul>           
-            <li><a href="../../../Forms/ActivityLog/index.php">Activity Log</a></li>
-            <li><a class="notificationBadge" data-badge='.$ticketCount.' id="adminNotificationBadge2" href="../../../Forms/Ticket/">View Tickets </a></li>
-            <li><a href="../../../Forms/ManageUser/">Manage User</a></li>
-            <li><a href="../../../Forms/NewUser/">Create New User</a></li>
-            <li><a href="../../../Training/admin.php">Training</a></li>
-            </ul>
-        </div>
-        <div class="menu-item menu-item_sub2">
-        <h4><a href="#">TDL Publishing</a></h4>
-        <ul>
-            <li><a href="../../../TDLPublish/Forms/index.php">Listing</a></li>
-            <li><a href="../../../TDLPublish/Forms/queue.php">Queue</a></li>
-        </ul>
-    </div>';
-                    }
-                    ?>
-                    <script>
-
-                    </script>
-                    <!-- Collections Tab -->
-                    <div class="menu-item menu-item_sub5">
-                        <h4><a href="#">Collections</a></h4>
-                        <ul>
-                            <li><a href="../../../Templates/Map/index.php?col=bluchermaps">Blucher Maps</a></li>
-                            <li><a href="../../../Templates/FieldBook/index.php?col=blucherfieldbook">Field Book</a></li>
-                            <li><a href="../../../Templates/Map/index.php?col=greenmaps">Green Maps</a></li>
-                            <li><a href="../../../Templates/Indices/index.php?col=mapindices">Indices</a></li>
-                            <li><a href="../../../Templates/Folder/index.php?col=jobfolder">Job Folder</a></li>
-                        </ul>
-                    </div>
-                    <!-- Indices Transcription Tab -->
-                    <div class="menu-item">
-                        <h4><a href="../../../Transcription/Indices/list.php?col=mapindices">Indices Transcription</a></h4>
-                    </div>
-                    <div class="menu-item menu-item_sub2">
-                        <h4><a href="#">GeoRectification</a></h4>
-                        <ul>
-                            <li><a href="../../../GeoRec/Map/index.php?col=bluchermaps">Blucher Maps</a></li>
-                            <li><a href="../../../GeoRec/Map/index.php?col=greenmaps">Green Maps</a></li>
-                        </ul>
-                    </div>
-                    <!-- Queries Tab -->
-                    <div class="menu-item menu-item_sub4">
-                        <h4><a href="#">Queries</a></h4>
-                        <ul>
-                            <li><a href="../../../Forms/Queries/hascoast.php">Coastal Maps</a></li>
-                            <li><a href="../../../Forms/Queries/exportcollection.php">Export Document Index</a></li>
-                            <li><a href="../../../Forms/Queries/mapswithouttitle.php">Maps Without Titles</a></li>
-                            <li><a href="../../../Forms/Queries/manage_authorname.php">Manage TDL Author</a></li>
-                            <li><a href="#">Supplied Title Procedure</a></li>
-                        </ul>
-                    </div>
-                    <!-- Statistics Tab -->
-                    <div class="menu-item">
-                        <h4><a href="../../../Forms/Statistics/">Statistics</a></h4>
-                    </div>
-                    <!-- My Account Tab -->
-                    <div class="menu-item">
-                        <h4><a href="../../../Forms/AccountSettings/">My Account</a></h4>
-                    </div>
-
-                    <?php
-
-
-                    echo '<div class="menu-item menu-item_sub2">
-        <h4><a class="notificationBadge" data-badge='.$userticketCount.' id="userNotificationBadge" href="#">Ticket </a></h4>
-        <ul>
-            <li><a class="notificationBadge" data-badge='.$userticketCount.' id="userNotificationBadge2" href="../../../Forms/UserTicket/">View Tickets </a></li>   
-            <li><a href="../../../Forms/TicketsSubmission/" target="_blank">Submit Ticket</a></li>
-        </ul>
-    </div>';
-
-
-                    if($session->isSuperAdmin())
-                    {
-                        echo '<div class="menu-item">
-        <h4><a href="../../../Creator/">Create New Collection</a></h4>
-    </div>';
-                    }
-                    ?>
-
-                    <!-- Help Tab -->
-                    <div class="menu-item menu-item_sub2">
-                        <h4><a href="#">Help</a></h4>
-                        <ul>
-                            <li><a href="../../../Procedures/Documents">Procedures</a></li>
-                            <li><a href="../../../Procedures/Utilities">Support Software</a></li>
-                        </ul>
-                    </div>
-                    <!-- Logout Tab -->
-                    <div class="menu-item">
-                        <h4><a href="../../../Forms/Logout/" id="sidemenu_logout">Logout as <?php echo $session->getUsername(); ?></a></h4>
-                    </div>
-
-                    <script>
-                        //Admin
-                        $( document ).ready(function()
-                        {
-                            var count = '<?php echo $ticketCount ?>';
-                            if(count > 0) {
-                                document.getElementById("adminNotificationBadge2").className = "notificationBadge";
-                                document.getElementById("adminNotificationBadge").className = "notificationBadge";
-                            }
-                            if(count < 1)
-                            {
-                                var admin = 0;
-                                try
-                                {
-                                    admin = '<?php echo $admin ?>';
-                                }catch(e)
-                                {
-                                    console.log("Error: "+ e);
-                                }
-                                //Handle our admin notification
-                                if(admin != '') {
-                                    document.getElementById("adminNotificationBadge2").className = "";
-                                    document.getElementById("adminNotificationBadge").className = "";
-                                }
-                                else {//Do nothing}
-                                }
-                            }
-
-                            var count2 = '<?php echo $userticketCount; ?>';
-                            if(count2 > 0)
-                            {
-                                document.getElementById("userNotificationBadge2").className = "notificationBadge";
-                                document.getElementById("userNotificationBadge").className = "notificationBadge";
-                            }
-                            if(count2 < 1)
-                            {
-                                document.getElementById("userNotificationBadge2").className = "";
-                                document.getElementById("userNotificationBadge").className = "";
-                            }
-                        });
-                    </script>
-                </nav>
-
+                <?php include "../../trainingMaster.php"?>
             </div>
             <div id="divright">
                 <h2 id="page_title">Training <?php if($priv == 'admin') echo $username; elseif($type == 'intermediate' || $type == 'newbie') echo ucfirst($type); elseif ($type == 'none') echo 'Homepage' ?></h2>
@@ -246,7 +93,7 @@ if($_SESSION["role"] == 1) {
 
                 <!--Document table list-->
                 <div id="divscroller" style="display: none;">
-                    <table id="dtable" class="display compact cell-border hover stripe" cellspacing="0" width="100%" data-page-length='10'>
+                    <table id="dtable" class="display compact cell-border hover stripe" cellspacing="0" width="100%" data-page-length='14'>
                         <thead>
                         <tr>
                             <th>Document Link</th>
@@ -259,23 +106,37 @@ if($_SESSION["role"] == 1) {
                         </thead>
 
                         <tbody>
-                        <!--Block of code that load the information from the xml file to the table-->
+                        <!--Block of code that loads the information from the xml file to the table-->
                             <?php
+                            //Main directory
                             $training_parent = "../../Training_Collections";
                             //Collection directory
                             $training_collection_dir = $training_parent.'/'.$collection;
                             //User directory
                             $training_user_dir = $training_collection_dir.'/'.$userfile;
                             $document = new DOMDocument();
+                            /*Conditions the training type to load the XML file pertaining to its training level and
+                            clear any document cache*/
                             if ($type  == 'newbie') {
-                                $document->load($training_user_dir.'/'.$userfile.'_newbie.xml');
-                            } elseif ($type  == 'inter') {
-                                $document->load($training_user_dir.'/'.$userfile.'_inter.xml');
+                                if (file_exists($training_user_dir . '/' . $userfile . '_newbie.xml')) {
+                                    clearstatcache();
+                                    $document->load($training_user_dir.'/'.$userfile.'_newbie.xml');
+                                }
+                            }
+                            elseif ($type  == 'inter') {
+                                if (file_exists($training_user_dir . '/' . $userfile . '_inter.xml')) {
+                                    clearstatcache();
+                                    $document->load($training_user_dir.'/'.$userfile.'_inter.xml');
+                                }
                             }
 
+                            //Reads all the document elements from the loaded document
                             $nodes = $document->getElementsByTagName('document');
                             $count = 0;
+                            //For each document as node
                             foreach ($nodes as $node) {
+                                //Block of conditional statements that obtains the childnode values from every document
+                                //to be displayed in the data table
                                 foreach ($node->childNodes as $child) {
                                     if ($child->nodeName == 'libraryindex') {
                                         $libraryindex = $child->nodeValue;
@@ -295,7 +156,7 @@ if($_SESSION["role"] == 1) {
                                     }
                                 }
 
-
+                                //Outputs into the table a document childnode by row and its attributes by table data
                                 echo '<tr>';
                                 echo "<td align = 'center'><a href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type&priv=$priv\">$libraryindex</a></td>";
                                 echo "<td align = 'center'>$libraryindex</td>";
@@ -308,6 +169,8 @@ if($_SESSION["role"] == 1) {
                         </tbody>
                     </table>
                 </div>
+
+                <!--Slideshow Container-->
                 <div class="slideshow-container" style="display: none">
                     <div class="mySlides">
                         <div class="numbertext">1 / 3</div>
@@ -337,10 +200,11 @@ if($_SESSION["role"] == 1) {
                         <span class="dot" onclick="currentSlide(4)"></span>
                     </div>
                 </div>
-                <!--Continue button-->
+                <!--Continue Bandocat Image Buttons-->
                 <div id="continueTraining">
-                    <span id="continueNewbi" class="continueSpan"><img src="../../images/BandoCatScan.PNG" id="bandocatNewbie"  class="bandocatImage"></a></span>
-                    <span id="continueInter" class="continueSpan"><img src="../../images/BandoCatScan.PNG" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
+                    <span id="continueNewbi" class="continueSpan"><img src="../Images/Training/BandoCatScan.PNG" id="bandocatNewbie"  class="bandocatImage"></a></span>
+                    <span id="continueInter" class="continueSpan"><img src="../Images/Training/BandoCatScan.PNG" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
+                    <!--Training Tabs-->
                     <div id="trainingTabs">
                         <ul>
                             <li><a href="#tabs-1">Training Tips</a></li>
@@ -356,18 +220,18 @@ if($_SESSION["role"] == 1) {
                             <p>Anna's contact Info</p>
                             <p>Link to procedures</p>
                         </div>
+                        <!--Training Admin Tab-->
                         <?php if($priv == 'admin') echo '<div id="tabs-3"><input type="button" id="resetTraining" value="Reset Training"></div>'?>
                     </div>
-                </div>
-
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
+    <script type="text/javascript">
 
-    <script>
-
+        //Slideshow Functions
         var slideIndex = 1;
         showSlides(slideIndex);
 
@@ -394,13 +258,26 @@ if($_SESSION["role"] == 1) {
             slides[slideIndex-1].style.display = "block";
             dots[slideIndex-1].className += " active";
         }
-    </script>
 
-    <script type="text/javascript">
-    var trainingCollectionsJSON =  {"col": '<?php echo $collection ?>', "user": '<?php echo $username?>', "loc": 'parent'};
-
-        //Function that creates the training directory by collection, user, and training type and it is triggered when the document is ready
         $( document ).ready(function() {
+            /*JQuery Functions
+            * dataTables
+            * trainingTabs*/
+
+            //Function that initiates the data table
+            $('#dtable').dataTable({
+                "bJQueryUI": true,
+                "order": [[3, "desc"]],
+                "lengthMenu": [10, 25, 50],
+                "iDisplayLength":10
+            });
+
+            //Function that initiates the training tabs
+            $( function() {
+                $( "#trainingTabs" ).tabs();
+            } );
+
+            //Conditional statement that displays the training links, tabs, and progress bar
             if("<?php echo $type ?>" == 'newbie' || "<?php echo $type ?>" == 'inter'){
                 $('#newbie').css('display', 'none');
                 $('#intermediate').css('display', 'none');
@@ -409,57 +286,41 @@ if($_SESSION["role"] == 1) {
                 $('div').remove('.slideshow-container');
                 $( "#divscroller" ).after( "<div id='buttonList' style='padding: 5%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>" );
             }
-
-
-            $('#dtable').dataTable({
-                "bJQueryUI": true,
-                "order": [[3, "desc"]],
-                //'sPaginationType': 'full_numbers',
-                "lengthMenu": [10, 25, 50],
-                "iDisplayLength":10
-            });
-
-            $( function() {
-                $( "#trainingTabs" ).tabs();
-            } );
-
-            $.ajax({
-                type: 'post',
-                url: "collectionTrainingXML.php",
-                data: trainingCollectionsJSON
-            });
+            trainingProgress();
         });
 
-        function confirmReset() {
-            var x =confirm("Are you sure want to reset your Training session?");
-            if ( x == true) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        //Count the number of completed training documents to display in a progress bar
+        /**********************************************
+         * Function: trainingProgress
+         * Description: Reads the number of document elements that have been tag as completed and sets an interval to
+         * set the width of the progress bar accordingly to the number of completed documents.
+         * Parameter(s): None
+         * Return value(s): None
+         ***********************************************/
         function trainingProgress() {
+            //Stores the progress of the training
             var progress = 0;
-            var frameDisplay = 0;
+            //Stores the progress of the newbie training
             var newbieCompletedTags = 0;
             var xhttp_newbie = new XMLHttpRequest();
             var xhttp_inter = new XMLHttpRequest();
 
-
+            //Event that is triggered every time that the readyState changes of the newbie XMLHttpRequest
             xhttp_newbie.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    completedTags = 0;
-                    elemCompletedLenght = 0;
+                    //Number of completed Tags in the user_newbie.xml
                     completeTagsLenght = xmlGetLenght(this);
+                    //Number of completed Tags that have a 1 value
                     completedTags = xmlGetComplete(this);
+                    //Progress in Percentage decimal value for the newbie training
                     newbieCompletedTags = completedTags/completeTagsLenght;
-                    progress = progressComplete(completedTags, completeTagsLenght);
+
                     xhttp_inter.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
+                            //Number of completed Tags in the user_inter.xml
                             completeTagsLenght = xmlGetLenght(this);
+                            //Number of completed Tags that have a 1 value
                             completedTags = xmlGetComplete(this);
+                            //Training Progress for the training program
                             progress = progressComplete(completedTags, completeTagsLenght);
                         }
 
@@ -471,12 +332,25 @@ if($_SESSION["role"] == 1) {
             xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
             xhttp_newbie.send();
 
+            /**********************************************
+             * Function: trainingProgress
+             * Description: Function that is called when all the completed elements have been counted and positively
+             * identified as completed, and sets the width of the progress bar accordingly to the number of tag and completed
+             * tags ratio.
+             * Parameter(s): completedTags (int) Number of positively updated completed tags
+             * completedTagsLength (int) Number of completed tags in the XML file
+             * Return value(s): None
+             ***********************************************/
             function progressComplete(completedTags, completeTagsLength ) {
                 var width = 1;
+                //Progress Level of the training (float)
                 progressLevel = (completedTags/completeTagsLength)*100;
+                //Progress Level of the trining (int)
                 sequence = parseInt(progressLevel);
 
+                //Conditional statement that displays the slideshow if the progress level is zero
                 if(progressLevel == 0) {
+                    //Makes the default width of the progress bar 3%
                     progressLevel = 3;
                     $('.slideshow-container').css('display', 'block');
                     $("#continueTraining").css('display', 'none');
@@ -489,28 +363,47 @@ if($_SESSION["role"] == 1) {
                     $('.slideshow-container').css('display', 'none')
                 }
 
-                var id = setInterval(frame, 10);
+                //The window evaluates the frame function at a specified interval of 18 milliseconds
+                var id = setInterval(frame, 12);
+
+                /**********************************************
+                 * Function: frame
+                 * Description: Sets the width of the training progress bar accordingly to the progress level
+                 * Parameter(s): None
+                 * Return value(s): None
+                 ***********************************************/
                 function frame() {
-                    if (width >= progressLevel-1){
-                        frameDisplay++;
+                    if (width >= progressLevel){
+                        //Terminates the setInterval method
                         clearInterval(id);
-                        if(newbieCompletedTags == 1 && '<?php echo $type ?>' == 'newbie' && frameDisplay == 2){
+
+                        //newbieCompletedTags == 1 (Newbie training has been completed)
+                        //frameDisplay == 2 (Times the frame function is called)
+
+                        /*Conditions the completion of the newbie training, the newbie training type, and last frame
+                        display call to continue to the intermediate level*/
+                        if(newbieCompletedTags == 1 && '<?php echo $type ?>' == 'newbie'){
                             $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
                         }
-                        if(newbieCompletedTags == 1 && frameDisplay == 2) {
+
+                        //Styles Bandocat Intermediate Image link
+                        if(newbieCompletedTags == 1) {
                             $("#bandocatInter").css('opacity', '1');
                             $("#bandocatInter").hover(function(){
                                 $(this).css("cursor", "pointer");
                             });
                         }
-                        if (newbieCompletedTags <= 1 && frameDisplay == 2) {
+
+                        //Styles Bandocat Newbie Image link
+                        if (newbieCompletedTags <= 1) {
                             $("#bandocatNewbie").hover(function(){
                                 $(this).css("cursor", "pointer");
                             });
                         }
                     }
 
-                     else {
+                    //Increments the width of the progress bar
+                    else {
                         width++;
                         $('#progressBar').width(width+'%').height(20).css("background-color", "green").css("height", "").css("text-align", "center").text(sequence + ' %');
 
@@ -518,7 +411,15 @@ if($_SESSION["role"] == 1) {
                 }
             }
        }
+
+
 var elemCompletedLenght = 0;
+        /**********************************************
+         * Function: xmlGetLenght
+         * Description: Gets the number of completed tags from the XML files
+         * Parameter(s): xml (XML object)
+         * Return value(s): elemCompletedLenght (int) number of completed tags
+         ***********************************************/
         function xmlGetLenght(xml) {
             var xmlDoc = xml.responseXML;
             elemCompleted = xmlDoc.getElementsByTagName('completed');
@@ -527,6 +428,12 @@ var elemCompletedLenght = 0;
         }
 
 var sumCompletedTags = 0;
+        /**********************************************
+         * Function: xmlGetComplete
+         * Description: Gets the number of positevely updated completed tags from the XML files
+         * Parameter(s): xml (XML object)
+         * Return value(s): sumCompletedTags (int) number of completed tags with a 1 value
+         ***********************************************/
         function xmlGetComplete(xml) {
             var xmlDoc = xml.responseXML;
             elemCompleted = xmlDoc.getElementsByTagName('completed');
@@ -538,22 +445,33 @@ var sumCompletedTags = 0;
             return sumCompletedTags;
         }
 
-        trainingProgress();
+        /**********************************************
+         *Function: winLocation
+         *Description: Declares the location on which the window will be replaced
+         * Parameter(string): Training Type
+         * Return value(string): URL that will replace the window
+         ***********************************************/
+        function winLocation(type) {
+            var trainLoc = "";
+            if("<?php echo $priv?>" == 'admin'){
+                trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
+                console.log(trainLoc);
+            }
 
-        //On click events
-
-    function winLocation(type) {
-        var trainLoc = "";
-        if("<?php echo $priv?>" == 'admin'){
-            trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
-            console.log(trainLoc);
+            else
+                trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
+            return trainLoc;
         }
 
-        else
-            trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
-        return trainLoc;
-    }
+        /*On click events
+        * 1. Link to the intermediate training
+        * 2. Link to the newbie training
+        * 3. While on the slideshow continue to the newbie training page
+        * 4. While on any of the trainings it link to the training homepage
+        * 5. While on the newbie training it links to the intermediate page
+        * 6. Resets training, Admin only*/
 
+        //1
         $('#bandocatInter').click(function () {
             var progressText = parseInt($('#progressBar').text());
 
@@ -568,46 +486,44 @@ var sumCompletedTags = 0;
             }
         });
 
+        //2
         $("#bandocatNewbie").click(function () {
             trainLoc = winLocation('newbie');
             window.location.href = trainLoc
         });
 
+        //3
         $("#continue").click(function () {
             trainLoc = winLocation('newbie');
             window.location.href = trainLoc
         });
 
+        //4
         function backList() {
             trainLoc = winLocation('none');
             window.location.href = trainLoc
         }
 
-       function linkInter() {
+       //5
+        function linkInter() {
            trainLoc = winLocation('inter');
             window.location.href = trainLoc
         }
 
-    $("#resetTraining").click(function () {
+        //6
+        $("#resetTraining").click(function () {
         $.ajax({
             type: 'post',
             url: "resetTraining.php",
             data: JSON.parse('{"filename": "' + "<?php echo $training_user_dir ?>" + '", "user": "' + "<?php echo $username?>" + '"}'),
             success: function (result) {
                 if(result) {
-                    window.location.href = '../../admin.php'
+                    console.log(result)
+                    window.location.href = '../../admin/admin.php'
                 }
             }
         });
     });
-
-        $(function() {
-            $('#ddl_switch').change(function() {
-                this.form.submit();
-            });
-        });
-
-
     </script>
 	</body>
 	</html>

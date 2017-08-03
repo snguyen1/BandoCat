@@ -23,8 +23,8 @@
 		public $frontthumbnail;
 		public $backtthumbnail;
 		public $xmlfile;
-		public $url = "../jobfolder/maps/";
-		public $thumb_url = "../jobfolder/thumbnails/";
+		public $url = "../Images/Intermediate/Documents/";
+		public $thumb_url = "../Images/Intermediate/Thumbnails/";
 		public $completed;
 	}
 
