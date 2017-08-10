@@ -174,36 +174,38 @@ if($_SESSION["role"] == 1) {
                 <div class="slideshow-container" style="display: none">
                     <div class="mySlides">
                         <div class="numbertext">1 / 3</div>
-                        <img class="slideImg" src="../images/slide000.PNG" style="width:80%">
+                        <img id="slideImg0" class="slideImg" src="" style="width:100%">
                         </div>
                     <div class="mySlides">
                         <div class="numbertext">2 / 3</div>
-                        <img class="slideImg" src="../images/slide00.PNG" style="width:80%">
-                        <div class="text"><!--<h2>This is the Document Table List. <ul><li>Library Index</li></ul></h2>--></div>
+                        <img id="slideImg1" class="slideImg" src="" style="width:100%">
                     </div>
                     <div class="mySlides">
-                        <div class="numbertext">2 / 3</div>
-                        <img class="slideImg" src="../images/slide01.PNG" style="width:100%">
-                        <div class="text">Welcome to your training. Through this sideshow you will have a quick glimpse about the cataloging process of Jobfolders</div>
+                        <div class="numbertext">3 / 3</div>
+                        <img id="slideImg2" class="slideImg" src="" style="width:100%">
+                    </div><div class="mySlides">
+                        <div class="numbertext">4 / 5</div>
+                        <img id="slideImg3" class="slideImg" src="" style="width:100%">
                     </div>
                     <div class="mySlides">
-                        <div class="numbertext">4 / 3</div>
+                        <div class="numbertext">5 / 5</div>
                         <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" value="Click to Continue To your Training"></div>
                     </div>
 
-                    <a class="prevSlide" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="nextSlide" onclick="plusSlides(1)">&#10095;</a>
+                    <a class="prevSlide" name="slider" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="nextSlide" name="slider" onclick="plusSlides(1)">&#10095;</a>
                     <div style="text-align:center">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                        <span class="dot" onclick="currentSlide(4)"></span>
+                        <span id="pt0" class="dot" onclick="currentSlide(0, 0)">Welcome</span>
+                        <span id="pt1" class="dot" onclick="currentSlide(1, 5)">List Page</span>
+                        <span id="pt2" class="dot" >Homepage</span>
+                        <span id="pt3" class="dot" >Input Page</span>
+                        <span id="pt4" class="dot" >Training</span>
                     </div>
                 </div>
                 <!--Continue Bandocat Image Buttons-->
-                <div id="continueTraining">
-                    <span id="continueNewbi" class="continueSpan"><img src="../Images/Training/BandoCatScan.PNG" id="bandocatNewbie"  class="bandocatImage"></a></span>
-                    <span id="continueInter" class="continueSpan"><img src="../Images/Training/BandoCatScan.PNG" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
+                <div id="homepage">
+                    <span id="continueNewbi" class="continueSpan"><img src="../../images/cat_scanner_white_bg.png" id="bandocatNewbie"  class="bandocatImage"></a></span>
+                    <span id="continueInter" class="continueSpan"><img src="../../images/bandocat_explorer.png" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
                     <!--Training Tabs-->
                     <div id="trainingTabs">
                         <ul>
@@ -213,11 +215,14 @@ if($_SESSION["role"] == 1) {
                         </ul>
                         <div id="tabs-1">
                             <ul>
-                                <li>Always leave the Needs Review field as yes</li>
+                                <li>Always leave the Needs Review field as yes.</li>
+                                <li>Always ask question.</li>
+                                <li>Remember to use the Classification Description to understand a classification.</li>
+                                <li>If stuck while cataloging, refer to previously cataloged input documents.</li>
                             </ul>
                         </div>
                         <div id="tabs-2">
-                            <p>Anna's contact Info</p>
+                            <p>Trainer's contact Info</p>
                             <p>Link to procedures</p>
                         </div>
                         <!--Training Admin Tab-->
@@ -230,34 +235,87 @@ if($_SESSION["role"] == 1) {
     </div>
 
     <script type="text/javascript">
+//Presentation progress
+var ptprg = 0
+//Slide progress
+var sldprg = 0;
+//Presentation Page Index
+var ptdx = 0;
+//Slide Presentation Index
+var slddx = 0;
+//Number of Slides in a presentation
+var nslddx = 1;
 
-        //Slideshow Functions
-        var slideIndex = 1;
-        showSlides(slideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+//First Slide
+showSlides(ptdx, slddx, nslddx);
 
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+//Slider event
+function plusSlides(n) {
+    showSlides(ptdx, slddx += n, nslddx);
+}
 
-        function showSlides(n) {
+//Page presentation event
+function currentSlide(pt, nslddx) {
+    showSlides(ptdx = pt, 0, nslddx);
+    if(ptprg != pt)
+        sldprg = 0;
+    ptprg = pt;
+    $("#pt"+String(pt+1)).click(function (event) {
+        if(sldprg == nslddx-1)
+            if(pt == 1){
+                currentSlide(pt+1, 3);
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 3)')
+            }
+            else if (pt == 2){
+                currentSlide(pt+1, 8);
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 8)')
+            }
+            else if (pt == 3) {
+                currentSlide(pt+1, 1)
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(4, 1)')
+            }
+        else
+            event.stopPropagation()
+    });
+}
+
+        function showSlides(pt, sld, nsld) {
             var i;
+            nslddx = nsld;
+            slddx = sld;
             var slides = document.getElementsByClassName("mySlides");
             var dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
+            if (sld > nsld-1) { slddx = 0}
+            if (sld < 0) { slddx = nsld-1}
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
+            slides[ptdx].style.display = "block";
+
+            imgSource(ptdx, slddx, nslddx);
+
+            function imgSource(presentation, slide, nSlide) {
+                var image = $("#slideImg" + String(presentation));
+                if(nSlide < 2)
+                    $("[name='slider']").css("display", "none");
+                else
+                    $("[name='slider']").css("display", "block");
+                image.attr("src", "../../jobfolder/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
+                if (slide > sldprg)
+                    sldprg = slide;
+            }
+
+            dots[ptdx].className += " active";
         }
+
+
+
+
+
 
         $( document ).ready(function() {
             /*JQuery Functions
@@ -281,7 +339,7 @@ if($_SESSION["role"] == 1) {
             if("<?php echo $type ?>" == 'newbie' || "<?php echo $type ?>" == 'inter'){
                 $('#newbie').css('display', 'none');
                 $('#intermediate').css('display', 'none');
-                $('div').remove('#continueTraining');
+                $('div').remove('#homepage');
                 $('#divscroller').css('display', 'block');
                 $('div').remove('.slideshow-container');
                 $( "#divscroller" ).after( "<div id='buttonList' style='padding: 5%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>" );
@@ -352,9 +410,10 @@ if($_SESSION["role"] == 1) {
                 if(progressLevel == 0) {
                     //Makes the default width of the progress bar 3%
                     progressLevel = 3;
-                    $('.slideshow-container').css('display', 'block');
-                    $("#continueTraining").css('display', 'none');
+                    $("#trainingProgress").css('display', 'none');
+                    $("#homepage").css('display', 'none');
                     $('#trainingButton').css('display', 'none');
+                    $('.slideshow-container').css('display', 'block');
                     if("<?php echo $type ?>" == 'newbie')
                         $('.slideshow-container').css('display', 'none');
                 }
@@ -378,7 +437,6 @@ if($_SESSION["role"] == 1) {
                         clearInterval(id);
 
                         //newbieCompletedTags == 1 (Newbie training has been completed)
-                        //frameDisplay == 2 (Times the frame function is called)
 
                         /*Conditions the completion of the newbie training, the newbie training type, and last frame
                         display call to continue to the intermediate level*/
@@ -389,8 +447,13 @@ if($_SESSION["role"] == 1) {
                         //Styles Bandocat Intermediate Image link
                         if(newbieCompletedTags == 1) {
                             $("#bandocatInter").css('opacity', '1');
-                            $("#bandocatInter").hover(function(){
+                            $("#bandocatInter").mouseover(function(){
                                 $(this).css("cursor", "pointer");
+                                $(this).css("box-shadow", "1px 0px 6px black");
+                                $(this).css("border-radius", "14px");
+                            }).mouseleave( function () {
+                                $(this).css("box-shadow", "none");
+                                $(this).css("border-radius", "0px");
                             });
                         }
 
@@ -398,6 +461,11 @@ if($_SESSION["role"] == 1) {
                         if (newbieCompletedTags <= 1) {
                             $("#bandocatNewbie").hover(function(){
                                 $(this).css("cursor", "pointer");
+                                $(this).css("box-shadow", "1px 0px 6px black");
+                                $(this).css("border-radius", "14px");
+                            }).mouseleave( function () {
+                                $(this).css("box-shadow", "none");
+                                $(this).css("border-radius", "0px");
                             });
                         }
                     }
