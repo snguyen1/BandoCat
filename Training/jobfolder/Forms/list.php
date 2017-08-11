@@ -203,7 +203,7 @@ if($_SESSION["role"] == 1) {
                     </div>
                 </div>
                 <!--Continue Bandocat Image Buttons-->
-                <div id="homepage">
+                <div id="homepage" style="display: none">
                     <span id="continueNewbi" class="continueSpan"><img src="../../images/cat_scanner_white_bg.png" id="bandocatNewbie"  class="bandocatImage"></a></span>
                     <span id="continueInter" class="continueSpan"><img src="../../images/bandocat_explorer.png" id="bandocatInter" class="bandocatImage" style="opacity: 0.5;"></a></span>
                     <!--Training Tabs-->
@@ -250,19 +250,41 @@ var nslddx = 1;
 //First Slide
 showSlides(ptdx, slddx, nslddx);
 
-//Slider event
+//Slider click event
+/**********************************************
+ * Function: plusSlides
+ * Description: Increments or decrements the slide index integer
+ * Parameter(s): n (integer) a 1 to increment or -1 to decrease the presentation slide index display
+ * Return value(s): None
+ ***********************************************/
 function plusSlides(n) {
     showSlides(ptdx, slddx += n, nslddx);
 }
 
-//Page presentation event
+//Page presentation click event
+/**********************************************
+ * Function: currentSlide
+ * Description: Function that calls and resets the showSlides function back to the initial slide. Also, sets flags to
+ * determine if the user has completed a presentation so to continue to the next presentation.
+ * Parameter(s): pt (integer) Presentation number
+ * nslddx (integer) Number of slides in the presentation
+ * Return value(s): None
+ ***********************************************/
 function currentSlide(pt, nslddx) {
-    showSlides(ptdx = pt, 0, nslddx);
+    //Resets slide show to the first slide
+    showSlides(pt, 0, nslddx);
+    //Flag that determines if a new presentation has been selected
     if(ptprg != pt)
+        //Resets the presentation progress
         sldprg = 0;
+    //Stores the presentation index
     ptprg = pt;
+
+    //Event that is triggered if the next contiguous presentation button is clicked
     $("#pt"+String(pt+1)).click(function (event) {
-        if(sldprg == nslddx-1)
+        //If all of the presentation slides have been observed the event will call the currentSlide to display the
+        // oncoming presentation
+        if(sldprg == nslddx-1){
             if(pt == 1){
                 currentSlide(pt+1, 3);
                 $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 3)')
@@ -275,19 +297,35 @@ function currentSlide(pt, nslddx) {
                 currentSlide(pt+1, 1)
                 $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(4, 1)')
             }
+        }
+
+        //Otherwise it prevents the event from propagating
         else
             event.stopPropagation()
     });
 }
 
+/**********************************************
+ * Function: showSlides
+ * Description: Function that displays the image slides
+ * Parameter(s): pt (integer) Presentation number
+ * sld (integer) Slide index
+ * nsld (integer) Number of slides in the presentation
+ * Return value(s): None
+ ***********************************************/
+//Dots refer to presentations
         function showSlides(pt, sld, nsld) {
             var i;
+            ptdx = pt;
             nslddx = nsld;
             slddx = sld;
+            //Slide Elements
             var slides = document.getElementsByClassName("mySlides");
+            //Presentation Elements
             var dots = document.getElementsByClassName("dot");
+            //If on last slide proceed to first slide
             if (sld > nsld-1) { slddx = 0}
-            if (sld < 0) { slddx = nsld-1}
+
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
@@ -298,13 +336,31 @@ function currentSlide(pt, nslddx) {
 
             imgSource(ptdx, slddx, nslddx);
 
+    /**********************************************
+     * Function: imgSource
+     * Description: Function that obtains the path of the slide image for display. Also, manipulates the slider style to
+     * match the slideshow requirement.
+     * Parameter(s): pt (integer) Presentation number
+     * sld (integer) Slide index
+     * nsld (integer) Number of slides in the presentation
+     * Return value(s): None
+     ***********************************************/
             function imgSource(presentation, slide, nSlide) {
+                //Image Element
                 var image = $("#slideImg" + String(presentation));
+                //If the presentation contains only one slide no slider will be displayed
                 if(nSlide < 2)
                     $("[name='slider']").css("display", "none");
                 else
                     $("[name='slider']").css("display", "block");
+                //If the presentation is on its first slide the user won't be able to go to the last slide
+                if(slide == 0)
+                    $(".prevSlide").css("display", "none");
+
+
                 image.attr("src", "../../jobfolder/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
+
+                //Stores the index of the highest slide that has been seen by the user
                 if (slide > sldprg)
                     sldprg = slide;
             }
@@ -419,7 +475,8 @@ function currentSlide(pt, nslddx) {
                 }
 
                 else{
-                    $('.slideshow-container').css('display', 'none')
+                    $('.slideshow-container').css('display', 'none');
+                    $("#homepage").css('display', 'block');
                 }
 
                 //The window evaluates the frame function at a specified interval of 18 milliseconds
