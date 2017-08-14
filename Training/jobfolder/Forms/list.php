@@ -224,6 +224,7 @@ if($_SESSION["role"] == 1) {
                         <div id="tabs-2">
                             <p>Trainer's contact Info</p>
                             <p>Link to procedures</p>
+                            <p id="slideshowLink" style="text-decoration: underline">Slideshow Presentation</p>
                         </div>
                         <!--Training Admin Tab-->
                         <?php if($priv == 'admin') echo '<div id="tabs-3"><input type="button" id="resetTraining" value="Reset Training"></div>'?>
@@ -290,8 +291,8 @@ function currentSlide(pt, nslddx) {
                 $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 3)')
             }
             else if (pt == 2){
-                currentSlide(pt+1, 8);
-                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 8)')
+                currentSlide(pt+1, 7);
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 7)')
             }
             else if (pt == 3) {
                 currentSlide(pt+1, 1)
@@ -591,10 +592,11 @@ var sumCompletedTags = 0;
         /*On click events
         * 1. Link to the intermediate training
         * 2. Link to the newbie training
-        * 3. While on the slideshow continue to the newbie training page
-        * 4. While on any of the trainings it link to the training homepage
-        * 5. While on the newbie training it links to the intermediate page
-        * 6. Resets training, Admin only*/
+        * 3. Link to the slideshow presentation
+        * 4. While on the slideshow continue to the newbie training page
+        * 5. While on any of the trainings it link to the training homepage
+        * 6. While on the newbie training it links to the intermediate page
+        * 7. Resets training, Admin only*/
 
         //1
         $('#bandocatInter').click(function () {
@@ -618,24 +620,36 @@ var sumCompletedTags = 0;
         });
 
         //3
+        $("#slideshowLink").click(function () {
+            $("#trainingProgress").css('display', 'none');
+            $("#homepage").css('display', 'none');
+            $('#trainingButton').css('display', 'none');
+            $('.slideshow-container').css('display', 'block');
+        });
+
+        $("#slideshowLink").hover(function () {
+           $("#slideshowLink").css("cursor", "pointer")
+        });
+
+        //4
         $("#continue").click(function () {
             trainLoc = winLocation('newbie');
             window.location.href = trainLoc
         });
 
-        //4
+        //5
         function backList() {
             trainLoc = winLocation('none');
             window.location.href = trainLoc
         }
 
-       //5
+       //6
         function linkInter() {
            trainLoc = winLocation('inter');
             window.location.href = trainLoc
         }
 
-        //6
+        //7
         $("#resetTraining").click(function () {
         $.ajax({
             type: 'post',

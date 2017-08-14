@@ -23,9 +23,9 @@
 		<needsinput>1</needsinput>
 
 		<frontimage>SampleDocFront.tif</frontimage>
-		<backimage>SampleDocBack.tif</backimage>
+		<backimage></backimage>
 		<frontthumbnail>SampleDocFront.jpg</frontthumbnail>
-		<backthumbnail>SampleDocBack.jpg</backthumbnail>
+		<backthumbnail></backthumbnail>
 		<completed>0</completed>
 	</document>
 <document collection = "jobfolder">
