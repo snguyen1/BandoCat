@@ -282,6 +282,80 @@ class FieldBookDBHelper extends DBHelper
             return $result;
         } else return false;
     }
+
+    /**********************************************
+     * Function: GET_FIELDBOOK_COLLECTION_LIST
+     * Description: attempts to get the list of fieldbook collection names
+     * Parameter(s):
+     * $collection (in string) - name of the collection
+     * Return value(s):
+     * True if good, False if fail
+     ***********************************************/
+    function GET_ALL_FIELDBOOK_FILENAMES_BY_BOOKTITLE($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //selects the fieldbook collection names from the fieldbook collection
+            $sth = $this->getConn()->prepare("SELECT `filename` FROM `document` WHERE `booktitle` = :booktitle");
+            $sth->bindParam(':booktitle',$booktitle,PDO::PARAM_STR);
+            $sth->execute();
+            //return the collection names
+            $result = $sth->fetchAll(PDO::FETCH_NUM);
+            return $result;
+        } else return false;
+    }
+    /**********************************************
+     * Function: UPDATE_FIELDBOOK_READYFORPDF
+     * Description: attempts to get the list of fieldbook collection names
+     * Parameter(s):
+     * $collection (in string) - name of the collection
+     * Return value(s):
+     * True if good, False if fail
+     ***********************************************/
+    function UPDATE_FIELDBOOK_READYFORPDF($collection, $iBookTitle,$iReadyForPdf)
+    {
+            $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection));
+            $db = $dbname['DbName'];
+            if ($db != null && $db != "")
+            {
+                $this->getConn()->exec('USE ' . $db);
+
+                $call = $this->getConn()->prepare("CALL SP_TEMPLATE_FIELDBOOK_DOCUMENT_READYFORPDF_UPDATE(:iBookTitle,:iReadyForPdf)");
+                if (!$call)
+                    trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
+                //bind parameters into variables for the above SQL statement
+                $call->bindParam(':iBookTitle', ($iBookTitle), PDO::PARAM_INT);
+                $call->bindParam(':iReadyForPdf', ($iReadyForPdf), PDO::PARAM_INT);
+
+                $ret = $call->execute();
+                //Execute Statement
+
+                if($ret)
+                    return true;
+                return false;
+            }
+
+    }
+    function COUNT_FIELDBOOK_READYFORPDF($collection,$iReadyForPdf)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //select booktitles where needs review = 0
+            // AND `weeklyreport`.`collectionID` = ?'
+            $sth = $this->getConn()->prepare("SELECT DISTINCT COUNT(`booktitle`) FROM `document` WHERE `RdyForPdf`=:RdyForPdf");
+            $sth->bindParam(':RdyForPdf',$iReadyForPdf,PDO::PARAM_INT);
+            $sth->execute();
+            //return the result
+            $result = $sth->fetchColumn();
+            return $result;
+        } else return false;
+    }
     /**********************************************
      * Function: GET_CREW_LIST
      * Description: gets the names of the crew members

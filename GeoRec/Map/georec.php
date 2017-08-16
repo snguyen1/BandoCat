@@ -516,7 +516,6 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
                     $('#rasterX-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].x);
                     $('#rasterY-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].y);
                     $('#rasterLat-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlat);
-                    $('#rasterLong-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlong);
                 });
 
                 //increment counters and adjust booleans

@@ -1081,6 +1081,85 @@ class DBHelper
             return $result;
         } else return false;
     }
+    /**********************************************
+     * Function: GET_DOCUMENT_FILTEREDNEEDSREVIEW_COUNT
+     * Description: function responsible for returning all documents that have a coastline
+     * Parameter(s):
+     * $collection (in String) - Name of the collection
+     * Return value(s):
+     * $result  (array) - true if success, otherwise, false
+     ***********************************************/
+    function GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //select booktitles where needs review = 0
+            // AND `weeklyreport`.`collectionID` = ?'
+            $sth = $this->getConn()->prepare("SELECT COUNT(`documentID`) FROM `document` WHERE `needsreview`='0' AND `booktitle`=:bookTitle");
+            $sth->bindParam(':bookTitle',$booktitle,PDO::PARAM_INT);
+            $sth->execute();
+            //return the result
+            $result = $sth->fetchColumn();
+            return $result;
+        } else return false;
+    }
+
+    function GET_DOCUMENT_MATCHBOOKTITLE_COUNT($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //select booktitles where needs review = 0
+            // AND `weeklyreport`.`collectionID` = ?'
+            $sth = $this->getConn()->prepare("SELECT COUNT(`documentID`) FROM `document` WHERE `booktitle`=:bookTitle");
+            $sth->bindParam(':bookTitle',$booktitle,PDO::PARAM_INT);
+            $sth->execute();
+            //return the result
+            $result = $sth->fetchColumn();
+            return $result;
+        } else return false;
+    }
+    function GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //select booktitles where needs review = 0
+            // AND `weeklyreport`.`collectionID` = ?'
+            $sth = $this->getConn()->prepare("SELECT `RdyForPdf` FROM `document` WHERE `booktitle`=:bookTitle");
+            $sth->bindParam(':bookTitle',$booktitle,PDO::PARAM_INT);
+            $sth->execute();
+            //return the result
+            $result = $sth->fetchColumn();
+            return $result;
+        } else return false;
+    }
+
+    function GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //select booktitles where needs review = 1
+            // AND `weeklyreport`.`collectionID` = ?'
+            $sth = $this->getConn()->prepare("SELECT COUNT(`documentID`) FROM `document` WHERE `needsreview`='1' AND `booktitle`=:bookTitle");
+            $sth->bindParam(':bookTitle',$booktitle,PDO::PARAM_INT);
+            $sth->execute();
+            //return the result
+            $result = $sth->fetchColumn();
+            return $result;
+        } else return false;
+    }
+
 
     /**********************************************
      * Function: GET_DOCUMENT_FILTEREDTITLE_COUNT
