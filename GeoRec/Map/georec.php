@@ -110,17 +110,23 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
     //pk.eyJ1Ijoic2FsbHJlZCIsImEiOiJjajN1N3pjbzkwMDUwMnFsaTZhNGxvcnpsIn0.YcXPcOqQeZ556qHY4B5o8A
     //old pk.eyJ1Ijoic3BhdGlhbHF1ZXJ5bGFiIiwiYSI6ImNpeW43eHZ2YTAwMTgzMnBjNGF4bWVuaHIifQ.H-IzkkctQwbBRjhS9VLddA
     //Base layers with leaflet layer control and access token
-    var street = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FsbHJlZCIsImEiOiJjajN1N3pjbzkwMDUwMnFsaTZhNGxvcnpsIn0.YcXPcOqQeZ556qHY4B5o8A', {
-        maxZoom: 20,
-        maxNativeZoom: 18,
-        attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
-    }).addTo(map);
+//    var street = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FsbHJlZCIsImEiOiJjajN1N3pjbzkwMDUwMnFsaTZhNGxvcnpsIn0.YcXPcOqQeZ556qHY4B5o8A', {
+//        maxZoom: 20,
+//        maxNativeZoom: 18,
+//        attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
+//    }).addTo(map);
 
-    var satellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FsbHJlZCIsImEiOiJjajN1N3pjbzkwMDUwMnFsaTZhNGxvcnpsIn0.YcXPcOqQeZ556qHY4B5o8A', {
-        maxZoom: 20,
-        maxNativeZoom: 18,
-        attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
-    });
+//    var street = L.tileLayer(
+//        'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+//            attribution: '&copy; '+mapLink+', '+wholink,
+//            maxZoom: 20,
+//    }).addTo(map);
+
+//    var satellite = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FsbHJlZCIsImEiOiJjajN1N3pjbzkwMDUwMnFsaTZhNGxvcnpsIn0.YcXPcOqQeZ556qHY4B5o8A', {
+//        maxZoom: 20,
+//        maxNativeZoom: 18,
+//        attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
+//    });
     mapLink = '<a href="http://www.esri.com/">Esri</a>';
     wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
     var esriSat =  L.tileLayer(
@@ -128,20 +134,20 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
             attribution: '&copy; '+mapLink+', '+wholink,
             maxZoom: 20,
         });
-    var Boundaries =  L.tileLayer(
-        'http://server.arcgisonline.com/arcgis/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+    var esriStreet =  L.tileLayer(
+        'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; '+mapLink+', '+wholink,
             maxZoom: 20,
-        });
+        }).addTo(map);
     var esriTransportation = L.tileLayer(
         'http://server.arcgisonline.com/arcgis/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; '+mapLink+', '+wholink,
             maxZoom: 20,
         });
     var items = new L.FeatureGroup([esriSat,esriTransportation]);
+
     var baseMaps = {
-        "Street": street,
-        "Satellite": satellite,
+        "Street": esriStreet,
         "Esri Sat": esriSat
     };
 
@@ -510,12 +516,14 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
                     //var longitude = marker._latlng.lng;
                     gcpList[rastermarkerIndex].rlong = marker._latlng.lng;
                     rCoords =rc.project(event.target._latlng);
-                    
+
+                    //Georec Bug
                     gcpList[rastermarkerIndex].x = rCoords.x;
                     gcpList[rastermarkerIndex].y = rCoords.y;
                     $('#rasterX-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].x);
                     $('#rasterY-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].y);
                     $('#rasterLat-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlat);
+                    $('#rasterLong-' + rastermarkerIndex).text(gcpList[rastermarkerIndex].rlong);
                 });
 
                 //increment counters and adjust booleans
