@@ -173,22 +173,17 @@ if($_SESSION["role"] == 1) {
                 <!--Slideshow Container-->
                 <div class="slideshow-container" style="display: none">
                     <div class="mySlides">
-                        <div class="numbertext">1 / 3</div>
                         <img id="slideImg0" class="slideImg" src="" style="width:100%">
                         </div>
                     <div class="mySlides">
-                        <div class="numbertext">2 / 3</div>
                         <img id="slideImg1" class="slideImg" src="" style="width:100%">
                     </div>
                     <div class="mySlides">
-                        <div class="numbertext">3 / 3</div>
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
                     </div><div class="mySlides">
-                        <div class="numbertext">4 / 5</div>
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
                     </div>
                     <div class="mySlides">
-                        <div class="numbertext">5 / 5</div>
                         <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" value="Click to Continue To your Training"></div>
                     </div>
 
@@ -357,22 +352,18 @@ function currentSlide(pt, nslddx) {
                 //If the presentation is on its first slide the user won't be able to go to the last slide
                 if(slide == 0)
                     $(".prevSlide").css("display", "none");
-
+                else if(slide == nSlide-1)
+                    $(".nextSlide").css("display", "none");
 
                 image.attr("src", "../../jobfolder/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
 
                 //Stores the index of the highest slide that has been seen by the user
-                if (slide > sldprg)
+                if (slide > nSlide-2)
                     sldprg = slide;
             }
 
             dots[ptdx].className += " active";
         }
-
-
-
-
-
 
         $( document ).ready(function() {
             /*JQuery Functions
@@ -580,12 +571,12 @@ var sumCompletedTags = 0;
         function winLocation(type) {
             var trainLoc = "";
             if("<?php echo $priv?>" == 'admin'){
-                trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
+                trainLoc = 'list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type +'&user=<?php echo $username?>&priv=admin';
                 console.log(trainLoc);
             }
 
             else
-                trainLoc = 'http://localhost/BandoCat/Training/'+ "<?php echo $collection ?>" +'/Forms/list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
+                trainLoc = 'list.php?col='+ "<?php echo $collection ?>" +'&action=training&type='+ type;
             return trainLoc;
         }
 
