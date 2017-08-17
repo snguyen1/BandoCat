@@ -73,7 +73,7 @@ else header('Location: ../../');
                 </tr>
                 <tr>
                     <td class="Collection_data">
-                        <a id="training" class="Collection_Button" href="../../Training/Forms/list.php?col=<?php echo $collection; ?>&action=training&type=none" style="text-decoration: none; color: white; display: block">Training</a>
+                        <a id="training" class="Collection_Button" href="../../Training/jobfolder/Forms/list.php?col=<?php echo $collection; ?>&action=training&type=none" style="text-decoration: none; color: white; display: block">Training</a>
                     </td>
                 </tr>
             </table>
@@ -88,7 +88,7 @@ else header('Location: ../../');
         var newType = {"col": '<?php echo $collection ?>', "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
         $.ajax({
                 type: 'post',
-                url: "../../Training/Forms/collectionTrainingXML.php",
+                url: "../../Training/"+ '<?php echo $collection ?>/' +"Forms/collectionTrainingXML.php",
                 data: newType
             });
         }

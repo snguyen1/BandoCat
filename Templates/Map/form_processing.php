@@ -21,7 +21,7 @@ $session = new SessionManager();
     if($action != "delete")
     {
         //data pre-processing
-        //Date
+        //DateF
         require '../../Library/DateHelper.php';
         $date = new DateHelper();
         $startdate = $date->mergeDate($data['ddlStartMonth'], $data['ddlStartDay'], $data['ddlStartYear']);
