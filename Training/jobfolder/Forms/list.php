@@ -174,22 +174,28 @@ if($_SESSION["role"] == 1) {
                 <div class="slideshow-container" style="display: none">
                     <div class="mySlides">
                         <img id="slideImg0" class="slideImg" src="" style="width:100%">
+                        <input type="button" id="nextSlide0" class="nextPresentation" onclick="currentSlide(1, 5)" value="next" style="display: none">
                         </div>
                     <div class="mySlides">
                         <img id="slideImg1" class="slideImg" src="" style="width:100%">
+                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 3)" style="display: none">
                     </div>
                     <div class="mySlides">
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
+                        <input type="button" id="nextSlide2" class="nextPresentation" value="next" onclick="currentSlide(3, 7)" style="display: none">
                     </div><div class="mySlides">
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
+                        <img id="slideImg3" class="slideImg" src="" style="width:100%">
+                        <input type="button" id="nextSlide3" class="nextPresentation" value="next" onclick="currentSlide(4, 0)" style="display: none">
                     </div>
                     <div class="mySlides">
-                        <div id="continue" style="padding: 15%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto" value="Click to Continue To your Training"></div>
+                        <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important;" value="Click to Continue To your Training"></div>
+                        <img id="slideImg4" class="slideImg" src="" style="width:100%; margin: -70.4% 0% 0% 0%">
                     </div>
 
                     <a class="prevSlide" name="slider" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="nextSlide" name="slider" onclick="plusSlides(1)">&#10095;</a>
-                    <div style="text-align:center">
+                    <div style="text-align:center; margin-top: -1.3%; z-index: 1; position: relative">
                         <span id="pt0" class="dot" onclick="currentSlide(0, 0)">Welcome</span>
                         <span id="pt1" class="dot" onclick="currentSlide(1, 5)">List Page</span>
                         <span id="pt2" class="dot" >Homepage</span>
@@ -211,7 +217,7 @@ if($_SESSION["role"] == 1) {
                         <div id="tabs-1">
                             <ul>
                                 <li>Always leave the Needs Review field as yes.</li>
-                                <li>Always ask question.</li>
+                                <li>Always ask questions.</li>
                                 <li>Remember to use the Classification Description to understand a classification.</li>
                                 <li>If stuck while cataloging, refer to previously cataloged input documents.</li>
                             </ul>
@@ -276,6 +282,7 @@ function currentSlide(pt, nslddx) {
     //Stores the presentation index
     ptprg = pt;
 
+
     //Event that is triggered if the next contiguous presentation button is clicked
     $("#pt"+String(pt+1)).click(function (event) {
         //If all of the presentation slides have been observed the event will call the currentSlide to display the
@@ -299,6 +306,12 @@ function currentSlide(pt, nslddx) {
         else
             event.stopPropagation()
     });
+//Delete
+//    $("#nextSlide"+String(pt)).click(function (event){
+//        ptidx = pt + 1;
+//        var currentSlide = $("#pt"+String(ptidx)).attr('onclick');
+//        console.log(currentSlide)
+//    });
 }
 
 /**********************************************
@@ -330,6 +343,16 @@ function currentSlide(pt, nslddx) {
             }
             slides[ptdx].style.display = "block";
 
+    if(pt == 2){
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 3)')
+    }
+    else if (pt == 3){
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(3, 7)')
+    }
+    else if (pt == 4) {
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(4, 1)')
+    }
+
             imgSource(ptdx, slddx, nslddx);
 
     /**********************************************
@@ -345,15 +368,20 @@ function currentSlide(pt, nslddx) {
                 //Image Element
                 var image = $("#slideImg" + String(presentation));
                 //If the presentation contains only one slide no slider will be displayed
-                if(nSlide < 2)
+                if(nSlide < 2){
                     $("[name='slider']").css("display", "none");
+                    $("#nextSlide"+String(presentation)).css("display", "block")
+                }
                 else
                     $("[name='slider']").css("display", "block");
                 //If the presentation is on its first slide the user won't be able to go to the last slide
                 if(slide == 0)
                     $(".prevSlide").css("display", "none");
-                else if(slide == nSlide-1)
+                else if(slide == nSlide-1){
                     $(".nextSlide").css("display", "none");
+                    $("#nextSlide"+String(presentation)).css("display", "block")
+                }
+
 
                 image.attr("src", "../../jobfolder/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
 
@@ -361,9 +389,21 @@ function currentSlide(pt, nslddx) {
                 if (slide > nSlide-2)
                     sldprg = slide;
             }
-
             dots[ptdx].className += " active";
         }
+
+        //Delete
+        //use dot element
+//$('#nextSlide'+$(".active").attr('id').replace(/^\D+/g,"")).click(function () {
+//    var ptidx = parseInt($(".active").attr('id').replace(/^\D+/g,""));
+//    ptidx = ptidx + 1;
+//    var currentSlide = $("#pt"+String(ptidx)).attr('onclick');
+//    var fn = currentSlide.slice(0,12);
+//    var arg1 = currentSlide[13];
+//    var arg2 = currentSlide[16];
+//    winfn = window[fn](parseInt(arg1), parseInt(arg2));
+//});
+//console.log($(".active").attr('id').replace(/^\D+/g,""));
 
         $( document ).ready(function() {
             /*JQuery Functions
