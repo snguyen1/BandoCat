@@ -57,7 +57,8 @@ else header('Location: ../../');
         $files = scandir($path);
         foreach($files as $file)
         {
-            if ($file != '.' && $file != '..')
+
+            if ($file != '.' && $file != '..' && $file != "Title_Page.pdf")
             {
                 $exec1 = "convert " . $path . '/' . basename($file) . " -quiet -compress jpeg -quality 40 " . $path . '/' . basename($file, '.tif') . ".pdf";
                 exec($exec1, $yaks, $return);
@@ -74,7 +75,12 @@ else header('Location: ../../');
             //SCAN DIRECTORY FOR NEWLY CREATED PDF FILES
             $files = scandir($path);
             $exec2 = "pdftk ";
+            $titlepage = "C:/xampp/htdocs/BandoCat/Images/Title_Page.pdf ";
+            $exec2 .= $titlepage;
             //BUILD STRING TO COMBINE ALL PDFS INTO ONE
+           // $exec2 .= $path . '/' . "Title_Page.pdf" . " ";
+
+
             foreach($files as $file)
             {
                 // var_dump($files);.
@@ -90,6 +96,7 @@ else header('Location: ../../');
                 }
             }
             $exec2 .= " cat output " . $path . '/' . "Book_" . $booktitle . ".pdf";
+
             exec($exec2,$yaks2,$return1);
             //IF THE COMBINING OF PDFS IS SUCCESSFUL DELETE CREATED PDFS
             if($return1 == 0)
@@ -114,7 +121,7 @@ else header('Location: ../../');
                 $stage = (string)$stage;
                 $boop = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$booktitle,$stage);
             }else{
-                echo 'Failed!';
+                echo 'Failed! ';
                 echo $exec2;
             }
 

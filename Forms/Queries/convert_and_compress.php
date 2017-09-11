@@ -48,7 +48,8 @@ $Render = new ControlsRender();
                                     <select name="ddlCollection" id="ddlCollection" onchange="Calculate(this.value)">
 
                                         <!-- Renders the Dropdownlist with the collections -->
-                                        <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(3),true),null);?>
+                                        <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(2,3),true),null);?>
+
                                     </select>
                                 </form>
                                 <td>
@@ -180,7 +181,7 @@ $Render = new ControlsRender();
 
                 "ajax":
                 {
-                    url: "fieldbook_bt_unique_processing.php?col=" +collection + "&stage=" + document.getElementById('ddlCollection2').value
+                    url: "convert_and_compress_processing.php?col=" +collection + "&stage=" + document.getElementById('ddlCollection2').value
                     , dataType: "json"
                     ,  complete: function() {
                     document.getElementById("loader_2").style.visibility = "hidden";
