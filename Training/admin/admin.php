@@ -53,7 +53,7 @@ for ($x = 2; $x < $colLength; $x++) {
                                     $splitJob = str_split($trainCol[$h],3);
                                     echo '<input type="radio" name="rdcollection" class="rdcollection" id='.$trainCol[$h].' value='.$trainCol[$h].'><label class="colLable" for='.$trainCol[$h].'>'.ucwords($splitJob[0]).' '.ucwords($splitJob[1].$splitJob[2]).'</label>';
                                     }
-                                if ($trainCol[$h] == 'fieldbooks') {
+                                if ($trainCol[$h] == 'maps') {
                                     $splitField = str_split($trainCol[$h], 5);
                                     echo '<input type="radio" name="rdcollection" class="rdcollection" id='.$trainCol[$h].' value='.$trainCol[$h].'><label class="colLable" for='.$trainCol[$h].'>'.ucwords($splitField[0]).' '.ucwords($splitField[1]).'</label>';
                                 }

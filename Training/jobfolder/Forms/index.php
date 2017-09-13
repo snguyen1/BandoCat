@@ -16,10 +16,16 @@ $type = $_GET['type'];
 $priv = $_GET['priv'];
 
 //Include Training type class
-if ($type == 'newbie') {
-    include 'newbieClass.php';
-} elseif ($type == 'inter') {
-    include 'interClass.php';
+switch ($type) {
+    case 'newbie':
+        include 'newbieClass.php';
+        break;
+    case 'answer':
+        include 'newbieClass.php';
+        break;
+    case 'inter':
+        include 'interClass.php';
+        break;
 }
 
 include 'config.php';
@@ -33,7 +39,10 @@ $XMLname = $username . '_' . $type;
 $XMLfile = XMLfilename($XMLname);
 
 //Loads file
-$file = simplexml_load_file('../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
+if($type == 'newbie' || $type == 'inter')
+    $file = simplexml_load_file('../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile) or die("Cannot open file!");
+else
+    $file = simplexml_load_file('newbie_Answers.xml');
 //Loops through every document tag in the file
 foreach ($file->document as $a) {
     //Conditions the document's Id
@@ -41,8 +50,18 @@ foreach ($file->document as $a) {
         //Future Collections Implementations: $collection -> Collection Name (string)
         if ($a["collection"] == $collection) {
             //JobFolder class
-            $doc1 = new JobFolder($collection,'../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile, $username, $doc_id);
-            break;
+            switch ($type) {
+                case 'newbie':
+                    $doc1 = new JobFolder($collection,'../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile, $username, $doc_id);
+                    break;
+                case 'inter':
+                    $doc1 = new JobFolder($collection,'../../Training_Collections/' . $collection . '/'.$username.'/'. $XMLfile, $username, $doc_id);
+                    break;
+                case 'answer':
+                    $doc1 = new JobFolder($collection, 'newbie_Answers.xml', $username, $doc_id);
+                    break;
+            }
+
         }
     }
 }
@@ -94,7 +113,7 @@ foreach ($file->document as $a) {
 
         <div id="divright">
             <h2> Input Training Session </h2>
-            <div id="divscroller" style="height: 776px">
+            <div id="divscroller" style="height: 700px">
                 <form id="form" name="form" method="post">
                     <table class="Account_Table">
                         <td id="col1">
@@ -121,7 +140,7 @@ foreach ($file->document as $a) {
                             <div class="cell">
                                 <span class="labelradio" >
                                 <mark>Needs Review: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed</p>
+                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
                                 </span>
                                 <input type = "radio" name = "rbNeedsReview" id = "rbNeedsReview_yes" size="26" value="1" <?php if($doc1->needsreview == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbNeedsReview" id = "rbNeedsReview_no" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
@@ -130,7 +149,7 @@ foreach ($file->document as $a) {
                             <div class="cell">
                                 <span class="labelradio" >
                                 <mark>In A Subfolder: </mark>
-                                <p hidden><b></b>This document belongs in a subfolder</p>
+                                <p hidden><b></b>Select if the document belongs to a subfolder. This will be indicated in the library index by a ".number" </br>Ex. 142-_038.1</p>
                                 </span>
                                 <input type = "radio" name = "rbInASubfolder" id = "rbInASubfolder_yes" size="26" value="1" <?php if($doc1->inasubfolder == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbInASubfolder" id = "rbInASubfolder_no" size="26" value="0" <?php if($doc1->inasubfolder == 0) echo "checked"; ?> />No
@@ -143,7 +162,7 @@ foreach ($file->document as $a) {
                                     </mark>
                                     <p hidden>
                                         <b></b>
-                                        <strong>Subfolder Comments: </strong>The first document of a subfolder will say what to expect within the subfolder. If looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.
+                                        <strong>Subfolder Comments: </strong>The first document of a subfolder will say what to expect within the subfolder. Looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.
                                     </p>
                                 </span>
                                 <textarea cols = "30" name="txtSubfolderComments" id="txtSubfolderComments"/><?php echo $doc1->subfoldercomments; ?></textarea>
@@ -156,7 +175,7 @@ foreach ($file->document as $a) {
                                     </mark>
                                     <p hidden>
                                         <b></b>
-                                        <strong>Classification: </strong>Classify the type of document. If you don’t know what it should be, consult the Classification Description box.
+                                        <strong>Classification: </strong>Classify the type of document. If assistance is needed, consult the Classification Description box.
                                     </p>
                                 </span>
                                 <select id="ddlClassification" name="ddlClassification" style="width:215px">
@@ -315,7 +334,7 @@ foreach ($file->document as $a) {
                                     <input type = "hidden" id="txtAction" name="txtAction" value="catalog" />  <!-- catalog or review -->
                                     <input type = "hidden" id="txtCollection" name="txtCollection" value="<?php echo $collection; ?>" />
                                     <span>
-                                        <?php if($session->hasWritePermission()){
+                                        <?php if($session->hasWritePermission() && $type != 'answer'){
                                             echo "<input type='submit' id='btnSubmit' name='submit' value='Update' action='index.php' class='bluebtn'/>";
                                         }
                                         ?>
@@ -340,6 +359,15 @@ $data = file_get_contents('php://input')
 
 
 <script>
+    //Window Height
+    var windowHeight = window.innerHeight;
+    $('#divscroller').height(windowHeight - (windowHeight * 0.1));
+
+    $(window).resize(function (event) {
+        windowHeight = event.target.innerHeight;
+        $('#divscroller').height(windowHeight - (windowHeight * 0.1));
+    });
+
       /**********************************************
       * Function: add_fields
       * Description: adds more fields for authors

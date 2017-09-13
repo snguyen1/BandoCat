@@ -52,6 +52,14 @@
         <li><a href="../../../Templates/Folder/index.php?col=jobfolder">Job Folder</a></li>
     </ul>
 </div>
+                    <!-- Training Tab -->
+                    <div class="menu-item menu-item_sub2">
+                        <h4><a href="#">Training</a></h4>
+                        <ul>
+                            <li class="trainingCol"><a href="../../jobfolder/Forms/list.php?col=jobfolder&action=training&type=none">Job Folder Training</a></li>
+                            <li class="trainingCol"><a href="../../maps/Forms/list.php?col=maps&action=training&type=none">Map Training</a></li>
+                        </ul>
+                    </div>
 <!-- Indices Transcription Tab -->
 <div class="menu-item">
     <h4><a href="../../../Transcription/Indices/list.php?col=mapindices">Indices Transcription</a></h4>
@@ -155,6 +163,24 @@ if($session->isSuperAdmin())
             document.getElementById("userNotificationBadge2").className = "";
             document.getElementById("userNotificationBadge").className = "";
         }
+    });
+
+    $('.trainingCol').click(function (e) {
+        switch (e.target.innerHTML) {
+            case 'Job Folder Training':
+                var collection = 'jobfolder';
+                break;
+            case 'Maps Training':
+                var collection = 'maps';
+                break;
+        }
+
+        var newType = {"col": collection, "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
+        $.ajax({
+            type: 'post',
+            url: "../"+ collection +"/Forms/collectionTrainingXML.php",
+            data: newType
+        });
     });
 </script>
 </nav>

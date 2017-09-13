@@ -84,7 +84,7 @@ if($_SESSION["role"] == 1) {
                 <?php include "../../trainingMaster.php"?>
             </div>
             <div id="divright">
-                <h2 id="page_title">Training <?php if($priv == 'admin') echo $username; elseif($type == 'intermediate' || $type == 'newbie') echo ucfirst($type); elseif ($type == 'none') echo 'Homepage' ?></h2>
+                <h2 id="page_title"><?php echo ucfirst($collection); ?> Training <?php if($priv == 'admin') echo $username; elseif($type == 'inter') echo 'Intermediate Level'; elseif($type == 'newbie') echo 'Beginner Level'; elseif ($type == 'none') echo 'Homepage' ?></h2>
 
                 <!--Training Progress/Progress Bar-->
                 <div id="trainingProgress">
@@ -130,9 +130,12 @@ if($_SESSION["role"] == 1) {
                                 }
                             }
 
+
+
                             //Reads all the document elements from the loaded document
                             $nodes = $document->getElementsByTagName('document');
                             $count = 0;
+                            $docArray = array();
                             //For each document as node
                             foreach ($nodes as $node) {
                                 //Block of conditional statements that obtains the childnode values from every document
@@ -155,10 +158,11 @@ if($_SESSION["role"] == 1) {
                                         $id = $child->nodeValue;
                                     }
                                 }
+                                $docArray[] = array("libraryIndex" =>[$libraryindex], "id" => $id);
 
                                 //Outputs into the table a document childnode by row and its attributes by table data
                                 echo '<tr>';
-                                echo "<td align = 'center'><a href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type&priv=$priv\">$libraryindex</a></td>";
+                                echo "<td align = 'center'><a target='_blank' href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type&priv=$priv\">$libraryindex</a></td>";
                                 echo "<td align = 'center'>$libraryindex</td>";
                                 echo "<td align = 'center'>$title</td>";
                                 echo "<td align = 'center'>$classification</td>";
@@ -178,7 +182,7 @@ if($_SESSION["role"] == 1) {
                         </div>
                     <div class="mySlides">
                         <img id="slideImg1" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 3)" style="display: none">
+                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 4)" style="display: none">
                     </div>
                     <div class="mySlides">
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
@@ -237,6 +241,32 @@ if($_SESSION["role"] == 1) {
     </div>
 
     <script type="text/javascript">
+        //Window Height
+        var windowHeight = window.innerHeight;
+        var divleftWidth = $("#divleft").width();
+        $('#divscroller').height(windowHeight - (windowHeight * 0.20));
+        $('#homepage').height(windowHeight - (windowHeight * 0.20));
+        $('.slideshow-container').height(windowHeight - (windowHeight * 0.10));
+        if(divleftWidth <= 256) {
+            $('#divscroller').css('margin-left', '1.5%')
+        }
+
+        $(window).resize(function (event) {
+            divleftWidth = $("#divleft").width();
+            windowHeight = event.target.innerHeight;
+            $('#divscroller').height(windowHeight - (windowHeight * 0.20));
+            $('#homepage').height(windowHeight - (windowHeight * 0.20));
+            $('.slideshow-container').height(windowHeight - (windowHeight * 0.10));
+            if(divleftWidth <= 256)
+                $('#divscroller').css('margin-left', '1.5%');
+            else
+                $('#divscroller').css('margin-left', '0%')
+        });
+
+
+
+
+
 //Presentation progress
 var ptprg = 0
 //Slide progress
@@ -289,8 +319,8 @@ function currentSlide(pt, nslddx) {
         // oncoming presentation
         if(sldprg == nslddx-1){
             if(pt == 1){
-                currentSlide(pt+1, 3);
-                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 3)')
+                currentSlide(pt+1, 4);
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 4)')
             }
             else if (pt == 2){
                 currentSlide(pt+1, 7);
@@ -306,12 +336,6 @@ function currentSlide(pt, nslddx) {
         else
             event.stopPropagation()
     });
-//Delete
-//    $("#nextSlide"+String(pt)).click(function (event){
-//        ptidx = pt + 1;
-//        var currentSlide = $("#pt"+String(ptidx)).attr('onclick');
-//        console.log(currentSlide)
-//    });
 }
 
 /**********************************************
@@ -322,7 +346,7 @@ function currentSlide(pt, nslddx) {
  * nsld (integer) Number of slides in the presentation
  * Return value(s): None
  ***********************************************/
-//Dots refer to presentations
+//Tabs are presentations
         function showSlides(pt, sld, nsld) {
             var i;
             ptdx = pt;
@@ -344,7 +368,7 @@ function currentSlide(pt, nslddx) {
             slides[ptdx].style.display = "block";
 
     if(pt == 2){
-        $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 3)')
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 4)')
     }
     else if (pt == 3){
         $("#pt"+String(pt)).attr('onClick', 'currentSlide(3, 7)')
@@ -392,19 +416,6 @@ function currentSlide(pt, nslddx) {
             dots[ptdx].className += " active";
         }
 
-        //Delete
-        //use dot element
-//$('#nextSlide'+$(".active").attr('id').replace(/^\D+/g,"")).click(function () {
-//    var ptidx = parseInt($(".active").attr('id').replace(/^\D+/g,""));
-//    ptidx = ptidx + 1;
-//    var currentSlide = $("#pt"+String(ptidx)).attr('onclick');
-//    var fn = currentSlide.slice(0,12);
-//    var arg1 = currentSlide[13];
-//    var arg2 = currentSlide[16];
-//    winfn = window[fn](parseInt(arg1), parseInt(arg2));
-//});
-//console.log($(".active").attr('id').replace(/^\D+/g,""));
-
         $( document ).ready(function() {
             /*JQuery Functions
             * dataTables
@@ -430,7 +441,7 @@ function currentSlide(pt, nslddx) {
                 $('div').remove('#homepage');
                 $('#divscroller').css('display', 'block');
                 $('div').remove('.slideshow-container');
-                $( "#divscroller" ).after( "<div id='buttonList' style='padding: 5%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>" );
+                $("<div id='buttonList' style='padding: 2%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>").appendTo("#divscroller")
             }
             trainingProgress();
         });
@@ -442,11 +453,12 @@ function currentSlide(pt, nslddx) {
          * Parameter(s): None
          * Return value(s): None
          ***********************************************/
+        var newbieCompletedTags = 0;
         function trainingProgress() {
             //Stores the progress of the training
             var progress = 0;
             //Stores the progress of the newbie training
-            var newbieCompletedTags = 0;
+
             var xhttp_newbie = new XMLHttpRequest();
             var xhttp_inter = new XMLHttpRequest();
 
@@ -535,6 +547,39 @@ function currentSlide(pt, nslddx) {
 
                         //Styles Bandocat Intermediate Image link
                         if(newbieCompletedTags == 1) {
+
+
+
+
+
+                            if($('#dtable').is(':visible')) {
+                                if("<?php echo $type ?>" == 'newbie')
+                                {
+                                    $('#dtable>thead>tr').append("<th class='sorting ui-state-default' tabindex='0' aria-controls='dtable' rowspan='1' colspan='1' aria-label='Answers: activate to sort column ascending' style='width: 0px'>Answers</th>");
+                                    var tableRows =  $('#dtable>tbody>tr');
+                                    var libID = JSON.stringify(<?php echo json_encode($docArray) ?>);
+                                    var JSONdoc = JSON.parse(libID);
+                                    var tm = 0;
+                                    function libraryMatch(libraryIdx) {
+
+                                        for(var j = 0; j < JSONdoc.length; j++) {
+                                            if(libraryIdx == JSONdoc[j].libraryIndex) {
+                                                var linkID = JSONdoc[j].id;
+                                            }
+                                        }
+                                        $("<td align='center'><a href='index.php?id=" + linkID + "&user=" + "<?php echo $userfile ?>" + "&col=" + "<?php echo $collection ?>" + "&type=answer&priv=" + "<?php echo $priv ?>" + "'>Answer</a></td>").insertAfter($('#dtable>tbody>tr')[tm].childNodes[4]);
+                                        console.log("<td align='center'><a href='index.php?id=" + linkID + "&user=" + "<?php echo $userfile ?>" + "&col=" + "<?php echo $collection ?>" + "&type=" + "<?php echo $type ?>" + "&priv=" + "<?php echo $priv ?>" + "'>Answer</a></td>");
+                                        tm += 1;
+                                    }
+
+                                    //console.log(tableRows.length);
+                                    for(var i = 0; i < tableRows.length; i++) {
+                                        libraryMatch($('#dtable>tbody>tr')[i].childNodes[1].innerHTML)
+                                    }
+                                }
+                            }
+
+
                             $("#bandocatInter").css('opacity', '1');
                             $("#bandocatInter").mouseover(function(){
                                 $(this).css("cursor", "pointer");
@@ -633,11 +678,11 @@ var sumCompletedTags = 0;
         $('#bandocatInter').click(function () {
             var progressText = parseInt($('#progressBar').text());
 
-            if(progressText < 38) {
+            if(newbieCompletedTags < 1) {
                 return false;
             }
 
-            if(progressText >= 38){
+            if(newbieCompletedTags == 1){
                 $("#bandocatInter").css('opacity', '1');
                 trainLoc = winLocation('inter');
                 window.location.href = trainLoc

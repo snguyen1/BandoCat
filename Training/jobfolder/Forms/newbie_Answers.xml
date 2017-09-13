@@ -3,21 +3,23 @@
 <document collection = "jobfolder">
 	<id>0</id>
 	<libraryindex>149-A_016</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>149-A_016</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Survey Calculation</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<endmonth>9</endmonth>
+	<endday>11</endday>
+	<endyear>1950</endyear>
 
-	<author><name></name></author>
-	<comments></comments>
+	<author><name>Green, William W., 1911-2001</name></author>
+	<comments>Sheet No. 2
+With sketch
+Job No. 4790</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -31,10 +33,17 @@
 <document collection = "jobfolder">
 	<id>1</id>
 	<libraryindex>143-(envelope)</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
-	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<title>143-(envelope)</title>
+	<inasubfolder>0</inasubfolder>
+	<subfoldercomments>Ward Island (A)
+(At mouth of Oso Creek) Island B&amp;C
+Ward Island
+Islands B&amp;C
+Caswell  &amp; Stout
+Ward Island Interurban Ry
+Franchises, Etc.
+also data on Old South City Limits</subfoldercomments>
+	<classification>Envelope/Binding</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
@@ -59,10 +68,10 @@
 <document collection = "jobfolder">
 	<id>2</id>
 	<libraryindex>142-_038.1</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
-	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<title>142-_038.1</title>
+	<inasubfolder>1</inasubfolder>
+	<subfoldercomments>These items belong to the Miscellaneous envelope</subfoldercomments>
+	<classification>Envelope/Binding</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
@@ -87,10 +96,10 @@
 <document collection = "jobfolder">
 	<id>3</id>
 	<libraryindex>142-_038.3</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
-	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<title>142-_038.3</title>
+	<inasubfolder>1</inasubfolder>
+	<subfoldercomments>These items belong to the Miscellaneous envelope</subfoldercomments>
+	<classification>Note</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
@@ -115,18 +124,18 @@
 <document collection = "jobfolder">
 	<id>4</id>
 	<libraryindex>140-H_012</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>140-H_012</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Field Note</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<endmonth>5</endmonth>
+	<endday>25</endday>
+	<endyear>1938</endyear>
 
 	<author><name></name></author>
 	<comments></comments>
@@ -143,21 +152,21 @@
 <document collection = "jobfolder">
 	<id>5</id>
 	<libraryindex>140G-_005.6</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
-	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<title>140G-_005.6</title>
+	<inasubfolder>1</inasubfolder>
+	<subfoldercomments>These items belong to the Peterson &amp; Dunlap envelope.</subfoldercomments>
+	<classification>Legal Document Draft</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<endmonth>1</endmonth>
+	<endday>7</endday>
+	<endyear>1954</endyear>
 
 	<author><name></name></author>
-	<comments></comments>
+	<comments>J.5475</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -171,21 +180,23 @@
 <document collection = "jobfolder">
 	<id>6</id>
 	<libraryindex>140-F_083</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>Preliminary Plat Austin Addition A Subdivision of Approximately 48 Acres Out of The Hitchcock Tract</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Map/Blueprint</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
+	<endmonth>8</endmonth>
 	<endday></endday>
-	<endyear></endyear>
+	<endyear>1944</endyear>
 
 	<author><name></name></author>
-	<comments></comments>
+	<comments>With calculation
+With sketch
+Scale 1 inch : 100 feet</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -199,21 +210,22 @@
 <document collection = "jobfolder">
 	<id>7</id>
 	<libraryindex>140G-_002.18</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
-	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<title>140G-_002.18</title>
+	<inasubfolder>1</inasubfolder>
+	<subfoldercomments>These items belong to the A.P. Tibbits or Dunlap Tract envelope.</subfoldercomments>
+	<classification>Legal Description</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<endmonth>8</endmonth>
+	<endday>3</endday>
+	<endyear>1925</endyear>
 
 	<author><name></name></author>
-	<comments></comments>
+	<comments>J. 5439
+With calculation</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -227,21 +239,21 @@
 <document collection = "jobfolder">
 	<id>8</id>
 	<libraryindex>140-_003</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>140-_003</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Correspondence</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<endmonth>4</endmonth>
+	<endday>2</endday>
+	<endyear>1942</endyear>
 
 	<author><name></name></author>
-	<comments></comments>
+	<comments>From C. M. B. to Mr. Nat Hardy</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -255,18 +267,18 @@
 <document collection = "jobfolder">
 	<id>9</id>
 	<libraryindex>142-_020</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>142-_020</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Legal Document</classification>
 	<classificationcomments></classificationcomments>
 
-	<startmonth></startmonth>
-	<startday></startday>
-	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<startmonth>2</startmonth>
+	<startday>13</startday>
+	<startyear>1940</startyear>
+	<endmonth>4</endmonth>
+	<endday>18</endday>
+	<endyear>1940</endyear>
 
 	<author><name></name></author>
 	<comments></comments>
@@ -283,21 +295,21 @@
 <document collection = "jobfolder">
 	<id>10</id>
 	<libraryindex>126-_001</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>126-_001</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Seperation Sheet</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
+	<endmonth>1</endmonth>
 	<endday></endday>
-	<endyear></endyear>
+	<endyear>1878</endyear>
 
 	<author><name></name></author>
-	<comments></comments>
+	<comments>Plat of the survey establishing the S.W. corner of Duval County January 1878</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -311,10 +323,10 @@
 <document collection = "jobfolder">
 	<id>11</id>
 	<libraryindex>88-A_104</libraryindex>
-	<title></title>
-	<inasubfolder></inasubfolder>
+	<title>88-A_104</title>
+	<inasubfolder>0</inasubfolder>
 	<subfoldercomments></subfoldercomments>
-	<classification></classification>
+	<classification>Stencil</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
