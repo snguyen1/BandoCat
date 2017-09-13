@@ -10,6 +10,7 @@
     //if user is admin, then add Admin section to the menu
     $userid = $session-> getUserID();
     $userticketCount = $DB1->GET_USER_CLOSEDTICKET_COUNT($userid);
+    $username = $_SESSION['username'];
     $ticketCount = 0;
     $admin = $session->isAdmin();
     if($session->isAdmin())
@@ -49,6 +50,14 @@
             <li><a href="../../Templates/Map/index.php?col=greenmaps">Green Maps</a></li>
             <li><a href="../../Templates/Indices/index.php?col=mapindices">Indices</a></li>
             <li><a href="../../Templates/Folder/index.php?col=jobfolder">Job Folder</a></li>
+        </ul>
+    </div>
+    <!-- Training Tab -->
+    <div class="menu-item menu-item_sub2">
+        <h4><a href="#">Training</a></h4>
+        <ul>
+            <li class="trainingCol"><a href="../../Training/jobfolder/Forms/list.php?col=jobfolder&action=training&type=none">Job Folder Training</a></li>
+            <li class="trainingCol"><a href="../../Training/maps/Forms/list.php?col=maps&action=training&type=none">Maps Training</a></li>
         </ul>
     </div>
     <!-- Indices Transcription Tab -->
@@ -154,6 +163,24 @@
                 document.getElementById("userNotificationBadge2").className = "";
                 document.getElementById("userNotificationBadge").className = "";
             }
+        });
+
+        $('.trainingCol').click(function (e) {
+            switch (e.target.innerHTML) {
+                case 'Job Folder Training':
+                    var collection = 'jobfolder';
+                    break;
+                case 'Maps Training':
+                    var collection = 'maps';
+                    break;
+            }
+
+            var newType = {"col": collection, "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
+                    $.ajax({
+                        type: 'post',
+                        url: "../../Training/"+ collection +"/Forms/collectionTrainingXML.php",
+                        data: newType
+                    });
         });
     </script>
 </nav>
