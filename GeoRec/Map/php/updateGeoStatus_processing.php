@@ -6,6 +6,7 @@ require('../../../Library/MapDBHelper.php');
 $DB = new MapDBHelper();
 $config = $DB->SP_GET_COLLECTION_CONFIG($_GET['col']);
 $ret =$DB->SWITCH_DB($_GET['col']);
+
 $comments = null;
 $isBack = $_GET['type'] == "back" ? true : false; //identify if this map is a front or a back scan
 if($ret)

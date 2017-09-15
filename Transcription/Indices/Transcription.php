@@ -172,7 +172,7 @@ else header('Location: ../../');
 
 		<!--Comments-->
 		<p class="fieldSubTitle" >Comments:</p>
-		<textarea class="Input_Field" id="Comments" name="Comments" rows="3"></textarea>
+		<textarea class="Input_Field" id="Comments" name="Comments" maxlength="500" rows="6"></textarea>
 
 		<!--Hidden input elements-->
 		<!--	Clients	-->
