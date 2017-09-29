@@ -171,6 +171,11 @@
     animation-duration: 1.5s;
 }
 
+@-webkit-keyframes correctFade {
+    0%{outline: green; outline-style: solid}
+    100%{outline: none; outline-style: none}
+}
+
 .continueSpan{
    margin: 0% 15% 0% 15%;
 }

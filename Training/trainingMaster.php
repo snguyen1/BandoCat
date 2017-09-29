@@ -11,6 +11,7 @@
                     //if user is admin, then add Admin section to the menu
                     $userid = $session-> getUserID();
                     $userticketCount = $DB1->GET_USER_CLOSEDTICKET_COUNT($userid);
+                    $username = $_SESSION['username'];
                     $ticketCount = 0;
                     $admin = $session->isAdmin();
                     if($session->isAdmin())
@@ -57,7 +58,7 @@
                         <h4><a href="#">Training</a></h4>
                         <ul>
                             <li class="trainingCol"><a href="../../jobfolder/Forms/list.php?col=jobfolder&action=training&type=none">Job Folder Training</a></li>
-                            <li class="trainingCol"><a href="../../maps/Forms/list.php?col=maps&action=training&type=none">Map Training</a></li>
+                            <li class="trainingCol"><a href="../../maps/Forms/list.php?col=maps&action=training&type=none">Maps Training</a></li>
                         </ul>
                     </div>
 <!-- Indices Transcription Tab -->
@@ -165,20 +166,20 @@ if($session->isSuperAdmin())
         }
     });
 
-    $('.trainingCol').click(function (e) {
-        switch (e.target.innerHTML) {
-            case 'Job Folder Training':
-                var collection = 'jobfolder';
-                break;
-            case 'Maps Training':
-                var collection = 'maps';
-                break;
-        }
+        $('.trainingCol').click(function (e) {
+            switch (e.target.innerHTML) {
+                case 'Job Folder Training':
+                    var collection = 'jobfolder';
+                    break;
+                case 'Maps Training':
+                    var collection = 'maps';
+                    break;
+            }
 
         var newType = {"col": collection, "ntype": 'newbie', "itype": 'inter', "user": '<?php echo $username?>'};
         $.ajax({
             type: 'post',
-            url: "../"+ collection +"/Forms/collectionTrainingXML.php",
+            url: "../../"+ collection +"/Forms/collectionTrainingXML.php",
             data: newType
         });
     });

@@ -548,10 +548,6 @@ function currentSlide(pt, nslddx) {
                         //Styles Bandocat Intermediate Image link
                         if(newbieCompletedTags == 1) {
 
-
-
-
-
                             if($('#dtable').is(':visible')) {
                                 if("<?php echo $type ?>" == 'newbie')
                                 {

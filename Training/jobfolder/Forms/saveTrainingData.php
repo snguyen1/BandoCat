@@ -70,10 +70,9 @@ function writeXMLtag($id, $tag, $data, $username){
 
 	else {
 		    $tag = $document->getElementsByTagName($tag);
-            $tag->item($id)->nodeValue = $data;
+            $tag->item($id)->nodeValue = htmlspecialchars($data);
 	}
     clearstatcache();
 $document->save($filename);
-
 }
 ?>
