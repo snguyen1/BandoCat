@@ -248,6 +248,7 @@ $Render = new ControlsRender();
     //**************************************************************
     function performAction(event,action,docID)
     {
+
         event.preventDefault();
         $.ajax({
             type: "POST",
