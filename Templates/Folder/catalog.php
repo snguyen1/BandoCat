@@ -39,6 +39,7 @@ $authors = $DB->GET_FOLDER_AUTHORS_BY_DOCUMENT_ID($collection,$docID);
     <script type="text/javascript" src="../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="../../ExtLibrary/jQueryUI-1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="../../Master/master.js"></script>
+
 </head>
 <!-- END HTML HEADER -->
 <body>
@@ -232,10 +233,11 @@ $authors = $DB->GET_FOLDER_AUTHORS_BY_DOCUMENT_ID($collection,$docID);
     </div>
 
 <?php include '../../Master/footer.php'; ?>
+<script type="text/javascript" src="../../Master/errorHandling.js"></script>
 </body>
 <!-- END HTML BODY -->
 <script>
-    /**********************************************
+     /**********************************************
      * Function: add_fields
      * Description: adds more fields for authors
      * Parameter(s):
@@ -271,6 +273,17 @@ $authors = $DB->GET_FOLDER_AUTHORS_BY_DOCUMENT_ID($collection,$docID);
         {
             event.preventDefault();
             /* stop form from submitting normally */
+            /*On submit error handling of the form elements*/
+                    //formElement = $("form").serializeArray();
+            var error = errorHandling($('#txtLibraryIndex'), '<?php echo $collection ?>');
+            if(error.answer){
+                for(i = 0; i < error.desc.length; i++) {
+                    alert(error.desc[i].message)
+                }
+                return false
+            }
+
+
             //This attaches the entire "#theform" in addition to the crews to the post
             var formData = new FormData($(this)[0]);
 

@@ -419,7 +419,7 @@ $date = new DateHelper();
 
     #thetable{height:100%;}
 </style>
-
+<script type="text/javascript" src="../../Master/errorHandling.js"></script>
 <script>
     $( document ).ready(function()
     {
@@ -432,6 +432,28 @@ $date = new DateHelper();
 //            {
                 //Library index was found having a "_" in the string
                 /* stop form from submitting normally */
+            var error = errorHandling($('#txtLibraryIndex'), '<?php echo $collection ?>');
+            if(error.answer){
+                for(i = 0; i < error.desc.length; i++) {
+                    alert(error.desc[i].message)
+                }
+                return false
+            }
+            var eScale = errorHandling($('#txtMapScale'), '<?php echo $collection ?>');
+            if(eScale.answer){
+                for(i = 0; i < eScale.desc.length; i++) {
+                    alert(eScale.desc[i].message)
+                }
+                return false
+            }
+
+//            if(eScale.answer){
+//                for(i = 0; i < eScale.desc.length; i++) {
+//                    alert(eScale.desc[i].message)
+//                }
+//                return false
+//            }
+
                 $('#btnSubmit').css("display", "none");
                 $('#loader').css("display", "inherit");
                 event.disabled;

@@ -333,7 +333,7 @@ $date = new DateHelper();
 </div>
 </div>
 <?php include '../../Master/footer.php'; ?>
-
+<script type="text/javascript" src="../../Master/errorHandling.js"></script>
 </body>
 <script>
     $( document ).ready(function() {
@@ -342,6 +342,21 @@ $date = new DateHelper();
             /* stop form from submitting normally */
             var formData = new FormData($(this)[0]);
             /*jquery that displays the three points loader*/
+
+            var error = errorHandling($('#txtLibraryIndex'), '<?php echo $collection ?>');
+            if(error.answer){
+                for(i = 0; i < error.desc.length; i++) {
+                    alert(error.desc[i].message)
+                }
+                return false
+            }
+            var eScale = errorHandling($('#txtMapScale'), '<?php echo $collection ?>');
+            if(eScale.answer){
+                for(i = 0; i < eScale.desc.length; i++) {
+                    alert(eScale.desc[i].message)
+                }
+                return false
+            }
 
              //TODO:: removed libraryindex underscore validation
 //            if(validateFormUnderscore("txtLibraryIndex") == true)
