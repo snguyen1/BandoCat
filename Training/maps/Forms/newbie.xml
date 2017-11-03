@@ -1,0 +1,484 @@
+<data>
+	<!--If the document libraryindex Tutorial is removed renumber all the documents' ids to zero-->
+<document collection = "maps">
+	<id>0</id>
+	<libraryindex>5RB_30</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>5RB-_30.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>5RB-_30.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>1</id>
+	<libraryindex>4R_23.1</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>4R-_23.1.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>4R-_23.1.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>2</id>
+	<libraryindex>4R_23.2</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>4R-_23.2.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>4R-_23.2.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>3</id>
+	<libraryindex>2BR_65</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>2BR-_65.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>2BR-_65.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>4</id>
+	<libraryindex>2BR_64</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>2BR-_64.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>2BR-_64.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>5</id>
+	<libraryindex>2BR_85</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>2BR-_85.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>2BR-_85.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>6</id>
+	<libraryindex>BF-1_5</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>BF-1_5.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>BF-1_5.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>7</id>
+	<libraryindex>BD_101</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>BD-_101.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>BD-_101.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>8</id>
+	<libraryindex>BA_13</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>BA-_13.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>BA-_13.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>9</id>
+	<libraryindex>AS-2_9</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>AS-2_9.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>AS-2_9.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+<document collection = "maps">
+	<id>10</id>
+	<libraryindex>AMFrench-1_25</libraryindex>
+	<title></title>
+	<subtitle></subtitle>
+	<scale></scale>
+	<is>1</is>
+	<needsreview>1</needsreview>
+	<northarrow>0</northarrow>
+	<street>0</street>
+	<poi>0</poi>
+	<coordinates>0</coordinates>
+	<coast>0</coast>
+	<customername></customername>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+
+	<fieldbooknumber></fieldbooknumber>
+	<fieldbookpage></fieldbookpage>
+	<readability></readability>
+	<rectifiability></rectifiability>
+	<companyname></companyname>
+	<documenttype></documenttype>
+	<documentmedium></documentmedium>
+	<author></author>
+
+	<frontimage>AMFrench-1_25.tif</frontimage>
+	<backimage></backimage>
+	<frontthumbnail>AMFrench-1_25.jpg</frontthumbnail>
+	<backthumbnail></backthumbnail>
+	<completed>0</completed>
+</document>
+	<document collection = "maps">
+		<id>11</id>
+		<libraryindex>DI_4</libraryindex>
+		<title></title>
+		<subtitle></subtitle>
+		<scale></scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability></readability>
+		<rectifiability></rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium></documentmedium>
+		<author></author>
+
+		<frontimage>DI-_4.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>DI-_4.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>12</id>
+		<libraryindex>BL_24</libraryindex>
+		<title></title>
+		<subtitle></subtitle>
+		<scale></scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability></readability>
+		<rectifiability></rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium></documentmedium>
+		<author></author>
+
+		<frontimage>BL-_24.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>BL-_24.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+</data>

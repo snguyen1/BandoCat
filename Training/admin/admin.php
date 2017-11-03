@@ -46,7 +46,7 @@ for ($x = 2; $x < $colLength; $x++) {
             <label for="collections" class="lblTraining">Collections</label>
             <div id="collections">
                         <!--Loop that obtains all of the Training_Collections sub-folders-->
-                        <!--Future Collection implementation (string replace)-->
+                        <!--Future Collection implementation-->
                         <?php
                             for ($h = 0; $h < count($trainCol); $h++) {
                                 if ($trainCol[$h] == 'jobfolder') {
@@ -54,6 +54,10 @@ for ($x = 2; $x < $colLength; $x++) {
                                     echo '<input type="radio" name="rdcollection" class="rdcollection" id='.$trainCol[$h].' value='.$trainCol[$h].'><label class="colLable" for='.$trainCol[$h].'>'.ucwords($splitJob[0]).' '.ucwords($splitJob[1].$splitJob[2]).'</label>';
                                     }
                                 if ($trainCol[$h] == 'maps') {
+                                    $splitField = str_split($trainCol[$h], 5);
+                                    echo '<input type="radio" name="rdcollection" class="rdcollection" id='.$trainCol[$h].' value='.$trainCol[$h].'><label class="colLable" for='.$trainCol[$h].'>'.ucwords($splitField[0]).'</label>';
+                                }
+                                if ($trainCol[$h] == 'fieldbook') {
                                     $splitField = str_split($trainCol[$h], 5);
                                     echo '<input type="radio" name="rdcollection" class="rdcollection" id='.$trainCol[$h].' value='.$trainCol[$h].'><label class="colLable" for='.$trainCol[$h].'>'.ucwords($splitField[0]).' '.ucwords($splitField[1]).'</label>';
                                 }
