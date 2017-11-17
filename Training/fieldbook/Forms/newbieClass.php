@@ -54,15 +54,14 @@
 				    $this->bookcollection = $a->bookcollection;
 					$this->booktitle = $a->booktitle;
 					$this->jobnumber = $a->jobnumber;
-					$this->scale = $a->scale;
-					$this->is= $a->is;
+					$this->jobtitle = $a->jobtitle;
+					$this->indexedpage = $a->indexedpage;
+					$this->blankpage = $a->blankpage;
+					$this->sketch = $a->sketch;
+					$this->loosedocument = $a->loosedocument;
 					$this->needsreview = $a->needsreview;
-					$this->northarrow = $a->northarrow;
-					$this->street = $a->street;
-					$this->poi = $a->poi;
-					$this->coordinates = $a->coordinates;
-					$this->coast = $a->coast;
-					$this->customername = $a->customername;
+					$this->author = $a->author;
+					$this->crewmember = $a->crewmember;
 
 					$this->startday = $a->startday;
 					$this->startmonth = $a->startmonth;
@@ -71,14 +70,6 @@
 					$this->endmonth = $a->endmonth;
 					$this->endyear = $a->endyear;
 
-					$this->fieldbooknumber = $a->fieldbooknumber;
-					$this->fieldbookpage = $a->fieldbookpage;
-					$this->readability = $a->readability;
-					$this->rectifiability = $a->rectifiability;
-					$this->companyname = $a->companyname;
-					$this->documenttype = $a->documenttype;
-					$this->documentmedium = $a->documentmedium;
-					$this->author = $a->author;
 					$this->comments = $a->comments;
 
 					$this->frontimage = $this->url. $a->frontimage;

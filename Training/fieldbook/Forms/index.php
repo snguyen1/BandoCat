@@ -187,9 +187,24 @@ foreach ($file->document as $a) {
                             </div>
 
                             <!-- FIELD CREW MEMBER: -->
-                            <div class="cell" id="crewmemberCell">
-                                <span class="labelradio"><mark class="label">Field Book Crew: </mark><p hidden><b></b><strong>Field Book Crew: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
-                                <input type = "text" name = "txtCrewmember" id = "crewmember" size="26" value='<?php echo $doc1->crewmember; ?>' />
+                            <div class="cell">
+                                <div class="crewMemberClass" id="crewMemberId0" style="width: 115%">
+                                    <span class="labelradio">
+                                        <mark class="label">Field Book Crew: </mark>
+                                        <p hidden><b></b>
+                                            <strong>Field Book Crew: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.
+                                        </p>
+                                    </span>
+                                        <input type = "text" name = "txtCrewmember" id = "crewmember" class="crewmember0" size="26" value='<?php echo $doc1->crewmember->name[0];?>' />
+                                        <input type="button" id="more_fields" onclick="add_fields($('.crewMemberClass').length, null);" value="+"/>
+                                        <input type="button" id="less_fields" onclick="remove_fields($('.crewMemberClass').length)" value="-">
+                                </div>
+                                <?php $lenCrewmembers = count($doc1->crewmember->name);
+                                for ($d = 1; $d < $lenCrewmembers; $d++){
+                                    echo '<div class="crewMemberClass" id="crewMemberId'.$d.'" style="width: 115%; margin-top: 2%"><span class="label" style="margin:0% 14% 0% -2%">Field Book Crew: </span> <input type = "text" name = "txtCrewmember" id = "crewmember" class="crewmember'.$d.'" size="26" value="'.$doc1->crewmember->name[$d].'" /> </div>';
+                                }
+                                ?>
+
                             </div>
                         </td>
 
@@ -325,27 +340,69 @@ $data = file_get_contents('php://input')
                     ansDataJSON = answersJSON.data;
                     table2JSON();
 
-                    $(':input').change(function (event) {
+                    $('form').on('change', ['input', 'textarea'],function (event) {
+                        //On change the table data is stored to the formJSON object
                         table2JSON();
-                        var targetID = event.currentTarget.id;
-                        var IDProperty = JSON.parse(JSON.stringify(targetID));
-                        var targetValue = event.target.value;
-                        //valid document ID
+                        //Document ID
                         var docID = formJSON.document;
-                        var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+                        //Target element ID
+                        var targetID = event.originalEvent.target.id;
+                        //Target element Class
+                        var targetClass = event.originalEvent.target.className;
+                        //Target element value
+                        var targetValue = event.target.value;
+                        //Target element ID converted into a json object to be used as an object property
+                        var IDProperty = JSON.parse(JSON.stringify(targetID));
+
+
+                        //Answer JSON element
+                        var answerElement = ansDataJSON.document[docID][IDProperty];
+                        //Flag that dictates if the Answer JSON element has a property called name because crewmember
+                        //contains different names
+                        var nameFlag = answerElement.hasOwnProperty('name');
+                        //If the Answer JSON element has a property called name a crewJSON object is initiated
+                        if(nameFlag){
+                            var crewJSON = {};
+                            for(var nm = 0; nm < answerElement.name.length; nm++){
+                                crewJSON["crewmember" + String(nm)]=answerElement.name[nm]["#text"];
+                            }
+                        }
+
+                        else
+                            var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+
+                        //If the Answer JSON element value is empty an empty string value is given
                         if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
                             answerValue = ''
                         }
 
-                        if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                            $("#aDeclerin").remove();
-                            $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
-                        }
+                        var crewType = typeof crewJSON;
+                        switch (crewType){
+                            case 'object':
+                                $.each(crewJSON, function (crewClass) {
+                                    if(crewClass == targetClass){
+                                        var crewProperty = JSON.parse(JSON.stringify(crewClass));
+                                        if(crewJSON[crewProperty].toLowerCase() == targetValue.toLowerCase()) {
+                                            $("#aDeclerin").remove();
+                                            $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                                            return
+                                        }
+                                    else
+                                        $("." + String(targetClass)).css('outline', 'red').css('outline-style', 'solid');
+                                    }
+                                });
+                                break;
+                            case 'undefined':
+                                if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                                    $("#aDeclerin").remove();
+                                    $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                                }
 
-                        else{
-                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
+                                else{
+                                    $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
+                                }
+                                break;
                         }
-
                     })
                 }
             };
@@ -411,6 +468,7 @@ $data = file_get_contents('php://input')
      * Parameter(string): None
      * Return value(string): None
      ***********************************************/
+
     function table2JSON() {
         var accountTable = $(".Account_Table").children();
         //Left column rows
@@ -422,19 +480,36 @@ $data = file_get_contents('php://input')
         formJSON["document"]= '<?php echo $doc_id?>';
         //Creates an empty property array
         formJSON["data"] = [];
+        var crewTableArray = [];
 
+        /****** LEFT COLUMN ******/
         //For every element in the Left column
-        for(var i = 0; i < accountInputsCol1.length-1; i++) {
+        for(var i = 0; i < accountInputsCol1.length; i++) {
             //Detects if the element is a radio button and retrieves its value if it is checked, and stores it
             //into the formJSON
-            if($("#"+accountInputsCol1[i].children[1].id).is(':radio'))
-                structureJSON(formJSON, accountInputsCol1[i].children[1].id,$("#" + accountInputsCol1[i].children[1].id + ":checked").val());
-            //If not a radio element, the element values are stored into the formJSON
-            else
-                structureJSON(formJSON, accountInputsCol1[i].children[1].id,accountInputsCol1[i].children[1].value);
+            if(i = 11) {
+                //For every field crew field children
+                for(var j = 0; j < accountInputsCol1[i].children.length;j++){
+                    //If a field crew input is not undefined its value is stored into an array that is then posted as
+                    //into the formJSON object
+                    if(typeof accountInputsCol1[i].children[j].children['crewmember'] !== "undefined") {
+                        crewTableArray.push(accountInputsCol1[i].children[j].children['crewmember'].value)
+                    }
+                }
+                structureJSON(formJSON, 'crewmember', crewTableArray)
+            }
+            else{
+                if($("#"+accountInputsCol1[i].children[1].id).is(':radio'))
+                    structureJSON(formJSON, accountInputsCol1[i].children[1].id,$("#" + accountInputsCol1[i].children[1].id + ":checked").val());
+                //Otherwise if not a radio nor a field crew element the input value is stored into the formJSON object
+                else
+                    structureJSON(formJSON, accountInputsCol1[i].children[1].id,accountInputsCol1[i].children[1].value);
+            }
+
         }
 
-        //For every element in the Left column
+        /****** RIGHT COLUMN ******/
+        //For every element in the Right column
         for(var i = 0; i < accountInputsCol2.length-1; i++) {
             //Detects the startDateCell div id and loops through the three day input drop downs to retrieve their
             //elements ids and values.
@@ -452,6 +527,44 @@ $data = file_get_contents('php://input')
             //If not a date element, the elements values are stored into the formJSON
             structureJSON(formJSON, accountInputsCol2[i].children[1].id,accountInputsCol2[i].children[1].value);
         }
+    }
+
+    /**********************************************
+     * Function: add_fields
+     * Description: adds more fields for authors
+     * Parameter(s): length (integer) Length of Author's cells
+     * val (String ) - name of the author
+     * Return value(s): None
+     ***********************************************/
+    var max = 5;
+    var crew_count = 0;
+
+    function add_fields(length, val) {
+        if (val == null)
+            val = "";
+        if (crew_count >= max)
+            return false;
+        $('#crewMemberId' + (length - 1)).after('' +
+            '<div class="crewMemberClass" id="crewMemberId' + length + '" style="margin-top: 2%">' +
+            '<span class="label" style="margin: 0% 16% 0% -2%">Field Book Crew: </span>' +
+            '<input type = "text" name = "txtCrewmember" id = "crewmember" class="crewmember'+length+'" size="26" value="' + val + '" />' +
+            '</div>');
+        crew_count++;
+    }
+
+    /**********************************************
+     *Function: remove_fields
+     *Description: removes fields from the Document Author field
+     * Parameter(s): length (integer) Length of Author's cells
+     * Return value(s): None
+     ***********************************************/
+    function remove_fields(length) {
+        //This will prevent for the function to delete all the authors' cells
+        if (length < 2)
+            return false;
+        //Removes the las childrend of the authorsCell class
+        $('.crewMemberClass').last().remove();
+        crew_count--;
     }
 
     /**********************************************
@@ -486,6 +599,16 @@ $data = file_get_contents('php://input')
                 if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty])){
                     ansDataJSON.document[formJSON.document][idProperty]['#text'] = ''
                 }
+                var nameFlagComp = ansDataJSON.document[formJSON.document][idProperty].hasOwnProperty('name');
+                if(nameFlagComp){
+                    if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]['name'])){
+                        ansDataJSON.document[formJSON.document][idProperty]['name'] = [];
+                        emptyName = {};
+                        emptyName['#text'] = '';
+                        ansDataJSON.document[formJSON.document][idProperty]['name'].push(emptyName)
+                    }
+                }
+
                 //If the JSON property contains an empty object but it is a date element a proper value is given to its
                 //property
                 switch (id){
@@ -515,24 +638,53 @@ $data = file_get_contents('php://input')
                         break;
                 }
 
-                //User and answer values are compared
-                if(value.toLowerCase() == ansVal['#text'].toLowerCase()){
-                    //Returns false for errors
-                    e = false;
-                    comparisonArray.push([e, value, ansVal['#text']])
+                if(id == 'crewmember'){
+                    for(var v = 0; v < value.length; v++) {
+                        if(value.length == ansVal['name'].length){
+                            //Validates the equality of answer value and input value
+                            if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
+                                //Returns false for errors
+                                e = false;
+                                comparisonArray.push([e, value, ansVal['name'][v]['#text']])
+                            }
+                            else {
+                                //Returns true for errors
+                                e = true;
+                                comparisonArray.push([e, value, ansVal['name'][v]['#text']]);
+                            }
+                        }
+                        //Error if uneven amount of answer values and input values
+                        else{
+                            comparisonArray.push([true, '', 'uneven amount of crew members'])
+                        }
+                    }
                 }
+
                 else{
-                    //Returns true for errors
-                    e = true;
-                    comparisonArray.push([e, value, ansVal['#text']]);
+                    if(id == 'crewmember') {
+                        e = true;
+                        comparisonArray.push([e, value, ansVal['#text']]);
+                    }
+                    //User and answer values are compared
+                    if(value.toLowerCase() == ansVal['#text'].toLowerCase()){
+                        //Returns false for errors
+                        e = false;
+                        comparisonArray.push([e, value, ansVal['#text']])
+                    }
+                    else{
+                        //Returns true for errors
+                        e = true;
+                        comparisonArray.push([e, value, ansVal['#text']]);
+                    }
                 }
             }
         });
-        return comparisonArray
+        return comparisonArray;
     }
 
     //Input form array
-      formArray = [];
+    formArray = [];
+    crewArray = [];
       //Submit function that will convert the input form into a JSON
       $("#form").on("submit", function (e) {
           e.preventDefault();
@@ -550,20 +702,24 @@ $data = file_get_contents('php://input')
                   error = dataComparison(formJSONID, formJSONValue);
                   //If error, the user and answer values are different on submit the submission is stopped an the input
                   //element's outline is highlighted with a orange color
-                  if(error[0][0]){
-                      $("#aDeclerin").remove();
-                      alert("There is an error");
-                      $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
-                      var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[0][2] + '</p></span>').insertAfter("#" + parentDeclerin);
-                      return
+                  for(var er = 0; er < error.length; er++) {
+                      if(error[er][0]){
+                          $("#aDeclerin").remove();
+                          alert("There is an error");
+                          $("."+formJSONID+String(er)).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                          var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
+                          $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
+                          return
+                      }
                   }
+
               }
           }
 
 
           //Creates an array of objects by form values
           var formSerialized = $(this).serializeArray();
+          formArray = [];
 
           /*JQuery that iterates through the serialized array to create a JSON object that will be posted to save the
           training input data*/
@@ -572,10 +728,18 @@ $data = file_get_contents('php://input')
               var flag = rgexspecialChar.test(field.value);
               if(flag) {
                   var idxSpecialChar = rgexspecialChar.exec(field.value);
-                  console.log(idxSpecialChar);
+              }
+              if(field.name == 'txtCrewmember'){
+                  crewArray.push(field.value);
+              }
+              else if(field.name == 'ddlStartMonth'){
+                  formArray.push('"txtCrewmember":[]');
+                  formArray.push('"'+field.name + '":"' + field.value+'"' )
               }
               //Obtains the name and value of each input and stores it into the Input form array in a JSON format
-              formArray.push('"'+field.name + '":"' + field.value+'"' )
+              else
+                  formArray.push('"'+field.name + '":"' + field.value+'"' )
+
           });
           //Training type attribute is pushed to the Input Form Array
           formArray.push('"type":"<?php echo $_GET['type']?>"');
@@ -583,6 +747,9 @@ $data = file_get_contents('php://input')
 
           //Input Form is parsed into a JSON
           formJSON = JSON.parse("{" + formArray.toString() + "}");
+          for(var d = 0; d < crewArray.length; d++){
+              formJSON['txtCrewmember'].push(crewArray[d])
+          }
 
           $.ajax({
               type: 'post',

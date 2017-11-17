@@ -2,7 +2,6 @@
 require '../../../Library/SessionManager.php';
 $session = new SessionManager();
 $userfile = $_SESSION['username'];
-var_dump($_POST);
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doc_id = $_POST['txtDocID'];
@@ -44,11 +43,45 @@ function writeXMLtag($id, $tag, $data, $username){
     $filename = "../../Training_Collections/".$_POST['col']. "/" . $username . "/" . $username . "_".$_POST['type'].".xml";
 	$document->load($filename);
 
-    $tag = $document->getElementsByTagName($tag);
-    var_dump($tag);
-    $tag->item($id)->nodeValue = htmlspecialchars($data);
-    var_dump($data);
+    if ($tag == 'crewmember') {
+        $crewmember = $document->getElementsByTagName($tag)->item($id);
+//        $name = $document->getElementsByTagName('name')->item($id);
+//        $name->nodeValue = $data[0];
+        $lenData = count($data);
+        $lenRemoved = 0;
+        $crewmemberNodes = $crewmember->childNodes;
+        $lenNode = $crewmemberNodes->length;
 
+        for($d = $lenNode-1; $d >= 0; --$d){
+            $crewmember->removeChild($crewmember->childNodes->item($d));
+            $lenRemoved++;
+        }
+        var_dump($lenRemoved);
+
+        $nodeCount = $lenNode - $lenRemoved;
+        var_dump($lenNode);
+        var_dump($lenRemoved);
+        var_dump($nodeCount);
+        if ($nodeCount == 0) {
+            for ($e = 0; $e < $lenData; $e++){
+                $newNode = $crewmember->appendChild(new DOMElement('name'));
+                $newNode->nodeValue = $data[$e];
+            }
+        }
+
+        else{
+            for ($e = 1; $e < $lenData; $e++){
+                $newNode = $crewmember->appendChild(new DOMElement('name'));
+                $newNode->nodeValue = $data[$e];
+            }
+        }
+    }
+
+
+    else {
+        $tag = $document->getElementsByTagName($tag);
+        $tag->item($id)->nodeValue = htmlspecialchars($data);
+    }
 $document->save($filename);
 }
 ?>

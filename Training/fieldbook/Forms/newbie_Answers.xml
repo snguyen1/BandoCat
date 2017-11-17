@@ -13,7 +13,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -39,7 +39,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -58,14 +58,14 @@
 		<bookcollection>Blucher</bookcollection>
 		<booktitle>360</booktitle>
 		<jobnumber></jobnumber>
-		<jobtitle>Sectionized Portion of the Hoffman Tract 6.87 Ac. out of Lot 9, Sec. "C"</jobtitle>
+		<jobtitle>Sectionized Portion of the Hoffman Tract 6.87 Ac. out of Lot 9, Sec. C</jobtitle>
 		<indexedpage>136</indexedpage>
 		<blankpage>0</blankpage>
 		<sketch>0</sketch>
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>George Mudd</name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -81,25 +81,25 @@
 	<document collection = "fieldbook">
 		<id>3</id>
 		<libraryindex>0360-144</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>360</booktitle>
+		<jobnumber>4395</jobnumber>
+		<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
+		<indexedpage>140</indexedpage>
 		<blankpage>0</blankpage>
 		<sketch>0</sketch>
 		<loosedocument>0</loosedocument>
-		<needsreview>0</needsreview>
+		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
-		<comments></comments>
+		<startmonth>02</startmonth>
+		<startday>16</startday>
+		<startyear>1949</startyear>
+		<endmonth>02</endmonth>
+		<endday>21</endday>
+		<endyear>1949</endyear>
+		<comments>For Charles Heck. See B 355 P 122 for lot survey.</comments>
 		<frontimage>0360-144.tif</frontimage>
 		<frontthumbnail>0360-144.jpg</frontthumbnail>
 		<completed>0</completed>
@@ -107,24 +107,24 @@
 	<document collection = "fieldbook">
 		<id>4</id>
 		<libraryindex>0360-145</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>360</booktitle>
+		<jobnumber>4395</jobnumber>
+		<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
+		<indexedpage>141</indexedpage>
 		<blankpage>0</blankpage>
-		<sketch>0</sketch>
+		<sketch>1</sketch>
 		<loosedocument>0</loosedocument>
-		<needsreview>0</needsreview>
+		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>02</startmonth>
+		<startday>16</startday>
+		<startyear>1949</startyear>
+		<endmonth>02</endmonth>
+		<endday>21</endday>
+		<endyear>1949</endyear>
 		<comments></comments>
 		<frontimage>0360-145.tif</frontimage>
 		<frontthumbnail>0360-145.jpg</frontthumbnail>
@@ -132,24 +132,24 @@
 	</document><document collection = "fieldbook">
 	<id>5</id>
 	<libraryindex>0388-059</libraryindex>
-	<bookcollection></bookcollection>
-	<booktitle></booktitle>
-	<jobnumber></jobnumber>
-	<jobtitle></jobtitle>
-	<indexedpage></indexedpage>
+	<bookcollection>Blucher</bookcollection>
+	<booktitle>388</booktitle>
+	<jobnumber>5268</jobnumber>
+	<jobtitle>Jones Tract, 23.57 Ac.; Mary Blucher Tract, 5.78 Ac.; Barnsdall Tract, 4.91 Ac.</jobtitle>
+	<indexedpage>53</indexedpage>
 	<blankpage>0</blankpage>
-	<sketch>0</sketch>
+	<sketch>1</sketch>
 	<loosedocument>0</loosedocument>
-	<needsreview>0</needsreview>
+	<needsreview>1</needsreview>
 	<author></author>
-	<crewmember></crewmember>
+	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Fred Sinclair</name><name>C.T. Murphy</name><name>John Carter</name></crewmember>
 
-	<startmonth></startmonth>
-	<startday></startday>
-	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
+	<startmonth>02</startmonth>
+	<startday>04</startday>
+	<startyear>1953</startyear>
+	<endmonth>05</endmonth>
+	<endday>04</endday>
+	<endyear>1953</endyear>
 	<comments></comments>
 	<frontimage>0388-059.tif</frontimage>
 	<frontthumbnail>0388-059.jpg</frontthumbnail>
@@ -157,25 +157,25 @@
 </document><document collection = "fieldbook">
 	<id>6</id>
 	<libraryindex>0388-060</libraryindex>
-	<bookcollection></bookcollection>
-	<booktitle></booktitle>
-	<jobnumber></jobnumber>
-	<jobtitle></jobtitle>
-	<indexedpage></indexedpage>
+	<bookcollection>Blucher</bookcollection>
+	<booktitle>388</booktitle>
+	<jobnumber>5306, 5366</jobnumber>
+	<jobtitle>Gugenheim &amp; Cohn Tract on Nueces Bay Pontiac &amp; Chicago Corp. Tract, out of</jobtitle>
+	<indexedpage>54</indexedpage>
 	<blankpage>0</blankpage>
-	<sketch>0</sketch>
+	<sketch>1</sketch>
 	<loosedocument>0</loosedocument>
-	<needsreview>0</needsreview>
+	<needsreview>1</needsreview>
 	<author></author>
-	<crewmember></crewmember>
+	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Fred Sinclair</name><name>C.T. Murphy</name><name>John Carter</name></crewmember>
 
-	<startmonth></startmonth>
-	<startday></startday>
-	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
-	<comments></comments>
+	<startmonth>05</startmonth>
+	<startday>05</startday>
+	<startyear>1953</startyear>
+	<endmonth>05</endmonth>
+	<endday>16</endday>
+	<endyear>1953</endyear>
+	<comments>For Pontiac Refining Co. See P 59 for revised corners.</comments>
 	<frontimage>0388-060.tif</frontimage>
 	<frontthumbnail>0388-060.jpg</frontthumbnail>
 	<completed>0</completed>
@@ -192,7 +192,7 @@
 	<loosedocument>0</loosedocument>
 	<needsreview>0</needsreview>
 	<author></author>
-	<crewmember></crewmember>
+	<crewmember><name></name></crewmember>
 
 	<startmonth></startmonth>
 	<startday></startday>
@@ -218,7 +218,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>0</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -244,7 +244,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>0</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -270,7 +270,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>0</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -296,7 +296,7 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>0</needsreview>
 		<author></author>
-		<crewmember></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>

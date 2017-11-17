@@ -245,7 +245,7 @@ foreach ($file->document as $a) {
                             </div>
                             <!-- DOCUMENT AUTHOR -->
                             <div class="cell">
-                                <div class='authorsCell' id="author">
+                                <div class='authorsCell' id="author0">
                                     <span class="labelradio">
                                     <mark class="label">
                                         Document Author:
@@ -259,7 +259,7 @@ foreach ($file->document as $a) {
                                     <input type="text" class="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
                                     <span style="padding-right:5px"></span>
 
-                                        <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null);" value="+"/>
+                                        <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null)" value="+">
                                         <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
                                     </div>
                                     </div>
@@ -372,7 +372,7 @@ $data = file_get_contents('php://input')
 
         //Loads XML
         xhttp_answers.onreadystatechange = function () {
-            if(this.readyState == 4 && this.status == 200) {
+            if (this.readyState == 4 && this.status == 200) {
                 //XML object
                 var xmlAnswers = this.responseXML;
                 answersJSON = xmlToJson(xmlAnswers);
@@ -388,7 +388,7 @@ $data = file_get_contents('php://input')
                     //valid document ID
                     var docID = formJSON.document;
                     var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
-                    if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
+                    if (jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
                         answerValue = ''
                     }
 
@@ -404,53 +404,57 @@ $data = file_get_contents('php://input')
         xhttp_answers.open("GET", "newbie_Answers.xml");
         xhttp_answers.send();
 
-        /**********************************************
-         *Function: xmlToJSON
-         *Description: Changes XML to JSON
-         * Parameter(string): XML object
-         * Return value(string): JSON object
-         ***********************************************/
-        function xmlToJson(xml) {
-            // Create the return object
-            var obj = {};
-
-            if (xml.nodeType == 1) { // element
-                // do attributes
-                if (xml.attributes.length > 0) {
-                    obj["@attributes"] = {};
-                    for (var j = 0; j < xml.attributes.length; j++) {
-                        var attribute = xml.attributes.item(j);
-                        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-                    }
-                }
-            } else if (xml.nodeType == 3) { // text
-                obj = xml.nodeValue;
-            }
-
-            // do children
-            if (xml.hasChildNodes()) {
-                for (var i = 0; i < xml.childNodes.length; i++) {
-                    var item = xml.childNodes.item(i);
-                    var nodeName = item.nodeName;
-                    if (typeof(obj[nodeName]) == "undefined") {
-                        obj[nodeName] = xmlToJson(item);
-                    } else {
-                        if (typeof(obj[nodeName].push) == "undefined") {
-                            var old = obj[nodeName];
-                            obj[nodeName] = [];
-                            obj[nodeName].push(old);
-                        }
-                        obj[nodeName].push(xmlToJson(item));
-                    }
-                }
-            }
-            return obj;
-        };
 
         //Disables the labels' description marks
         if ("<?php echo $type?>" == "inter") {
             $(".labelradio > p").remove();
         }
+
+    });
+
+    /**********************************************
+     *Function: xmlToJSON
+     *Description: Changes XML to JSON
+     * Parameter(string): XML object
+     * Return value(string): JSON object
+     ***********************************************/
+    function xmlToJson(xml) {
+        // Create the return object
+        var obj = {};
+
+        if (xml.nodeType == 1) { // element
+            // do attributes
+            if (xml.attributes.length > 0) {
+                obj["@attributes"] = {};
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attribute = xml.attributes.item(j);
+                    obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                }
+            }
+        } else if (xml.nodeType == 3) { // text
+            obj = xml.nodeValue;
+        }
+
+        // do children
+        if (xml.hasChildNodes()) {
+            for(var i = 0; i < xml.childNodes.length; i++) {
+                var item = xml.childNodes.item(i);
+                var nodeName = item.nodeName;
+                if (typeof(obj[nodeName]) == "undefined") {
+                    obj[nodeName] = xmlToJson(item);
+                } else {
+                    if (typeof(obj[nodeName].push) == "undefined") {
+                        var old = obj[nodeName];
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+                    obj[nodeName].push(xmlToJson(item));
+                }
+            }
+        }
+        return obj;
+    };
+
 
         /**********************************************
          * Function: accountJSON
@@ -513,7 +517,7 @@ $data = file_get_contents('php://input')
         var author_count = 0;
 
         function add_fields(length, val) {
-            console.log(length);
+            console.log($('.authorsCell'));
             if (val == null)
                 val = "";
             if (author_count >= max)
@@ -557,7 +561,6 @@ $data = file_get_contents('php://input')
                     $("#tdClass").text(clName_desc[q]);
             }
         });
-    })
 
         function dataComparison(id, value) {
             $.each(ansDataJSON.document[formJSON.document], function (ansID, ansVal) {
