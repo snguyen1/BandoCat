@@ -55,7 +55,7 @@ if($_SESSION["role"] == 1) {
 
 <!DOCTYPE html>
 <head>
-	<title>Edit Map Information</title>
+	<title><?php echo ucfirst($collection); ?> Training <?php if($priv == 'admin') echo $username; elseif($type == 'inter') echo 'Intermediate Level'; elseif($type == 'newbie') echo 'Beginner Level'; elseif ($type == 'none') echo 'Homepage' ?></title>
 	<!-- <meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" /> -->
 	<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
@@ -118,8 +118,8 @@ if($_SESSION["role"] == 1) {
                             /*Conditions the training type to load the XML file pertaining to its training level and
                             clear any document cache*/
                             if ($type  == 'newbie') {
+                                $random = rand(0, 100);
                                 if (file_exists($training_user_dir . '/' . $userfile . '_newbie.xml')) {
-                                    clearstatcache();
                                     $document->load($training_user_dir.'/'.$userfile.'_newbie.xml');
                                 }
                             }
@@ -193,7 +193,7 @@ if($_SESSION["role"] == 1) {
                         <input type="button" id="nextSlide3" class="nextPresentation" value="next" onclick="currentSlide(4, 0)" style="display: none">
                     </div>
                     <div class="mySlides">
-                        <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important;" value="Click to Continue To your Training"></div>
+                        <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important; max-width: 50%;" value="Click To Continue To Your Training"></div>
                         <img id="slideImg4" class="slideImg" src="" style="width:100%; margin: -70.4% 0% 0% 0%">
                     </div>
 
@@ -483,11 +483,11 @@ function currentSlide(pt, nslddx) {
                         }
 
                     };
-                    xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml' ?>", true);
+                    xhttp_inter.open("GET", "<?php echo $training_user_dir . '/' . $userfile . '_inter.xml?p='.rand(0,100) ?>", true);
                     xhttp_inter.send();
                 }
             };
-            xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml' ?>", true);
+            xhttp_newbie.open("GET", "<?php echo $training_user_dir.'/'.$userfile.'_newbie.xml?p='.rand(0,100) ?>", true);
             xhttp_newbie.send();
 
             /**********************************************

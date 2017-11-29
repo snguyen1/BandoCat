@@ -1,5 +1,4 @@
 <data>
-	<!--If the document libraryindex Tutorial is removed renumber all the documents' ids to zero-->
 	<document collection = "fieldbook">
 		<id>0</id>
 		<libraryindex>0360-001</libraryindex>
@@ -54,10 +53,36 @@
 	</document>
 	<document collection = "fieldbook">
 		<id>2</id>
-		<libraryindex>0360-140</libraryindex>
+		<libraryindex>0360-006</libraryindex>
 		<bookcollection>Blucher</bookcollection>
 		<booktitle>360</booktitle>
 		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage>2</indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>1</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+		<comments>Index</comments>
+		<frontimage>0360-006.tif</frontimage>
+		<frontthumbnail>0360-006.jpg</frontthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "fieldbook">
+		<id>3</id>
+		<libraryindex>0360-140</libraryindex>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>360</booktitle>
+		<jobnumber>4374</jobnumber>
 		<jobtitle>Sectionized Portion of the Hoffman Tract 6.87 Ac. out of Lot 9, Sec. C</jobtitle>
 		<indexedpage>136</indexedpage>
 		<blankpage>0</blankpage>
@@ -74,50 +99,76 @@
 		<endday>19</endday>
 		<endyear>1949</endyear>
 		<comments>For Wm. W. Neyland. See B 298 P 10, 36, 28; B 331 P 112; B 329 P 94; B 293 P 100; B 370 P 24.</comments>
-		<frontimage>0360-140.tif</frontimage>
+		<frontimage>0360(140-141).tif</frontimage>
 		<frontthumbnail>0360-140.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
-		<id>3</id>
-		<libraryindex>0360-144</libraryindex>
-		<bookcollection>Blucher</bookcollection>
-		<booktitle>360</booktitle>
-		<jobnumber>4395</jobnumber>
-		<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
-		<indexedpage>140</indexedpage>
-		<blankpage>0</blankpage>
-		<sketch>0</sketch>
-		<loosedocument>0</loosedocument>
-		<needsreview>1</needsreview>
-		<author></author>
-		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
-
-		<startmonth>02</startmonth>
-		<startday>16</startday>
-		<startyear>1949</startyear>
-		<endmonth>02</endmonth>
-		<endday>21</endday>
-		<endyear>1949</endyear>
-		<comments>For Charles Heck. See B 355 P 122 for lot survey.</comments>
-		<frontimage>0360-144.tif</frontimage>
-		<frontthumbnail>0360-144.jpg</frontthumbnail>
-		<completed>0</completed>
-	</document>
-	<document collection = "fieldbook">
 		<id>4</id>
-		<libraryindex>0360-145</libraryindex>
+		<libraryindex>0360-141</libraryindex>
 		<bookcollection>Blucher</bookcollection>
 		<booktitle>360</booktitle>
-		<jobnumber>4395</jobnumber>
-		<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
-		<indexedpage>141</indexedpage>
+		<jobnumber></jobnumber>
+		<jobtitle>Sectionized Portion of the Hoffman Tract 6.87 Ac. out of Lot 9, Sec. C</jobtitle>
+		<indexedpage>137</indexedpage>
 		<blankpage>0</blankpage>
 		<sketch>1</sketch>
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>George Mudd</name></crewmember>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth>01</endmonth>
+		<endday>19</endday>
+		<endyear>1949</endyear>
+		<comments></comments>
+		<frontimage>0360(140-141).tif</frontimage>
+		<frontthumbnail>0360-141.jpg</frontthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "fieldbook">
+	<id>5</id>
+	<libraryindex>0360-144</libraryindex>
+	<bookcollection>Blucher</bookcollection>
+	<booktitle>360</booktitle>
+	<jobnumber>4395</jobnumber>
+	<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
+	<indexedpage>140</indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>1</needsreview>
+	<author></author>
+	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
+
+	<startmonth>02</startmonth>
+	<startday>16</startday>
+	<startyear>1949</startyear>
+	<endmonth>02</endmonth>
+	<endday>21</endday>
+	<endyear>1949</endyear>
+	<comments>For Charles Heck. See B 355 P 122 for lot survey.</comments>
+	<frontimage>0360(144-145).tif</frontimage>
+	<frontthumbnail>0360-144.jpg</frontthumbnail>
+	<completed>0</completed>
+</document>
+	<document collection = "fieldbook">
+	<id>6</id>
+	<libraryindex>0360-145</libraryindex>
+	<bookcollection>Blucher</bookcollection>
+	<booktitle>360</booktitle>
+	<jobnumber>4395</jobnumber>
+	<jobtitle>Bay View Block 11 Lot 13 &amp; 14 Ties to Improvements</jobtitle>
+	<indexedpage>141</indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>1</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>1</needsreview>
+	<author></author>
+	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name></crewmember>
 
 		<startmonth>02</startmonth>
 		<startday>16</startday>
@@ -125,82 +176,32 @@
 		<endmonth>02</endmonth>
 		<endday>21</endday>
 		<endyear>1949</endyear>
-		<comments></comments>
-		<frontimage>0360-145.tif</frontimage>
-		<frontthumbnail>0360-145.jpg</frontthumbnail>
-		<completed>0</completed>
-	</document><document collection = "fieldbook">
-	<id>5</id>
-	<libraryindex>0388-059</libraryindex>
-	<bookcollection>Blucher</bookcollection>
-	<booktitle>388</booktitle>
-	<jobnumber>5268</jobnumber>
-	<jobtitle>Jones Tract, 23.57 Ac.; Mary Blucher Tract, 5.78 Ac.; Barnsdall Tract, 4.91 Ac.</jobtitle>
-	<indexedpage>53</indexedpage>
-	<blankpage>0</blankpage>
-	<sketch>1</sketch>
-	<loosedocument>0</loosedocument>
-	<needsreview>1</needsreview>
-	<author></author>
-	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Fred Sinclair</name><name>C.T. Murphy</name><name>John Carter</name></crewmember>
-
-	<startmonth>02</startmonth>
-	<startday>04</startday>
-	<startyear>1953</startyear>
-	<endmonth>05</endmonth>
-	<endday>04</endday>
-	<endyear>1953</endyear>
 	<comments></comments>
-	<frontimage>0388-059.tif</frontimage>
-	<frontthumbnail>0388-059.jpg</frontthumbnail>
-	<completed>0</completed>
-</document><document collection = "fieldbook">
-	<id>6</id>
-	<libraryindex>0388-060</libraryindex>
-	<bookcollection>Blucher</bookcollection>
-	<booktitle>388</booktitle>
-	<jobnumber>5306, 5366</jobnumber>
-	<jobtitle>Gugenheim &amp; Cohn Tract on Nueces Bay Pontiac &amp; Chicago Corp. Tract, out of</jobtitle>
-	<indexedpage>54</indexedpage>
-	<blankpage>0</blankpage>
-	<sketch>1</sketch>
-	<loosedocument>0</loosedocument>
-	<needsreview>1</needsreview>
-	<author></author>
-	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Fred Sinclair</name><name>C.T. Murphy</name><name>John Carter</name></crewmember>
-
-	<startmonth>05</startmonth>
-	<startday>05</startday>
-	<startyear>1953</startyear>
-	<endmonth>05</endmonth>
-	<endday>16</endday>
-	<endyear>1953</endyear>
-	<comments>For Pontiac Refining Co. See P 59 for revised corners.</comments>
-	<frontimage>0388-060.tif</frontimage>
-	<frontthumbnail>0388-060.jpg</frontthumbnail>
+	<frontimage>0360(144-145).tif</frontimage>
+	<frontthumbnail>0360-145.jpg</frontthumbnail>
 	<completed>0</completed>
 </document><document collection = "fieldbook">
 	<id>7</id>
 	<libraryindex>0382-070</libraryindex>
-	<bookcollection></bookcollection>
-	<booktitle></booktitle>
-	<jobnumber></jobnumber>
-	<jobtitle></jobtitle>
-	<indexedpage></indexedpage>
+	<bookcollection>Blucher</bookcollection>
+	<booktitle>380</booktitle>
+	<jobnumber>4754</jobnumber>
+	<jobtitle>Bessar Park Block 3; W 37.50' Lot 4, All Lots &amp; E 25' Lot 6</jobtitle>
+	<indexedpage>66</indexedpage>
 	<blankpage>0</blankpage>
 	<sketch>0</sketch>
 	<loosedocument>0</loosedocument>
-	<needsreview>0</needsreview>
+	<needsreview>1</needsreview>
 	<author></author>
-	<crewmember><name></name></crewmember>
+	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>Ralph Pospech</name></crewmember>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth></endmonth>
-	<endday></endday>
-	<endyear></endyear>
-	<comments></comments>
+	<endmonth>06</endmonth>
+	<endday>22</endday>
+	<endyear>1950</endyear>
+	<comments>For W.W. Wolton.</comments>
 	<frontimage>0382-070.tif</frontimage>
 	<frontthumbnail>0382-070.jpg</frontthumbnail>
 	<completed>0</completed>
@@ -208,63 +209,63 @@
 	<document collection = "fieldbook">
 		<id>8</id>
 		<libraryindex>0370-076</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>370</booktitle>
+		<jobnumber>4482, 4815</jobnumber>
+		<jobtitle>Bay View Block 15 Lot 16 &amp; 17</jobtitle>
+		<indexedpage>72</indexedpage>
 		<blankpage>0</blankpage>
 		<sketch>0</sketch>
 		<loosedocument>0</loosedocument>
-		<needsreview>0</needsreview>
+		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember><name></name></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Kenney</name><name>Joe Marshall</name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
 		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
-		<comments></comments>
-		<frontimage>0370-076.tif</frontimage>
+		<endmonth>06</endmonth>
+		<endday>22</endday>
+		<endyear>1949</endyear>
+		<comments>For Temple Beth El. See B 315 P 88; B 355 P 114, 106; B 334 P 44.</comments>
+		<frontimage>0370(076-077).tif</frontimage>
 		<frontthumbnail>0370-076.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>9</id>
-		<libraryindex>0370-060</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<libraryindex>0370-077</libraryindex>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>370</booktitle>
+		<jobnumber>4482, 4815</jobnumber>
+		<jobtitle>Bay View Block 15 Lot 16 &amp; 17</jobtitle>
+		<indexedpage>73</indexedpage>
 		<blankpage>0</blankpage>
-		<sketch>0</sketch>
+		<sketch>1</sketch>
 		<loosedocument>0</loosedocument>
-		<needsreview>0</needsreview>
+		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember><name></name></crewmember>
+		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>Joe Marshall</name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
 		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<endmonth>06</endmonth>
+		<endday>22</endday>
+		<endyear>1949</endyear>
 		<comments></comments>
-		<frontimage>0370-060.tif</frontimage>
-		<frontthumbnail>0370-060.jpg</frontthumbnail>
+		<frontimage>0370(076-077).tif</frontimage>
+		<frontthumbnail>0370-077.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>10</id>
-		<libraryindex>0382-072</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<libraryindex>0370-060</libraryindex>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>370</booktitle>
+		<jobnumber>4463</jobnumber>
+		<jobtitle>El Rey Addition Block 5 Lot 6</jobtitle>
+		<indexedpage>56</indexedpage>
 		<blankpage>0</blankpage>
 		<sketch>0</sketch>
 		<loosedocument>0</loosedocument>
@@ -278,21 +279,21 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-		<comments></comments>
-		<frontimage>0382-072.tif</frontimage>
-		<frontthumbnail>0382-072.jpg</frontthumbnail>
+		<comments>For Community Center House. See B 354 P 66; B 298 P 74; B 270 P 61.</comments>
+		<frontimage>0370(060-061).tif</frontimage>
+		<frontthumbnail>0382-060.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>11</id>
-		<libraryindex>0382-077</libraryindex>
-		<bookcollection></bookcollection>
-		<booktitle></booktitle>
-		<jobnumber></jobnumber>
-		<jobtitle></jobtitle>
-		<indexedpage></indexedpage>
+		<libraryindex>0370-061</libraryindex>
+		<bookcollection>Blucher</bookcollection>
+		<booktitle>370</booktitle>
+		<jobnumber>4463</jobnumber>
+		<jobtitle>El Rey Addition Block 5 Lot 6</jobtitle>
+		<indexedpage>57</indexedpage>
 		<blankpage>0</blankpage>
-		<sketch>0</sketch>
+		<sketch>1</sketch>
 		<loosedocument>0</loosedocument>
 		<needsreview>0</needsreview>
 		<author></author>
@@ -304,9 +305,9 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-		<comments></comments>
-		<frontimage>0382-077.tif</frontimage>
-		<frontthumbnail>0382-077.jpg</frontthumbnail>
+		<comments>For Community Center House. See B 354 P 66; B 298 P 74; B 270 P 61.</comments>
+		<frontimage>0370(060-061).tif</frontimage>
+		<frontthumbnail>0370-061.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 </data>

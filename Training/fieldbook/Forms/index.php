@@ -105,36 +105,36 @@ foreach ($file->document as $a) {
                                     </mark>
                                     <p hidden>
                                         <b></b>
-                                        <strong>Library Index: </strong>The library index is the name of a scanned document. Copy and paste the image’s name into the textbox exactly as you see it.<br><i>Example: </i><?php echo $doc1->libraryindex; ?>
+                                        <strong>Library Index: </strong>This field is automatically created by the file name; each value is unique and does not need to be changed.<br><i>Example: </i><?php echo $doc1->libraryindex; ?>
                                     </p>
                                 </span>
                                 <input type = "text" name = "txtLibraryIndex" id = "libraryindex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
                             <!-- COLLECTION -->
                             <div class="cell" id="collectionCell">
-                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Collection: </mark><p hidden><b></b><strong>Document collection: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Collection: </mark><p hidden><b></b><strong>Document collection: </strong>This should always be entered as “Blucher”, unless otherwise specified.</p></span>
                                 <input type = "text" name = "txtBookcollection" id = "bookcollection" size="26" required="true" value='<?php echo $doc1->bookcollection; ?>' />
                             </div>
                             <!-- BOOKTITLE -->
                             <div class="cell" id="booktitleCell">
-                                <span class="labelradio"><mark class="label">Book Title: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Book Title: </mark><p hidden><b></b><strong>Book Title: </strong>This field is automatically created by the file name, this value should not be changed.</p></span>
                                 <input type = "text" name = "txtBooktitle" id = "booktitle" size="26" value='<?php echo $doc1->booktitle; ?>' />
                             </div>
                             <!-- JOB NUMBER -->
                             <div class="cell" id="jobnumberCell">
-                                <span class="labelradio"><mark class="label">Job Number: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Job Number: </mark><p hidden><b></b><strong>Job Number: </strong>This value can usually be seen on the first page for a specific job in the field book. This number will usually be in the top right corner following the letter “J”, and can usually be found near the job title. Most jobs should have these, however it is not rare for a job number to be missing. An example would be “J-4237”. Only include the numbered value, not the “J”. Some jobs may contain more than one job number, include them all separated by commas.</p></span>
                                 <input type = "text" name = "txtJobnumber" id = "jobnumber" size="26" value='<?php echo $doc1->jobnumber; ?>' />
                             </div>
 
                             <!-- JOB TTITLE -->
                             <div class="cell" id="jobtitleCell">
-                                <span class="labelradio"><mark class="label">Job Title: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Job Title: </mark><p hidden><b></b><strong>Job Title: </strong> This is the main header at the top of the page for each job listed in the field book. Each job title should be listed as well in the index. Although they can occasionally be lengthy, include the full job title; the more detail the better.</p></span>
                                 <input type = "text" name = "txtJobtitle" id = "jobtitle" size="26" value='<?php echo $doc1->jobtitle; ?>' />
                             </div>
 
                             <!-- INDEXED PAGE -->
                             <div class="cell" id="indexedpageCell">
-                                <span class="labelradio"><mark class="label">Indexed Page: </mark><p hidden><b></b><strong>Indexed Page: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Indexed Page: </mark><p hidden><b></b><strong>Indexed Page: </strong>This is the page number that is written in the top corner of the page. Odd numbers are usually not written out in the field book, however it is implied that these pages are still numbered. Pages on the left side are generally numbered evenly, and pages on the right side are odd. </p></span>
                                 <input type = "text" name = "txtIndexedpage" id = "indexedpage" size="26" value='<?php echo $doc1->indexedpage; ?>' />
                             </div>
 
@@ -143,7 +143,7 @@ foreach ($file->document as $a) {
                             <div class="cell" id="blankpageCell">
                                 <span class="labelradio" >
                                 <mark>Blank Page: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
+                                <p hidden><b></b><strong>Blank Page: </strong>If the page is COMPLETELY (except for the page number) blank, then it is a blank page. If there is any writing on the page (except for the page number), it is not blank. </p>
                                 </span>
                                 <input type = "radio" name = "rbBlankpage" id = "blankpage" size="26" value="1" <?php if($doc1->blankpage == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbBlankpage" id = "blankpage" size="26" value="0" <?php if($doc1->blankpage == 0) echo "checked"; ?>  />No
@@ -153,7 +153,7 @@ foreach ($file->document as $a) {
                             <div class="cell" id="sketchCell">
                                 <span class="labelradio" >
                                 <mark>Sketch: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
+                                    <p hidden><b></b><strong>Sketch: </strong>If there is a drawing or a map present on the page, then it is considered a sketch. In some cases, the surveyor may draw an angle or lines which may not represent a sketch. Use your best judgment to determine if it is a sketch of the jobsite or something else.</p>
                                 </span>
                                 <input type = "radio" name = "rbSketch" id = "sketch" size="26" value="1" <?php if($doc1->sketch == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbSketch" id = "sketch" size="26" value="0" <?php if($doc1->sketch == 0) echo "checked"; ?>  />No
@@ -163,7 +163,7 @@ foreach ($file->document as $a) {
                             <div class="cell" id="loosedocumentCell">
                                 <span class="labelradio" >
                                 <mark>Loose Document: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
+                                <p hidden><b></b><strong>Loose Document: </strong>Indicate this page as a loose document if there is any file or document that is loose/stapled/glued to the pages. A loose document is not part of the original field book. They can often be found in between the pages, examples include receipts, attached drawings, invoices, etc.</p>
                                 </span>
                                 <input type = "radio" name = "rbLoosedocument" id = "loosedocument" size="26" value="1" <?php if($doc1->loosedocument == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbLoosedocument" id = "loosedocument" size="26" value="0" <?php if($doc1->loosedocument == 0) echo "checked"; ?>  />No
@@ -174,7 +174,7 @@ foreach ($file->document as $a) {
                             <div class="cell" id="needsreviewCell">
                                 <span class="labelradio" >
                                 <mark>Needs Review: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
+                                <p hidden><b></b><strong>Needs Review: </strong>This is to signal if a review is needed, and always keep selection as yes</p>
                                 </span>
                                 <input type = "radio" name = "rbNeedsreview" id = "needsreview" size="26" value="1" <?php if($doc1->needsreview == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbNeedsreview" id = "needsreview" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
@@ -182,7 +182,7 @@ foreach ($file->document as $a) {
 
                             <!-- FIELD BOOK AUTHOR -->
                             <div class="cell" id="authorCell">
-                                <span class="labelradio"><mark class="label">Field Book Author: </mark><p hidden><b></b><strong>Indexed Page: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Field Book Author: </mark><p hidden><b></b><strong>Field Book Author: </strong>This is a field that is very rarely used. Older field books had a field book author indicated towards the front of the book. Do not enter any names in this field unless the book specifically states there is a field book author.</p></span>
                                 <input type = "text" name = "txtAuthor" id = "author" size="26" value='<?php echo $doc1->author; ?>' />
                             </div>
 
@@ -192,7 +192,7 @@ foreach ($file->document as $a) {
                                     <span class="labelradio">
                                         <mark class="label">Field Book Crew: </mark>
                                         <p hidden><b></b>
-                                            <strong>Field Book Crew: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.
+                                            <strong>Field Book Crew: </strong>TThe names for the field crew members will almost always be found on the odd numbered pages in the top left corner. List each and every field crew member on each page for that specific job. If their names are abbreviated, an index of field crew members can almost always be found at the very beginning of the field book. Field crew members can change throughout the job, enter each field crew member on every page. The maximum amount of field crew members that can be entered for the training is five, however the average is usually around four. For example, if a job is twenty pages and you see John Carter on only one page and he is absent from the rest, his name must be included on every page for the field crew members.
                                         </p>
                                     </span>
                                         <input type = "text" name = "txtCrewmember" id = "crewmember" class="crewmember0" size="26" value='<?php echo $doc1->crewmember->name[0];?>' />
@@ -263,7 +263,10 @@ foreach ($file->document as $a) {
 
                             <!-- COMMENTS -->
                             <div class="cell" id="commentsCell">
-                                <span class="labelradio"><mark class="label">Comments: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio"><mark class="label">Comments: </mark><p hidden><b></b><strong>Document Title: </strong>1. The client for the job. After the job title, there is usually a following line that says “For John Doe”, include this line in the comments.
+                                2. Include all field books, pages, and maps that are referenced on the job title page. Often you will see something such as “B 309 P 42”, or “map 4R-87” on this page. Include these values in the comments, as this job may share similarities to another in a different field book or map.
+                                3. The front cover, indices, and back cover should simply be indicated as so in the comments. Just insert “Front cover”, “Index”, and “Back cover” in the comments when needed.
+                                </p></span>
                                 <textarea cols="25" name = "txtComments" id = "comments" /><?php echo $doc1->comments; ?></textarea>
                             </div>
 
@@ -487,7 +490,7 @@ $data = file_get_contents('php://input')
         for(var i = 0; i < accountInputsCol1.length; i++) {
             //Detects if the element is a radio button and retrieves its value if it is checked, and stores it
             //into the formJSON
-            if(i = 11) {
+            if(i == 11) {
                 //For every field crew field children
                 for(var j = 0; j < accountInputsCol1[i].children.length;j++){
                     //If a field crew input is not undefined its value is stored into an array that is then posted as
@@ -588,7 +591,7 @@ $data = file_get_contents('php://input')
      ***********************************************/
     function dataComparison(id, value) {
         var comparisonArray = [];
-        //For each property of the JSON the its id and value properties are being looped
+        //For each property of the JSON its id and value properties are being looped
         $.each(ansDataJSON.document[formJSON.document],function (ansID, ansVal) {
             //if the id(input id) and ansID(answer id), which is a JSON property type, are the same the JSON property
             //is converted into a string
@@ -645,17 +648,17 @@ $data = file_get_contents('php://input')
                             if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
                                 //Returns false for errors
                                 e = false;
-                                comparisonArray.push([e, value, ansVal['name'][v]['#text']])
+                                comparisonArray.push([e, id, value, ansVal['name'][v]['#text']])
                             }
                             else {
                                 //Returns true for errors
                                 e = true;
-                                comparisonArray.push([e, value, ansVal['name'][v]['#text']]);
+                                comparisonArray.push([e, id, value, ansVal['name'][v]['#text']]);
                             }
                         }
                         //Error if uneven amount of answer values and input values
                         else{
-                            comparisonArray.push([true, '', 'uneven amount of crew members'])
+                            comparisonArray.push([true, id, '', 'uneven amount of crew members'])
                         }
                     }
                 }
@@ -706,7 +709,7 @@ $data = file_get_contents('php://input')
                       if(error[er][0]){
                           $("#aDeclerin").remove();
                           alert("There is an error");
-                          $("."+formJSONID+String(er)).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                          $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                           var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
                           $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
                           return

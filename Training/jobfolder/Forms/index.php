@@ -195,12 +195,8 @@ foreach ($file->document as $a) {
                                 </span>
                                 <textarea rows = "2" cols = "30" id="classificationcomments" name="txtClassificationComments"/><?php echo $doc1->classificationcomments; ?></textarea>
                             </div>
-                            <!-- GET START DDL MONTH -->
-                            <div class="cell">
-
-                                <select name="ddlStartMonth" id="startmonth" style="width:60px">
-                                    <?php $Render->GET_DDL_MONTH($doc1->startmonth); ?>
-                                </select>
+                            <!--START DATE-->
+                            <div class="cell" id="startDateCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Document Start Date:
@@ -210,21 +206,22 @@ foreach ($file->document as $a) {
                                         <strong>Document Start Date: </strong>The earliest date on the document- as it pertains to the creation of that document.</br><i>*If there is one date on the document, only fill out the Document End Date boxes.</i>
                                     </p>
                                 </span>
+                                <!-- GET START DDL MONTH -->
+                                <select name="ddlStartMonth" id="startmonth" style="width:60px">
+                                    <?php $Render->GET_DDL_MONTH($doc1->startmonth); ?>
+                                </select>
                                 <!-- GET START DDL DAY -->
                                 <select name="ddlStartDay" id="startday" style="width:60px">
                                     <?php $Render->GET_DDL_DAY($doc1->startday); ?>
                                 </select>
                                 <!-- GET START DDL YEAR -->
-                                <select id="ddlStartYear" name="startyear" style="width:85px">
+                                <select id="startyear" name="ddlStartYear" style="width:85px">
                                     <?php $Render->GET_DDL_YEAR($doc1->startyear); ?>
                                 </select>
 
                             </div>
-                            <!-- GET END DDL MONTH -->
-                            <div class="cell">
-                                <select name="ddlEndMonth" id="endmonth" style="width:60px">
-                                    <?php $Render->GET_DDL_MONTH($doc1->endmonth); ?>
-                                </select>
+                            <!--END DATE-->
+                            <div class="cell" id="endDateCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Document End Date:
@@ -234,19 +231,22 @@ foreach ($file->document as $a) {
                                         <strong>Document End Date: </strong>The latest date on the document- as it pertains to the creation of that document.
                                     </p>
                                 </span>
+                                <!-- GET END DDL MONTH -->
+                                <select name="ddlEndMonth" id="endmonth" style="width:60px">
+                                    <?php $Render->GET_DDL_MONTH($doc1->endmonth); ?>
+                                </select>
                                 <!-- GET END DDL DAY -->
                                 <select name="ddlEndDay" id="endday" style="width:60px">
                                     <?php $Render->GET_DDL_DAY($doc1->endday); ?>
                                 </select>
                                 <!-- GET END DDL YEAR -->
-                                <select name="ddlEndYear" id="ddlEndYear" style="width:85px">
+                                <select name="ddlEndYear" id="endyear" style="width:85px">
                                     <?php $Render->GET_DDL_YEAR($doc1->endyear); ?>
                                 </select>
                             </div>
                             <!-- DOCUMENT AUTHOR -->
-                            <div class="cell">
-                                <div class='authorsCell' id="author0">
-                                    <span class="labelradio">
+                            <div class="cell" id="authorCell">
+                                <span class="labelradio">
                                     <mark class="label">
                                         Document Author:
                                     </mark>
@@ -255,14 +255,13 @@ foreach ($file->document as $a) {
                                         <strong>Document Author: </strong>Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.
                                     </p>
                                 </span>
-                                    <div style="width: 110%">
-                                    <input type="text" class="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
-                                    <span style="padding-right:5px"></span>
+                                <input type="text" class="txtAuthor" id="author" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
+                                <span style="padding-right:5px"></span>
 
-                                        <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null)" value="+">
-                                        <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
-                                    </div>
-                                    </div>
+                                <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null)" value="+">
+                                <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
+
+
 
                                 <?php $lenAuthors = count($doc1->author->name);
                                 for ($d = 1; $d < $lenAuthors; $d++) {
@@ -392,16 +391,24 @@ $data = file_get_contents('php://input')
                         answerValue = ''
                     }
 
-                    if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                        $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                    if(targetID == 'author'){
+                        if(ansDataJSON.document[docID][IDProperty]['name']['#text'].toLowerCase() == targetValue.toLowerCase())
+                            $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                        else
+                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
                     }
+                    else{
+                        if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                            $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                        }
 
-                    else
-                        $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
+                        else
+                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
+                    }
                 })
             }
         };
-        xhttp_answers.open("GET", "newbie_Answers.xml");
+        xhttp_answers.open("GET", "newbie_Answers.xml?p="+String(Math.random()));
         xhttp_answers.send();
 
 
@@ -485,23 +492,28 @@ $data = file_get_contents('php://input')
             //Creates an empty property array
             formJSON["data"] = [];
 
-            for (var i = 0; i < accountInputsCol1.length - 1; i++) {
+            for (var i = 0; i < accountInputsCol1.length; i++) {
                 if ($("#" + accountInputsCol1[i].children[1].id).is(':radio'))
                     accountJSON(formJSON, accountInputsCol1[i].children[1].id, $("#" + accountInputsCol1[i].children[1].id + ":checked").val());
+                else if(accountInputsCol1[i].id == 'startDateCell'){
+                    for(var d = 1; d < 4; d++) {
+                        accountJSON(formJSON, accountInputsCol1[i].children[d].id, accountInputsCol1[i].children[d].value)
+                    }
+                }
+                else if(accountInputsCol1[i].id == 'endDateCell'){
+                    for(var d = 1; d < 4; d++) {
+                        accountJSON(formJSON, accountInputsCol1[i].children[d].id, accountInputsCol1[i].children[d].value)
+                    }
+                }
+                else if(accountInputsCol1[i].id == 'authorCell'){
+                    console.log(accountInputsCol1[i].children[1].id)
+                    accountJSON(formJSON, accountInputsCol1[i].children[1].id, accountInputsCol1[i].children[1].value);
+                }
                 else
                     accountJSON(formJSON, accountInputsCol1[i].children[1].id, accountInputsCol1[i].children[1].value);
             }
 
             for (var i = 0; i < accountInputsCol2.length - 1; i++) {
-                if (accountInputsCol2[i].id == 'startDate') {
-                    for (var d = 2; d < 4; d++)
-                        accountJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
-                }
-
-                else if (accountInputsCol2[i].id == 'endDate') {
-                    for (var d = 2; d < 4; d++)
-                        accountJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
-                }
                 accountJSON(formJSON, accountInputsCol2[i].children[1].id, accountInputsCol2[i].children[1].value);
             }
         }
@@ -563,13 +575,13 @@ $data = file_get_contents('php://input')
         });
 
         function dataComparison(id, value) {
+            var comparisonArray = [];
             $.each(ansDataJSON.document[formJSON.document], function (ansID, ansVal) {
                 if (id == ansID) {
                     var idProperty = JSON.parse(JSON.stringify(ansID));
                     if (jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty])) {
                         ansDataJSON.document[formJSON.document][idProperty]['#text'] = ''
                     }
-
                     switch (id) {
                         case 'startday':
                             if (value == '00')
@@ -596,18 +608,31 @@ $data = file_get_contents('php://input')
                                 value = '';
                             break;
                     }
-
-                    if (value == ansVal['#text']) {
-                        e = false;
-                        return e;
+                    //If answer author name is equal to the input author name
+                    if(ansID == 'author'){
+                        console.log(ansVal.name['#text']);
+                        if(value.toLowerCase() == ansVal.name['#text'].toLowerCase()){
+                            e = false;
+                            comparisonArray.push([e, value, ansVal.name['#text']])
+                        }
+                        else{
+                            e = true;
+                            comparisonArray.push([e, value, ansVal.name['#text']]);
+                        }
                     }
-                    else {
-                        e = true;
-                        return e;
+                    else{
+                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
+                            e = false;
+                            comparisonArray.push([e, value, ansVal['#text']]);
+                        }
+                        else {
+                            e = true;
+                            comparisonArray.push([e, value, ansVal['#text']]);
+                        }
                     }
                 }
             });
-            return e
+            return comparisonArray
         }
 
 
@@ -631,10 +656,16 @@ $data = file_get_contents('php://input')
               error = dataComparison(formJSONID, formJSONValue);
               //If error, the user and answer values are different on submit the submission is stopped an the input
               //element's outline is highlighted with a orange color
-              if(error){
-                  alert("There is an error");
-                  $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
-                  return
+              for(var er = 0; er < error.length; er++) {
+                  if(error[er][0]){
+                      $("#aDeclerin").remove();
+                      alert("There is an error");
+                      $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                      var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
+                      console.log(parentDeclerin);
+                      $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
+                      return
+                  }
               }
           }
 

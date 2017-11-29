@@ -55,7 +55,7 @@ if($_SESSION["role"] == 1) {
 
 <!DOCTYPE html>
 <head>
-	<title>Edit Map Information</title>
+	<title><?php echo ucfirst($collection); ?> Training <?php if($priv == 'admin') echo $username; elseif($type == 'inter') echo 'Intermediate Level'; elseif($type == 'newbie') echo 'Beginner Level'; elseif ($type == 'none') echo 'Homepage' ?></title>
 	<!-- <meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="pragma" content="no-cache" /> -->
 	<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8" />
