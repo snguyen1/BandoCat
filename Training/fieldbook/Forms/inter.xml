@@ -1,19 +1,18 @@
 <data>
-	<!--If the document libraryindex Tutorial is removed renumber all the documents' ids to zero-->
 	<document collection = "fieldbook">
 		<id>0</id>
-		<libraryindex>7-_52.A(bottom)</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0360-007</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>360</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -21,36 +20,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>7-_52.A(bottom).tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>7-_52.A(bottom).jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>0360-007.tif</frontimage>
+		<frontthumbnail>0360-007.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>1</id>
-		<libraryindex>7-_52.A(top)</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-056</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -58,36 +46,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>7-_52.A(top).tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>7-_52.A(top).jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-056_0382-059).tif</frontimage>
+		<frontthumbnail>0388-056.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>2</id>
-		<libraryindex>7-_87.A</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-057</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -95,36 +72,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>7-_87.A.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>7-_87.A.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-056_0382-059).tif</frontimage>
+		<frontthumbnail>0388-057.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>3</id>
-		<libraryindex>7-_87.B</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-058</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -132,36 +98,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>7-_87.B.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>7-_87.B.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-056_0382-059).tif</frontimage>
+		<frontthumbnail>0388-058.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>4</id>
-		<libraryindex>BD-_42</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-059</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -169,36 +124,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>BD-_42.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>BD-_42.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-056_0382-059).tif</frontimage>
+		<frontthumbnail>0388-059.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>5</id>
-		<libraryindex>BM-_6</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-060</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -206,36 +150,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>BM-_6.tif</frontimage>
-		<backimage>BM-_6(back).tif</backimage>
-		<frontthumbnail>BM-_6.jpg</frontthumbnail>
-		<backthumbnail>BM-_6(back).jpg</backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-060_0382-065).tif</frontimage>
+		<frontthumbnail>0388-060.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>6</id>
-		<libraryindex>BM-_4</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-061</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -243,73 +176,50 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>BM-_4.tif</frontimage>
-		<backimage>BM-_4(back).tif</backimage>
-		<frontthumbnail>BM-_4.jpg</frontthumbnail>
-		<backthumbnail>BM-_4(back).jpg</backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-060_0382-065).tif</frontimage>
+		<frontthumbnail>0388-061.jpg</frontthumbnail>
 		<completed>0</completed>
-	</document>
-	<document collection = "fieldbook">
-		<id>7</id>
-		<libraryindex>BM-_1</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+	</document><document collection = "fieldbook">
+	<id>7</id>
+	<libraryindex>0388-062</libraryindex>
+	<bookcollection></bookcollection>
+	<booktitle>388</booktitle>
+	<jobnumber></jobnumber>
+	<jobtitle></jobtitle>
+	<indexedpage></indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>0</needsreview>
+	<author></author>
+	<crewmember><name></name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>BM-_1.tif</frontimage>
-		<backimage>BM-_1(back).tif</backimage>
-		<frontthumbnail>BM-_1.jpg</frontthumbnail>
-		<backthumbnail>BM-_1(back).jpg</backthumbnail>
-		<completed>0</completed>
-	</document>
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+	<comments></comments>
+	<frontimage>(0388-060_0382-065).tif</frontimage>
+	<frontthumbnail>0388-062.jpg</frontthumbnail>
+	<completed>0</completed>
+</document>
 	<document collection = "fieldbook">
 		<id>8</id>
-		<libraryindex>AY-_34</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-063</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -317,36 +227,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>AY-_34.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>AY-_34.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-060_0382-065).tif</frontimage>
+		<frontthumbnail>0388-063.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>9</id>
-		<libraryindex>AY-_13</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-064</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>0388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -354,36 +253,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>AY-_13.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>AY-_13.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-060_0382-065).tif</frontimage>
+		<frontthumbnail>0388-064.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>10</id>
-		<libraryindex>BC-3_40</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0388-065</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>388</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -391,36 +279,25 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>BC-3_40.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>BC-3_40.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0388-060_0382-065).tif</frontimage>
+		<frontthumbnail>0388-065.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 	<document collection = "fieldbook">
 		<id>11</id>
-		<libraryindex>AlbertBrown-2_34</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<libraryindex>0382-072</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>382</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -428,36 +305,125 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>AlbertBrown-2_34.tif</frontimage>
-		<backimage>AlbertBrown-2_34(back).tif</backimage>
-		<frontthumbnail>AlbertBrown-2_34.jpg</frontthumbnail>
-		<backthumbnail>AlbertBrown-2_34(back).jpg</backthumbnail>
+		<comments></comments>
+		<frontimage>(0382-072_0382-077)</frontimage>
+		<frontthumbnail>0382-072.jpg</frontthumbnail>
 		<completed>0</completed>
-	</document>
+	</document><document collection = "fieldbook">
+	<id>12</id>
+	<libraryindex>0382-073</libraryindex>
+	<bookcollection></bookcollection>
+	<booktitle>382</booktitle>
+	<jobnumber></jobnumber>
+	<jobtitle></jobtitle>
+	<indexedpage></indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>0</needsreview>
+	<author></author>
+	<crewmember><name></name></crewmember>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+	<comments></comments>
+	<frontimage>(0382-072_0382-077)</frontimage>
+	<frontthumbnail>0382-073.jpg</frontthumbnail>
+	<completed>0</completed>
+</document><document collection = "fieldbook">
+	<id>13</id>
+	<libraryindex>0382-074</libraryindex>
+	<bookcollection></bookcollection>
+	<booktitle>382</booktitle>
+	<jobnumber></jobnumber>
+	<jobtitle></jobtitle>
+	<indexedpage></indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>0</needsreview>
+	<author></author>
+	<crewmember><name></name></crewmember>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+	<comments></comments>
+	<frontimage>(0382-072_0382-077)</frontimage>
+	<frontthumbnail>0382-074.jpg</frontthumbnail>
+	<completed>0</completed>
+</document><document collection = "fieldbook">
+	<id>14</id>
+	<libraryindex>0382-075</libraryindex>
+	<bookcollection></bookcollection>
+	<booktitle>382</booktitle>
+	<jobnumber></jobnumber>
+	<jobtitle></jobtitle>
+	<indexedpage></indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>0</needsreview>
+	<author></author>
+	<crewmember><name></name></crewmember>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+	<comments></comments>
+	<frontimage>(0382-072_0382-077)</frontimage>
+	<frontthumbnail>0382-075.jpg</frontthumbnail>
+	<completed>0</completed>
+</document><document collection = "fieldbook">
+	<id>15</id>
+	<libraryindex>0382-076</libraryindex>
+	<bookcollection></bookcollection>
+	<booktitle>382</booktitle>
+	<jobnumber></jobnumber>
+	<jobtitle></jobtitle>
+	<indexedpage></indexedpage>
+	<blankpage>0</blankpage>
+	<sketch>0</sketch>
+	<loosedocument>0</loosedocument>
+	<needsreview>0</needsreview>
+	<author></author>
+	<crewmember><name></name></crewmember>
+
+	<startmonth></startmonth>
+	<startday></startday>
+	<startyear></startyear>
+	<endmonth></endmonth>
+	<endday></endday>
+	<endyear></endyear>
+	<comments></comments>
+	<frontimage>(0382-072_0382-077)</frontimage>
+	<frontthumbnail>0382-076.jpg</frontthumbnail>
+	<completed>0</completed>
+</document>
 	<document collection = "fieldbook">
-		<id>12</id>
-		<libraryindex>AY-_25</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
+		<id>16</id>
+		<libraryindex>0382-077</libraryindex>
+		<bookcollection></bookcollection>
+		<booktitle>382</booktitle>
+		<jobnumber></jobnumber>
+		<jobtitle></jobtitle>
+		<indexedpage></indexedpage>
+		<blankpage>0</blankpage>
+		<sketch>0</sketch>
+		<loosedocument>0</loosedocument>
+		<needsreview>0</needsreview>
+		<author></author>
+		<crewmember><name></name></crewmember>
 
 		<startmonth></startmonth>
 		<startday></startday>
@@ -465,94 +431,9 @@
 		<endmonth></endmonth>
 		<endday></endday>
 		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>AY-_25.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>AY-_25.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
-		<completed>0</completed>
-	</document>
-	<document collection = "fieldbook">
-		<id>13</id>
-		<libraryindex>AMFrench-6_58.1</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
-
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>AMFrench-6_58.1.tif</frontimage>
-		<backimage>AMFrench-6_58.1(back).tif</backimage>
-		<frontthumbnail>AMFrench-6_58.1.jpg</frontthumbnail>
-		<backthumbnail>AMFrench-6_58.1(back).jpg</backthumbnail>
-		<completed>0</completed>
-	</document>
-	<document collection = "fieldbook">
-		<id>14</id>
-		<libraryindex>Photostats-_12</libraryindex>
-		<title></title>
-		<subtitle></subtitle>
-		<scale></scale>
-		<is>1</is>
-		<needsreview>1</needsreview>
-		<northarrow>0</northarrow>
-		<street>0</street>
-		<poi>0</poi>
-		<coordinates>0</coordinates>
-		<coast>0</coast>
-		<customername></customername>
-
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
-
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
-		<readability></readability>
-		<rectifiability></rectifiability>
-		<companyname></companyname>
-		<documenttype></documenttype>
-		<documentmedium></documentmedium>
-		<author><name></name></author>
-
-		<frontimage>Photostats-_12.tif</frontimage>
-		<backimage></backimage>
-		<frontthumbnail>Photostats-_12.jpg</frontthumbnail>
-		<backthumbnail></backthumbnail>
+		<comments></comments>
+		<frontimage>(0382-072_0382-077)</frontimage>
+		<frontthumbnail>0382-077.jpg</frontthumbnail>
 		<completed>0</completed>
 	</document>
 </data>

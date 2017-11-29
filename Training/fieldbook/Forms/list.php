@@ -98,7 +98,7 @@ if($_SESSION["role"] == 1) {
                         <thead>
                         <tr>
                             <th>Document Link</th>
-                            <th>Book Title</th>
+                            <th>Library Index</th>
                             <th>Job Title</th>
                             <th>Needs Review</th>
                         </tr>

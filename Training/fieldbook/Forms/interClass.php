@@ -1,111 +1,88 @@
 <?php
-	class Document
-	{
-        //vars
-        public $id;
-        public $collection;
-        public $libraryindex;
-        public $title;
-        public $needsreview; //bool
-
-        public $startday;
-        public $startmonth;
-        public $startyear;
-        public $endday;
-        public $endmonth;
-        public $endyear;
+class Document
+{
+    //vars
+    public $id;
+    public $bookcollection;
+    public $libraryindex;
+    public $needsreview; //bool
 
 
-        public $fronturl;
-        public $backurl;
-        public $frontimage;
-        public $backimage;
-        public $frontthumbnail;
-        public $backthumbnail;
-        public $xmlfile;
-        public $url = "../Images/Intermediate/Documents/";
-        public $thumb_url = "../Images/Intermediate/Thumbnails/";
-        public $completed;
-	}
+    public $startday;
+    public $startmonth;
+    public $startyear;
+    public $endday;
+    public $endmonth;
+    public $endyear;
 
-	class Maps extends Document
-	{
-        public $subtitle;
-        public $scale;
-        public $is;
-        public $northarrow;
-        public $street;
-        public $poi;
-        public $coordinates;
-        public $coast;
-        public $customername;
-        public $fieldbooknumber;
-        public $fieldbookpage;
-        public $readability;
-        public $rectifiability;
-        public $companyname;
-        public $documenttype;
-        public $documentmedium;
-        public $author;
 
-		public function __construct($collection,$xmlpath,$username,$mapid)
-		{
-			$this->xmlfile = $xmlpath;
-			$found = -1;
-			$this->collection = $collection;
-			$this->id = $mapid;
+    public $fronturl;
+    public $frontimage;
+    public $frontthumbnail;
+    public $xmlfile;
+    public $url = "../Images/Intermediate/Documents/";
+    public $thumb_url = "../Images/Intermediate/Thumbnails/";
+    public $completed;
+}
 
-			$xml = simplexml_load_file($this->xmlfile) or die("Cannot open file!");
-			foreach($xml->document as $a)
-			{
-				if($a->id == $this->id)
-				{
-                    $this->libraryindex = $a->libraryindex;
-                    $this->title = $a->title;
-                    $this->subtitle = $a->subtitle;
-                    $this->scale = $a->scale;
-                    $this->is= $a->is;
-                    $this->needsreview = $a->needsreview;
-                    $this->northarrow = $a->northarrow;
-                    $this->street = $a->street;
-                    $this->poi = $a->poi;
-                    $this->coordinates = $a->coordinates;
-                    $this->coast = $a->coast;
-                    $this->customername = $a->customername;
+class Fiedlbook extends Document
+{
+    public $booktitle;
+    public $jobnumber;
+    public $jobtitle;
+    public $indexedpage;
+    public $blankpage;
+    public $sketch;
+    public $loosedocument;
+    public $crewmember;
+    public $author;
+    public $comments;
 
-                    $this->startday = $a->startday;
-                    $this->startmonth = $a->startmonth;
-                    $this->startyear = $a->startyear;
-                    $this->endday = $a->endday;
-                    $this->endmonth = $a->endmonth;
-                    $this->endyear = $a->endyear;
+    public function __construct($collection,$xmlpath,$username,$mapid)
+    {
+        $this->xmlfile = $xmlpath;
+        $found = -1;
+        $this->collection = $collection;
+        $this->id = $mapid;
 
-                    $this->fieldbooknumber = $a->fieldbooknumber;
-                    $this->fieldbookpage = $a->fieldbookpage;
-                    $this->readability = $a->readability;
-                    $this->rectifiability = $a->rectifiability;
-                    $this->companyname = $a->companyname;
-                    $this->documenttype = $a->documenttype;
-                    $this->documentmedium = $a->documentmedium;
-                    $this->author = $a->author;
+        $xml = simplexml_load_file($this->xmlfile) or die("Cannot open file!");
+        foreach($xml->document as $a)
+        {
+            if($a->id == $this->id)
+            {
+                $this->libraryindex = $a->libraryindex;
+                $this->bookcollection = $a->bookcollection;
+                $this->booktitle = $a->booktitle;
+                $this->jobnumber = $a->jobnumber;
+                $this->jobtitle = $a->jobtitle;
+                $this->indexedpage = $a->indexedpage;
+                $this->blankpage = $a->blankpage;
+                $this->sketch = $a->sketch;
+                $this->loosedocument = $a->loosedocument;
+                $this->needsreview = $a->needsreview;
+                $this->author = $a->author;
+                $this->crewmember = $a->crewmember;
 
-                    $this->frontimage = $this->url. $a->frontimage;
-                    $this->backimage = $this->url. $a->backimage;
-                    $this->frontthumbnail = $this->thumb_url. $a->frontthumbnail;
-                    $this->backthumbnail = $this->thumb_url. $a->backthumbnail;
-                    $found = 1;
-				}
-				if($found == 1)
-					break;
-			}
+                $this->startday = $a->startday;
+                $this->startmonth = $a->startmonth;
+                $this->startyear = $a->startyear;
+                $this->endday = $a->endday;
+                $this->endmonth = $a->endmonth;
+                $this->endyear = $a->endyear;
 
-		}
+                $this->comments = $a->comments;
 
-	}
+                $this->frontimage = $this->url. $a->frontimage;
+                $this->backimage = $this->url. $a->backimage;
+                $this->frontthumbnail = $this->thumb_url. $a->frontthumbnail;
+                $this->backthumbnail = $this->thumb_url. $a->backthumbnail;
+                $found = 1;
+            }
+            if($found == 1)
+                break;
+        }
 
-	class Map extends Document
-	{
+    }
 
-	}
-
+}
 ?>
