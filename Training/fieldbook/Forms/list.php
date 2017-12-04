@@ -293,7 +293,7 @@ if($_SESSION["role"] == 1) {
 
 
 //Presentation progress
-var ptprg = 0
+var ptprg = 0;
 //Slide progress
 var sldprg = 0;
 //Presentation Page Index
@@ -349,7 +349,7 @@ function currentSlide(pt, nslddx) {
             }
             else if (pt == 2){
                 currentSlide(pt+1, 7);
-                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 7)')
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 8)')
             }
             else if (pt == 3) {
                 currentSlide(pt+1, 1)

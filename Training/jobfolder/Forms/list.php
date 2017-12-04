@@ -186,7 +186,7 @@ if($_SESSION["role"] == 1) {
                     </div>
                     <div class="mySlides">
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide2" class="nextPresentation" value="next" onclick="currentSlide(3, 7)" style="display: none">
+                        <input type="button" id="nextSlide2" class="nextPresentation" value="next" onclick="currentSlide(3, 9)" style="display: none">
                     </div><div class="mySlides">
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
@@ -324,7 +324,7 @@ function currentSlide(pt, nslddx) {
             }
             else if (pt == 2){
                 currentSlide(pt+1, 7);
-                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 7)')
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(3, 9)')
             }
             else if (pt == 3) {
                 currentSlide(pt+1, 1)
@@ -371,7 +371,7 @@ function currentSlide(pt, nslddx) {
         $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 4)')
     }
     else if (pt == 3){
-        $("#pt"+String(pt)).attr('onClick', 'currentSlide(3, 7)')
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(3, 9)')
     }
     else if (pt == 4) {
         $("#pt"+String(pt)).attr('onClick', 'currentSlide(4, 1)')
@@ -564,7 +564,6 @@ function currentSlide(pt, nslddx) {
                                             }
                                         }
                                         $("<td align='center'><a href='index.php?id=" + linkID + "&user=" + "<?php echo $userfile ?>" + "&col=" + "<?php echo $collection ?>" + "&type=answer&priv=" + "<?php echo $priv ?>" + "'>Answer</a></td>").insertAfter($('#dtable>tbody>tr')[tm].childNodes[4]);
-                                        console.log("<td align='center'><a href='index.php?id=" + linkID + "&user=" + "<?php echo $userfile ?>" + "&col=" + "<?php echo $collection ?>" + "&type=" + "<?php echo $type ?>" + "&priv=" + "<?php echo $priv ?>" + "'>Answer</a></td>");
                                         tm += 1;
                                     }
 

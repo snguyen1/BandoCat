@@ -116,7 +116,7 @@ foreach ($file->document as $a) {
                     <table class="Account_Table">
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
-                            <div class="cell">
+                            <div class="cell" id="indexCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         <span style = "color:red;"> * </span>
@@ -130,13 +130,13 @@ foreach ($file->document as $a) {
                                 <input type = "text" name = "txtLibraryIndex" id = "libraryindex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
                             <!-- TITLE -->
-                            <div class="cell">
+                            <div class="cell" id="titleCell">
                                 <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Document Title: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
                                 <input type = "text" name = "txtTitle" id = "title" size="26" required="true" value='<?php echo $doc1->title; ?>' />
                             </div>
                             <!-- NEEDS REVIEW -->
                             <div class="cell">
-                                <span class="labelradio" >
+                                <span class="labelradio" id="needsreviewCell">
                                 <mark>Needs Review: </mark>
                                 <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
                                 </span>
@@ -144,7 +144,7 @@ foreach ($file->document as $a) {
                                 <input type = "radio" name = "rbNeedsReview" id = "needsreview" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
                             </div>
                             <!-- SUB FOLDER -->
-                            <div class="cell">
+                            <div class="cell" id="subfolderCell">
                                 <span class="labelradio" >
                                 <mark>In A Subfolder: </mark>
                                 <p hidden><b></b>Select if the document belongs to a subfolder. This will be indicated in the library index by a ".number" </br>Ex. 142-_038.1</p>
@@ -153,7 +153,7 @@ foreach ($file->document as $a) {
                                 <input type = "radio" name = "rbInASubfolder" id = "inasubfolder" size="26" value="0" <?php if($doc1->inasubfolder == 0) echo "checked"; ?> />No
                             </div>
                             <!-- SUBFOLDER COMMENTS -->
-                            <div class="cell">
+                            <div class="cell" id="subfuldercommentsCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Subfolder Comments:
@@ -166,7 +166,7 @@ foreach ($file->document as $a) {
                                 <textarea cols = "30" name="txtSubfolderComments" id="subfoldercomments"/><?php echo $doc1->subfoldercomments; ?></textarea>
                             </div>
                             <!-- CLASSIFICATION -->
-                            <div class="cell">
+                            <div class="cell" id="classificationCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Classification:
@@ -183,7 +183,7 @@ foreach ($file->document as $a) {
                                 </select>
                             </div>
                             <!-- CLASSIFICATION COMMENTS-->
-                            <div class="cell">
+                            <div class="cell" id="classificationcommentsCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Classifications Comments:
@@ -275,7 +275,7 @@ foreach ($file->document as $a) {
 
                         <td id="col2" style="padding-left:40px">
                             <!-- COMMENTS-->
-                            <div class="cell">
+                            <div class="cell" id="commentsCell">
                                 <span class="labelradio">
                                     <mark class="label">
                                         Comments:
@@ -506,7 +506,6 @@ $data = file_get_contents('php://input')
                     }
                 }
                 else if(accountInputsCol1[i].id == 'authorCell'){
-                    console.log(accountInputsCol1[i].children[1].id)
                     accountJSON(formJSON, accountInputsCol1[i].children[1].id, accountInputsCol1[i].children[1].value);
                 }
                 else
@@ -529,7 +528,6 @@ $data = file_get_contents('php://input')
         var author_count = 0;
 
         function add_fields(length, val) {
-            console.log($('.authorsCell'));
             if (val == null)
                 val = "";
             if (author_count >= max)
@@ -610,7 +608,6 @@ $data = file_get_contents('php://input')
                     }
                     //If answer author name is equal to the input author name
                     if(ansID == 'author'){
-                        console.log(ansVal.name['#text']);
                         if(value.toLowerCase() == ansVal.name['#text'].toLowerCase()){
                             e = false;
                             comparisonArray.push([e, value, ansVal.name['#text']])
@@ -662,7 +659,7 @@ $data = file_get_contents('php://input')
                       alert("There is an error");
                       $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                       var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      console.log(parentDeclerin);
+                      console.log($("#" + String(formJSONID)).parent());
                       $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
                       return
                   }

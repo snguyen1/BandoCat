@@ -214,7 +214,7 @@ if($_SESSION["role"] == 1) {
                         </div>
                     <div class="mySlides">
                         <img id="slideImg1" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 4)" style="display: none">
+                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 3)" style="display: none">
                     </div>
                     <div class="mySlides">
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
@@ -352,7 +352,7 @@ function currentSlide(pt, nslddx) {
         if(sldprg == nslddx-1){
             if(pt == 1){
                 currentSlide(pt+1, 4);
-                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 4)')
+                $("#pt"+String(pt+1)).attr('onClick', 'currentSlide(2, 3)')
             }
             else if (pt == 2){
                 currentSlide(pt+1, 7);
@@ -400,7 +400,7 @@ function currentSlide(pt, nslddx) {
             slides[ptdx].style.display = "block";
 
     if(pt == 2){
-        $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 4)')
+        $("#pt"+String(pt)).attr('onClick', 'currentSlide(2, 3)')
     }
     else if (pt == 3){
         $("#pt"+String(pt)).attr('onClick', 'currentSlide(3, 7)')
@@ -439,7 +439,7 @@ function currentSlide(pt, nslddx) {
                 }
 
 
-                image.attr("src", "../../maps/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
+                image.attr("src", "../../maps/Images/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
 
                 //Stores the index of the highest slide that has been seen by the user
                 if (slide > nSlide-2)
