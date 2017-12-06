@@ -225,7 +225,7 @@ if($_SESSION["role"] == 1) {
                         <input type="button" id="nextSlide3" class="nextPresentation" value="next" onclick="currentSlide(4, 0)" style="display: none">
                     </div>
                     <div class="mySlides">
-                        <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important;" value="Click to Continue To your Training"></div>
+                        <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important; max-width: 50%;" value="Click To Continue To Your Training"></div>
                         <img id="slideImg4" class="slideImg" src="" style="width:100%; margin: -70.4% 0% 0% 0%">
                     </div>
 

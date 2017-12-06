@@ -390,15 +390,26 @@ $data = file_get_contents('php://input')
                     if (jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
                         answerValue = ''
                     }
+                    if(IDProperty == 'author'){
+                        if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty]['name'])){
+                            answerValue = ''
+                        }
+                    }
+
 
                     if(targetID == 'author'){
-                        if(ansDataJSON.document[docID][IDProperty]['name']['#text'].toLowerCase() == targetValue.toLowerCase())
+                        answerValue = ansDataJSON.document[docID][IDProperty]['name']['#text'];
+                        if(answerValue.toLowerCase() == targetValue.toLowerCase()){
+                            $("#aDeclerin").remove();
                             $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                        }
+
                         else
                             $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
                     }
                     else{
                         if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                            $("#aDeclerin").remove();
                             $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                         }
 
@@ -580,6 +591,12 @@ $data = file_get_contents('php://input')
                     if (jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty])) {
                         ansDataJSON.document[formJSON.document][idProperty]['#text'] = ''
                     }
+                    if(idProperty == 'author'){
+                        if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]['name'])){
+                            ansDataJSON.document[formJSON.document][idProperty]['name']['#text'] = ''
+                        }
+                    }
+
                     switch (id) {
                         case 'startday':
                             if (value == '00')

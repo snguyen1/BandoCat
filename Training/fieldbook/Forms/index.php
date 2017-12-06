@@ -187,7 +187,7 @@ foreach ($file->document as $a) {
                             </div>
 
                             <!-- FIELD CREW MEMBER: -->
-                            <div class="cell">
+                            <div class="cell" id="crewCell">
                                 <div class="crewMemberClass" id="crewMemberId0" style="width: 115%">
                                     <span class="labelradio">
                                         <mark class="label">Field Book Crew: </mark>
@@ -487,29 +487,27 @@ $data = file_get_contents('php://input')
 
         /****** LEFT COLUMN ******/
         //For every element in the Left column
-        for(var i = 0; i < accountInputsCol1.length; i++) {
-            //Detects if the element is a radio button and retrieves its value if it is checked, and stores it
-            //into the formJSON
-            if(i == 11) {
-                //For every field crew field children
-                for(var j = 0; j < accountInputsCol1[i].children.length;j++){
+        $.each(accountInputsCol1, function (index, element) {
+            if(element.id == "crewCell") {
+                for(var j = 0; j < element.children.length;j++){
                     //If a field crew input is not undefined its value is stored into an array that is then posted as
                     //into the formJSON object
-                    if(typeof accountInputsCol1[i].children[j].children['crewmember'] !== "undefined") {
-                        crewTableArray.push(accountInputsCol1[i].children[j].children['crewmember'].value)
+                    if(typeof element.children[j].children['crewmember'] !== "undefined") {
+                        crewTableArray.push(element.children[j].children['crewmember'].value)
                     }
                 }
                 structureJSON(formJSON, 'crewmember', crewTableArray)
             }
             else{
-                if($("#"+accountInputsCol1[i].children[1].id).is(':radio'))
-                    structureJSON(formJSON, accountInputsCol1[i].children[1].id,$("#" + accountInputsCol1[i].children[1].id + ":checked").val());
+                if($("#"+element.children[1].id).is(':radio'))
+                    structureJSON(formJSON, element.children[1].id,$("#" + element.children[1].id + ":checked").val());
                 //Otherwise if not a radio nor a field crew element the input value is stored into the formJSON object
                 else
-                    structureJSON(formJSON, accountInputsCol1[i].children[1].id,accountInputsCol1[i].children[1].value);
+                    structureJSON(formJSON, element.children[1].id,element.children[1].value);
+
             }
 
-        }
+        });
 
         /****** RIGHT COLUMN ******/
         //For every element in the Right column
@@ -648,17 +646,17 @@ $data = file_get_contents('php://input')
                             if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
                                 //Returns false for errors
                                 e = false;
-                                comparisonArray.push([e, id, value, ansVal['name'][v]['#text']])
+                                comparisonArray.push([e, value, ansVal['name'][v]['#text'], id])
                             }
                             else {
                                 //Returns true for errors
                                 e = true;
-                                comparisonArray.push([e, id, value, ansVal['name'][v]['#text']]);
+                                comparisonArray.push([e, value, ansVal['name'][v]['#text'], id]);
                             }
                         }
                         //Error if uneven amount of answer values and input values
                         else{
-                            comparisonArray.push([true, id, '', 'uneven amount of crew members'])
+                            comparisonArray.push([true, '', 'uneven amount of crew members', id])
                         }
                     }
                 }

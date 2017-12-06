@@ -407,7 +407,7 @@ function currentSlide(pt, nslddx) {
                 }
 
 
-                image.attr("src", "../../jobfolder/Images/Training/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
+                image.attr("src", "../../jobfolder/Images/slideshow/slides/Slide0" + String(presentation) + "/slide0" + String(presentation) + "-0" + String(slide) + ".png");
 
                 //Stores the index of the highest slide that has been seen by the user
                 if (slide > nSlide-2)
