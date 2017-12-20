@@ -3,14 +3,14 @@
 	<document collection = "maps">
 		<id>0</id>
 		<libraryindex>5RB_30</libraryindex>
-		<title>Map of the W.B.Baker Subdivision of the Cody Partition</title>
+		<title>Map of the W.B. Baker Subdivision of the Cody Partition</title>
 		<subtitle>Situated on the Simpson League and Gregorio Farias Grant</subtitle>
 		<scale>1 in = 1000 ft</scale>
 		<is>1</is>
 		<needsreview>1</needsreview>
 		<northarrow>0</northarrow>
 		<street>0</street>
-		<poi>0</poi>
+		<poi>1</poi>
 		<coordinates>0</coordinates>
 		<coast>0</coast>
 		<customername></customername>
@@ -19,17 +19,17 @@
 		<startday>29</startday>
 		<startyear>1909</startyear>
 		<endmonth>12</endmonth>
-		<endday>30</endday>
+		<endday>03</endday>
 		<endyear>1909</endyear>
 
-		<fieldbooknumber></fieldbooknumber>
-		<fieldbookpage></fieldbookpage>
+		<fieldbooknumber>2</fieldbooknumber>
+		<fieldbookpage>16</fieldbookpage>
 		<readability>GOOD</readability>
 		<rectifiability>POOR</rectifiability>
 		<companyname></companyname>
 		<documenttype>Map</documenttype>
 		<documentmedium>Blueprint</documentmedium>
-		<author></author>
+		<author>W.B. Baker</author>
 
 		<frontimage>5RB-_30.tif</frontimage>
 		<backimage></backimage>

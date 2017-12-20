@@ -346,7 +346,7 @@ foreach ($file->document as $a) {
                             </div>
 
                             <!-- THUMBNAIL LINKS -->
-                            <div class="cell" id="scanThumbnails">
+                            <div class="cell" id="">
                                 <!--SCAN OF BACK-->
                                 <div style="text-align: center">
                                             <?php
@@ -422,36 +422,39 @@ $data = file_get_contents('php://input')
                     //JSON document{[documents array[fields]]}
                     ansDataJSON = answersJSON.data;
                     table2JSON();
-
-                    $(':input').change(function (event) {
-                        table2JSON();
-                        var targetID = event.currentTarget.id;
-                        var IDProperty = JSON.parse(JSON.stringify(targetID));
-                        var targetValue = event.target.value;
-                        //valid document ID
-                        var docID = formJSON.document;
-                        var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
-                        if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
-                            answerValue = ''
-                        }
-
-                        if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                            $("#aDeclerin").remove();
-                            $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
-                        }
-
-                        else{
-                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
-                        }
-
-                    })
                 }
             };
             xhttp_answers.open("GET", "newbie_Answers.xml");
             xhttp_answers.send();
         }
 
+        $(':input').change(function (event) {
+            table2JSON();
+            var targetID = event.currentTarget.id;
+            var IDProperty = JSON.parse(JSON.stringify(targetID));
+            var targetValue = event.target.value;
+            //valid document ID
+            var docID = formJSON.document;
+            var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+            if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
+                answerValue = ''
+            }
 
+            if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                for(target = 0; target < formJSON.data.length; target++) {
+                    if(formJSON.data[target].id == targetID) {
+                        var targetIndex = target
+                    }
+                }
+                $("span[name = aDeclerin"+ targetIndex +"]").remove();
+                $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+            }
+
+            else{
+                $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
+            }
+
+        });
 
         /**********************************************
          *Function: xmlToJSON
@@ -521,35 +524,48 @@ $data = file_get_contents('php://input')
         //Creates an empty property array
         formJSON["data"] = [];
 
+        /****** LEFT COLUMN ******/
         //For every element in the Left column
-        for(var i = 0; i < accountInputsCol1.length-1; i++) {
-            //Detects if the element is a radio button and retrieves its value if it is checked, and stores it
-            //into the formJSON
-            if($("#"+accountInputsCol1[i].children[1].id).is(':radio'))
-                structureJSON(formJSON, accountInputsCol1[i].children[1].id,$("#" + accountInputsCol1[i].children[1].id + ":checked").val());
-            //If not a radio element, the element values are stored into the formJSON
-            else
-                structureJSON(formJSON, accountInputsCol1[i].children[1].id,accountInputsCol1[i].children[1].value);
-        }
 
-        //For every element in the Left column
-        for(var i = 0; i < accountInputsCol2.length-1; i++) {
-            //Detects the startDateCell div id and loops through the three day input drop downs to retrieve their
-            //elements ids and values.
-            if(accountInputsCol2[i].id == 'startDateCell'){
-                for(var d = 2; d < 4; d++)
-                    structureJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
-            }
+        $.each(accountInputsCol1, function (index, element) {
+            if (element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(input)")[0];
+                if(inputDivs !== undefined) {
+                    var inputId = $("#" + inputDivs.id + " > input")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > input")[0].value;
+                    if($("#"+inputId).is(":radio"))
+                        structureJSON(formJSON, inputId,$("#" + inputId + ":checked").val());
+                    else
+                        structureJSON(formJSON, inputId, inputVal);
+                }
 
-            //Detects if the element has a endDateCell id and loops through the next two end days to retrieve their
-            //elements ids and values.
-            else if(accountInputsCol2[i].id == 'endDateCell') {
-                for(var d = 2; d < 4; d++)
-                    structureJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
             }
-            //If not a date element, the elements values are stored into the formJSON
-            structureJSON(formJSON, accountInputsCol2[i].children[1].id,accountInputsCol2[i].children[1].value);
-        }
+        });
+
+        /****** RIGHT COLUMN ******/
+        //For every element in the Right column
+        $.each(accountInputsCol2, function (index, element) {
+            if (element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(input)")[0];
+                var selectDivs = $("#" + element.id + ":has(select)")[0];
+                var selectList = $("#" + element.id + "> select");
+
+                if(inputDivs !== undefined){
+                    var inputId = $("#" + inputDivs.id + " > :input")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > :input")[0].value;
+                    structureJSON(formJSON, inputId, inputVal);
+                }
+                //Detects the select elements and loops through the three day input drop downs to retrieve their
+                //elements ids and values.
+                else if(selectDivs !== undefined){
+                    for(var s = 0; s < selectList.length; s++) {
+                        var selectId = selectList[s].id;
+                        var selectVal = selectList[s].value;
+                        structureJSON(formJSON, selectId, selectVal)
+                    }
+                }
+            }
+        });
     }
 
     /**********************************************
@@ -617,12 +633,44 @@ $data = file_get_contents('php://input')
                 if(value.toLowerCase() == ansVal['#text'].toLowerCase()){
                     //Returns false for errors
                     e = false;
-                    comparisonArray.push([e, value, ansVal['#text']])
+                    comparisonArray.push([e, id, ansVal['#text']])
+                }
+                else if(ansID == 'startday' || ansID == 'startmonth' || ansID == 'startyear'){
+                    if (id.toLowerCase() == ansVal['#text'].toLowerCase()) {
+                        e = false;
+                        comparisonArray.push([e, id, ansVal['#text']]);
+                    }
+                    else {
+                        //True for errors
+                        e = true;
+                        var DocAnswers = ansDataJSON.document[formJSON.document];
+                        var day = DocAnswers['startday']['#text'];
+                        var month = DocAnswers['startmonth']['#text'];
+                        var year = DocAnswers['startyear']['#text'];
+                        var date = month + '/' + day + '/' + year;
+                        comparisonArray.push([e, id, date]);
+                    }
+                }
+                else if(ansID == 'endday' || ansID == 'endmonth' || ansID == 'endyear'){
+                    if (id.toLowerCase() == ansVal['#text'].toLowerCase()) {
+                        e = false;
+                        comparisonArray.push([e, id, ansVal['#text']]);
+                    }
+                    else {
+                        //True for errors
+                        e = true;
+                        var DocAnswers = ansDataJSON.document[formJSON.document];
+                        var day = DocAnswers['endday']['#text'];
+                        var month = DocAnswers['endmonth']['#text'];
+                        var year = DocAnswers['endyear']['#text'];
+                        var date = month + '/' + day + '/' + year;
+                        comparisonArray.push([e, id, date]);
+                    }
                 }
                 else{
                     //Returns true for errors
                     e = true;
-                    comparisonArray.push([e, value, ansVal['#text']]);
+                    comparisonArray.push([e, id, ansVal['#text']]);
                 }
             }
         });
@@ -631,13 +679,22 @@ $data = file_get_contents('php://input')
 
     //Input form array
       formArray = [];
+    //No errors while submiting
+        var submitErrors = 0;
+        var errorsCorrection = 0;
       //Submit function that will convert the input form into a JSON
       $("#form").on("submit", function (e) {
+          if(errorsCorrection > 0){
+              submitErrors = 0;
+              console.log(formJSON.index);
+              $("span[name = 'aDeclerin']").remove();
+          }
           e.preventDefault();
           table2JSON();
           //Default no error values
           if('<?php echo $type ?>' == 'newbie'){
               error = false;
+              formErrors = [];
 
               for(var d = 0; d < formJSON.data.length; d++){
                   //User input id
@@ -646,16 +703,21 @@ $data = file_get_contents('php://input')
                   var formJSONValue = formJSON.data[d].value;
                   //Compares User and Answer values
                   error = dataComparison(formJSONID, formJSONValue);
+                  formErrors.push(error);
+
                   //If error, the user and answer values are different on submit the submission is stopped an the input
                   //element's outline is highlighted with a orange color
-                  if(error[0][0]){
-                      $("#aDeclerin").remove();
-                      alert("There is an error");
+                  if(formErrors[d][0][0]){
+                      submitErrors = 1;
                       $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                       var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[0][2] + '</p></span>').insertAfter("#" + parentDeclerin);
-                      return
+                      $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[0][2] + '</p></span>').insertAfter("#" + parentDeclerin);
                   }
+              }
+              if(submitErrors == 1) {
+                  alert('There is an error');
+                  errorsCorrection += 1;
+                  return
               }
           }
 
