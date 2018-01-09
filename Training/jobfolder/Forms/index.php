@@ -117,66 +117,52 @@ foreach ($file->document as $a) {
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
                             <div class="cell" id="indexCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Library Index: The library index is the name of a scanned document. Copy and paste the image’s name into the textbox exactly as you see it. Example: <?php echo $doc1->libraryindex; ?>">
                                     <mark class="label">
                                         <span style = "color:red;"> * </span>
                                         Library Index:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Library Index: </strong>The library index is the name of a scanned document. Copy and paste the image’s name into the textbox exactly as you see it.<br><i>Example: </i><?php echo $doc1->libraryindex; ?>
-                                    </p>
                                 </span>
                                 <input type = "text" name = "txtLibraryIndex" id = "libraryindex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
                             <!-- TITLE -->
                             <div class="cell" id="titleCell">
-                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Document Title: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio" title="Document Title: This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index. Envelopes: An envelope will always be given the title of the library index."><mark class="label"><span style = "color:red;"> * </span>Document Title: </mark></span>
                                 <input type = "text" name = "txtTitle" id = "title" size="26" required="true" value='<?php echo $doc1->title; ?>' />
                             </div>
                             <!-- NEEDS REVIEW -->
-                            <div class="cell">
-                                <span class="labelradio" id="needsreviewCell">
+                            <div class="cell" id="needsreviewCell">
+                                <span class="labelradio" title="This is to signal if a review is needed, and always keep selection as yes">
                                 <mark>Needs Review: </mark>
-                                <p hidden><b></b>This is to signal if a review is needed, and always keep selection as yes</p>
                                 </span>
                                 <input type = "radio" name = "rbNeedsReview" id = "needsreview" size="26" value="1" <?php if($doc1->needsreview == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbNeedsReview" id = "needsreview" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
                             </div>
                             <!-- SUB FOLDER -->
                             <div class="cell" id="subfolderCell">
-                                <span class="labelradio" >
+                                <span class="labelradio" title="Select if the document belongs to a subfolder. This will be indicated in the library index by a '.number' Ex. 142-_038.1">
                                 <mark>In A Subfolder: </mark>
-                                <p hidden><b></b>Select if the document belongs to a subfolder. This will be indicated in the library index by a ".number" </br>Ex. 142-_038.1</p>
                                 </span>
                                 <input type = "radio" name = "rbInASubfolder" id = "inasubfolder" size="26" value="1" <?php if($doc1->inasubfolder == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbInASubfolder" id = "inasubfolder" size="26" value="0" <?php if($doc1->inasubfolder == 0) echo "checked"; ?> />No
                             </div>
                             <!-- SUBFOLDER COMMENTS -->
                             <div class="cell" id="subfuldercommentsCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Subfolder Comments: The first document of a subfolder will say what to expect within the subfolder. Looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.">
                                     <mark class="label">
                                         Subfolder Comments:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Subfolder Comments: </strong>The first document of a subfolder will say what to expect within the subfolder. Looking at the first document, type exactly what is written on the document into this box. If you are cataloging a consecutive document, copy the text from the first document into this box. All documents within the subfolder will have the subfolder comments from the first document.
-                                    </p>
                                 </span>
                                 <textarea cols = "30" name="txtSubfolderComments" id="subfoldercomments"/><?php echo $doc1->subfoldercomments; ?></textarea>
                             </div>
                             <!-- CLASSIFICATION -->
                             <div class="cell" id="classificationCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Classification: Classify the type of document. If assistance is needed, consult the Classification Description box.">
                                     <mark class="label">
                                         Classification:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Classification: </strong>Classify the type of document. If assistance is needed, consult the Classification Description box.
-                                    </p>
                                 </span>
-                                <select id="classification" name="ddlClassification" style="width:215px">
+                                <select id="classification" name="ddlClassification" style="width:44%">
                                     <?php
                                     classification($classification_arr, $doc1->classification);
                                     ?>
@@ -184,78 +170,62 @@ foreach ($file->document as $a) {
                             </div>
                             <!-- CLASSIFICATION COMMENTS-->
                             <div class="cell" id="classificationcommentsCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Classifications Comments: This is reserved only for the folder’s envelope. Copy what is seen on the envelope into this box.">
                                     <mark class="label">
                                         Classifications Comments:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Classifications Comments: </strong>This is reserved only for the folder’s envelope. Copy what is seen on the envelope into this box.
-                                    </p>
                                 </span>
                                 <textarea rows = "2" cols = "30" id="classificationcomments" name="txtClassificationComments"/><?php echo $doc1->classificationcomments; ?></textarea>
                             </div>
                             <!--START DATE-->
                             <div class="cell" id="startDateCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Document Start Date: The earliest date on the document- as it pertains to the creation of that document. If there is one date on the document, only fill out the Document End Date boxes.">
                                     <mark class="label">
                                         Document Start Date:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Document Start Date: </strong>The earliest date on the document- as it pertains to the creation of that document.</br><i>*If there is one date on the document, only fill out the Document End Date boxes.</i>
-                                    </p>
                                 </span>
                                 <!-- GET START DDL MONTH -->
-                                <select name="ddlStartMonth" id="startmonth" style="width:60px">
+                                <select name="ddlStartMonth" id="startmonth" style="width:14%">
                                     <?php $Render->GET_DDL_MONTH($doc1->startmonth); ?>
                                 </select>
                                 <!-- GET START DDL DAY -->
-                                <select name="ddlStartDay" id="startday" style="width:60px">
+                                <select name="ddlStartDay" id="startday" style="width:14%">
                                     <?php $Render->GET_DDL_DAY($doc1->startday); ?>
                                 </select>
                                 <!-- GET START DDL YEAR -->
-                                <select id="startyear" name="ddlStartYear" style="width:85px">
+                                <select id="startyear" name="ddlStartYear" style="width:16%">
                                     <?php $Render->GET_DDL_YEAR($doc1->startyear); ?>
                                 </select>
 
                             </div>
                             <!--END DATE-->
                             <div class="cell" id="endDateCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Document End Date: The latest date on the document- as it pertains to the creation of that document.">
                                     <mark class="label">
                                         Document End Date:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Document End Date: </strong>The latest date on the document- as it pertains to the creation of that document.
-                                    </p>
                                 </span>
                                 <!-- GET END DDL MONTH -->
-                                <select name="ddlEndMonth" id="endmonth" style="width:60px">
+                                <select name="ddlEndMonth" id="endmonth" style="width:14%">
                                     <?php $Render->GET_DDL_MONTH($doc1->endmonth); ?>
                                 </select>
                                 <!-- GET END DDL DAY -->
-                                <select name="ddlEndDay" id="endday" style="width:60px">
+                                <select name="ddlEndDay" id="endday" style="width:14%">
                                     <?php $Render->GET_DDL_DAY($doc1->endday); ?>
                                 </select>
                                 <!-- GET END DDL YEAR -->
-                                <select name="ddlEndYear" id="endyear" style="width:85px">
+                                <select name="ddlEndYear" id="endyear" style="width:16%">
                                     <?php $Render->GET_DDL_YEAR($doc1->endyear); ?>
                                 </select>
                             </div>
                             <!-- DOCUMENT AUTHOR -->
                             <div class="cell" id="authorCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Document Author: Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.">
                                     <mark class="label">
                                         Document Author:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Document Author: </strong>Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.
-                                    </p>
                                 </span>
-                                <input type="text" class="txtAuthor" id="author" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
+                                <input type="text" class="txtAuthor" id="author0" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
                                 <span style="padding-right:5px"></span>
 
                                 <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null)" value="+">
@@ -276,14 +246,10 @@ foreach ($file->document as $a) {
                         <td id="col2" style="padding-left:40px">
                             <!-- COMMENTS-->
                             <div class="cell" id="commentsCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="Comments: Any additional information that needs to be included from the document. This can include the individuals involved in a correspondence, metadata from a map, sheet number, and job folder number.">
                                     <mark class="label">
                                         Comments:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Comments: </strong>Any additional information that needs to be included from the document. This can include the individuals involved in a correspondence, metadata from a map, sheet number, and job folder number.
-                                    </p>
                                 </span>
                                 <textarea rows = "4" cols = "30" id="comments" name="txtComments"/><?php echo $doc1->comments; ?></textarea>
                                 <br><br><br>
@@ -366,18 +332,25 @@ $data = file_get_contents('php://input')
     var formJSON = {};
     var answersJSON = '';
     $(document).ready(function () {
-        //object to request data for the newbie_Answers.xml
-        var xhttp_answers = new XMLHttpRequest();
+        if('<?php echo $type?>' == 'newbie')
+        {
+            //object to request data for the newbie_Answers.xml
+            var xhttp_answers = new XMLHttpRequest();
 
-        //Loads XML
-        xhttp_answers.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                //XML object
-                var xmlAnswers = this.responseXML;
-                answersJSON = xmlToJson(xmlAnswers);
-                //JSON document{[documents array[fields]]}
-                ansDataJSON = answersJSON.data;
-                table2JSON();
+            //Loads Newbie answers XML
+            xhttp_answers.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200) {
+                    //XML object
+                    var xmlAnswers = this.responseXML;
+                    answersJSON = xmlToJson(xmlAnswers);
+                    //JSON document{[documents array[fields]]}
+                    ansDataJSON = answersJSON.data;
+                    table2JSON();
+                }
+            };
+            xhttp_answers.open("GET", "newbie_Answers.xml?p="+String(Math.random()));
+            xhttp_answers.send();
+        }
 
                 $(':input').change(function (event) {
                     table2JSON();
@@ -387,6 +360,7 @@ $data = file_get_contents('php://input')
                     //valid document ID
                     var docID = formJSON.document;
                     var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+
                     if (jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
                         answerValue = ''
                     }
@@ -400,7 +374,12 @@ $data = file_get_contents('php://input')
                     if(targetID == 'author'){
                         answerValue = ansDataJSON.document[docID][IDProperty]['name']['#text'];
                         if(answerValue.toLowerCase() == targetValue.toLowerCase()){
-                            $("#aDeclerin").remove();
+                            for(target = 0; target < formJSON.data.length; target++) {
+                                if(formJSON.data[target].id == targetID) {
+                                    var targetIndex = target
+                                }
+                            }
+                            $("span[name = aDeclerin"+ targetIndex +"]").remove();
                             $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                         }
 
@@ -409,19 +388,19 @@ $data = file_get_contents('php://input')
                     }
                     else{
                         if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                            $("#aDeclerin").remove();
+                            for(target = 0; target < formJSON.data.length; target++) {
+                                if(formJSON.data[target].id == targetID) {
+                                    var targetIndex = target
+                                }
+                            }
+                            $("span[name = aDeclerin"+ targetIndex +"]").remove();
                             $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                         }
 
                         else
                             $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
                     }
-                })
-            }
-        };
-        xhttp_answers.open("GET", "newbie_Answers.xml?p="+String(Math.random()));
-        xhttp_answers.send();
-
+                });
 
         //Disables the labels' description marks
         if ("<?php echo $type?>" == "inter") {
@@ -503,30 +482,59 @@ $data = file_get_contents('php://input')
             //Creates an empty property array
             formJSON["data"] = [];
 
-            for (var i = 0; i < accountInputsCol1.length; i++) {
-                if ($("#" + accountInputsCol1[i].children[1].id).is(':radio'))
-                    accountJSON(formJSON, accountInputsCol1[i].children[1].id, $("#" + accountInputsCol1[i].children[1].id + ":checked").val());
-                else if(accountInputsCol1[i].id == 'startDateCell'){
-                    for(var d = 1; d < 4; d++) {
-                        accountJSON(formJSON, accountInputsCol1[i].children[d].id, accountInputsCol1[i].children[d].value)
-                    }
-                }
-                else if(accountInputsCol1[i].id == 'endDateCell'){
-                    for(var d = 1; d < 4; d++) {
-                        accountJSON(formJSON, accountInputsCol1[i].children[d].id, accountInputsCol1[i].children[d].value)
-                    }
-                }
-                else if(accountInputsCol1[i].id == 'authorCell'){
-                    accountJSON(formJSON, accountInputsCol1[i].children[1].id, accountInputsCol1[i].children[1].value);
-                }
-                else
-                    accountJSON(formJSON, accountInputsCol1[i].children[1].id, accountInputsCol1[i].children[1].value);
-            }
+        /****** LEFT COLUMN ******/
+        //For every element in the Left column
 
-            for (var i = 0; i < accountInputsCol2.length - 1; i++) {
-                accountJSON(formJSON, accountInputsCol2[i].children[1].id, accountInputsCol2[i].children[1].value);
+        $.each(accountInputsCol1, function (index, element) {
+            if (element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(input)")[0];
+                var selectDivs = $("#" + element.id + ":has(select)")[0];
+                var selectList = $("#" + element.id + "> select");
+                if(inputDivs !== undefined) {
+                    var inputId = $("#" + inputDivs.id + " > input")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > input")[0].value;
+                    if($("#"+inputId).is(":radio"))
+                        structureJSON(formJSON, inputId,$("#" + inputId + ":checked").val());
+                    else
+                        structureJSON(formJSON, inputId, inputVal);
+                }
+                //Detects the select elements and loops through the three day input drop downs to retrieve their
+                //elements ids and values.
+                else if(selectDivs !== undefined){
+                    for(var s = 0; s < selectList.length; s++) {
+                        var selectId = selectList[s].id;
+                        var selectVal = selectList[s].value;
+                        structureJSON(formJSON, selectId, selectVal)
+                    }
+                }
             }
-        }
+        });
+
+        /****** RIGHT COLUMN ******/
+        //For every element in the Right column
+        $.each(accountInputsCol2, function (index, element) {
+            if (element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(textarea)")[0];
+                if(inputDivs !== undefined){
+                    var inputId = $("#" + inputDivs.id + " > textarea")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > textarea")[0].value;
+                    structureJSON(formJSON, inputId, inputVal);
+                }
+            }
+        });
+    }
+
+    /**********************************************
+     *Function: structureJSON
+     *Description: Creates a property structure of ids and values for a JSON object
+     * Parameter(string): json (object) JSON object to which the properties will be stored
+     * elemID (string) Input element id of the field
+     * value (string) Value of the Element id input
+     * Return value(string): None
+     ***********************************************/
+    function structureJSON(json, elemID, value) {
+        json["data"].push({ "id":elemID, "value":value});
+    }
 
         /**********************************************
          * Function: add_fields
@@ -536,19 +544,20 @@ $data = file_get_contents('php://input')
          * Return value(s): None
          ***********************************************/
         var max = 5;
-        var author_count = 0;
+        var authorCount = 0;
 
         function add_fields(length, val) {
             if (val == null)
                 val = "";
-            if (author_count >= max)
+            if (authorCount >= max)
                 return false;
-            $('#author' + (length - 1)).after('' +
-                '<div class="authorsCell" id="author' + length + '" style="margin: 1% 0% 0% -1.5%">' +
+            var authorIndex = length+1;
+            $("#author" + length ).after('' +
+                '<div class="authorsCell" class="txtAuthor" id="author' + authorIndex + '" style="margin: 1% 0% 0% -1.5%">' +
                 '<span class="label">Document Author: </span>' +
                 '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
                 '</div>')
-            author_count++;
+            authorCount++;
         }
 
         /**********************************************
@@ -559,11 +568,11 @@ $data = file_get_contents('php://input')
          ***********************************************/
         function remove_fields(length) {
             //This will prevent for the function to delete all the authors' cells
-            if (length < 2)
+            if (length < 1)
                 return false;
             //Removes the las childrend of the authorsCell class
             $('.authorsCell').last().remove();
-            author_count--;
+            authorCount--;
         }
 
 
@@ -626,12 +635,45 @@ $data = file_get_contents('php://input')
                     //If answer author name is equal to the input author name
                     if(ansID == 'author'){
                         if(value.toLowerCase() == ansVal.name['#text'].toLowerCase()){
+                            //False for errors
                             e = false;
                             comparisonArray.push([e, value, ansVal.name['#text']])
                         }
                         else{
                             e = true;
                             comparisonArray.push([e, value, ansVal.name['#text']]);
+                        }
+                    }
+                    else if(ansID == 'startday' || ansID == 'startmonth' || ansID == 'startyear'){
+                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
+                            e = false;
+                            comparisonArray.push([e, value, ansVal['#text']]);
+                        }
+                        else {
+                            //True for errors
+                            e = true;
+                            var DocAnswers = ansDataJSON.document[formJSON.document];
+                            var day = DocAnswers['startday']['#text'];
+                            var month = DocAnswers['startmonth']['#text'];
+                            var year = DocAnswers['startyear']['#text'];
+                            var date = month + '/' + day + '/' + year;
+                            comparisonArray.push([e, value, date]);
+                        }
+                    }
+                    else if(ansID == 'endday' || ansID == 'endmonth' || ansID == 'endyear'){
+                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
+                            e = false;
+                            comparisonArray.push([e, value, ansVal['#text']]);
+                        }
+                        else {
+                            //True for errors
+                            e = true;
+                            var DocAnswers = ansDataJSON.document[formJSON.document];
+                            var day = DocAnswers['endday']['#text'];
+                            var month = DocAnswers['endmonth']['#text'];
+                            var year = DocAnswers['endyear']['#text'];
+                            var date = month + '/' + day + '/' + year;
+                            comparisonArray.push([e, value, date]);
                         }
                     }
                     else{
@@ -654,32 +696,45 @@ $data = file_get_contents('php://input')
         formArray = [];
         //Authors Array
         authorArray = [];
+    //No errors while submiting
+        var submitErrors = 0;
+        var errorsCorrection = 0;
+      //Submit function that will convert the input form into a JSON
+      $("#form").on("submit", function (e) {
+          if(errorsCorrection > 0){
+              submitErrors = 0;
+              $("span[name = 'aDeclerin']").remove();
+          }
+          e.preventDefault();
+          table2JSON();
+          //Default no error values
+          if('<?php echo $type ?>' == 'newbie'){
+              error = false;
+              formErrors = [];
 
-        //Submit function that will convert the input form and author array into a single JSON
-        $("#form").on("submit", function (e) {
-            e.preventDefault();
+              for(var d = 0; d < formJSON.data.length; d++){
+                  //User input id
+                  var formJSONID = formJSON.data[d].id;
+                  //User input value
+                  var formJSONValue = formJSON.data[d].value;
+                  //Compares User and Answer values
+                  error = dataComparison(formJSONID, formJSONValue);
+                  formErrors.push(error);
 
-            error = false;
-
-          for(var d = 0; d < formJSON.data.length; d++){
-              //User input id
-              var formJSONID = formJSON.data[d].id;
-              //User input value
-              var formJSONValue = formJSON.data[d].value;
-              //Compares User and Answer values
-              error = dataComparison(formJSONID, formJSONValue);
-              //If error, the user and answer values are different on submit the submission is stopped an the input
-              //element's outline is highlighted with a orange color
-              for(var er = 0; er < error.length; er++) {
-                  if(error[er][0]){
-                      $("#aDeclerin").remove();
-                      alert("There is an error");
+                  //If error, the user and answer values are different on submit the submission is stopped an the input
+                  //element's outline is highlighted with a orange color
+                  if(formErrors[d][0][0]){
+                      submitErrors = 1;
                       $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                       var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      console.log($("#" + String(formJSONID)).parent());
-                      $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
-                      return
+                      var correctValue = error[0][2];
+                      $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="position: relative; width: 50%;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
                   }
+              }
+              if(submitErrors == 1) {
+                  alert('There is an error');
+                  errorsCorrection += 1;
+                  return
               }
           }
 

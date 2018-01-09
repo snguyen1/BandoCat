@@ -98,52 +98,51 @@ foreach ($file->document as $a) {
                         <td id="col1">
                             <!-- LIBRARY INDEX -->
                             <div class="cell" id="indexCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="This field is automatically created by the file name; each value is unique and does not need to be changed.">
                                     <mark class="label">
                                         <span style = "color:red;"> * </span>
                                         Library Index:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Library Index: </strong>This field is automatically created by the file name; each value is unique and does not need to be changed.<br><i>Example: </i><?php echo $doc1->libraryindex; ?>
-                                    </p>
                                 </span>
                                 <input type = "text" name = "txtLibraryIndex" id = "libraryindex" size="26" value='<?php echo $doc1->libraryindex; ?>' required />
                             </div>
                             <!-- COLLECTION -->
                             <div class="cell" id="collectionCell">
-                                <span class="labelradio"><mark class="label"><span style = "color:red;"> * </span>Collection: </mark><p hidden><b></b><strong>Document collection: </strong>This should always be entered as “Blucher”, unless otherwise specified.</p></span>
+                                <span class="labelradio" title="This should always be entered as “Blucher”, unless told otherwise"><mark class="label"><span style = "color:red;"> * </span>Collection: </mark></span>
                                 <input type = "text" name = "txtBookcollection" id = "bookcollection" size="26" required="true" value='<?php echo $doc1->bookcollection; ?>' />
                             </div>
                             <!-- BOOKTITLE -->
                             <div class="cell" id="booktitleCell">
-                                <span class="labelradio"><mark class="label">Book Title: </mark><p hidden><b></b><strong>Book Title: </strong>This field is automatically created by the file name, this value should not be changed.</p></span>
+                                <span class="labelradio" title="This field is automatically created by the file name, this value should not be changed.">
+                                    <mark class="label">Book Title: </mark></span>
                                 <input type = "text" name = "txtBooktitle" id = "booktitle" size="26" value='<?php echo $doc1->booktitle; ?>' />
                             </div>
                             <!-- JOB NUMBER -->
                             <div class="cell" id="jobnumberCell">
-                                <span class="labelradio"><mark class="label">Job Number: </mark><p hidden><b></b><strong>Job Number: </strong>This value can usually be seen on the first page for a specific job in the field book. This number will usually be in the top right corner following the letter “J”, and can usually be found near the job title. Most jobs should have these, however it is not rare for a job number to be missing. An example would be “J-4237”. Only include the numbered value, not the “J”. Some jobs may contain more than one job number, include them all separated by commas.</p></span>
+                                <span class="labelradio" title="This value can usually be seen on the first page for a specific job in the field book. This number will usually be in the top right corner following the letter “J”, and can usually be found near the job title. Most jobs should have these, however it is not rare for a job number to be missing. An example would be “J-4237”. Only include the numbered value, not the “J”. Some jobs may contain more than one job number, include them all separated by commas.">
+                                    <mark class="label">Job Number: </mark></span>
                                 <input type = "text" name = "txtJobnumber" id = "jobnumber" size="26" value='<?php echo $doc1->jobnumber; ?>' />
                             </div>
 
                             <!-- JOB TTITLE -->
                             <div class="cell" id="jobtitleCell">
-                                <span class="labelradio"><mark class="label">Job Title: </mark><p hidden><b></b><strong>Job Title: </strong> This is the main header at the top of the page for each job listed in the field book. Each job title should be listed as well in the index. Although they can occasionally be lengthy, include the full job title; the more detail the better.</p></span>
+                                <span class="labelradio" title="This is the main header at the top of the page for each job listed in the field book. Each job title should be listed as well in the index. Although they can occasionally be lengthy, include the full job title; the more detail the better.">
+                                    <mark class="label">Job Title: </mark></span>
                                 <input type = "text" name = "txtJobtitle" id = "jobtitle" size="26" value='<?php echo $doc1->jobtitle; ?>' />
                             </div>
 
                             <!-- INDEXED PAGE -->
                             <div class="cell" id="indexedpageCell">
-                                <span class="labelradio"><mark class="label">Indexed Page: </mark><p hidden><b></b><strong>Indexed Page: </strong>This is the page number that is written in the top corner of the page. Odd numbers are usually not written out in the field book, however it is implied that these pages are still numbered. Pages on the left side are generally numbered evenly, and pages on the right side are odd. </p></span>
+                                <span class="labelradio" title="This is the page number that is written in the top corner of the page. Odd numbers are usually not written out in the field book, however it is implied that these pages are still numbered. Pages on the left side are generally numbered evenly, and pages on the right side are odd.">
+                                    <mark class="label">Indexed Page: </mark></span>
                                 <input type = "text" name = "txtIndexedpage" id = "indexedpage" size="26" value='<?php echo $doc1->indexedpage; ?>' />
                             </div>
 
 
                             <!-- BLANK PAGE -->
                             <div class="cell" id="blankpageCell">
-                                <span class="labelradio" >
+                                <span class="labelradio" title="If the page is COMPLETELY (except for the page number) blank, then it is a blank page. If there is any writing on the page (except for the page number), it is not blank.">
                                 <mark>Blank Page: </mark>
-                                <p hidden><b></b><strong>Blank Page: </strong>If the page is COMPLETELY (except for the page number) blank, then it is a blank page. If there is any writing on the page (except for the page number), it is not blank. </p>
                                 </span>
                                 <input type = "radio" name = "rbBlankpage" id = "blankpage" size="26" value="1" <?php if($doc1->blankpage == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbBlankpage" id = "blankpage" size="26" value="0" <?php if($doc1->blankpage == 0) echo "checked"; ?>  />No
@@ -151,9 +150,8 @@ foreach ($file->document as $a) {
 
                             <!-- SKETCH -->
                             <div class="cell" id="sketchCell">
-                                <span class="labelradio" >
+                                <span class="labelradio" title="If there is a drawing or a map present on the page, then it is considered a sketch. In some cases, the surveyor may draw an angle or lines which may not represent a sketch. Use your best judgment to determine if it is a sketch of the jobsite or something else.">
                                 <mark>Sketch: </mark>
-                                    <p hidden><b></b><strong>Sketch: </strong>If there is a drawing or a map present on the page, then it is considered a sketch. In some cases, the surveyor may draw an angle or lines which may not represent a sketch. Use your best judgment to determine if it is a sketch of the jobsite or something else.</p>
                                 </span>
                                 <input type = "radio" name = "rbSketch" id = "sketch" size="26" value="1" <?php if($doc1->sketch == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbSketch" id = "sketch" size="26" value="0" <?php if($doc1->sketch == 0) echo "checked"; ?>  />No
@@ -161,9 +159,8 @@ foreach ($file->document as $a) {
 
                             <!-- LOOSE DOCUMENT -->
                             <div class="cell" id="loosedocumentCell">
-                                <span class="labelradio" >
+                                <span class="labelradio" title="Indicate this page as a loose document if there is any file or document that is loose/stapled/glued to the pages. A loose document is not part of the original field book. They can often be found in between the pages, examples include receipts, attached drawings, invoices, etc.">
                                 <mark>Loose Document: </mark>
-                                <p hidden><b></b><strong>Loose Document: </strong>Indicate this page as a loose document if there is any file or document that is loose/stapled/glued to the pages. A loose document is not part of the original field book. They can often be found in between the pages, examples include receipts, attached drawings, invoices, etc.</p>
                                 </span>
                                 <input type = "radio" name = "rbLoosedocument" id = "loosedocument" size="26" value="1" <?php if($doc1->loosedocument == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbLoosedocument" id = "loosedocument" size="26" value="0" <?php if($doc1->loosedocument == 0) echo "checked"; ?>  />No
@@ -172,28 +169,24 @@ foreach ($file->document as $a) {
 
                             <!-- NEEDS REVIEW -->
                             <div class="cell" id="needsreviewCell">
-                                <span class="labelradio" >
+                                <span class="labelradio" title="Don’t change this, it should remain marked as “yes”.">
                                 <mark>Needs Review: </mark>
-                                <p hidden><b></b><strong>Needs Review: </strong>This is to signal if a review is needed, and always keep selection as yes</p>
                                 </span>
                                 <input type = "radio" name = "rbNeedsreview" id = "needsreview" size="26" value="1" <?php if($doc1->needsreview == 1) echo "checked"; ?> />Yes
                                 <input type = "radio" name = "rbNeedsreview" id = "needsreview" size="26" value="0" <?php if($doc1->needsreview == 0) echo "checked"; ?>  />No
                             </div>
 
                             <!-- FIELD BOOK AUTHOR -->
-                            <div class="cell" id="authorCell">
-                                <span class="labelradio"><mark class="label">Field Book Author: </mark><p hidden><b></b><strong>Field Book Author: </strong>This is a field that is very rarely used. Older field books had a field book author indicated towards the front of the book. Do not enter any names in this field unless the book specifically states there is a field book author.</p></span>
+                            <div class="cell" id="authorCell" title="This is a field that is very rarely used. Older field books had a field book author indicated towards the front of the book. Do not enter any names in this field unless the book specifically states there is a field book author.">
+                                <span class="labelradio"><mark class="label">Field Book Author: </mark></span>
                                 <input type = "text" name = "txtAuthor" id = "author" size="26" value='<?php echo $doc1->author; ?>' />
                             </div>
 
                             <!-- FIELD CREW MEMBER: -->
                             <div class="cell" id="crewCell">
                                 <div class="crewMemberClass" id="crewMemberId0" style="width: 115%">
-                                    <span class="labelradio">
+                                    <span class="labelradio" title="The names for the field crew members will almost always be found on the odd numbered pages in the top left corner. List each and every field crew member on each page for that specific job. If their names are abbreviated, an index of field crew members can almost always be found at the very beginning of the field book. Field crew members can change throughout the job, enter each field crew member on every page. The maximum amount of field crew members that can be entered for the training is five, however the average is usually around four. For example, if a job is twenty pages and you see John Carter on only one page and he is absent from the rest, his name must be included on every page for the field crew members.">
                                         <mark class="label">Field Book Crew: </mark>
-                                        <p hidden><b></b>
-                                            <strong>Field Book Crew: </strong>TThe names for the field crew members will almost always be found on the odd numbered pages in the top left corner. List each and every field crew member on each page for that specific job. If their names are abbreviated, an index of field crew members can almost always be found at the very beginning of the field book. Field crew members can change throughout the job, enter each field crew member on every page. The maximum amount of field crew members that can be entered for the training is five, however the average is usually around four. For example, if a job is twenty pages and you see John Carter on only one page and he is absent from the rest, his name must be included on every page for the field crew members.
-                                        </p>
                                     </span>
                                         <input type = "text" name = "txtCrewmember" id = "crewmember" class="crewmember0" size="26" value='<?php echo $doc1->crewmember->name[0];?>' />
                                         <input type="button" id="more_fields" onclick="add_fields($('.crewMemberClass').length, null);" value="+"/>
@@ -213,14 +206,10 @@ foreach ($file->document as $a) {
 
                             <!-- GET START DDL MONTH -->
                             <div class="cell" id="startDateCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="The dates for jobs can almost always be found to the right of the field crew members on the odd numbered pages. Put to the earliest date for the job in the start date, and the last date you find as the end date. If only one date is listed, enter the date as the end date and leave the start date fields empty. Theses dates should be on every page for the specific job.">
                                     <mark class="label">
                                         Document Start Date:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Document Start Date: </strong>The earliest date on the document- as it pertains to the creation of that document.</br><i>*If there is one date on the document, only fill out the Document End Date boxes.</i>
-                                    </p>
                                 </span>
                                 <select name="ddlStartMonth" id="startmonth" style="width:60px">
                                     <?php $Render->GET_DDL_MONTH($doc1->startmonth); ?>
@@ -238,14 +227,10 @@ foreach ($file->document as $a) {
                             </div>
                             <!-- GET END DDL MONTH -->
                             <div class="cell" id="endDateCell">
-                                <span class="labelradio">
+                                <span class="labelradio" title="The dates for jobs can almost always be found to the right of the field crew members on the odd numbered pages. Put to the earliest date for the job in the start date, and the last date you find as the end date. If only one date is listed, enter the date as the end date and leave the start date fields empty. Theses dates should be on every page for the specific job.">
                                     <mark class="label">
                                         Document End Date:
                                     </mark>
-                                    <p hidden>
-                                        <b></b>
-                                        <strong>Document End Date: </strong>The latest date on the document- as it pertains to the creation of that document.
-                                    </p>
                                 </span>
                                 <select name="ddlEndMonth" id="endmonth" style="width:60px">
                                     <?php $Render->GET_DDL_MONTH($doc1->endmonth); ?>
@@ -263,10 +248,8 @@ foreach ($file->document as $a) {
 
                             <!-- COMMENTS -->
                             <div class="cell" id="commentsCell">
-                                <span class="labelradio"><mark class="label">Comments: </mark><p hidden><b></b><strong>Document Title: </strong>1. The client for the job. After the job title, there is usually a following line that says “For John Doe”, include this line in the comments.
-                                2. Include all field books, pages, and maps that are referenced on the job title page. Often you will see something such as “B 309 P 42”, or “map 4R-87” on this page. Include these values in the comments, as this job may share similarities to another in a different field book or map.
-                                3. The front cover, indices, and back cover should simply be indicated as so in the comments. Just insert “Front cover”, “Index”, and “Back cover” in the comments when needed.
-                                </p></span>
+                                <span class="labelradio" title="There are a few things you will often want to include in the comments. These things include: 1. The client for the job. After the job title, there is usually a following line that says “For John Doe”, include this line in the comments.               2. Include all field books, pages, and maps that are referenced on the job title page. Often you will see something such as “B 309 P 42”, or “map 4R-87” on this page. Include these values in the comments, as this job may share similarities to another in a different field book or map. 3. The front cover, indices, and back cover should simply be indicated as so in the comments. Just insert “Front cover”, “Index”, and “Back cover” in the comments when needed. Other Notes: Towards the end of field books, pages may no longer be numbered. In this case do not enter a value for the indexed page as there is none. There will also probably be a section of mathematical tables, charts, and graphs near the end of the field book. There is no need to include any of this information in the comments, or change anything on the catalog page. Simply change the Collection to “Blucher” and hit “Update”.">
+                                    <mark class="label">Comments: </mark></span>
                                 <textarea cols="25" name = "txtComments" id = "comments" /><?php echo $doc1->comments; ?></textarea>
                             </div>
 
@@ -342,76 +325,70 @@ $data = file_get_contents('php://input')
                     //JSON document{[documents array[fields]]}
                     ansDataJSON = answersJSON.data;
                     table2JSON();
-
-                    $('form').on('change', ['input', 'textarea'],function (event) {
-                        //On change the table data is stored to the formJSON object
-                        table2JSON();
-                        //Document ID
-                        var docID = formJSON.document;
-                        //Target element ID
-                        var targetID = event.originalEvent.target.id;
-                        //Target element Class
-                        var targetClass = event.originalEvent.target.className;
-                        //Target element value
-                        var targetValue = event.target.value;
-                        //Target element ID converted into a json object to be used as an object property
-                        var IDProperty = JSON.parse(JSON.stringify(targetID));
-
-
-                        //Answer JSON element
-                        var answerElement = ansDataJSON.document[docID][IDProperty];
-                        //Flag that dictates if the Answer JSON element has a property called name because crewmember
-                        //contains different names
-                        var nameFlag = answerElement.hasOwnProperty('name');
-                        //If the Answer JSON element has a property called name a crewJSON object is initiated
-                        if(nameFlag){
-                            var crewJSON = {};
-                            for(var nm = 0; nm < answerElement.name.length; nm++){
-                                crewJSON["crewmember" + String(nm)]=answerElement.name[nm]["#text"];
-                            }
-                        }
-
-                        else
-                            var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
-
-                        //If the Answer JSON element value is empty an empty string value is given
-                        if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
-                            answerValue = ''
-                        }
-
-                        var crewType = typeof crewJSON;
-                        switch (crewType){
-                            case 'object':
-                                $.each(crewJSON, function (crewClass) {
-                                    if(crewClass == targetClass){
-                                        var crewProperty = JSON.parse(JSON.stringify(crewClass));
-                                        if(crewJSON[crewProperty].toLowerCase() == targetValue.toLowerCase()) {
-                                            $("#aDeclerin").remove();
-                                            $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
-                                            return
-                                        }
-                                    else
-                                        $("." + String(targetClass)).css('outline', 'red').css('outline-style', 'solid');
-                                    }
-                                });
-                                break;
-                            case 'undefined':
-                                if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                                    $("#aDeclerin").remove();
-                                    $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
-                                }
-
-                                else{
-                                    $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
-                                }
-                                break;
-                        }
-                    })
                 }
             };
             xhttp_answers.open("GET", "newbie_Answers.xml");
             xhttp_answers.send();
         }
+
+        $('form').on('change', ['input', 'textarea'], function (event) {
+            //On change the table data is stored to the formJSON object
+            table2JSON();
+            //Document ID
+            var docID = formJSON.document;
+            //Target element ID
+            var targetID = event.originalEvent.target.id;
+            //Target element value
+            var targetValue = event.target.value;
+            //Taget element class
+            var targetClass = event.originalEvent.target.className;
+            //Target element ID converted into a json object to be used as an object property
+            var IDProperty = JSON.parse(JSON.stringify(targetID));
+            //Answer JSON element
+            var answerElement = ansDataJSON.document[docID][IDProperty];
+            //Answer element value
+            var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+
+            if(targetID !== 'crewmember'){
+                //Removes wrong decleration answer style
+                if(jQuery.isEmptyObject(answerElement))
+                    answerValue = '';
+                if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                    var targetAttribute = event.originalEvent.srcElement.parentNode.nextSibling.attributes[1].nodeValue;
+                    $("span[name = "+ targetAttribute +"]").remove();
+                    $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                    return
+                }
+                //Includes correct declaration style
+                else
+                    $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
+            }
+
+            else{
+                //If the Answer JSON element has a property called name a crewJSON object is initiated
+                var nameFlagComp = answerElement.hasOwnProperty('name');
+                if(nameFlagComp){
+                    if(jQuery.isEmptyObject(answerElement.name)){
+                        answerValue = '';
+                    }
+                    else {
+                        targetValue = $("." + targetClass)[0].value;
+                        var crewIndex = parseInt(targetClass.match(/\d+/), 10);
+                        answerValue = ansDataJSON.document[docID]['crewmember']['name'][crewIndex]['#text'];
+                    }
+                    if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                        //Removes wrong decleration answer style
+                        var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].value;
+                        $("span[name = "+ targetAttribute +"]").remove();
+                        $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                    }
+                    //Includes correct declaration style
+                    else {
+                        $("." + String(targetClass)).css('outline', 'red').css('outline-style', 'solid');
+                    }
+                }
+            }
+        });
 
 
 
@@ -488,46 +465,54 @@ $data = file_get_contents('php://input')
         /****** LEFT COLUMN ******/
         //For every element in the Left column
         $.each(accountInputsCol1, function (index, element) {
-            if(element.id == "crewCell") {
-                for(var j = 0; j < element.children.length;j++){
-                    //If a field crew input is not undefined its value is stored into an array that is then posted as
-                    //into the formJSON object
-                    if(typeof element.children[j].children['crewmember'] !== "undefined") {
-                        crewTableArray.push(element.children[j].children['crewmember'].value)
-                    }
+            if(element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(input)")[0];
+                if(inputDivs !== undefined && element.id !== "crewCell") {
+                    var inputId = $("#" + inputDivs.id + " > input")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > input")[0].value;
+                        if($("#"+inputId).is(':radio'))
+                            structureJSON(formJSON, inputId,$("#" + inputId + ":checked").val());
+                        //Otherwise if not a radio nor a field crew element the input value is stored into the formJSON object
+                        else
+                            structureJSON(formJSON, inputId,inputVal);
                 }
-                structureJSON(formJSON, 'crewmember', crewTableArray)
+                else if(element.id == "crewCell") {
+                    for(var j = 0; j < element.children.length;j++){
+                        //If a field crew input is not undefined its value is stored into an array that is then posted as
+                        //into the formJSON object
+                        if(typeof element.children[j].children['crewmember'] !== "undefined") {
+                            crewTableArray.push(element.children[j].children['crewmember'].value)
+                        }
+                    }
+                    structureJSON(formJSON, "crewmember", crewTableArray)
+                }
             }
-            else{
-                if($("#"+element.children[1].id).is(':radio'))
-                    structureJSON(formJSON, element.children[1].id,$("#" + element.children[1].id + ":checked").val());
-                //Otherwise if not a radio nor a field crew element the input value is stored into the formJSON object
-                else
-                    structureJSON(formJSON, element.children[1].id,element.children[1].value);
-
-            }
-
         });
 
         /****** RIGHT COLUMN ******/
         //For every element in the Right column
-        for(var i = 0; i < accountInputsCol2.length-1; i++) {
-            //Detects the startDateCell div id and loops through the three day input drop downs to retrieve their
-            //elements ids and values.
-            if(accountInputsCol2[i].id == 'startDateCell'){
-                for(var d = 2; d < 4; d++)
-                    structureJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
-            }
+        $.each(accountInputsCol2, function (index, element) {
+            if (element.id !== "") {
+                var inputDivs = $("#" + element.id + ":has(input)")[0];
+                var selectDivs = $("#" + element.id + ":has(select)")[0];
+                var selectList = $("#" + element.id + "> select");
 
-            //Detects if the element has a endDateCell id and loops through the next two end days to retrieve their
-            //elements ids and values.
-            else if(accountInputsCol2[i].id == 'endDateCell') {
-                for(var d = 2; d < 4; d++)
-                    structureJSON(formJSON, accountInputsCol2[i].children[d].id, accountInputsCol2[i].children[d].value);
+                if(inputDivs !== undefined){
+                    var inputId = $("#" + inputDivs.id + " > :input")[0].id;
+                    var inputVal = $("#" + inputDivs.id + " > :input")[0].value;
+                    structureJSON(formJSON, inputId, inputVal);
+                }
+                //Detects the select elements and loops through the three day input drop downs to retrieve their
+                //elements ids and values.
+                else if(selectDivs !== undefined){
+                    for(var s = 0; s < selectList.length; s++) {
+                        var selectId = selectList[s].id;
+                        var selectVal = selectList[s].value;
+                        structureJSON(formJSON, selectId, selectVal)
+                    }
+                }
             }
-            //If not a date element, the elements values are stored into the formJSON
-            structureJSON(formJSON, accountInputsCol2[i].children[1].id,accountInputsCol2[i].children[1].value);
-        }
+        });
     }
 
     /**********************************************
@@ -597,85 +582,107 @@ $data = file_get_contents('php://input')
                 var idProperty = JSON.parse(JSON.stringify(ansID));
                 //if the JSON property contains an empty object an empty string value is given to the property, thus to
                 //compare it with an empty user input.
-                if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty])){
-                    ansDataJSON.document[formJSON.document][idProperty]['#text'] = ''
-                }
-                var nameFlagComp = ansDataJSON.document[formJSON.document][idProperty].hasOwnProperty('name');
-                if(nameFlagComp){
-                    if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]['name'])){
-                        ansDataJSON.document[formJSON.document][idProperty]['name'] = [];
-                        emptyName = {};
-                        emptyName['#text'] = '';
-                        ansDataJSON.document[formJSON.document][idProperty]['name'].push(emptyName)
+
+                if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]))
+                    ansVal = '';
+                else
+                    ansVal = ansDataJSON.document[formJSON.document][idProperty]['#text'];
+
+                if(id !== 'crewmember'){
+                    //User's values and answer values are compared
+                    if(value.toLowerCase() == ansVal.toLowerCase()){
+                        //Returns false for errors
+                        e = false;
+                        comparisonArray.push([e, id, ansVal])
+                    }
+                    else if(ansID == 'startday' || ansID == 'startmonth' || ansID == 'startyear'){
+                        if (value.toLowerCase() == ansVal.toLowerCase()) {
+                            e = false;
+                            comparisonArray.push([e, id, ansVal]);
+                        }
+                        else {
+                            //True for errors
+                            e = true;
+                            var DocAnswers = ansDataJSON.document[formJSON.document];
+                            var day = DocAnswers['startday']['#text'];
+                            var month = DocAnswers['startmonth']['#text'];
+                            var year = DocAnswers['startyear']['#text'];
+                            if(day == '00' || month == '00' || year == '0000'){
+                                day = 'day';
+                                month = 'month';
+                                year = 'year'
+                            }
+                            var date = month + '/' + day + '/' + year;
+                            comparisonArray.push([e, id, date]);
+                        }
+                    }
+                    else if(ansID == 'endday' || ansID == 'endmonth' || ansID == 'endyear'){
+                        if (value.toLowerCase() == ansVal.toLowerCase()) {
+                            e = false;
+                            comparisonArray.push([e, id, ansVal]);
+                        }
+                        else {
+                            //True for errors
+                            e = true;
+                            var DocAnswers = ansDataJSON.document[formJSON.document];
+                            var day = DocAnswers['endday']['#text'];
+                            var month = DocAnswers['endmonth']['#text'];
+                            var year = DocAnswers['endyear']['#text'];
+                            if(day == '00' || month == '00' || year == '0000'){
+                                day = 'day';
+                                month = 'month';
+                                year = 'year'
+                            }
+                            var date = month + '/' + day + '/' + year;
+
+                            comparisonArray.push([e, id, date]);
+                        }
+                    }
+                    else{
+                        //Returns true for errors
+                        e = true;
+                        if(ansVal == '')
+                            ansVal = 'No information required';
+                        comparisonArray.push([e, id, ansVal]);
                     }
                 }
 
-                //If the JSON property contains an empty object but it is a date element a proper value is given to its
-                //property
-                switch (id){
-                    case 'startday':
-                        if(value == '00')
-                        value = '';
-                        break;
-                    case 'startmonth':
-                        if(value == '00')
-                        value = '';
-                        break;
-                    case 'startyear':
-                        if(value == '0000')
-                        value = '';
-                        break;
-                    case 'endday':
-                        if(value == '00')
-                        value = '';
-                        break;
-                    case 'endmonth':
-                        if(value == '00')
-                        value = '';
-                        break;
-                    case 'endyear':
-                        if(value == '0000')
-                        value = '';
-                        break;
-                }
 
-                if(id == 'crewmember'){
+
+               else{
                     for(var v = 0; v < value.length; v++) {
+                        //Crew members'names array
+                         ansVal = ansDataJSON.document[formJSON.document][idProperty];
+
                         if(value.length == ansVal['name'].length){
                             //Validates the equality of answer value and input value
                             if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
                                 //Returns false for errors
                                 e = false;
-                                comparisonArray.push([e, value, ansVal['name'][v]['#text'], id])
+                                comparisonArray.push([e, id, ansVal['name'][v]['#text']])
                             }
                             else {
                                 //Returns true for errors
                                 e = true;
-                                comparisonArray.push([e, value, ansVal['name'][v]['#text'], id]);
+                                comparisonArray.push([e, id, ansVal['name'][v]['#text']]);
                             }
                         }
                         //Error if uneven amount of answer values and input values
                         else{
-                            comparisonArray.push([true, '', 'uneven amount of crew members', id])
+                            if(jQuery.isEmptyObject(ansVal['name'])){
+                                ansVal = '';
+                                if(value[v].toLowerCase() == ansVal.toLowerCase()){
+                                    //Returns false for errors
+                                    e = false;
+                                    comparisonArray.push([e, id, ansVal])
+                                }
+                                else {
+                                    //Returns true for errors
+                                    e = true;
+                                    comparisonArray.push([e, id, "No field crew member"]);
+                                }
+                            }
                         }
-                    }
-                }
-
-                else{
-                    if(id == 'crewmember') {
-                        e = true;
-                        comparisonArray.push([e, value, ansVal['#text']]);
-                    }
-                    //User and answer values are compared
-                    if(value.toLowerCase() == ansVal['#text'].toLowerCase()){
-                        //Returns false for errors
-                        e = false;
-                        comparisonArray.push([e, value, ansVal['#text']])
-                    }
-                    else{
-                        //Returns true for errors
-                        e = true;
-                        comparisonArray.push([e, value, ansVal['#text']]);
                     }
                 }
             }
@@ -685,14 +692,24 @@ $data = file_get_contents('php://input')
 
     //Input form array
     formArray = [];
+    //Crew members array
     crewArray = [];
+    //No errors wil submitting
+    var submitErrors = 0;
+    var errorsCorrection = 0;
       //Submit function that will convert the input form into a JSON
       $("#form").on("submit", function (e) {
+          if(errorsCorrection > 0){
+              submitErrors = 0;
+              $("span[name = 'aDeclerin']").remove();
+          }
           e.preventDefault();
           table2JSON();
           //Default no error values
           if('<?php echo $type ?>' == 'newbie'){
               error = false;
+              //Stores the errors from dataComparison function
+              formErrors = [];
 
               for(var d = 0; d < formJSON.data.length; d++){
                   //User input id
@@ -701,19 +718,34 @@ $data = file_get_contents('php://input')
                   var formJSONValue = formJSON.data[d].value;
                   //Compares User and Answer values
                   error = dataComparison(formJSONID, formJSONValue);
+                  formErrors.push(error);
+
                   //If error, the user and answer values are different on submit the submission is stopped an the input
                   //element's outline is highlighted with a orange color
-                  for(var er = 0; er < error.length; er++) {
-                      if(error[er][0]){
-                          $("#aDeclerin").remove();
-                          alert("There is an error");
-                          $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
-                          var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                          $('<span class="labelradio" id="aDeclerin" style="float: right; width: 10px;margin: -11% 0% 0% 0%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[er][2] + '</p></span>').insertAfter("#" + parentDeclerin);
-                          return
-                      }
-                  }
+                  $.each(formErrors[d], function (index, data) {
+                      if(data[0]){
+                          submitErrors = 1;
+                          if(data[1] !== "crewmember"){
+                              $("#" + data[1]).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                              var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
+                              var correctValue = data[2];
+                              $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
 
+                          }
+                          else {
+                              $("." + data[1] + index).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                              var parentDeclerin = $("." + data[1] + index);
+                              var correctValue = data[2];
+                              $('<span class="labelradio" name="aDeclerin'+ d +"-"+ index + '" style="width: 10px;margin: -4.5% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter(parentDeclerin).prop('title', correctValue);
+
+                          }
+                      }
+                  });
+              }
+              if(submitErrors == 1) {
+                  alert('There is an error');
+                  errorsCorrection += 1;
+                  return
               }
           }
 

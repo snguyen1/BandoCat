@@ -424,7 +424,7 @@ $data = file_get_contents('php://input')
                     table2JSON();
                 }
             };
-            xhttp_answers.open("GET", "newbie_Answers.xml");
+            xhttp_answers.open("GET", "newbie_Answers.xml?p="+String(Math.random()));
             xhttp_answers.send();
         }
 
@@ -441,6 +441,7 @@ $data = file_get_contents('php://input')
             }
 
             if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                //Gets the index input element from the formJSON object to remove the answer declaration icon by id
                 for(target = 0; target < formJSON.data.length; target++) {
                     if(formJSON.data[target].id == targetID) {
                         var targetIndex = target
@@ -686,7 +687,6 @@ $data = file_get_contents('php://input')
       $("#form").on("submit", function (e) {
           if(errorsCorrection > 0){
               submitErrors = 0;
-              console.log(formJSON.index);
               $("span[name = 'aDeclerin']").remove();
           }
           e.preventDefault();
@@ -711,7 +711,8 @@ $data = file_get_contents('php://input')
                       submitErrors = 1;
                       $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                       var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"><p hidden>' + error[0][2] + '</p></span>').insertAfter("#" + parentDeclerin);
+                      var correctValue = error[0][2];
+                      $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
                   }
               }
               if(submitErrors == 1) {
