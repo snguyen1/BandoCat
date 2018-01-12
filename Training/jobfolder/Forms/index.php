@@ -220,26 +220,21 @@ foreach ($file->document as $a) {
                             </div>
                             <!-- DOCUMENT AUTHOR -->
                             <div class="cell" id="authorCell">
-                                <span class="labelradio" title="Document Author: Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.">
-                                    <mark class="label">
-                                        Document Author:
-                                    </mark>
-                                </span>
-                                <input type="text" class="txtAuthor" id="author0" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
-                                <span style="padding-right:5px"></span>
-
-                                <input type="button" id="more_fields" onclick="add_fields($('.authorsCell').length, null)" value="+">
-                                <input type="button" id="less_fields" onclick="remove_fields($('.authorsCell').length)" value="-">
-
-
-
+                                <div class="authorClass" id="authorId0" style="width: 115%">
+                                    <span class="labelradio" title="Document Author: Who created the document. This can be found at the top of the document or at the end. However, if there are documents grouped together in sequence, with the author’s name on the last page, all the documents have the same author. If there are multiple authors, press the “+” to create more input boxes.">
+                                        <mark class="label">Document Author:</mark>
+                                    </span>
+                                    <input type="text" class="author0" id="author" name="txtAuthor[]" size="26" list="lstAuthor" value="<?php echo $doc1->author->name[0]?>"/>
+                                    <span style="padding-right:5px"></span>
+                                    <input type="button" id="more_fields" onclick="add_fields($('.authorClass').length, null)" value="+">
+                                    <input type="button" id="less_fields" onclick="remove_fields($('.authorClass').length)" value="-">
+                                </div>
                                 <?php $lenAuthors = count($doc1->author->name);
                                 for ($d = 1; $d < $lenAuthors; $d++) {
                                     echo '<div class="authorsCell" id="author'.$d.'" style="margin: 1% 0% 0% -1.5%"><span class="label">Document Author: </span>
                                     <input type="text" id="txtAuthor" name="txtAuthor[]" size="26" list="lstAuthor" value="'.$doc1->author->name[$d].'"/></div>';
                                 }
                                 ?>
-
                             </div>
                         </td>
 
@@ -353,53 +348,70 @@ $data = file_get_contents('php://input')
         }
 
                 $(':input').change(function (event) {
+                    //On change the table data is stored to the formJSON object
                     table2JSON();
-                    var targetID = event.currentTarget.id;
-                    var IDProperty = JSON.parse(JSON.stringify(targetID));
-                    var targetValue = event.target.value;
-                    //valid document ID
+                    //Document ID
                     var docID = formJSON.document;
-                    var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+                    //Target element ID
+                    var targetID = event.originalEvent.target.id;
+                    //Target element value
+                    var targetValue = event.target.value;
+                    //Taget element class
+                    var targetClass = event.originalEvent.target.className;
+                    //Target element ID converted into a json object to be used as an object property
+                    var IDProperty = JSON.parse(JSON.stringify(targetID));
+                    //Answer JSON element
+                    var answerElement = ansDataJSON.document[docID][IDProperty];
 
-                    if (jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
-                        answerValue = ''
-                    }
-                    if(IDProperty == 'author'){
-                        if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty]['name'])){
-                            answerValue = ''
-                        }
-                    }
 
-
-                    if(targetID == 'author'){
-                        answerValue = ansDataJSON.document[docID][IDProperty]['name']['#text'];
-                        if(answerValue.toLowerCase() == targetValue.toLowerCase()){
-                            for(target = 0; target < formJSON.data.length; target++) {
-                                if(formJSON.data[target].id == targetID) {
-                                    var targetIndex = target
-                                }
-                            }
-                            $("span[name = aDeclerin"+ targetIndex +"]").remove();
-                            $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
-                        }
-
-                        else
-                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
-                    }
-                    else{
+                    if(targetID !== 'author'){
+                        //Answer element value
+                        var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+                        //Removes wrong decleration answer style
+                        if(jQuery.isEmptyObject(answerElement))
+                            answerValue = '';
                         if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                            for(target = 0; target < formJSON.data.length; target++) {
-                                if(formJSON.data[target].id == targetID) {
-                                    var targetIndex = target
-                                }
+                            //If there is an answer declaration and the answer is correct the declaration will be removed
+                            if(event.originalEvent.srcElement.parentNode.nextSibling.attributes !== undefined) {
+                                var targetAttribute = event.originalEvent.srcElement.parentNode.nextSibling.attributes[1].nodeValue;
+                                $("span[name = "+ targetAttribute +"]").remove();
                             }
-                            $("span[name = aDeclerin"+ targetIndex +"]").remove();
+                            //Green outline blink
                             $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                            return
                         }
-
+                        //Wrong declaration outline style
                         else
-                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid')
+                            $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
                     }
+
+                    else{
+                        var nameFlagComp = answerElement.hasOwnProperty('name');
+                        if(nameFlagComp){
+                            if(jQuery.isEmptyObject(answerElement.name)){
+                                answerValue = '';
+                            }
+                            else {
+                                targetValue = $("." + targetClass)[0].value;
+                                /*var authorIndex = parseInt(targetClass.match(/\d+/), 10);*/
+                                answerValue = ansDataJSON.document[docID]['author']['name']['#text'];
+                            }
+                            if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
+                                //Removes wrong decleration answer style
+                                if(event.originalEvent.srcElement.nextSibling.attributes !== undefined) {
+                                    var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].nodeValue;
+                                    $("span[name = "+ targetAttribute +"]").remove();
+                                }
+                                $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
+                            }
+                            //Includes correct declaration style
+                            else {
+                                $("." + String(targetClass)).css('outline', 'red').css('outline-style', 'solid');
+                            }
+                        }
+                    }
+
+
                 });
 
         //Disables the labels' description marks
@@ -481,22 +493,31 @@ $data = file_get_contents('php://input')
             formJSON["document"]= '<?php echo $doc_id?>';
             //Creates an empty property array
             formJSON["data"] = [];
+            //Author's names array
+            var authorArray = [];
 
         /****** LEFT COLUMN ******/
         //For every element in the Left column
-
         $.each(accountInputsCol1, function (index, element) {
-            if (element.id !== "") {
+            if(element.id !== "") {
                 var inputDivs = $("#" + element.id + ":has(input)")[0];
+                var textAreaDivs = $("#" + element.id + ":has(textarea)")[0];
                 var selectDivs = $("#" + element.id + ":has(select)")[0];
                 var selectList = $("#" + element.id + "> select");
-                if(inputDivs !== undefined) {
+                if(textAreaDivs !== undefined){
+                    var inputId = $("#" + textAreaDivs.id ).children('textarea')[0].id;
+                    var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].textContent;
+                    structureJSON(formJSON, inputId, inputVal);
+                }
+                else if(inputDivs !== undefined && element.id !== "authorCell") {
                     var inputId = $("#" + inputDivs.id + " > input")[0].id;
                     var inputVal = $("#" + inputDivs.id + " > input")[0].value;
-                    if($("#"+inputId).is(":radio"))
+
+                    if($("#"+inputId).is(':radio'))
                         structureJSON(formJSON, inputId,$("#" + inputId + ":checked").val());
+                    //Otherwise if not a radio, nor select, nor text area the input value is stored into the formJSON object
                     else
-                        structureJSON(formJSON, inputId, inputVal);
+                        structureJSON(formJSON, inputId,inputVal);
                 }
                 //Detects the select elements and loops through the three day input drop downs to retrieve their
                 //elements ids and values.
@@ -507,6 +528,16 @@ $data = file_get_contents('php://input')
                         structureJSON(formJSON, selectId, selectVal)
                     }
                 }
+                else if(element.id == "authorCell"){
+                    for(var j = 0; j < element.children.length;j++){
+                        //If a field crew input is not undefined its value is stored into an array that is then posted as
+                        //into the formJSON object
+                        if(typeof element.children[j].children['author'] !== "undefined") {
+                            authorArray.push(element.children[j].children['author'].value)
+                        }
+                    }
+                    structureJSON(formJSON, "author", authorArray)
+                }
             }
         });
 
@@ -514,10 +545,11 @@ $data = file_get_contents('php://input')
         //For every element in the Right column
         $.each(accountInputsCol2, function (index, element) {
             if (element.id !== "") {
-                var inputDivs = $("#" + element.id + ":has(textarea)")[0];
-                if(inputDivs !== undefined){
-                    var inputId = $("#" + inputDivs.id + " > textarea")[0].id;
-                    var inputVal = $("#" + inputDivs.id + " > textarea")[0].value;
+                var textAreaDivs = $("#" + element.id + ":has(textarea)")[0];
+                if(textAreaDivs !== undefined){
+                    var inputId = $("#" + textAreaDivs.id ).children('textarea')[0].id;
+                    var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].value;
+                    console.log($("#" + textAreaDivs.id ).children('textarea')[0]);
                     structureJSON(formJSON, inputId, inputVal);
                 }
             }
@@ -551,12 +583,11 @@ $data = file_get_contents('php://input')
                 val = "";
             if (authorCount >= max)
                 return false;
-            var authorIndex = length+1;
-            $("#author" + length ).after('' +
-                '<div class="authorsCell" class="txtAuthor" id="author' + authorIndex + '" style="margin: 1% 0% 0% -1.5%">' +
-                '<span class="label">Document Author: </span>' +
-                '<input type = "text" name = "txtAuthor[]" autocomplete="off" class="txtAuthor" size="26" value="' + val + '" list="lstAuthor">' +
-                '</div>')
+            $('#authorId' + (length - 1)).after('' +
+                '<div class="authorClass" id="authorId' + length + '" style="margin-top: 2%">' +
+                '<span class="label" style="margin: 0% 16% 0% -2%">Document Author: </span>' +
+                '<input type = "text" name = "txtauthor[]" id = "author" class="author'+length+'" size="26" value="' + val + '" />' +
+                '</div>');
             authorCount++;
         }
 
@@ -568,10 +599,10 @@ $data = file_get_contents('php://input')
          ***********************************************/
         function remove_fields(length) {
             //This will prevent for the function to delete all the authors' cells
-            if (length < 1)
+            if (length < 2)
                 return false;
             //Removes the las childrend of the authorsCell class
-            $('.authorsCell').last().remove();
+            $('.authorClass').last().remove();
             authorCount--;
         }
 
@@ -597,14 +628,10 @@ $data = file_get_contents('php://input')
             $.each(ansDataJSON.document[formJSON.document], function (ansID, ansVal) {
                 if (id == ansID) {
                     var idProperty = JSON.parse(JSON.stringify(ansID));
-                    if (jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty])) {
-                        ansDataJSON.document[formJSON.document][idProperty]['#text'] = ''
-                    }
-                    if(idProperty == 'author'){
-                        if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]['name'])){
-                            ansDataJSON.document[formJSON.document][idProperty]['name']['#text'] = ''
-                        }
-                    }
+                    if (jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]))
+                        ansVal = '';
+                    else
+                        ansVal = ansVal['#text'];
 
                     switch (id) {
                         case 'startday':
@@ -632,58 +659,104 @@ $data = file_get_contents('php://input')
                                 value = '';
                             break;
                     }
-                    //If answer author name is equal to the input author name
-                    if(ansID == 'author'){
-                        if(value.toLowerCase() == ansVal.name['#text'].toLowerCase()){
-                            //False for errors
+
+                    if(id !== 'author'){
+                        //User's values and answer values are compared
+                        if(value.toLowerCase() == ansVal.toLowerCase()){
+                            //Returns false for errors
                             e = false;
-                            comparisonArray.push([e, value, ansVal.name['#text']])
+                            comparisonArray.push([e, id, ansVal])
+                        }
+                        else if(ansID == 'startday' || ansID == 'startmonth' || ansID == 'startyear'){
+                            if (value.toLowerCase() == ansVal.toLowerCase()) {
+                                e = false;
+                                comparisonArray.push([e, id, ansVal]);
+                            }
+                            else {
+                                //True for errors
+                                e = true;
+                                var DocAnswers = ansDataJSON.document[formJSON.document];
+                                var day = DocAnswers['startday']['#text'];
+                                var month = DocAnswers['startmonth']['#text'];
+                                var year = DocAnswers['startyear']['#text'];
+                                if(day == '' || month == '' || year == ''){
+                                    day = 'day';
+                                    month = 'month';
+                                    year = 'year'
+                                }
+                                var date = month + '/' + day + '/' + year;
+                                comparisonArray.push([e, id, date]);
+                            }
+                        }
+                        else if(ansID == 'endday' || ansID == 'endmonth' || ansID == 'endyear'){
+                            if (value.toLowerCase() == ansVal.toLowerCase()) {
+                                e = false;
+                                comparisonArray.push([e, id, ansVal]);
+                            }
+                            else {
+                                //True for errors
+                                e = true;
+                                var DocAnswers = ansDataJSON.document[formJSON.document];
+                                var day = DocAnswers['endday']['#text'];
+                                var month = DocAnswers['endmonth']['#text'];
+                                var year = DocAnswers['endyear']['#text'];
+                                if(day == '' || month == '' || year == ''){
+                                    day = 'day';
+                                    month = 'month';
+                                    year = 'year'
+                                }
+                                var date = month + '/' + day + '/' + year;
+
+                                comparisonArray.push([e, id, date]);
+                            }
                         }
                         else{
+                            //Returns true for errors
                             e = true;
-                            comparisonArray.push([e, value, ansVal.name['#text']]);
+                            if(ansVal == '')
+                                ansVal = 'No information required';
+                            comparisonArray.push([e, id, ansVal]);
                         }
                     }
-                    else if(ansID == 'startday' || ansID == 'startmonth' || ansID == 'startyear'){
-                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
-                            e = false;
-                            comparisonArray.push([e, value, ansVal['#text']]);
-                        }
-                        else {
-                            //True for errors
-                            e = true;
-                            var DocAnswers = ansDataJSON.document[formJSON.document];
-                            var day = DocAnswers['startday']['#text'];
-                            var month = DocAnswers['startmonth']['#text'];
-                            var year = DocAnswers['startyear']['#text'];
-                            var date = month + '/' + day + '/' + year;
-                            comparisonArray.push([e, value, date]);
-                        }
-                    }
-                    else if(ansID == 'endday' || ansID == 'endmonth' || ansID == 'endyear'){
-                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
-                            e = false;
-                            comparisonArray.push([e, value, ansVal['#text']]);
-                        }
-                        else {
-                            //True for errors
-                            e = true;
-                            var DocAnswers = ansDataJSON.document[formJSON.document];
-                            var day = DocAnswers['endday']['#text'];
-                            var month = DocAnswers['endmonth']['#text'];
-                            var year = DocAnswers['endyear']['#text'];
-                            var date = month + '/' + day + '/' + year;
-                            comparisonArray.push([e, value, date]);
-                        }
-                    }
+
                     else{
-                        if (value.toLowerCase() == ansVal['#text'].toLowerCase()) {
-                            e = false;
-                            comparisonArray.push([e, value, ansVal['#text']]);
-                        }
-                        else {
-                            e = true;
-                            comparisonArray.push([e, value, ansVal['#text']]);
+                        for(var v = 0; v < value.length; v++) {
+                            //Crew members'names array
+                            ansVal = ansDataJSON.document[formJSON.document][idProperty];
+                            console.log(ansVal['name'].length);
+
+                            if(value.length == ansVal['name'].length){
+                                //Validates the equality of answer value and input value
+                                if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
+                                    //Returns false for errors
+                                    e = false;
+                                    comparisonArray.push([e, id, ansVal['name'][v]['#text']])
+                                }
+                                else {
+                                    //Returns true for errors
+                                    e = true;
+                                    comparisonArray.push([e, id, ansVal['name'][v]['#text']]);
+                                }
+                            }
+                            //Only one author with no length
+                            else if(ansVal['name'].length == undefined ){
+                                if(jQuery.isEmptyObject(ansVal['name'])){
+                                    ansVal = '';
+                                }
+                                if(value[v].toLowerCase() == ansVal['name']['#text'].toLowerCase()){
+                                    //Returns false for errors
+                                    e = false;
+                                    comparisonArray.push([e, id, ansVal['name']['#text']])
+                                }
+                                else{
+                                    //Returns true for errors
+                                    e = true;
+                                    if(ansVal['name']['#text'] == '')
+                                        comparisonArray.push([e, id, "No author information required"]);
+                                    else
+                                        comparisonArray.push([e, id, ansVal['name']['#text']]);
+                                }
+                            }
                         }
                     }
                 }
@@ -723,13 +796,24 @@ $data = file_get_contents('php://input')
 
                   //If error, the user and answer values are different on submit the submission is stopped an the input
                   //element's outline is highlighted with a orange color
-                  if(formErrors[d][0][0]){
-                      submitErrors = 1;
-                      $("#"+formJSONID).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
-                      var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
-                      var correctValue = error[0][2];
-                      $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="position: relative; width: 50%;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
-                  }
+                  $.each(formErrors[d], function (index, data) {
+                      if(data[0]){
+                          submitErrors = 1;
+                          //Non author answer declaration
+                          if(data[1] !== "author"){
+                              $("#" + data[1]).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                              var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
+                              var correctValue = data[2];
+                              $('<span class="labelradio" name="aDeclerin'+ d + '" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
+                          }
+                          else {
+                              $("." + data[1] + index).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
+                              var parentDeclerin = $("." + data[1] + index);
+                              var correctValue = data[2];
+                              $('<span class="labelradio" name="aDeclerin'+ d +"-"+ index + '" style="width: 10px;margin: -4.5% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter(parentDeclerin).prop('title', correctValue);
+                          }
+                      }
+                  });
               }
               if(submitErrors == 1) {
                   alert('There is an error');

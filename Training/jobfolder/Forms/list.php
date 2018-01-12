@@ -178,19 +178,19 @@ if($_SESSION["role"] == 1) {
                 <div class="slideshow-container" style="display: none">
                     <div class="mySlides">
                         <img id="slideImg0" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide0" class="nextPresentation" onclick="currentSlide(1, 5)" value="next" style="display: none">
+                        <input type="button" id="nextSlide0" class="nextPresentation" onclick="currentSlide(1, 5)" value="next" style="display: none; width: 9%">
                         </div>
                     <div class="mySlides">
                         <img id="slideImg1" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 4)" style="display: none">
+                        <input type="button" id="nextSlide1" class="nextPresentation" value="next" onclick="currentSlide(2, 4)" style="display: none; width: 9%">
                     </div>
                     <div class="mySlides">
                         <img id="slideImg2" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide2" class="nextPresentation" value="next" onclick="currentSlide(3, 9)" style="display: none">
+                        <input type="button" id="nextSlide2" class="nextPresentation" value="next" onclick="currentSlide(3, 9)" style="display: none; width: 9%">
                     </div><div class="mySlides">
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
                         <img id="slideImg3" class="slideImg" src="" style="width:100%">
-                        <input type="button" id="nextSlide3" class="nextPresentation" value="next" onclick="currentSlide(4, 0)" style="display: none">
+                        <input type="button" id="nextSlide3" class="nextPresentation" value="next" onclick="currentSlide(4, 0)" style="display: none; width: 9%">
                     </div>
                     <div class="mySlides">
                         <div id="continue" style="padding: 30%;"><input type="button" class="bluebtn" name="linkLists" style="display: block; margin: auto; position: relative; z-index: 2; padding: 10% 75% 10% 10% !important; max-width: 50%;" value="Click To Continue To Your Training"></div>
@@ -441,7 +441,7 @@ function currentSlide(pt, nslddx) {
                 $('div').remove('#homepage');
                 $('#divscroller').css('display', 'block');
                 $('div').remove('.slideshow-container');
-                $("<div id='buttonList' style='padding: 2%;'><input type='button' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>").appendTo("#divscroller")
+                $("<div id='buttonList' style='padding: 2%;'><input type='button' style='width: 20%' onclick='backList()' id='backList' class='bluebtn' id='trainingButton' value='Back to Training Home'></div>").appendTo("#divscroller")
             }
             trainingProgress();
         });
@@ -542,7 +542,7 @@ function currentSlide(pt, nslddx) {
                         /*Conditions the completion of the newbie training, the newbie training type, and last frame
                         display call to continue to the intermediate level*/
                         if(newbieCompletedTags == 1 && '<?php echo $type ?>' == 'newbie'){
-                            $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange' id='trainingButton' value='Continue to Next Level'>")
+                            $("#buttonList").append("<input type='button' id='linkInter' onclick='linkInter()' class='bluebtn' style='margin-left: 60%; background: orange; width: 20%' id='trainingButton' value='Continue to Next Level'>")
                         }
 
                         //Styles Bandocat Intermediate Image link

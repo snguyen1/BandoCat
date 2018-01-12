@@ -67,7 +67,7 @@ for ($x = 2; $x < $colLength; $x++) {
             <!--Users' form options Container-->
             <label for="users" class="lblTraining" style="margin-top: 4%">Users</label>
             <div id="users">
-                <form id="formUsers" action="jobfolder/Forms/list.php" method="post" >
+                <form id="formUsers" action="jobfolder/Forms/list.php?priv=admin" method="post" >
                     <select name="user" id="selUsers" multiple="multiple" size="20">
                         <option id="selCol" value="none">Select Collection</option>
                     </select>
@@ -145,7 +145,7 @@ for ($x = 2; $x < $colLength; $x++) {
             //Submit object JSON
             var userJSON = JSON.parse(user);
             //Submit object JSON is posted to collection_name/Forms/list.php and redirected to that page
-            $.redirect( "../"+ColValue+"/Forms/list.php", userJSON);
+            $.redirect( "../"+ColValue+"/Forms/list.php?priv=admin", userJSON);
         });
     });
 </script>

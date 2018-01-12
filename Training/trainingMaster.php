@@ -11,7 +11,6 @@
                     //if user is admin, then add Admin section to the menu
                     $userid = $session-> getUserID();
                     $userticketCount = $DB1->GET_USER_CLOSEDTICKET_COUNT($userid);
-                    $username = $_SESSION['username'];
                     $ticketCount = 0;
                     $admin = $session->isAdmin();
                     if($session->isAdmin())

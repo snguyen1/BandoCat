@@ -346,10 +346,11 @@ $data = file_get_contents('php://input')
             var IDProperty = JSON.parse(JSON.stringify(targetID));
             //Answer JSON element
             var answerElement = ansDataJSON.document[docID][IDProperty];
-            //Answer element value
-            var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
+
 
             if(targetID !== 'crewmember'){
+                //Answer element value
+                var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
                 //Removes wrong decleration answer style
                 if(jQuery.isEmptyObject(answerElement))
                     answerValue = '';
@@ -378,8 +379,10 @@ $data = file_get_contents('php://input')
                     }
                     if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
                         //Removes wrong decleration answer style
-                        var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].value;
-                        $("span[name = "+ targetAttribute +"]").remove();
+                        if(event.originalEvent.srcElement.nextSibling.attributes !== undefined) {
+                            var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].nodeValue;
+                            $("span[name = "+ targetAttribute +"]").remove();
+                        }
                         $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                     }
                     //Includes correct declaration style
@@ -460,6 +463,7 @@ $data = file_get_contents('php://input')
         formJSON["document"]= '<?php echo $doc_id?>';
         //Creates an empty property array
         formJSON["data"] = [];
+        //Field crew members' names array
         var crewTableArray = [];
 
         /****** LEFT COLUMN ******/
@@ -585,8 +589,10 @@ $data = file_get_contents('php://input')
 
                 if(jQuery.isEmptyObject(ansDataJSON.document[formJSON.document][idProperty]))
                     ansVal = '';
-                else
-                    ansVal = ansDataJSON.document[formJSON.document][idProperty]['#text'];
+                else{
+                    ansVal = ansVal['#text'];
+                }
+
 
                 if(id !== 'crewmember'){
                     //User's values and answer values are compared
@@ -682,6 +688,11 @@ $data = file_get_contents('php://input')
                                     comparisonArray.push([e, id, "No field crew member"]);
                                 }
                             }
+                            else{
+                                //Returns true for errors
+                                e = true;
+                                comparisonArray.push([e, id, ansVal['name']['#text']]);
+                            }
                         }
                     }
                 }
@@ -725,12 +736,12 @@ $data = file_get_contents('php://input')
                   $.each(formErrors[d], function (index, data) {
                       if(data[0]){
                           submitErrors = 1;
+                          //Non crewmembers answer declaration
                           if(data[1] !== "crewmember"){
                               $("#" + data[1]).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
                               var parentDeclerin = $("#" + String(formJSONID)).parent()[0].id;
                               var correctValue = data[2];
-                              $('<span class="labelradio" name="aDeclerin'+ d +'" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
-
+                              $('<span class="labelradio" name="aDeclerin'+ d + '" style="width: 10px;margin: -11% 0% 0% 90%; min-width:10%" ><img src="../../images/pin_question.png" style="width: 50%; position: relative;"></span>').insertAfter("#" + parentDeclerin).prop('title', correctValue);
                           }
                           else {
                               $("." + data[1] + index).css('outline', 'orange').css('outline', 'orange').css('outline-style', 'solid');
