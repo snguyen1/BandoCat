@@ -162,7 +162,7 @@ if($_SESSION["role"] == 1) {
 
                                 //Outputs into the table a document childnode by row and its attributes by table data
                                 echo '<tr>';
-                                echo "<td align = 'center'><a target='_blank' href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type&priv=$priv\">$libraryindex</a></td>";
+                                echo "<td align = 'center'><a target='_blank' onclick='window.close()' href=\"index.php?id=$id&user=$userfile&col=$collection&type=$type&priv=$priv\">$libraryindex</a></td>";
                                 echo "<td align = 'center'>$libraryindex</td>";
                                 echo "<td align = 'center'>$title</td>";
                                 echo "<td align = 'center'>$classification</td>";

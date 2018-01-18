@@ -323,7 +323,6 @@ $data = file_get_contents('php://input')
         $('#divscroller').height(windowHeight - (windowHeight * 0.1));
     });
 
-
     var formJSON = {};
     var answersJSON = '';
     $(document).ready(function () {
@@ -370,6 +369,7 @@ $data = file_get_contents('php://input')
                         //Removes wrong decleration answer style
                         if(jQuery.isEmptyObject(answerElement))
                             answerValue = '';
+                        
                         if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
                             //If there is an answer declaration and the answer is correct the declaration will be removed
                             if(event.originalEvent.srcElement.parentNode.nextSibling.attributes !== undefined) {
@@ -464,7 +464,6 @@ $data = file_get_contents('php://input')
         return obj;
     };
 
-
         /**********************************************
          * Function: accountJSON
          * Description: adds more fields for authors
@@ -500,13 +499,16 @@ $data = file_get_contents('php://input')
         //For every element in the Left column
         $.each(accountInputsCol1, function (index, element) {
             if(element.id !== "") {
+                //Div element with input children
                 var inputDivs = $("#" + element.id + ":has(input)")[0];
+                //Div element with textarea children
                 var textAreaDivs = $("#" + element.id + ":has(textarea)")[0];
+                //Div element with select children
                 var selectDivs = $("#" + element.id + ":has(select)")[0];
                 var selectList = $("#" + element.id + "> select");
                 if(textAreaDivs !== undefined){
                     var inputId = $("#" + textAreaDivs.id ).children('textarea')[0].id;
-                    var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].textContent;
+                    var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].value;
                     structureJSON(formJSON, inputId, inputVal);
                 }
                 else if(inputDivs !== undefined && element.id !== "authorCell") {
@@ -549,7 +551,6 @@ $data = file_get_contents('php://input')
                 if(textAreaDivs !== undefined){
                     var inputId = $("#" + textAreaDivs.id ).children('textarea')[0].id;
                     var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].value;
-                    console.log($("#" + textAreaDivs.id ).children('textarea')[0]);
                     structureJSON(formJSON, inputId, inputVal);
                 }
             }
@@ -723,7 +724,6 @@ $data = file_get_contents('php://input')
                         for(var v = 0; v < value.length; v++) {
                             //Crew members'names array
                             ansVal = ansDataJSON.document[formJSON.document][idProperty];
-                            console.log(ansVal['name'].length);
 
                             if(value.length == ansVal['name'].length){
                                 //Validates the equality of answer value and input value
@@ -741,15 +741,15 @@ $data = file_get_contents('php://input')
                             //Only one author with no length
                             else if(ansVal['name'].length == undefined ){
                                 if(jQuery.isEmptyObject(ansVal['name'])){
-                                    ansVal = '';
+                                    ansVal['name']['#text'] = '';
                                 }
+                                //Returns false for errors
                                 if(value[v].toLowerCase() == ansVal['name']['#text'].toLowerCase()){
-                                    //Returns false for errors
                                     e = false;
                                     comparisonArray.push([e, id, ansVal['name']['#text']])
                                 }
+                                //Returns true for errors
                                 else{
-                                    //Returns true for errors
                                     e = true;
                                     if(ansVal['name']['#text'] == '')
                                         comparisonArray.push([e, id, "No author information required"]);
