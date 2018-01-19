@@ -369,7 +369,7 @@ $data = file_get_contents('php://input')
                         //Removes wrong decleration answer style
                         if(jQuery.isEmptyObject(answerElement))
                             answerValue = '';
-                        
+
                         if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
                             //If there is an answer declaration and the answer is correct the declaration will be removed
                             if(event.originalEvent.srcElement.parentNode.nextSibling.attributes !== undefined) {
