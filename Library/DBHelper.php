@@ -229,9 +229,10 @@ class DBHelper
              return false;
          }
          $output = $sth->fetch(PDO::FETCH_ASSOC);
-
          if(password_verify($iPassword,$output['password']))
          {
+
+
              if($output['role'] === "Inactive")
              {
                  $oMessage = "Inactive";
