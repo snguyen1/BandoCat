@@ -33,7 +33,7 @@
 	<libraryindex>143-(envelope)</libraryindex>
 	<title>143-(envelope)</title>
 	<inasubfolder>0</inasubfolder>
-	<subfoldercomments>Ward Island (A), (At mouth of Oso Creek) Island B&amp;C Ward Island Islands B&amp;C Caswell  &amp; Stout Ward Island Interurban Ry Franchises, Etc. also data on Old South City Limits</subfoldercomments>
+	<subfoldercomments>Ward Island (A), (At mouth of Oso Creek) Island B&amp;C Ward Island Islands B&amp;C Caswell &amp; Stout Ward Island Interurban Ry Franchises, Etc. also data on Old South City Limits</subfoldercomments>
 	<classification>Envelope/Binding</classification>
 	<classificationcomments></classificationcomments>
 
@@ -106,7 +106,7 @@
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
 
-	<frontimage>142-_038.3.tif</frontimage>
+	<frontimage>142-_038(1_3).tif</frontimage>
 	<backimage></backimage>
 	<frontthumbnail>142-_038.3.jpg</frontthumbnail>
 	<backthumbnail></backthumbnail>
@@ -124,7 +124,7 @@
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth>5</endmonth>
+	<endmonth>05</endmonth>
 	<endday>25</endday>
 	<endyear>1938</endyear>
 
@@ -145,15 +145,15 @@
 	<libraryindex>140G-_005.6</libraryindex>
 	<title>140G-_005.6</title>
 	<inasubfolder>1</inasubfolder>
-	<subfoldercomments>These items belong to the Peterson &amp; Dunlap envelope.</subfoldercomments>
+	<subfoldercomments>These items belong together</subfoldercomments>
 	<classification>Legal Document Draft</classification>
 	<classificationcomments></classificationcomments>
 
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth>1</endmonth>
-	<endday>7</endday>
+	<endmonth>01</endmonth>
+	<endday>07</endday>
 	<endyear>1954</endyear>
 
 	<author><name></name></author>
@@ -180,14 +180,12 @@
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth>8</endmonth>
+	<endmonth>08</endmonth>
 	<endday></endday>
 	<endyear>1944</endyear>
 
 	<author><name></name></author>
-	<comments>With calculation
-With sketch
-Scale 1 inch : 100 feet</comments>
+	<comments>With calculation, With sketch, Scale 1 inch : 100 feet</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -210,13 +208,12 @@ Scale 1 inch : 100 feet</comments>
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth>8</endmonth>
-	<endday>3</endday>
+	<endmonth>08</endmonth>
+	<endday>03</endday>
 	<endyear>1925</endyear>
 
 	<author><name></name></author>
-	<comments>J. 5439
-With calculation</comments>
+	<comments>J. 5439, With calculation</comments>
 
 	<needsreview>1</needsreview>
 	<needsinput>1</needsinput>
@@ -239,8 +236,8 @@ With calculation</comments>
 	<startmonth></startmonth>
 	<startday></startday>
 	<startyear></startyear>
-	<endmonth>4</endmonth>
-	<endday>2</endday>
+	<endmonth>04</endmonth>
+	<endday>02</endday>
 	<endyear>1942</endyear>
 
 	<author><name></name></author>

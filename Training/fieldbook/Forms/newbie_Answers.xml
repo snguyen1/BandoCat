@@ -14,12 +14,12 @@
 		<author></author>
 		<crewmember><name></name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
+		<endmonth>00</endmonth>
+		<endday>00</endday>
+		<endyear>0000</endyear>
 		<comments>Front Cover</comments>
 		<frontimage>0360-001.tif</frontimage>
 		<frontthumbnail>0360-001.jpg</frontthumbnail>
@@ -40,12 +40,12 @@
 		<author></author>
 		<crewmember><name></name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
+		<endmonth>00</endmonth>
+		<endday>00</endday>
+		<endyear>0000</endyear>
 		<comments>Index</comments>
 		<frontimage>0360-005.tif</frontimage>
 		<frontthumbnail>0360-005.jpg</frontthumbnail>
@@ -64,14 +64,14 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember><name></name></crewmember>
+		<crewmember><name>undefined</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
+		<endmonth>00</endmonth>
+		<endday>000</endday>
+		<endyear>0000</endyear>
 		<comments>Index</comments>
 		<frontimage>0360-006.tif</frontimage>
 		<frontthumbnail>0360-006.jpg</frontthumbnail>
@@ -92,9 +92,9 @@
 		<author></author>
 		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>George Mudd</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
 		<endmonth>01</endmonth>
 		<endday>19</endday>
 		<endyear>1949</endyear>
@@ -118,9 +118,9 @@
 		<author></author>
 		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>George Mudd</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
 		<endmonth>01</endmonth>
 		<endday>19</endday>
 		<endyear>1949</endyear>
@@ -195,9 +195,9 @@
 	<author></author>
 	<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>Ralph Pospech</name></crewmember>
 
-	<startmonth></startmonth>
-	<startday></startday>
-	<startyear></startyear>
+	<startmonth>00</startmonth>
+	<startday>00</startday>
+	<startyear>0000</startyear>
 	<endmonth>06</endmonth>
 	<endday>22</endday>
 	<endyear>1950</endyear>
@@ -221,9 +221,9 @@
 		<author></author>
 		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Kenney</name><name>Joe Marshall</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
 		<endmonth>06</endmonth>
 		<endday>22</endday>
 		<endyear>1949</endyear>
@@ -247,9 +247,9 @@
 		<author></author>
 		<crewmember><name>Robert Dunlap</name><name>Howard Williams</name><name>Alvin Keeney</name><name>Joe Marshall</name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
 		<endmonth>06</endmonth>
 		<endday>22</endday>
 		<endyear>1949</endyear>
@@ -273,12 +273,12 @@
 		<author></author>
 		<crewmember><name></name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
+		<endmonth>00</endmonth>
+		<endday>00</endday>
+		<endyear>0000</endyear>
 		<comments>For Community Center House. See B 354 P 66; B 298 P 74; B 270 P 61.</comments>
 		<frontimage>0370(060-061).tif</frontimage>
 		<frontthumbnail>0382-060.jpg</frontthumbnail>
@@ -299,12 +299,12 @@
 		<author></author>
 		<crewmember><name></name></crewmember>
 
-		<startmonth></startmonth>
-		<startday></startday>
-		<startyear></startyear>
-		<endmonth></endmonth>
-		<endday></endday>
-		<endyear></endyear>
+		<startmonth>00</startmonth>
+		<startday>00</startday>
+		<startyear>0000</startyear>
+		<endmonth>00</endmonth>
+		<endday>00</endday>
+		<endyear>0000</endyear>
 		<comments>For Community Center House. See B 354 P 66; B 298 P 74; B 270 P 61.</comments>
 		<frontimage>0370(060-061).tif</frontimage>
 		<frontthumbnail>0370-061.jpg</frontthumbnail>

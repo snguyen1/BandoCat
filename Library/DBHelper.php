@@ -1288,6 +1288,23 @@ class DBHelper
         return $call->fetch(PDO::FETCH_NUM);
     }
 
+    function SELECT_DOCID_BY_SUBJECT($iSubject, $iCollection)
+    {
+        $bolDB = $this->SWITCH_DB($iCollection);
+        if($bolDB){
+            /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
+            // selects the weeks from weeklyreport db that satisfy the year and collection id parameters
+            $call = $this->getConn()->prepare("SELECT `documentID` FROM `document` WHERE `libraryindex` = :iSubject");
+
+
+            //bind variables to the above sql statement
+            //bind variables to the above sql statement
+            $call->bindParam(':iSubject',$iSubject,PDO::PARAM_STR);
+            $call->execute();
+            return $call->fetch(PDO::FETCH_NUM);
+        }
+    }
+
     /**********************************************
      * Function: GET_ACTION_COUNT
      * Description: counts the number of actions specified User has done.

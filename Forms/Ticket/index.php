@@ -24,6 +24,7 @@ else header('Location: ../../');
     <script type="text/javascript" src="../../ExtLibrary/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
+            var docID = '';
 
             var table = $('#dtable').DataTable( {
                 "processing": true,
@@ -42,6 +43,8 @@ else header('Location: ../../');
                     //column Collection
                     {
                         "render": function ( data, type, row ) {
+                            //Object that stores the collection name
+                            colData = data;
                             return data;
                         },
                         "targets": 1
@@ -49,7 +52,45 @@ else header('Location: ../../');
                     //column Subject
                     {
                         "render": function ( data, type, row ) {
-                            return data;
+                            //Stores the collection name to the subject collection variable
+                            switch(colData) {
+                                case 'Blucher Maps':
+                                    var dbCol = 'bluchermaps';
+                                    var file = 'Map';
+                                    break;
+                                case 'Green Maps':
+                                    var dbCol = 'greenmaps';
+                                    var file = 'Map';
+                                    break;
+                                case 'Job Folder':
+                                    var dbCol = 'jobfolder';
+                                    var file = 'Folder';
+                                    break;
+                                case 'Blucher Field Book':
+                                    var dbCol = 'blucherfieldbook';
+                                    var file = 'FieldBook';
+                                    break;
+                                case 'Map Indices':
+                                    var dbCol = 'mapindices';
+                                    var file = 'Indices';
+                                    break;
+                            }
+                            //Object with subject collection and subject/library index
+                            var subCol = {"subjectCol": dbCol, "subject": data};
+
+                            $.ajax({
+                                url: 'ticketLink.php',
+                                type: 'post',
+                                data: subCol,
+                                success: function (id) {
+                                    id = JSON.parse(id);
+                                    docID = id;
+                                    var td = $('td:contains('+data+')')[0];
+                                    if(docID !== false)
+                                        $(td).html("<a href='../../Templates/" + file + "/review.php?doc=" + id[0] + "&col=" + dbCol + "' target='_blank' >"+ data +"</a>")
+                                }
+                            });
+                            return data
                         },
                         "targets": 2
                     },

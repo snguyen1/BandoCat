@@ -243,7 +243,6 @@
 .labelradio
 {
     float:left;
-    width:150px;
     min-width: 195px;
 }
 mark {
@@ -254,23 +253,26 @@ mark {
     margin-left: -7%;
     padding: 2.05%;
 }
-span.labelradio:hover p{
+span.labelradio:hover p {
     z-index: 10;
-    display: table;
+    display: inline-block;
     text-align: initial;
-    position: absolute;
+    position: relative;
     border: 1px solid #000000;
     background: #fefdff;
-    font-size: 14px;
+    margin: -45% -5% -2% -20%;
+    font-size: 12px;
     font-style: normal;
     -webkit-border-radius: 3px;
-    -moz-border-radius: 3px; -o-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
     border-radius: 3px;
     -webkit-box-shadow: 4px 4px 4px #175131;
     -moz-box-shadow: 4px 4px 4px #154d2e;
     box-shadow: 4px 4px 4px #175433;
-    width: 30%;
-    padding: 10px 10px;
+    width: max-content;
+    max-width: 120%;
+    padding: 3%;
 }
 descriptionBox{
     color: #e62014;
@@ -284,4 +286,10 @@ descriptionBox{
 #selClass {
     width: 50%;
     margin-left: 48%;
+}
+input[type= 'text']{
+    width:44%;
+}
+input[type='button'] {
+    width:5%;
 }
