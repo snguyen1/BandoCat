@@ -346,7 +346,7 @@ $data = file_get_contents('php://input')
             xhttp_answers.send();
         }
 
-                $(':input').change(function (event) {
+                $('form').on('change', ['input', 'textarea'], function (event) {
                     //On change the table data is stored to the formJSON object
                     table2JSON();
                     //Document ID
@@ -586,8 +586,8 @@ $data = file_get_contents('php://input')
                 return false;
             $('#authorId' + (length - 1)).after('' +
                 '<div class="authorClass" id="authorId' + length + '" style="margin-top: 2%">' +
-                '<span class="label" style="margin: 0% 16% 0% -2%">Document Author: </span>' +
-                '<input type = "text" name = "txtauthor[]" id = "author" class="author'+length+'" size="26" value="' + val + '" />' +
+                '<span class="label" style="margin: 0% 12% 0% -2%">Document Author: </span>' +
+                '<input type = "text" name = "txtauthor[]" id = "author" class="author'+length+'" size="26" value="' + val + '" style="width: 51%" />' +
                 '</div>');
             authorCount++;
         }

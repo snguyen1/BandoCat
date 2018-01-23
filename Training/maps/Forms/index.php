@@ -303,7 +303,9 @@ foreach ($file->document as $a) {
 
                             <!-- COMPANY NAME -->
                             <div class="cell" id="companyCell">
-                                <span class="labelradio"><mark class="label">Company Name: </mark><p hidden><b></b><strong>Document Title: </strong>This can be printed or hand written, but it is typically found across the top of the document. If one cannot be found, enter the library index.</br><strong>Envelopes: </strong>An envelope will always be given the title of the library index.</p></span>
+                                <span class="labelradio" title="Input the name of a company if one is recorded in the document.</p>">
+                                    <mark class="label">Company Name: </mark>
+                                </span>
                                 <input type = "text" name = "txtCompanyname" id = "companyname" size="26" value='<?php echo $doc1->companyname; ?>' />
                             </div>
 
@@ -421,6 +423,7 @@ $data = file_get_contents('php://input')
         $(':input').change(function (event) {
             table2JSON();
             var targetID = event.currentTarget.id;
+            //targetID parsed into a JSON object to be used as a property variable to retrieve answer value
             var IDProperty = JSON.parse(JSON.stringify(targetID));
             var targetValue = event.target.value;
             //valid document ID
@@ -428,6 +431,32 @@ $data = file_get_contents('php://input')
             var answerValue = ansDataJSON.document[docID][IDProperty]['#text'];
             if(jQuery.isEmptyObject(ansDataJSON.document[docID][IDProperty])) {
                 answerValue = ''
+                switch (targetID){
+                    case 'startday':
+                        if(answerValue == '')
+                            answerValue = '00';
+                        break;
+                    case 'startmonth':
+                        if(answerValue == '')
+                            answerValue = '00';
+                        break;
+                    case 'startyear':
+                        if(answerValue == '')
+                            answerValue = '0000';
+                        break;
+                    case 'endday':
+                        if(answerValue == '')
+                            answerValue = '00';
+                        break;
+                    case 'endmonth':
+                        if(answerValue == '')
+                            answerValue = '00';
+                        break;
+                    case 'endyear':
+                        if(answerValue == '')
+                            answerValue = '0000';
+                        break;
+                }
             }
 
             if (answerValue.toLowerCase() == targetValue.toLowerCase()) {

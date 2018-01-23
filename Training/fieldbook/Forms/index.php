@@ -69,7 +69,7 @@ foreach ($file->document as $a) {
 <html xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
-	<title>[Training] Maps</title>
+	<title>Training Fieldbooks</title>
     <!--Training CSS-->
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <!--Master CSS-->
@@ -354,13 +354,20 @@ $data = file_get_contents('php://input')
                 //Removes wrong decleration answer style
                 if(jQuery.isEmptyObject(answerElement))
                     answerValue = '';
+
+                /*Correct Answer*/
                 if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
-                    var targetAttribute = event.originalEvent.srcElement.parentNode.nextSibling.attributes[1].nodeValue;
-                    $("span[name = "+ targetAttribute +"]").remove();
+                    //If the document has been submitted and it contains an answer declaration the element will be removed
+
+                    if(event.originalEvent.srcElement.parentNode.nextSibling.attributes !== undefined){
+                        var targetAttribute = event.originalEvent.srcElement.parentNode.nextSibling.attributes[1].nodeValue;
+                        $("span[name = "+ targetAttribute +"]").remove();
+                    }
+                    //Highlights the outline of the element green
                     $("#" + String(targetID)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                     return
                 }
-                //Includes correct declaration style
+                /*Wrong Answer*/
                 else
                     $("#" + String(targetID)).css('outline', 'red').css('outline-style', 'solid');
             }
@@ -368,10 +375,13 @@ $data = file_get_contents('php://input')
             else{
                 //If the Answer JSON element has a property called name a crewJSON object is initiated
                 var nameFlagComp = answerElement.hasOwnProperty('name');
+                //Ensures the crewmember element contains a name property
                 if(nameFlagComp){
+                    //If name is empty
                     if(jQuery.isEmptyObject(answerElement.name)){
                         answerValue = '';
                     }
+                    //If name contains a value
                     else {
                         targetValue = $("." + targetClass)[0].value;
                         var crewIndex = parseInt(targetClass.match(/\d+/), 10);
@@ -379,9 +389,13 @@ $data = file_get_contents('php://input')
                     }
                     if (answerValue.toLowerCase() == targetValue.toLowerCase()) {
                         //Removes wrong decleration answer style
-                        if(event.originalEvent.srcElement.nextSibling.attributes !== undefined) {
-                            var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].nodeValue;
-                            $("span[name = "+ targetAttribute +"]").remove();
+                        var eventElement = event.originalEvent.srcElement;
+                        if(eventElement.nextSibling !== null) {
+                            //Corroborates that the the answer declaration is removed for every answer crew field
+                            if(eventElement.nextSibling.id !== 'more_fields' && event.originalEvent.target.nextSibling.childNodes.length !== 0){
+                                var targetAttribute = event.originalEvent.target.nextSibling.attributes[1].nodeValue;
+                                $("span[name = "+ targetAttribute +"]").remove();
+                            }
                         }
                         $("." + String(targetClass)).removeAttr('style').css('-webkit-animation', 'correctFade 2s linear');
                     }
@@ -497,13 +511,14 @@ $data = file_get_contents('php://input')
         //For every element in the Right column
         $.each(accountInputsCol2, function (index, element) {
             if (element.id !== "") {
-                var inputDivs = $("#" + element.id + ":has(input)")[0];
                 var selectDivs = $("#" + element.id + ":has(select)")[0];
                 var selectList = $("#" + element.id + "> select");
+                var textAreaDivs = $("#" + element.id + ":has(textarea)")[0];
 
-                if(inputDivs !== undefined){
-                    var inputId = $("#" + inputDivs.id + " > :input")[0].id;
-                    var inputVal = $("#" + inputDivs.id + " > :input")[0].value;
+                //Detects the textarea element and retrieves the element's id and value to post to the formJSON.
+                if(textAreaDivs !== undefined){
+                    var inputId = $("#" + textAreaDivs.id ).children('textarea')[0].id;
+                    var inputVal = $("#" + textAreaDivs.id ).children('textarea')[0].value;
                     structureJSON(formJSON, inputId, inputVal);
                 }
                 //Detects the select elements and loops through the three day input drop downs to retrieve their
@@ -659,6 +674,12 @@ $data = file_get_contents('php://input')
                     for(var v = 0; v < value.length; v++) {
                         //Crew members'names array
                          ansVal = ansDataJSON.document[formJSON.document][idProperty];
+                         if(jQuery.isEmptyObject(ansVal['name'])){
+                             //Length of the answer value is 0 while the answer input value length should be 1 but empty
+                             //Therefore if statement must fail
+                             ansVal['name'].length = 0;
+                             ansVal['name'][0] = {'#text': ''}
+                         }
 
                         if(value.length == ansVal['name'].length){
                             //Validates the equality of answer value and input value
@@ -675,26 +696,20 @@ $data = file_get_contents('php://input')
                         }
                         //Error if uneven amount of answer values and input values
                         else{
-                            if(jQuery.isEmptyObject(ansVal['name'])){
-                                ansVal = '';
-                                if(value[v].toLowerCase() == ansVal.toLowerCase()){
-                                    //Returns false for errors
-                                    e = false;
-                                    comparisonArray.push([e, id, ansVal])
-                                }
-                                else {
-                                    //Returns true for errors
-                                    e = true;
-                                    comparisonArray.push([e, id, "No field crew member"]);
-                                }
+                            if(value[v].toLowerCase() == ansVal['name'][v]['#text'].toLowerCase()){
+                                //Returns false for errors
+                                e = false;
+                                comparisonArray.push([e, id, ansVal['name'][v]['#text']])
                             }
                             else{
                                 //Returns true for errors
                                 e = true;
-                                comparisonArray.push([e, id, ansVal['name']['#text']]);
+                                var uneven = [e, id, "Uneven amount of crew members or no crew member is required"];
                             }
                         }
                     }
+                    if(uneven !== undefined)
+                        comparisonArray.push(uneven);
                 }
             }
         });
