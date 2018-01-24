@@ -43,7 +43,7 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
                     <td>
                         <div id="Left_Display" style="text-align: left">
                             <h3>Collection Name: <span id="Collection_Name"></span></h3>
-                            <h3>Library Index/Subject: <span id="Subject"></span></h3>
+                            <h3>Library Index/Subject: <span class="Subject" id="Subject0"></span></h3>
                             <h3>Description: <span id="Description"></span></h3>
                             <h3>Status:
                                 <input type="radio" value="0" name="Status"><span>Open</span>
@@ -92,7 +92,52 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
         var data = <?php echo json_encode($ticket); ?>;
         //Series of document elements in which the data from the ticket is saved into their inner text.
         document.getElementById("Collection_Name").innerText = data.Collection;
-        document.getElementById("Subject").innerText = data.Subject;
+        var libIdxJSON = JSON.parse(data.LibraryIndex);
+        switch(data.Collection) {
+            case 'Blucher Maps':
+                var dbCol = 'bluchermaps';
+                var file = 'Map';
+                break;
+            case 'Green Maps':
+                var dbCol = 'greenmaps';
+                var file = 'Map';
+                break;
+            case 'Job Folder':
+                var dbCol = 'jobfolder';
+                var file = 'Folder';
+                break;
+            case 'Blucher Field Book':
+                var dbCol = 'blucherfieldbook';
+                var file = 'FieldBook';
+                break;
+            case 'Map Indices':
+                var dbCol = 'mapindices';
+                var file = 'Indices';
+                break;
+        }
+
+        $.each(libIdxJSON, function (index, obj) {
+            var libraryIndex = obj.libraryIndex;
+            var ticketData = {"subjectCol": dbCol, "subject": libraryIndex};
+            $.ajax({
+                url: 'ticketLink.php',
+                type: 'post',
+                data: ticketData,
+                success: function (docID) {
+                    var id = JSON.parse(docID);
+                    var libIndexParse = JSON.parse(data.LibraryIndex);
+                    var libraryIndex = libIndexParse[index].libraryIndex;
+                    if(id[index] !== false){
+                        if(index > 0){
+                            indexVal = index-1;
+                            $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + index + '"></span>').insertAfter('#Subject' + indexVal);
+                        }
+                        $('#Subject' + index).html("<a href='../../Templates/" + file + "/review.php?doc=" + id[0] + "&col=" + dbCol + "' target='_blank' >"+ libraryIndex +"</a>");
+                    }
+                }
+            });
+        });
+        //document.getElementById("Subject").innerText = data.LibraryIndex;
         document.getElementById("Description").innerText = data.Description;
 
         /*Input tags compared conditionally with the status data, from the ticket, to determine if it should be
