@@ -65,6 +65,16 @@ require '../../Library/DBHelper.php';
 <?php include '../../Master/footer.php'; ?>
 </body>
 <script>
+
+    //Window Height
+    var windowHeight = window.innerHeight;
+    $('#divscroller').height(windowHeight - (windowHeight * 0.3));
+
+    $(window).resize(function (event) {
+        windowHeight = event.target.innerHeight;
+        $('#divscroller').height(windowHeight - (windowHeight * 0.3));
+    });
+
     var libArray = [];
     $( document ).ready(function() {
         /* attach a submit handler to the form */
@@ -107,7 +117,7 @@ require '../../Library/DBHelper.php';
             val = "";
         $('#divSubject' + (length - 1)).after('' +
          '<div class="divSubject" id="divSubject' + length + '" style="margin-top: 2%">' +
-         '<input type = "text" class="txtSubject" name = "txtSubject" id = "txtSubject0" size="32" value="' + val + '" />' +
+         '<input type = "text" class="txtSubject" name = "txtSubject" id = "txtSubject0" size="32" value="' + val + '" required/>' +
          '</div>');
     }
     

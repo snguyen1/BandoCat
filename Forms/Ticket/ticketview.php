@@ -29,21 +29,25 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
 
 </head>
 <body>
-<table id = "thetable">
-    <tr>
-        <td class="menu_left" id="thetable_left">
+<div id="wrap">
+    <div id="main">
+        <div class="menu_left" id="thetable_left" style="padding: 0px;float:left; width: 20%; overflow-y: auto; overflow-x: hidden">
             <?php include '../../Master/header.php';
             include '../../Master/sidemenu.php' ?>
-        </td>
-        <td class="Collection" id="thetable_right">
-            <h2>Ticket View</h2>
-            <form id="frmTicket" name="frmTicket">
+        </div>
+    </div>
+</div>
+
+<div class="Collection" id="thetable_right" style="float: left; width: 79%; overflow-x: hidden">
+    <h2>Ticket View</h2>
+    <div id="divscroller" style="overflow-x: hidden;overflow-y: auto; padding-right: 2px">
+        <form id="frmTicket" name="frmTicket">
             <table class="Collection_Table" style="width: 95%; font-size: 15px; padding-top: 0%; margin-bottom: 2%; padding-bottom: 1%; margin-top: 4%; margin-bottom: 2%; overflow: auto;">
                 <tr>
                     <td>
                         <div id="Left_Display" style="text-align: left">
                             <h3>Collection Name: <span id="Collection_Name"></span></h3>
-                            <h3>Library Index/Subject: <span class="Subject" id="Subject0"></span></h3>
+                            <div id="libraryIndex"><h3>Library Index/Subject: <span class="Subject" id="Subject0"></span></h3></div>
                             <h3>Description: <span id="Description"></span></h3>
                             <h3>Status:
                                 <input type="radio" value="0" name="Status"><span>Open</span>
@@ -80,19 +84,32 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
                 </tr>
                 <tr>
             </table>
-            </form>
+        </form>
+    </div>
+</div>
 
             <?php include '../../Master/footer.php'; ?>
 
 </body>
 
 <script>
+    //Window Height
+    var windowHeight = window.innerHeight;
+    $('#divscroller').height(windowHeight - (windowHeight * 0.2));
+
+    $(window).resize(function (event) {
+        windowHeight = event.target.innerHeight;
+        $('#divscroller').height(windowHeight - (windowHeight * 0.2));
+    });
+
     $( document ).ready(function() {
         //Variable that stores in a json the information of the ticket retrieved from the database.
         var data = <?php echo json_encode($ticket); ?>;
         //Series of document elements in which the data from the ticket is saved into their inner text.
         document.getElementById("Collection_Name").innerText = data.Collection;
+        //JSON with the libray index information
         var libIdxJSON = JSON.parse(data.LibraryIndex);
+        //Switch statement that selects the collection name and file name to be used to link the ticket with its document
         switch(data.Collection) {
             case 'Blucher Maps':
                 var dbCol = 'bluchermaps';
@@ -118,22 +135,32 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
 
         $.each(libIdxJSON, function (index, obj) {
             var libraryIndex = obj.libraryIndex;
+            //Data to be posted to ticketLink; subject collection and subject name
             var ticketData = {"subjectCol": dbCol, "subject": libraryIndex};
             $.ajax({
                 url: 'ticketLink.php',
                 type: 'post',
                 data: ticketData,
+                //If the function was executed correctly then it will return the document id by querying the database
+                //the ticket library index
                 success: function (docID) {
                     var id = JSON.parse(docID);
                     var libIndexParse = JSON.parse(data.LibraryIndex);
                     var libraryIndex = libIndexParse[index].libraryIndex;
-                    if(id[index] !== false){
+                    //The query successfully selected a document id its number will be retrieved otherwise it will
+                    //false, if not false a span element will be inserted after the first span with id subject with its
+                    //innerHTML with the link to the document
+                    console.log(id);
+                    if(id !== false){
                         if(index > 0){
                             indexVal = index-1;
                             $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + index + '"></span>').insertAfter('#Subject' + indexVal);
                         }
                         $('#Subject' + index).html("<a href='../../Templates/" + file + "/review.php?doc=" + id[0] + "&col=" + dbCol + "' target='_blank' >"+ libraryIndex +"</a>");
                     }
+                    else
+                        $('#Subject' + index).html(libraryIndex)
+
                 }
             });
         });
