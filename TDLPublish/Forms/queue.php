@@ -38,25 +38,25 @@ $Render = new ControlsRender();
             <h2>TDL Publishing Queue</h2>
             <table width="100%">
                 <tr>
-                        <td>
+                    <td>
                         <!-- Form responsible for the select drop down menu -->
                         <form id = "form" name="form" method="post">
                             Select Collection:
                             <select name="ddlCollection" id="ddlCollection">
                                 <!-- Renders the Dropdownlist with the collections -->
-                                <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(4),false),"bluchermaps");?>
+                                <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(4),false),"");?>
                             </select>
                         </form>
-                        </td>
+                    </td>
                 </tr>
                 <tr><td>
-                    <button onclick="startBackgroundWorker()" id="btnStartWorker">Start Background Worker (Testing only)</button>
+                        <button onclick="startBackgroundWorker()" id="btnStartWorker">Start Background Worker (Testing only)</button>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <br/>
-                    <button id="btnPush" name="btnPush" onclick="pushQueue();">Push</button>
+                        <button id="btnPush" name="btnPush" onclick="pushQueue();">Push</button>
                         <select id="ddlHowMany" name="ddlHowMany">
                             <option value="1">1</option>
                             <option value="20">20</option>
@@ -170,12 +170,17 @@ $Render = new ControlsRender();
     /*Submit event that obtains teh information from the user form and calls the newuser_processing.php page, which links to
      a procedure in the database that insert the information into the bandocatdb database in the user table .*/
     $(document).ready(function () {
-        displayLog();
+        //displayLog();
         $( "#ddlCollection" ).change(function() {
             switch ($("#ddlCollection").val())
             {
                 case "": break;
-                default: loadQueue();
+                default: {
+                    console.log("Loading Queue...");
+                    console.log($("#ddlCollection").val());
+                    loadQueue();
+                    //displayLog();
+                }
             }
             //resize height of the scroller
             $("#divscroller").height(450);
@@ -185,11 +190,25 @@ $Render = new ControlsRender();
 
         //Reload queue after 10sec, reload Queue every 10sec
         window.setInterval(function(){
-            loadQueue();
+            if($("#ddlCollection").val() == "")
+            {
+                console.log("Selection box is empty");
+            }
+            else{
+                loadQueue();
+            }
+
         }, 10000);
         //Reload queue after 18sec, reload Log every 10sec
         window.setInterval(function(){
-            displayLog();
+            if($("#ddlCollection").val() == "")
+            {
+                console.log("Selection box is empty");
+            }
+            else{
+                displayLog();
+            }
+            //
         }, 18000);
 
     });
