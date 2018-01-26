@@ -46,80 +46,80 @@ class bitstream{
             $this->type = $type;
 
         exec('certUtil -hashfile "' . $this->path . '" MD5',$output);
-	    $this->md5_checksum = preg_replace('/\s+/', '', $output[1]);
+        $this->md5_checksum = preg_replace('/\s+/', '', $output[1]);
     }
 }
 
-    /*
-     * TDL Status:
-     * -1: Error
-     * 0 : not published
-     * 1 : published
-     * 2 : In Queue
-     *10: publishing front
-     * 11 publishing back
-     */
+/*
+ * TDL Status:
+ * -1: Error
+ * 0 : not published
+ * 1 : published
+ * 2 : In Queue
+ *10: publishing front
+ * 11 publishing back
+ */
 
-    //debug flag
-    $debug = true;
-    if($debug)
-        echo "DEBUG MODE IS ON\n";
-    else echo "DEBUG MODE IS OFF\n";
+//debug flag
+$debug = true;
+if($debug)
+    echo "DEBUG MODE IS ON\n";
+else echo "DEBUG MODE IS OFF\n";
 
-    //prepare
-    $DB = new DBHelper();
-    $DS = new TDLPublishJob();
-    $Schema = new TDLSchema();
+//prepare
+$DB = new DBHelper();
+$DS = new TDLPublishJob();
+$Schema = new TDLSchema();
 
-    //create a log file if not exists
-    $logfilename = "log.txt";
-    if(!file_exists($logfilename))
-        $logfile = fopen($logfilename,"w"); //create log file if not exists (write)
-    else $logfile = fopen($logfilename,"a"); //open log file and append to it if file already exists
+//create a log file if not exists
+$logfilename = "log.txt";
+if(!file_exists($logfilename))
+    $logfile = fopen($logfilename,"w"); //create log file if not exists (write)
+else $logfile = fopen($logfilename,"a"); //open log file and append to it if file already exists
 
-    fwrite($logfile,date(DATE_RFC2822) . ": " . "Job Started.\r\n");
+fwrite($logfile,date(DATE_RFC2822) . ": " . "Job Started.\r\n");
 
-    echo "TDL Publishing job\nLast updated: 04/14/2017\nBy Son Nguyen\n";
-    echo "TDL Publishing job is ready....\n\n...\n...\n";
+echo "TDL Publishing job\nLast updated: 04/14/2017\nBy Son Nguyen\n";
+echo "TDL Publishing job is ready....\n\n...\n...\n";
 
 //*********************************************************************************************************************
-    //Current collection: Blucher Maps (bluchermaps), ID = 1,template Map (use MapDBHelper)
-    $collectionName = "bluchermaps";//change the variable if publishing to new collection
+//Current collection: Blucher Maps (bluchermaps), ID = 1,template Map (use MapDBHelper)
+$collectionName = "bluchermaps";//change the variable if publishing to new collection
 //*********************************************************************************************************************
-    fwrite($logfile,date(DATE_RFC2822) . ": Targeted collection: " . $collectionName . "\r\n");
-    //Dspace Community and collection info:
-    $collection = $DB->GET_COLLECTION_INFO($collectionName);
+fwrite($logfile,date(DATE_RFC2822) . ": Targeted collection: " . $collectionName . "\r\n");
+//Dspace Community and collection info:
+$collection = $DB->GET_COLLECTION_INFO($collectionName);
 
-    $TDLCommunityID = $collection["TDLcommunityID"];
-    $TDLCollectionID = $collection["TDLcollectionID"];
-    while(true){ //infinite loop
-	$docID = null;
+$TDLCommunityID = $collection["TDLcommunityID"];
+$TDLCollectionID = $collection["TDLcollectionID"];
+while(true){ //infinite loop
+    $docID = null;
     //while(!$isEmptyQueue) {
-        //use this database
-        $DB->SWITCH_DB($collectionName);
-        $docID = $DB->PUBLISHING_DOCUMENT_GET_PUBLISHING_ID(); //look for abandoned job
-        //grab the next one
+    //use this database
+    $DB->SWITCH_DB($collectionName);
+    $docID = $DB->PUBLISHING_DOCUMENT_GET_PUBLISHING_ID(); //look for abandoned job
+    //grab the next one
+    if ($docID == null) {
+        $docID = $DB->PUBLISHING_DOCUMENT_GET_NEXT_IN_QUEUE_ID();
         if ($docID == null) {
-            $docID = $DB->PUBLISHING_DOCUMENT_GET_NEXT_IN_QUEUE_ID();
-            if ($docID == null) {
-                echo "\nThere is no item in the Queue. Sleep for 30 seconds.";
-                //fwrite($logfile,date(DATE_RFC2822) . ": " . "No item in the Queue.\r\n");
-                sleep(30);
-                //break;
-					//re-run (testing)
-					$DB = null;
-					$DS = null;
-					$Schema = null;
-				    //prepare
-					$DB = new DBHelper();
-					$DS = new TDLPublishJob();
-					$Schema = new TDLSchema();
-            }
+            echo "\nThere is no item in the Queue. Sleep for 30 seconds.";
+            //fwrite($logfile,date(DATE_RFC2822) . ": " . "No item in the Queue.\r\n");
+            sleep(30);
+            //break;
+            //re-run (testing)
+            $DB = null;
+            $DS = null;
+            $Schema = null;
+            //prepare
+            $DB = new DBHelper();
+            $DS = new TDLPublishJob();
+            $Schema = new TDLSchema();
         }
-		
+    }
 
-		if($docID != null)		//begin if[1]
-		{
+
+    if($docID != null)		//begin if[1]
+    {
         //add more case if there are new templates
         //get document info
         switch($collection["templateID"])
@@ -200,9 +200,9 @@ class bitstream{
                 break;
             case 10:
             case 11:
-            $dspaceID = $doc_dspace["dspaceID"];
-            $dspaceURI = $doc_dspace["dspaceURI"];
-            fwrite($logfile,date(DATE_RFC2822) . ": " . " Continue working on abandoned job. DspaceID: $dspaceID | DspaceURI : $dspaceURI.\r\n");
+                $dspaceID = $doc_dspace["dspaceID"];
+                $dspaceURI = $doc_dspace["dspaceURI"];
+                fwrite($logfile,date(DATE_RFC2822) . ": " . " Continue working on abandoned job. DspaceID: $dspaceID | DspaceURI : $dspaceURI.\r\n");
                 break;
             default: fwrite($logfile,date(DATE_RFC2822) . ": " . " Unknown dspacePublished status code " . $doc_dspace["dspacePublished"] . ". Job Ended.\r\n");
                 fclose($logfile);
@@ -306,7 +306,7 @@ class bitstream{
         //cleaning
         exec("del " . str_replace('/','\\',$jpgFilePath));
         if($hasBack)
-        exec("del " . str_replace('/','\\',$jpgFilePathBack));
+            exec("del " . str_replace('/','\\',$jpgFilePathBack));
 
         $DB->PUBLISHING_DOCUMENT_UPDATE_STATUS($docID,1); //set status to Published
 
@@ -343,10 +343,10 @@ class bitstream{
         } //set status to 11
 
         //$isEmptyQueue = true; //break the loop, for testing
-		}//end if [1]
-    }
+    }//end if [1]
+}
 
-    echo "\n...\n...\n...\nEnd Job...";
-    fwrite($logfile,date(DATE_RFC2822) . ": " . "Job Ended.\r\n");
-    fclose($logfile);
-    return;
+echo "\n...\n...\n...\nEnd Job...";
+fwrite($logfile,date(DATE_RFC2822) . ": " . "Job Ended.\r\n");
+fclose($logfile);
+return;
