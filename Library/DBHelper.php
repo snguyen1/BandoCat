@@ -1294,7 +1294,7 @@ class DBHelper
         if($bolDB){
             /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
             // selects the weeks from weeklyreport db that satisfy the year and collection id parameters
-            $call = $this->getConn()->prepare("SELECT `documentID` FROM `document` WHERE `libraryindex` = :iSubject");
+            $call = $this->getConn()->prepare("SELECT `documentID`, `libraryindex` FROM `document` WHERE `libraryindex` = :iSubject");
 
 
             //bind variables to the above sql statement

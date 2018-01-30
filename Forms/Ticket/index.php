@@ -76,7 +76,7 @@ else header('Location: ../../');
                                     break;
                             }
                             //Object with subject collection and subject/library index
-                            var subCol = {"subjectCol": dbCol, "subject": data};
+                            var subCol = {"data":[{"subjectCol": dbCol, "subject": data}]};
 
                             $.ajax({
                                 url: 'ticketLink.php',
@@ -87,7 +87,7 @@ else header('Location: ../../');
                                     docID = id;
                                     var td = $('td:contains('+data+')')[0];
                                     if(docID !== false)
-                                        $(td).html("<a href='../../Templates/" + file + "/review.php?doc=" + id[0] + "&col=" + dbCol + "' target='_blank' >"+ data +"</a>")
+                                        $(td).html("<a href='../../Templates/" + file + "/review.php?doc=" + id.data[0][0] + "&col=" + dbCol + "' target='_blank' >"+ id.data[0][1] +"</a>")
                                 }
                             });
                             return data
