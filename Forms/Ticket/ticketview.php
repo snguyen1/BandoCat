@@ -133,37 +133,63 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
                 break;
         }
 
+        var libCount = 0;
+        var ticketData = {};
+        ticketData['data'] = [];
         $.each(libIdxJSON, function (index, obj) {
             var libraryIndex = obj.libraryIndex;
             //Data to be posted to ticketLink; subject collection and subject name
-            var ticketData = {"subjectCol": dbCol, "subject": libraryIndex};
-            $.ajax({
-                url: 'ticketLink.php',
-                type: 'post',
-                data: ticketData,
-                //If the function was executed correctly then it will return the document id by querying the database
-                //the ticket library index
-                success: function (docID) {
-                    var id = JSON.parse(docID);
-                    var libIndexParse = JSON.parse(data.LibraryIndex);
-                    var libraryIndex = libIndexParse[index].libraryIndex;
-                    //The query successfully selected a document id its number will be retrieved otherwise it will
-                    //false, if not false a span element will be inserted after the first span with id subject with its
-                    //innerHTML with the link to the document
-                    console.log(id);
-                    if(id !== false){
-                        if(index > 0){
-                            indexVal = index-1;
-                            $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + index + '"></span>').insertAfter('#Subject' + indexVal);
-                        }
-                        $('#Subject' + index).html("<a href='../../Templates/" + file + "/review.php?doc=" + id[0] + "&col=" + dbCol + "' target='_blank' >"+ libraryIndex +"</a>");
-                    }
-                    else
-                        $('#Subject' + index).html(libraryIndex)
-
-                }
-            });
+            //ticketData = {"subjectCol": dbCol, "subject": libraryIndex};
+            ticketData['data'].push({"subjectCol": dbCol, "subject": libraryIndex});
         });
+        //ticketDataStr = JSON.stringify("{" +ticketData + "}");
+
+        ticketDataJSON = JSON.parse(JSON.stringify("{" + ticketData + "}"));
+        DataJSON = JSON.parse(JSON.stringify(ticketDataJSON));
+        console.log(ticketData);
+
+        $.ajax({
+            url: 'ticketLink.php',
+            type: 'post',
+            data: ticketData,
+            //If the function was executed correctly then it will return the document id by querying the database
+            //the ticket library index
+            success: function (libData) {
+                var libInfo = JSON.parse(libData);
+                $.each(libInfo, function (data, info) {
+                    for(var ticket = 0; ticket < info.length; ticket++){
+                        documentID = info[ticket][0];
+                        documentLibIndex = info[ticket][1];
+                        if(documentID !== false){
+                            if(libCount > 0){
+                                //Previous subject element index to insertAfter
+                                indexVal = libCount-1;
+                                $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + libCount + '"></span>').insertAfter('#Subject' + indexVal);
+                            }
+                            //Link
+                            $('#Subject' + libCount).html("<a href='../../Templates/" + file + "/review.php?doc=" + documentID + "&col=" + dbCol + "' target='_blank' >"+ documentLibIndex +"</a>");
+                            libCount++
+                        }
+                        else{
+                            if(libCount > 0){
+                                //Previous subject element index to insertAfter
+                                indexVal = libCount-1;
+                                $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + libCount + '"></span>').insertAfter('#Subject' + indexVal);
+                            }
+                            $('#Subject' + libCount).html(documentLibIndex);
+                            libCount++
+                        }
+                    }
+                });
+                var libIndexParse = JSON.parse(data.LibraryIndex);
+                var libraryIndex = libIndexParse[libCount].libraryIndex;
+                //The query successfully selected a document id its number will be retrieved otherwise it will
+                //false, if not false a span element will be inserted after the first span with id subject with its
+                //innerHTML with the link to the document
+
+            }
+        });
+
         //document.getElementById("Subject").innerText = data.LibraryIndex;
         document.getElementById("Description").innerText = data.Description;
 
