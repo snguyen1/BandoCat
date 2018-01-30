@@ -599,10 +599,6 @@ $georec_status = $DB->DOCUMENT_GEORECSTATUS_SELECT($_GET['docID'],$isBack);
             document.getElementById('deletePrevious').disabled = true;
             document.getElementById('setStatus').disabled = true;
             document.getElementById('rectify').disabled = true;
-
-
-
-
         }
         //load the points into the map and raster if there is any
         var entries = <?php echo json_encode($georec_entries); ?>;

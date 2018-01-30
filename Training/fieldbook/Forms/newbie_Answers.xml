@@ -64,13 +64,13 @@
 		<loosedocument>0</loosedocument>
 		<needsreview>1</needsreview>
 		<author></author>
-		<crewmember><name>undefined</name></crewmember>
+		<crewmember><name></name></crewmember>
 
 		<startmonth>00</startmonth>
 		<startday>00</startday>
 		<startyear>0000</startyear>
 		<endmonth>00</endmonth>
-		<endday>000</endday>
+		<endday>00</endday>
 		<endyear>0000</endyear>
 		<comments>Index</comments>
 		<frontimage>0360-006.tif</frontimage>

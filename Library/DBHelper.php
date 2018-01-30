@@ -481,7 +481,7 @@ class DBHelper
      * $iDescription (in string) - description of what goes wrong
      * Return value(s): true if success, false if fail
      ***********************************************/
-    function SP_TICKET_INSERT($iSubject, $iPosterID, $iCollectionID, $iDescription)
+    function SP_TICKET_INSERT($iSubject, $iPosterID, $iCollectionID, $iDescription, $iLibraryIndex)
     {
         //Switch to correct DB
         $this->getConn()->exec('USE ' . $this->maindb);
@@ -489,8 +489,8 @@ class DBHelper
         /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
         //The ? in the functions parameter list is a variable that we bind a few lines down.
         //CALL is sql for calling the function built into the db at localhost/phpmyadmin
-        $call = $this->getConn()->prepare("CALL SP_TICKET_INSERT(?,?,?,?)");
-        //Error handleing
+        $call = $this->getConn()->prepare("CALL SP_TICKET_INSERT(?,?,?,?,?)");
+        //Error handling
         if (!$call)
             trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
         //bind parameters to the sql statement
@@ -498,6 +498,7 @@ class DBHelper
         $call->bindParam(2, $iPosterID, PDO::PARAM_INT);
         $call->bindParam(3, $iCollectionID, PDO::PARAM_INT);
         $call->bindParam(4, $iDescription, PDO::PARAM_STR, strlen($iDescription));
+        $call->bindParam(5, $iLibraryIndex, PDO::PARAM_STR, strlen($iLibraryIndex));
         /* EXECUTE STATEMENT */
         $call->execute();
         if ($call)
@@ -652,7 +653,7 @@ class DBHelper
         /* PREPARE STATEMENT */
         /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
         // sql statement CALL calls the function pointed to in the db
-        $call = $this->getConn()->prepare("CALL SP_ADMIN_TICKET_SELECT(?,@oSubject,@oSubmissionDate,@oSolvedDate,@oPoster,@oCollection,@oDescription,@oNotes,@oSolver,@oStatus,@oLastSeen)");
+        $call = $this->getConn()->prepare("CALL SP_ADMIN_TICKET_SELECT(?,@oSubject,@oSubmissionDate,@oSolvedDate,@oPoster,@oCollection,@oDescription,@oNotes,@oSolver,@oStatus,@oLastSeen,@oLibraryIndex)");
         if (!$call)
             trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
         //bind variable to the ? in the above call statement
@@ -661,7 +662,7 @@ class DBHelper
         $call->execute();
         /* RETURN RESULT */
         //select appropriate ticket
-        $select = $this->getConn()->query('SELECT @oSubject AS Subject,@oSubmissionDate AS SubmissionDate,@oSolvedDate AS SolvedDate,@oPoster AS Submitter,@oCollection AS Collection,@oDescription AS Description,@oNotes AS Notes,@oSolver AS Solver,@oStatus AS Status,@oLastSeen AS LastSeen');
+        $select = $this->getConn()->query('SELECT @oSubject AS Subject,@oSubmissionDate AS SubmissionDate,@oSolvedDate AS SolvedDate,@oPoster AS Submitter,@oCollection AS Collection,@oDescription AS Description,@oNotes AS Notes,@oSolver AS Solver,@oStatus AS Status,@oLastSeen AS LastSeen, @oLibraryIndex AS LibraryIndex');
         //return appropriate ticket
         $result = $select->fetch(PDO::FETCH_ASSOC);
         return $result;
