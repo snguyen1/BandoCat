@@ -84,9 +84,8 @@ else header('Location: ../../');
                                 data: subCol,
                                 success: function (id) {
                                     id = JSON.parse(id);
-                                    docID = id;
                                     var td = $('td:contains('+data+')')[0];
-                                    if(docID !== false)
+                                    if(id.data[0][0] != false)
                                         $(td).html("<a href='../../Templates/" + file + "/review.php?doc=" + id.data[0][0] + "&col=" + dbCol + "' target='_blank' >"+ id.data[0][1] +"</a>")
                                 }
                             });
