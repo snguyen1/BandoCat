@@ -47,7 +47,14 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
                     <td>
                         <div id="Left_Display" style="text-align: left">
                             <h3>Collection Name: <span id="Collection_Name"></span></h3>
-                            <div id="libraryIndex"><h3>Library Index/Subject: <span class="Subject" id="Subject0"></span></h3></div>
+                            <div id="libraryIndex">
+                                <h3>Library Index/Subject:
+                                    <span class="Subject" id="Subject0"></span>
+                                </h3>
+                                <table id="libraryIndexList" style="margin-left: 5%">
+                                    <tr id="libraryIndexRow0"></tr>
+                                </table>
+                            </div>
                             <h3>Description: <span id="Description"></span></h3>
                             <h3>Status:
                                 <input type="radio" value="0" name="Status"><span>Open</span>
@@ -159,24 +166,30 @@ $ticket = $DB->SP_ADMIN_TICKET_SELECT($tID); //assoc array contains ticket info
                         documentID = info[ticket][0];
                         //Library Index
                         documentLibIndex = info[ticket][1];
+
+                        /*LINK*/
                         //If the document id was fetched from database
                         if(documentID !== false){
                             if(ticket > 0){
-                                //Previous subject element index to insertAfter
-                                indexVal = ticket-1;
-                                $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + ticket + '"></span>').insertAfter('#Subject' + indexVal);
+                                $('#libraryIndexList tr:last').html("<a href='../../Templates/" + file + "/review.php?doc=" + documentID + "&col=" + dbCol + "' target='_blank' >"+ documentLibIndex +"</a>");
                             }
-                            /*LINK*/
-                            $('#Subject' + ticket).html("<a href='../../Templates/" + file + "/review.php?doc=" + documentID + "&col=" + dbCol + "' target='_blank' >"+ documentLibIndex +"</a>");
+                            else
+                                $('#libraryIndexRow' + ticket).html("<a href='../../Templates/" + file + "/review.php?doc=" + documentID + "&col=" + dbCol + "' target='_blank' >"+ documentLibIndex +"</a>");
+                            //Inserts a row to the last after the last row element in the table
+                            var tc = ticket + 1;
+                            $('#libraryIndexList tr:last').after('<tr id="libraryIndexRow"' + tc + '></tr>');
                         }
+
+                        /*NO LINK*/
                         else{
                             if(ticket > 0){
-                                //Previous subject element index to insertAfter
-                                indexVal = ticket-1;
-                                $('</br><span class="Subject" style="margin-left: 32.5%" id="Subject' + ticket + '"></span>').insertAfter('#Subject' + indexVal);
+                                $('#libraryIndexList tr:last').html(documentLibIndex);
                             }
-                            /*NO LINK*/
-                            $('#Subject' + ticket).html(documentLibIndex);
+                            else
+                                $('#libraryIndexRow' + ticket).html(documentLibIndex);
+                            //Inserts a row to the last after the last row element in the table
+                            var tc = ticket + 1;
+                            $('#libraryIndexList tr:last').after('<tr id="libraryIndexRow"' + tc + '></tr>');
                         }
                     }
                 });
