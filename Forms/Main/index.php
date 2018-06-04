@@ -110,6 +110,40 @@ require '../../Library/AnnouncementDBHelper.php';
 
                     break;
                 }
+                //if asteroids
+                if (value == "65")
+                {
+                    if(down[index+1] == "83")
+                    {
+                        if(down[index+2] == "84")
+                        {
+                            if(down[index+3] == "69")
+                            {
+                                if(down[index+4] == "82")
+                                {
+                                    if(down[index+5] == "79")
+                                    {
+                                        if(down[index+6] == "73")
+                                        {
+                                            if(down[index+7] == "68")
+                                            {
+                                                if(down[index+8] == "83")
+                                                {
+                                                    window.location.replace("../Main/index_asteroids.php");
+                                                    // ../../Transcription/Indices/list.php?
+                                                    down.length = 0;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                }
             }
 
             // down.length = 0;

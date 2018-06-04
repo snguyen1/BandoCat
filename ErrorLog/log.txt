@@ -88,3 +88,4 @@
 2017-06-22 03:21:19pmJMartinez @bluchermaps - documentID:CO-_13.152.tif: Front Map: EXISTED,Failed to Submit!,
 2017-07-26 09:16:56amJMartinez @bluchermaps - documentID:7700: Success!,
 >>>>>>> 614751967c3bff714b7668db1f72e8fdf78ecc35
+2018-04-25 12:08:31pmsallred @pennyfenner - documentID:1-_52  .tif: Front Map: EXISTED,Failed to Submit!,

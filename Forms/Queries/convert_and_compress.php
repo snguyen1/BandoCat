@@ -30,6 +30,8 @@ $Render = new ControlsRender();
 
     <div id="main">
 
+
+
             <!-- HTML Header and Side Menu -->
         <div id="divleft">
                     <?php include '../../Master/header.php';
@@ -37,8 +39,17 @@ $Render = new ControlsRender();
         </div>
         <div id="divright">
 
+
+
+
                     <h2 id="page_title">Convert and Compress To PDF</h2>
+
                     <table width="100%" id="table-header_right">
+                        <div id="modal_2" style="position: fixed; left: 50%; top: 50%">
+                            <img style=" visibility: hidden;
+
+                                  margin: auto; /* presto! */" id="loader_2" src="../../Images/loading.gif" />
+                        </div>
                         <tr>
                             <td style="margin-left: 45% ;font-size:14px" colspan="5%"
                             <td style="float:left;font-size:14px" colspan="5%">
@@ -85,14 +96,7 @@ $Render = new ControlsRender();
         </div>
 
     </div>
-    <div id="modal_2">
-        <img style=" visibility: hidden; position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto; /* presto! */" id="loader_2" src="../../Images/loading.gif" />
-    </div>
+
 </div>
 <?php include '../../Master/footer.php'; ?>
 </body>
@@ -120,71 +124,73 @@ $Render = new ControlsRender();
      *******************************************/
     function SSP_DataTable(collection)
     {
-        document.getElementById("loader_2").style.visibility = "visible";
+       // document.getElementById("loader_2").style.visibility = "visible";
         //create new DataTable with 6 parameters and assign table to #dtable
         //options can be found at https://datatables.net/reference/option/
-        var table = $('#dtable').DataTable( {
-            //Enables display of a processing indicator
-            "processing": true,
-            //Toggles serverside processing
-            "serverSide": true,
-            //Specifys the entries in the length dropdown select list
-            "lengthMenu": [20, 40 , 60, 80, 100],
-            "bStateSave": false,
-            //Initialise a datatable as usual, but if there is an existing table which matches the selector
-            //it will be destroyed and replaced with the new table
-            "destroy": true,
-            //Allows you to assign specific options to columns in the table
-            "columnDefs":
-                [
-                    {
-
-                        "render": function ( data, type, row )
+        if(collection == "jobfolder")
+        {
+            var table = $('#dtable').DataTable( {
+                //Enables display of a processing indicator
+                "processing": true,
+                //Toggles serverside processing
+                "serverSide": true,
+                //Specifys the entries in the length dropdown select list
+                "lengthMenu": [20, 40 , 60, 80, 100],
+                "bStateSave": false,
+                //Initialise a datatable as usual, but if there is an existing table which matches the selector
+                //it will be destroyed and replaced with the new table
+                "destroy": true,
+                //Allows you to assign specific options to columns in the table
+                "columnDefs":
+                    [
                         {
-                            //print_r(data);
-                          //  var_dump(data);
-                           // var data = table.row( $(this).parents('tr') ).data();
-                          //  console.log(row[1]);
-                           // alert(row[1]);
-                            //alert( data );  alert('weee');
-                            //NEEDS REVIEW
 
-                            if(document.getElementById('ddlCollection2').value == 0)
+                            "render": function ( data, type, row )
                             {
+                                //print_r(data);
+                                //  var_dump(data);
+                                // var data = table.row( $(this).parents('tr') ).data();
+                                //  console.log(row[1]);
+                                // alert(row[1]);
+                                //alert( data );  alert('weee');
+                                //NEEDS REVIEW
 
-                                //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
-                                return "<a target='_blank'  href='/BandoCat/Templates/FieldBook/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
-                            }
-                            //READY FOR PDF
-                            if(document.getElementById('ddlCollection2').value == 1)
-                            {
-                                
-                                //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
-                                return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
-                            }
-                            //COMPLETED
-                            if(document.getElementById('ddlCollection2').value == 2)
-                            {
+                                if(document.getElementById('ddlCollection2').value == 0)
+                                {
 
-                                //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
-                                return "<a target='_blank'  href='/BandoCat/Templates/FieldBook/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
-                            }
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a target='_blank'  href='/BandoCat/Templates/Folder/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
+                                }
+                                //READY FOR PDF
+                                if(document.getElementById('ddlCollection2').value == 1)
+                                {
 
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                }
+                                //COMPLETED
+                                if(document.getElementById('ddlCollection2').value == 2)
+                                {
+
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a target='_blank'  href='/BandoCat/Templates/Folder/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
+                                }
+
+                            },
+                            "targets": 2
                         },
-                        "targets": 2
-                    },
-                {
-                    "searchable": false, "targets": [0,2],
-                }
-                ],
-            //Use ajax to pass data to the table. collection contains the db info
+                        {
+                            "searchable": false, "targets": [0,2],
+                        }
+                    ],
+                //Use ajax to pass data to the table. collection contains the db info
 
                 "ajax":
                 {
                     url: "convert_and_compress_processing.php?col=" +collection + "&stage=" + document.getElementById('ddlCollection2').value
                     , dataType: "json"
                     ,  complete: function() {
-                    document.getElementById("loader_2").style.visibility = "hidden";
+                  //  document.getElementById("loader_2").style.visibility = "hidden";
                 }
                     , error: function (xhr, error, thrown)
                 {
@@ -198,7 +204,92 @@ $Render = new ControlsRender();
 
 
 
-        } );
+            } );
+        }
+        if(collection == "blucherfieldbook")
+        {
+            var table = $('#dtable').DataTable( {
+                //Enables display of a processing indicator
+                "oLanguage" :
+                {
+                    "sProcessing": "<figure style='background: white;border-radius: 10px;box-shadow: 0 0 20px; blur-radius:10px; padding: 10px; position:absolute; top:40%;left:42%'><img src='../../Images/loading2.gif'> <figcaption><b> Loading. Please wait...</b></figcaption></figure>"
+                },
+                "processing": true,
+                //Toggles serverside processing
+                "serverSide": true,
+                //Specifys the entries in the length dropdown select list
+                "lengthMenu": [20, 40 , 60, 80, 100],
+                "bStateSave": false,
+                //Initialise a datatable as usual, but if there is an existing table which matches the selector
+                //it will be destroyed and replaced with the new table
+                "destroy": true,
+                //Allows you to assign specific options to columns in the table
+                "columnDefs":
+                    [
+                        {
+
+                            "render": function ( data, type, row )
+                            {
+                                //print_r(data);
+                                //  var_dump(data);
+                                // var data = table.row( $(this).parents('tr') ).data();
+                                //  console.log(row[1]);
+                                // alert(row[1]);
+                                //alert( data );  alert('weee');
+                                //NEEDS REVIEW
+
+                                if(document.getElementById('ddlCollection2').value == 0)
+                                {
+
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a target='_blank'  href='/BandoCat/Templates/FieldBook/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
+                                }
+                                //READY FOR PDF
+                                if(document.getElementById('ddlCollection2').value == 1)
+                                {
+
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                }
+                                //COMPLETED
+                                if(document.getElementById('ddlCollection2').value == 2)
+                                {
+
+                                    //return "<a href='' onclick=onClickCalculate(event,document.getElementById('ddlCollection').value)>Select</a>" ;
+                                    return "<a target='_blank'  href='/BandoCat/Templates/FieldBook/index.php?&col=" + $('#ddlCollection').val() + "&pagekey=review'>Edit/View</a>"
+                                }
+
+                            },
+                            "targets": 2
+                        },
+                        {
+                            "searchable": false, "targets": [0,2],
+                        }
+                    ],
+                //Use ajax to pass data to the table. collection contains the db info
+
+                "ajax":
+                {
+                    url: "convert_and_compress_processing.php?col=" +collection + "&stage=" + document.getElementById('ddlCollection2').value
+                    , dataType: "json"
+                    ,  complete: function() {
+                   // document.getElementById("loader_2").style.visibility = "hidden";
+                }
+                    , error: function (xhr, error, thrown)
+                {
+                    alert("An error occurred while attempting to retrieve data via ajax.\n"+thrown );
+                }
+
+                },
+
+
+
+
+
+
+            } );
+        }
+
 
 
         table.column(0).visible(false);
@@ -316,24 +407,40 @@ $Render = new ControlsRender();
 
         document.getElementById("loader_2").style.visibility = "visible";
        // alert(tableAADataForContributors.fnGetPosition( $(this).closest('tr')[0]));
-        if (Query.length == 0) {
+        if (Query.length == 0)
+        {
             document.getElementById("txt_counter").innerHTML = "";
             return;
-        } else {
+        }
+        else
+        {
+            var Column = "needsreview";
+            var BookTitle = event.path[2].firstChild.textContent;
+//            $.ajax({
+//                type: 'post',
+//                url: 'QueryHelper.php',
+//                data: $('form').serialize(), col: Query, column: Column, booktitle: BookTitle, stage: 2,
+//                success: function ()
+//                {
+//                    alert('form was submitted');
+//                }
+//            });
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
+            xmlhttp.onreadystatechange = function()
+            {
                 if (this.readyState == 4 && this.status == 200)
                 {
                     alert(xmlhttp.responseText);
                    // document.getElementById("txt_counter").innerHTML = this.responseText;
                 }
-                if (xhr.readyState == XMLHttpRequest.DONE) {
-                    alert(xhr.responseText);
+                if (xhr.readyState == XMLHttpRequest.DONE)
+                {
+                   // alert(xhr.responseText);
                 }
 
             };
-            var Column = "needsreview";
-            var BookTitle = event.path[2].firstChild.textContent;
+
+
             xmlhttp.open("GET", "QueryHelper.php?col=" + Query + "&column=" + Column + "&booktitle=" + BookTitle + "&stage=2", true);
             xmlhttp.send();
 

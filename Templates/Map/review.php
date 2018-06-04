@@ -13,7 +13,15 @@ if(isset($_GET['col']) && isset($_GET['doc']))
     //get appropriate DB
     $config = $DB->SP_GET_COLLECTION_CONFIG($collection);
     //find the document by passing collection and docid
-    $document = $DB->SP_TEMPLATE_MAP_DOCUMENT_SELECT($collection,$docID);
+    if($collection != "pennyfenner")
+    {
+        $document = $DB->SP_TEMPLATE_MAP_DOCUMENT_SELECT($collection,$docID);
+    }
+    else if($collection == "pennyfenner")
+    {
+        $document = $DB->SP_TEMPLATE_MAP_DOCUMENT_WITH_JOBNUMBER_SELECT($collection,$docID);
+    }
+
     //var_dump($document);
 }
 else header('Location: ../../');
@@ -132,6 +140,16 @@ $date = new DateHelper();
                             <td><span class="label">Map Scale:</span></td>
                             <td> <input type = "text" name = "txtMapScale" id = "txtMapScale" size="26" value="<?php echo htmlspecialchars($document['MapScale'],ENT_QUOTES); ?>"  />
                             </td>
+                            <?php if($collection == "pennyfenner") : ?>
+                                <td>
+                                    <!-- FIELD BOOK NUMBER -->
+                                    <span class="label">Job Number:</span>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "txtJobNumber" id = "txtJobNumber" size="26" value="<?php if($document['JobNumber'] != 0 && $document['JobNumber'] != null) {echo htmlspecialchars($document['JobNumber'],ENT_QUOTES);} ?>"/><span class = "errorInput" id = "customernameErr"></span>
+                                </td>
+
+                            <?php endif; ?>
                             <td>
                                 <!-- FIELD BOOK NUMBER -->
                                 <span class="label">Field Book Number:</span>
@@ -227,13 +245,18 @@ $date = new DateHelper();
                                 <input type = "radio" name = "rbHasPOI" id = "rbHasPOI_yes" size="26" value="1" <?php if($document['HasPOI'] == 1) echo "checked"; ?>/>Yes
                                 <input type = "radio" name = "rbHasPOI" id = "rbHasPOI_no" size="26" value="0"  <?php if($document['HasPOI'] == 0) echo "checked"; ?>/>No
                             </td>
-                            <td>
-                                <!-- DOCUMENT TYPE-->
-                                <span class="label">Document Type:</span>
-                            </td>
-                            <td>
-                                <input type = "text" name = "txtType" id = "txtType" size="26" value="<?php echo htmlspecialchars($document['Type'],ENT_QUOTES);?>" />
-                            </td>
+
+
+                            <?php if($collection != "pennyfenner") : ?>
+                                <td>
+                                    <!-- DOCUMENT TYPE-->
+                                    <span class="label">Document Type:</span>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "txtType" id = "txtType" size="26" value="<?php echo htmlspecialchars($document['Type'],ENT_QUOTES);?>" />
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
                         <tr>
                             <td>

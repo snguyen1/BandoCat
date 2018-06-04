@@ -308,6 +308,56 @@ class FieldBookDBHelper extends DBHelper
         } else return false;
     }
     /**********************************************
+     * Function: GET_FIELDBOOK_COLLECTION_LIST
+     * Description: attempts to get the list of fieldbook collection names
+     * Parameter(s):
+     * $collection (in string) - name of the collection
+     * Return value(s):
+     * True if good, False if fail
+     ***********************************************/
+    function GET_ALL_FIELDBOOK_FILENAMES_BY_BOOKTITLE_ORDERBY_JOBNUMBER($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //selects the fieldbook collection names from the fieldbook collection
+            //$sth = $this->getConn()->prepare("SELECT libraryindex, jobnumber,startdate,enddate,indexedpage,filenamepath,jobtitle FROM `document` WHERE `booktitle` = :booktitle ORDER BY `jobnumber`");
+            $sth = $this->getConn()->prepare("SELECT libraryindex, jobnumber,startdate,enddate,indexedpage,filenamepath,jobtitle,booktitle FROM `document` WHERE `booktitle` = :booktitle");
+            $sth->bindParam(':booktitle',$booktitle,PDO::PARAM_STR);
+            $sth->execute();
+            //return the collection names
+            $result = $sth->fetchAll(PDO::FETCH_NUM);
+            return $result;
+        } else return false;
+    }
+    /**********************************************
+     * Function: GET_FIELDBOOK_COLLECTION_LIST
+     * Description: attempts to get the list of fieldbook collection names
+     * Parameter(s):
+     * $collection (in string) - name of the collection
+     * Return value(s):
+     * True if good, False if fail
+     ***********************************************/
+    function GET_ALL_DISTINT_JOBNUMBER($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //selects the fieldbook collection names from the fieldbook collection
+            $sth = $this->getConn()->prepare("SELECT DISTINCT jobnumber FROM `document` WHERE `booktitle` = :booktitle");
+            $sth->bindParam(':booktitle',$booktitle,PDO::PARAM_STR);
+            $sth->execute();
+            //return the collection names
+            $result = $sth->fetchAll(PDO::FETCH_NUM);
+            return $result;
+        } else return false;
+    }
+
+    /**********************************************
      * Function: UPDATE_FIELDBOOK_READYFORPDF
      * Description: attempts to get the list of fieldbook collection names
      * Parameter(s):

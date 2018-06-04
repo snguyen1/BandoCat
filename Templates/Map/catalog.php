@@ -242,6 +242,13 @@ $date = new DateHelper();
                                     <?php $Render->GET_DDL_YEAR(null); ?>
                                 </select>
                             </div>
+                            <?php if($collection == "pennyfenner") : ?>
+                                <div class="cell">
+                                    <!-- Job Number33334 NUMBER -->
+                                    <span class="label">Job Number:</span>
+                                    <input type = "text" name = "txtJobNumber" id = "txtJobNumber" size="26" value=""/>
+                                </div>
+                            <?php endif; ?>
                             <div class="cell">
                                 <!-- FIELD BOOK NUMBER -->
                                 <span class="label">Field Book Number:</span>
@@ -280,11 +287,13 @@ $date = new DateHelper();
                                     <?php $Render->getDataList($DB->GET_COMPANY_LIST($collection)); ?>
                                 </datalist>
                             </div>
-                            <div class="cell">
-                                <!-- DOCUMENT TYPE-->
-                                <span class="label">Document Type:</span>
-                                <input type = "text" name = "txtType" id = "txtType" size="26" value="" />
-                            </div>
+                            <?php if($collection != "pennyfenner") : ?>
+                                <div class="cell">
+                                    <!-- DOCUMENT TYPE-->
+                                    <span class="label">Document Type:</span>
+                                    <input type = "text" name = "txtType" id = "txtType" size="26" value="" />
+                                </div>
+                            <?php endif; ?>
                             <div class="cell">
                                 <!-- DOCUMENT MEDIUM -->
                                 <span class="label"><span style = "color:red;"> * </span>Document Medium:</span>

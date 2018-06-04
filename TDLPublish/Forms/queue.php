@@ -38,7 +38,7 @@ $Render = new ControlsRender();
             <h2>TDL Publishing Queue</h2>
             <table width="100%">
                 <tr>
-                    <td>
+                        <td>
                         <!-- Form responsible for the select drop down menu -->
                         <form id = "form" name="form" method="post">
                             Select Collection:
@@ -47,16 +47,16 @@ $Render = new ControlsRender();
                                 <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(4),false),"");?>
                             </select>
                         </form>
-                    </td>
+                        </td>
                 </tr>
                 <tr><td>
-                        <button onclick="startBackgroundWorker()" id="btnStartWorker">Start Background Worker (Testing only)</button>
+                    <button onclick="startBackgroundWorker()" id="btnStartWorker">Start Background Worker (Testing only)</button>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <br/>
-                        <button id="btnPush" name="btnPush" onclick="pushQueue();">Push</button>
+                    <button id="btnPush" name="btnPush" onclick="pushQueue();">Push</button>
                         <select id="ddlHowMany" name="ddlHowMany">
                             <option value="1">1</option>
                             <option value="20">20</option>
@@ -176,38 +176,38 @@ $Render = new ControlsRender();
             {
                 case "": break;
                 default: {
-                    console.log("Loading Queue...");
-                    console.log($("#ddlCollection").val());
-                    loadQueue();
-                    //displayLog();
-                }
+					console.log("Loading Queue...");
+					console.log($("#ddlCollection").val());
+					loadQueue();
+					//displayLog();
+				}
             }
             //resize height of the scroller
             $("#divscroller").height(450);
         });
 
         $("#ddlCollection").change(); //run this when the page is loaded
-
+		
         //Reload queue after 10sec, reload Queue every 10sec
         window.setInterval(function(){
-            if($("#ddlCollection").val() == "")
-            {
-                console.log("Selection box is empty");
-            }
-            else{
-                loadQueue();
-            }
-
+			if($("#ddlCollection").val() == "")
+			{
+				console.log("Selection box is empty");
+			}
+			else{
+				loadQueue();
+			}
+            
         }, 10000);
         //Reload queue after 18sec, reload Log every 10sec
         window.setInterval(function(){
-            if($("#ddlCollection").val() == "")
-            {
-                console.log("Selection box is empty");
-            }
-            else{
-                displayLog();
-            }
+			if($("#ddlCollection").val() == "")
+			{
+				console.log("Selection box is empty");
+			}
+			else{
+				displayLog();
+			}
             //
         }, 18000);
 

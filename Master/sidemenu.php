@@ -42,14 +42,16 @@
 
     </script>
     <!-- Collections Tab -->
-    <div class="menu-item menu-item_sub5">
+    <div class="menu-item menu-item_sub6">
         <h4><a href="#">Collections</a></h4>
         <ul>
             <li><a href="../../Templates/Map/index.php?col=bluchermaps">Blucher Maps</a></li>
             <li><a href="../../Templates/FieldBook/index.php?col=blucherfieldbook">Field Book</a></li>
             <li><a href="../../Templates/Map/index.php?col=greenmaps">Green Maps</a></li>
             <li><a href="../../Templates/Indices/index.php?col=mapindices">Indices</a></li>
+            <li><a href="../../Templates/FieldBookIndices/index.php?col=fieldbookindices">Field Book Indices</a></li>
             <li><a href="../../Templates/Folder/index.php?col=jobfolder">Job Folder</a></li>
+            <li><a href="../../Templates/Map/index.php?col=pennyfenner">Pennyfenner Maps</a></li>
         </ul>
     </div>
     <!-- Training Tab -->
@@ -62,9 +64,17 @@
         </ul>
     </div>
     <!-- Indices Transcription Tab -->
-    <div class="menu-item">
-        <h4><a href="../../Transcription/Indices/list.php?col=mapindices">Indices Transcription</a></h4>
+    <div class="menu-item menu-item_sub2">
+        <h4><a href="#">Indices Transcription</a></h4>
+        <ul>
+            <li><a href="../../Transcription/Indices/list.php?col=mapindices">Map Indices</a></li>
+            <li><a href="../../Transcription/FieldBookIndices/list.php?col=fieldbookindices">FieldBook Indices</a></li>
+
+        </ul>
     </div>
+<!--    <div class="menu-item">-->
+<!--       -->
+<!--    </div>-->
     <div class="menu-item menu-item_sub2">
         <h4><a href="#">GeoRectification</a></h4>
         <ul>
