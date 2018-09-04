@@ -457,6 +457,34 @@ class FieldBookDBHelper extends DBHelper
     }
 
     /**********************************************
+     * Function: GET_FIELDBOOK_CREWS_AND_PARTIAL_DOCUMENT_BY_BOOKTITLE_AND_DOCID
+     * Description: Returns the information from the documents needed for PDF generation + lists all crew members associated with that document in column[0].
+     * Parameter(s): booktitle
+     * $collection (in string) - name of the collection
+     * $booktitle (in Int) - document booktitle
+     * Return value(s):
+     * Array of possible values if success
+     ***********************************************/
+    function GET_FIELDBOOK_CREWS_AND_PARTIAL_DOCUMENT_BY_BOOKTITLE($collection,$booktitle)
+    {
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+        if ($dbname != null && $dbname != "")
+        {
+            //selects the fieldbook collection names from the fieldbook collection
+            //$sth = $this->getConn()->prepare("SELECT libraryindex, jobnumber,startdate,enddate,indexedpage,filenamepath,jobtitle FROM `document` WHERE `booktitle` = :booktitle ORDER BY `jobnumber`");
+            $sth = $this->getConn()->prepare("SELECT (SELECT GROUP_CONCAT(c.`crewname`) FROM `documentcrew` AS dc LEFT JOIN `crew` AS c ON dc.`crewID` = c.`crewID` WHERE dc.`docID` IN (SELECT documentID WHERE `booktitle` = :booktitle ) GROUP BY dc.`docID`) as `crewlist`,libraryindex, jobnumber,startdate,enddate,indexedpage,filenamepath,jobtitle,booktitle FROM `document` WHERE `booktitle` = :booktitle ");
+            $sth->bindParam(':booktitle',$booktitle,PDO::PARAM_STR);
+            $sth->execute();
+            //return the collection names
+            $result = $sth->fetchAll(PDO::FETCH_NUM);
+            return $result;
+        } else return false;
+
+    }
+
+    /**********************************************
      * Function: GET_BOOKS
      * Description: retrieve unique books in `booktitle` field of `document` table in the targeted collection
      * Parameter(s):

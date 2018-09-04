@@ -274,7 +274,7 @@ try
             $pathtoImage = $collection["storagedir"] . $doc["FileNamePath"];
             $jpgFilePath = str_replace(".tif",".jpg",$pathtoImage);
             $jpgFileName = str_replace(".tif",".jpg",$doc["FileName"]);
-            exec("convert " . $pathtoImage . " " . $jpgFilePath );
+            exec("convert -limit memory 32MiB " . $pathtoImage . " " . $jpgFilePath );
             array_push($internalBitstreams,new bitstream($jpgFileName,$jpgFilePath,"frontJPG"));
             if($hasBack)
             {

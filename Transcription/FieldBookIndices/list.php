@@ -35,7 +35,6 @@ else header('Location: ../../');
             var collection_config = <?php echo json_encode($config); ?>;
             $('#page_title').text(collection_config.DisplayName + " Transcription");
 
-
             var table = $('#dtable').DataTable( {
                 "processing": true,
                 "serverSide": true,

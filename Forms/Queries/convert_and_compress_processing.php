@@ -26,39 +26,41 @@ if($collection == "blucherfieldbook")
     {
         $doc = new DomDocument;
 
-// We need to validate our document before refering to the id
+		// We need to validate our document before refering to the id
         $doc->validateOnParse = true;
-
-        //GRAB UNIQUE BOOK TITLES
+		
+        /* //GRAB UNIQUE BOOK TITLES
         $ret = $FB->GET_BOOKS($collection);
         //ITERATE THROUGH BOOKS TO COUNT NEEDS REVIEW
         foreach($ret as $OuterArray)
         {
-
+				
             if(is_array($OuterArray))
             {
                 foreach($OuterArray as $value)
                 {
+				
                     //At this point $value is a unique booktitle
                     //Checks DB for needsreview 0 (Does not need to be reviewed)
                     $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT($collection, $value);
                     //Checks DB for needsreview 1 (Needs to be reviewed)
-                    $countfilter1 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection, $value);
+							// $countfilter1 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection, $value);
                     //Get the Total number of
                     $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT($collection,$value);
-                    $returnedStage = $DB->GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$value);
+							//$returnedStage = $DB->GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$value);
 
-                    //compare the not needing to be reviewed
+                  
+					// Check the number of documents in the table that DO NOT NEED TO BE REVIEWED to the total number of documents
                     if($countfilter0 != $total)
                     {
-                        //If the number of items that does not need to be reviewed match the number of items in total
-                        //then we know that the fieldbook is complete and ready
-                        //Flag entire book to be ready for PDF
+                        //If the number of items that DO NOT NEED to be reviewed DO NOT match the number of items in total
+                        //then we know that the fieldbook is NOT complete and ready
+                        //Flag entire book to be NOT READY ready for PDF
                         $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,$stage);
                     }
                     else if($countfilter0 == $total)
                     {
-                        //If the number of items that does not need to be reviewed match the number of items in total
+                        //If the number of items that DO NOT NEED to be reviewed match the number of items in total
                         //then we know that the fieldbook is complete and ready
                         //Flag entire book to be ready for PDF
                         $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,1);
@@ -66,29 +68,32 @@ if($collection == "blucherfieldbook")
                 }
             }
 
-        }
+        } */
     }
     if($stage == 1)
     {
 
+		//$ret = $FB->UPDATE_FIELDBOOK_DOCUMENTS_RDYFORPDF($collection,1);
+		//var_dump($ret);
         //GRAB UNIQUE BOOK TITLES
         $ret = $FB->GET_BOOKS($collection);
         //ITERATE THROUGH BOOKS TO COUNT NEEDS REVIEW
         foreach($ret as $OuterArray)
         {
-
+         
             if(is_array($OuterArray))
             {
                 foreach($OuterArray as $value)
                 {
+				
                     //At this point $value is a unique booktitle
                     //Checks DB for needsreview 0 (Does not need to be reviewed)
-                    $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT($collection, $value);
+                    $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT_FIELDBOOK($collection, $value);
 
                     //Checks DB for needsreview 1 (Needs to be reviewed)
                     // $countfilter1 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection, $value);
                     //Get the Total number of
-                    $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT($collection,$value);
+                    $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT_FIELDBOOK($collection,$value);
                     // echo $total;
                     $returnedStage = $DB->GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$value);
 
@@ -155,74 +160,37 @@ if($collection == "jobfolder")
     {
         $doc = new DomDocument;
 
-// We need to validate our document before refering to the id
+		// We need to validate our document before refering to the id
         $doc->validateOnParse = true;
+		
+    }
+    if($stage == 1)
+    {
 
         //GRAB UNIQUE BOOK TITLES
         $ret = $JF->GET_FOLDERS($collection);
         //ITERATE THROUGH BOOKS TO COUNT NEEDS REVIEW
         foreach($ret as $OuterArray)
         {
+			
 
             if(is_array($OuterArray))
             {
                 foreach($OuterArray as $value)
                 {
-                    $JFdirectory= explode("-_", $value);
-                    //
-                    //var_dump($JFdirectory[0]);
+					
                     //At this point $value is a unique booktitle
                     //Checks DB for needsreview 0 (Does not need to be reviewed)
-                    $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT($collection, $value);
-                    //Checks DB for needsreview 1 (Needs to be reviewed)
-                    $countfilter1 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection, $value);
-                    //Get the Total number of
-                    $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT($collection,$value);
-                    $returnedStage = $DB->GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$value);
-
-                    //compare the not needing to be reviewed
-                    if($countfilter0 != $total)
-                    {
-                        //If the number of items that does not need to be reviewed match the number of items in total
-                        //then we know that the fieldbook is complete and ready
-                        //Flag entire book to be ready for PDF
-                     //   $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,$stage);
-                    }
-                    else if($countfilter0 == $total)
-                    {
-                        //If the number of items that does not need to be reviewed match the number of items in total
-                        //then we know that the fieldbook is complete and ready
-                        //Flag entire book to be ready for PDF
-                     //   $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,1);
-                    }
-                }
-            }
-
-        }
-    }
-    if($stage == 1)
-    {
-
-        //GRAB UNIQUE BOOK TITLES
-        $ret = $FB->GET_BOOKS($collection);
-        //ITERATE THROUGH BOOKS TO COUNT NEEDS REVIEW
-        foreach($ret as $OuterArray)
-        {
-
-            if(is_array($OuterArray))
-            {
-                foreach($OuterArray as $value)
-                {
-                    //At this point $value is a unique booktitle
-                    //Checks DB for needsreview 0 (Does not need to be reviewed)
-                    $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT($collection, $value);
+                    $countfilter0 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW0_COUNT_JOBFOLDER($collection, $value);
 
                     //Checks DB for needsreview 1 (Needs to be reviewed)
                     // $countfilter1 = $DB->GET_DOCUMENT_FILTEREDNEEDSREVIEW1_COUNT($collection, $value);
                     //Get the Total number of
-                    $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT($collection,$value);
+                    $total = $DB->GET_DOCUMENT_MATCHBOOKTITLE_COUNT_JOBFOLDER($collection,$value);
                     // echo $total;
-                    $returnedStage = $DB->GET_DOCUMENT_MATCHBOOKTITLE_PDFSTAGE($collection,$value);
+					
+					
+                    $returnedStage = $DB->GET_DOCUMENT_MATCHFOLDERNAME_PDFSTAGE($collection,$value);
 
                     //compare the not needing to be reviewed
                     if($countfilter0 == $total && $returnedStage == 0)
@@ -230,14 +198,14 @@ if($collection == "jobfolder")
                         //If the number of items that does not need to be reviewed match the number of items in total
                         //then we know that the fieldbook is complete and ready
                         //Flag entire book to be ready for PDF
-                        $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,$stage);
+                        $ret = $JF->UPDATE_JOBFOLDER_READYFORPDF($collection,$value,$stage);
                     }
                     else if($countfilter0 != $total)
                     {
                         //If the number of items that does not need to be reviewed match the number of items in total
                         //then we know that the fieldbook is complete and ready
                         //Flag entire book to be ready for PDF
-                        $ret = $FB->UPDATE_FIELDBOOK_READYFORPDF($collection,$value,0);
+                        $ret = $JF->UPDATE_JOBFOLDER_READYFORPDF($collection,$value,0);
                     }
                 }
             }
@@ -261,7 +229,7 @@ if($collection == "jobfolder")
 
     $columns = array(
         array( 'db' => '`document`.`documentID`', 'dt' => 0, 'field' => 'documentID' ),
-        array( 'db' => '`document`.`libraryindex`', 'dt' => 1,'field' => 'libraryindex' )
+        array( 'db' => '`document`.`foldername`', 'dt' => 1,'field' => 'foldername' )
 
     );
 
@@ -274,7 +242,7 @@ if($collection == "jobfolder")
 //document is the name of the db
     $joinQuery = " FROM `document` ";
 //extra where parameter to search with
-    $groupby = "`libraryindex` HAVING COUNT(*) >= 1";
+    $groupby = "`foldername` HAVING COUNT(*) >= 1";
     $extraWhere = null;
     $extraWhere = " `document`.`RdyForPdf` = '$stage'";
     echo json_encode(

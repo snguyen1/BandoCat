@@ -54,6 +54,7 @@ else header('Location: ../../');
         $errorType = "1";
     }
 //GET_ALL_DISTINT_JOBNUMBER
+$orderedListOfBookTitleByJobNumber = $FB->GET_FIELDBOOK_CREWS_BY_DOCUMENT_ID($collection,)
 $orderedListOfBookTitleByJobNumber = $FB->GET_ALL_FIELDBOOK_FILENAMES_BY_BOOKTITLE_ORDERBY_JOBNUMBER($_GET['col'], $booktitle);
 //echo $orderedListOfBookTitleByJobNumber;
 $distintJobNumbers = $FB->GET_ALL_DISTINT_JOBNUMBER($_GET['col'], $booktitle);
