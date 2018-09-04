@@ -634,3 +634,11 @@ ul.tab li a:focus, .active {
     border: 1px solid #ccc;
     border-top: none;
 }
+
+/* Styles the Description Box */
+#tableClass {
+    width: 88%;
+    box-shadow: 0px 0px 2px;
+    margin: -14% 0% 1% 4%;
+    border-radius: 5%;
+}

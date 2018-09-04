@@ -236,6 +236,7 @@ $crews = $DB->GET_FIELDBOOK_CREWS_BY_DOCUMENT_ID($collection,$docID);
         objTo.appendChild(divtest)
     }
 </script>
+<script type="text/javascript" src="../../Master/errorHandling.js"></script>
 <script>
     $( document ).ready(function()
     {
@@ -249,6 +250,14 @@ $crews = $DB->GET_FIELDBOOK_CREWS_BY_DOCUMENT_ID($collection,$docID);
         }
         /* attach a submit handler to the form */
         $('#theform').submit(function (event) {
+
+            var error = errorHandling($('#txtLibraryIndex'), '<?php echo $collection ?>');
+            if(error.answer){
+                for(i = 0; i < error.desc.length; i++) {
+                    alert(error.desc[i].message)
+                }
+                return false
+            }
             /* stop form from submitting normally */
             var formData = new FormData($(this)[0]);
 

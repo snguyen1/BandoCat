@@ -215,6 +215,68 @@ class SSP {
             "data"            => SSP::data_output( $columns, $data, $joinQuery )
         );
     }
+
+    static function simpleUnique ( $request, $sql_details, $table, $primaryKey, $columns, $joinQuery = NULL, $extraWhere = '', $groupBy = '')
+    {
+        $bindings = array();
+        $db = SSP::sql_connect( $sql_details );
+        // Build the SQL query string from the request
+        $limit = SSP::limit( $request, $columns );
+        $order = SSP::order( $request, $columns, $joinQuery );
+        $where = SSP::filter( $request, $columns, $bindings, $joinQuery );
+        // IF Extra where set then set and prepare query
+        if($extraWhere){
+            $extraWhere = ($where) ? ' AND '.$extraWhere : ' WHERE '.$extraWhere;
+        }
+        $groupBy = ($groupBy) ? ' GROUP BY '.$groupBy .' ' : '';
+        // Main query to actually get the data
+        if($joinQuery){
+
+            $col = SSP::pluck($columns, 'db', $joinQuery);
+            $query =  "SELECT SQL_CALC_FOUND_ROWS ".implode(", ", $col)."
+			 $joinQuery
+			 $where
+			 $extraWhere
+             $groupBy
+			 $order
+			 $limit";
+        }else{
+            $query =  "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", SSP::pluck($columns, 'db'))."`
+			 FROM `$table`
+			 $where
+			 $extraWhere
+			 $groupBy
+             $order
+			 $limit";
+        }
+        $data = SSP::sql_exec( $db, $bindings,$query);
+        // Data set length after filtering
+        $resFilterLength = SSP::sql_exec( $db,
+            "SELECT FOUND_ROWS()"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $count_request = "SELECT COUNT(`{$primaryKey}`)";
+        if($joinQuery){
+            $count_request .= $joinQuery;
+        } else {
+            $count_request .= "FROM   `$table`";
+        }
+        $resTotalLength = SSP::sql_exec( $db,$count_request);
+        $recordsTotal = $resTotalLength[0][0];
+        /*
+         * Output
+         */
+        return array(
+            "draw"            => intval( $request['draw'] ),
+            "recordsTotal"    => intval( $recordsTotal ),
+            "recordsFiltered" => intval( $recordsFiltered ),
+            "data"            => SSP::data_output( $columns, $data, $joinQuery )
+        );
+    }
+
+
+
     /**
      * Connect to the database
      *
@@ -261,6 +323,7 @@ class SSP {
         if ( $sql === null ) {
             $sql = $bindings;
         }
+       // var_dump($sql);
         $stmt = $db->prepare( $sql );
         //echo $sql;
         // Bind parameters

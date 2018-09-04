@@ -57,7 +57,7 @@ function cancel()
 	var gdalTranslateScript = 0;
 	var gdalWarpScript = 0;
 	var scriptObject = addScriptObject(gdalTranslateScript, gdalWarpScript, rasterJSON);
-	
+
 	$.post("php/cancel.php", { jsonData: JSON.stringify(scriptObject)}, function(results){
 			closeModal(2), window.close()});
 }
@@ -110,7 +110,7 @@ function rectify()
 //This function is used by the "rectify" function to create the string that will be executing gdaltranslate on the TIFF.
 function translateScriptCreator()
 {
-		var prefix = 'gdal_translate -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -co TILED=YES -of GTiff -a_srs WGS84 ';
+		var prefix = 'gdal_translate -b 1 -b 2 -b 3 -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -co TILED=YES -of GTiff -a_srs WGS84 ';
 		//var suffix = translateInputFile + " " + translateOutputFile;
 		var suffix = "";
 	    var complete = "";
@@ -126,7 +126,6 @@ function translateScriptCreator()
 function warpScriptCreator()
 {
 	var prefix = "gdalwarp -s_srs WGS84 -t_srs WGS84 -tps -co COMPRESS=JPEG -co PHOTOMETRIC=YCBCR -co TILED=YES ";
-	//var complete = prefix + " " + translateOutputFile + " " + warpOutputFile;
 	var complete = prefix;
 	return complete;
 }
