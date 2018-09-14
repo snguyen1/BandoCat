@@ -1,5 +1,5 @@
-<nav>
-    <div class="menu-item alpha">
+<nav >
+    <div    class="menu-item alpha">
         <h4><a href="../../">Main Menu</a></h4>
     </div>
     <!-- Add admin section to side menu -->
@@ -75,11 +75,12 @@
 <!--    <div class="menu-item">-->
 <!--       -->
 <!--    </div>-->
-    <div class="menu-item menu-item_sub2">
+    <div class="menu-item menu-item_sub3">
         <h4><a href="#">GeoRectification</a></h4>
         <ul>
             <li><a href="../../GeoRec/Map/index.php?col=bluchermaps">Blucher Maps</a></li>
             <li><a href="../../GeoRec/Map/index.php?col=greenmaps">Green Maps</a></li>
+            <li><a href="../../GeoRec/Map/animation.php">Animation</a></li>
         </ul>
     </div>
     <!-- Queries Tab -->
@@ -95,7 +96,7 @@
     </div>
     <!-- Statistics Tab -->
     <div class="menu-item">
-        <h4><a href="../../Forms/Statistics/">Statistics</a></h4>
+        <h4><a href="../../Forms/Statistics/index.php">Statistics</a></h4>
     </div>
     <!-- My Account Tab -->
     <div class="menu-item">

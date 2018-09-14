@@ -1,1 +1,1 @@
-<img id="header_logo" width="260px" src="../../Images/Logos/bando-logo-medium.png"/>
+<img style = "width: 100%; id="header_logo" width="260px" src="../../Images/Logos/bando-logo-medium.png"/>

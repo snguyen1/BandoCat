@@ -27,7 +27,7 @@ class AnnouncementDBHelper extends DBHelper
      * $iMessage (in string) - input announcement message
      * $iEndtime (in timestamp) - input time in which the announcement will be deleted
      * $iPosttime (in timestamp) - input time the announcement was posted
-     * $iPosterID (in int) - input UserID that created the annoucement
+     * $iPosterID (in int) - input UserID that created the announcement
      * Return value(s): NONE
      ***********************************************/
 
@@ -52,6 +52,8 @@ class AnnouncementDBHelper extends DBHelper
         return false;
 
     }
+
+
 
     function SP_ANNOUNCEMENT_UPDATE($iTitle, $iMessage, $iEndtime, $iUser, $iAnnouncementID)
     {
@@ -78,6 +80,16 @@ class AnnouncementDBHelper extends DBHelper
         return false;
     }
 
+
+
+    /**********************************************
+     * Function: SP_ANNOUNCEMENT_INSERT
+     * Description:
+     * Selects data that is past expiration date
+     * Parameter(s): none
+     * Return value(s):
+     * $results holds returned set of expired data.
+     ***********************************************/
     function GET_ANNOUNCEMENT_DATA()
     {
         //Select all relevant data where the expiration date is greater than the current date

@@ -24,6 +24,7 @@ class FieldBookDBHelper extends DBHelper
         $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
         if ($dbname != null && $dbname != "")
         {
+            //after selecting option in the Collections pane switch to database.
             $this->getConn()->exec('USE ' . $dbname);
             /* PREPARE STATEMENT */
             /* Prepares the SQL query, and returns a statement handle
@@ -135,6 +136,7 @@ class FieldBookDBHelper extends DBHelper
             $call = $this->getConn()->prepare("CALL SP_TEMPLATE_FIELDBOOK_DOCUMENT_UPDATE(:docID,:lib,:fbcol,:btitle,:jnumber,:jtitle,:author,:sdate,:edate,:comments,:indexed,:blankp,:sketch,:loose,:input,:review)");
             if (!$call)
                 trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
+            // assigns table colum values to php variables
             $call->bindParam(':docID', ($iDocID), PDO::PARAM_INT);
             $call->bindParam(':lib', ($iLibraryIndex), PDO::PARAM_STR);
             $call->bindParam(':fbcol', ($iFBCollectionName), PDO::PARAM_STR);

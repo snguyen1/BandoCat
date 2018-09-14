@@ -191,7 +191,7 @@ $authors = $DB->GET_FOLDER_AUTHORS_BY_DOCUMENT_ID($collection,$docID);
                                 if($document['FileNameBack'] != '') //has Back Scan
                                 {
 
-                                    echo '<span class="label" style="text-align: center">Scan of Back</span><br>';
+                                    echo '<span class="label" style="text-align: center">Scan of Back </span><br>';
                                     echo "<a id='download_front' href=\"download.php?file=$config[StorageDir]$document[FileNameBackPath]\"><br><img src='" . '../../' . $config['ThumbnailDir'] . str_replace(".tif", ".jpg", $document['FileNameBack']) . " ' alt = Error /></a>";
                                     echo "<br>Size: " . round(filesize($config['StorageDir'] . $document['FileNameBackPath']) / 1024 / 1024, 2) . " MB";
                                     echo "<br><a href=\"download.php?file=$config[StorageDir]$document[FileNameBackPath]\">(Click to download)</a>";
@@ -211,6 +211,7 @@ $authors = $DB->GET_FOLDER_AUTHORS_BY_DOCUMENT_ID($collection,$docID);
                             <div class="cell" style="text-align: center;padding-top:20px">
                                 <!-- Hidden inputs that are passed when the update button is hit -->
                                 <span><input type="reset" id="btnReset" name="btnReset" value="Reset" class="bluebtn"/></span>
+
                                 <input type = "hidden" id="txtDocID" name = "txtDocID" value = "<?php echo $docID;?>" />
                                 <input type = "hidden" id="txtAction" name="txtAction" value="catalog" />  <!-- catalog or review -->
                                 <input type = "hidden" id="txtCollection" name="txtCollection" value="<?php echo $collection; ?>" />

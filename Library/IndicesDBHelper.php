@@ -68,6 +68,7 @@ class IndicesDBHelper extends DBHelper implements TranscriptionDB
     {
         //get appropriate DB
         $db = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        //if database exists use selected database
         if ($db != null && $db != "")
         {
             $this->getConn()->exec('USE ' . $db);
@@ -126,6 +127,7 @@ class IndicesDBHelper extends DBHelper implements TranscriptionDB
     function SP_TEMPLATE_INDICES_DOCUMENT_UPDATE($collection, $iDocID, $iLibraryIndex, $iBookID, $iPageType, $iPageNumber, $iComments, $iNeedsReview)
     {
         $db = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+
 
         if ($db != null && $db != "")
         {

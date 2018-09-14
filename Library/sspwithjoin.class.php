@@ -56,6 +56,9 @@ class SSP {
      *
      *  @return string SQL order by clause
      */
+
+
+    //
     static function order ( $request, $columns, $isJoin = false )
     {
         $order = '';
@@ -95,6 +98,8 @@ class SSP {
      *
      *  @return string SQL where clause
      */
+
+
     static function filter ( $request, $columns, &$bindings, $isJoin = false )
     {
         $globalSearch = array();
@@ -112,7 +117,9 @@ class SSP {
                 }
             }
         }
+
         // Individual column filtering
+
         for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ ) {
             $requestColumn = $request['columns'][$i];
             $columnIdx = array_search( $requestColumn['data'], $dtColumns );
@@ -215,6 +222,7 @@ class SSP {
             "data"            => SSP::data_output( $columns, $data, $joinQuery )
         );
     }
+
 
     static function simpleUnique ( $request, $sql_details, $table, $primaryKey, $columns, $joinQuery = NULL, $extraWhere = '', $groupBy = '')
     {
@@ -334,6 +342,8 @@ class SSP {
             }
         }
         // Execute
+
+
         try {
             $stmt->execute();
         }

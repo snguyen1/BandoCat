@@ -243,6 +243,7 @@ $date = new DateHelper();
                                 </select>
                             </div>
                             <?php if($collection == "pennyfenner") : ?>
+
                                 <div class="cell">
                                     <!-- Job Number33334 NUMBER -->
                                     <span class="label">Job Number:</span>

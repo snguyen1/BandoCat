@@ -91,7 +91,7 @@ trait GeoRectificationTrait
     }
     /**********************************************
     Function: DOCUMENT_GEORECSTATUS_UPDATE
-    Description: Update status of geoRecStatus field in document table
+    Description: Connect to database and update status of geoRecStatus field in the document
     Parameter(s):
      * $docID (int) - update info of row that has documentID = $docID on document table
      * $isback (int) - Identify the type of map (true == back, false == front)
@@ -100,6 +100,8 @@ trait GeoRectificationTrait
      ***********************************************/
     public function DOCUMENT_GEORECSTATUS_UPDATE($docID,$isback,$iStatusCode)
     {
+
+
         if($isback)
             $sth = $this->getConn()->prepare("UPDATE `document` SET `geoRecBackStatus` = :statuscode WHERE `documentID` = :docID");
         else $sth = $this->getConn()->prepare("UPDATE `document` SET `geoRecFrontStatus` = :statuscode WHERE `documentID` = :docID");
@@ -140,8 +142,11 @@ trait GeoRectificationTrait
      ***********************************************/
     public function DOCUMENT_GEORECPATHS_UPDATE($docID,$FrontKMZPath,$FrontGeoTIFFPath,$BackKMZPath,$BackGeoTIFFPath)
     {
+
+        //
         if($FrontKMZPath == null && $FrontGeoTIFFPath == null) //update back
         {
+            //connect to database and update based on document ID.
             $sth = $this->getConn()->prepare("UPDATE `document` SET `georecBackDirKMZ` = :backKMZ,`georecBackDirGeoTIFF` = :backGeoTIFF WHERE `documentID` = :docID");
             $sth->bindParam(":backKMZ",$BackKMZPath,PDO::PARAM_STR);
             $sth->bindParam(":backGeoTIFF",$BackGeoTIFFPath,PDO::PARAM_STR);
@@ -165,6 +170,7 @@ trait GeoRectificationTrait
      * $docID (int) - document to be selected on document table
     Return value(s): return false if fail, return an assoc array of georec info if success
      ***********************************************/
+
     public function DOCUMENT_GEOREC_INFO_SELECT($docID)
     {
         $sth = $this->getConn()->prepare("SELECT `geoRecFrontStatus`,`georecFrontDirKMZ`,`georecFrontDirGeoTIFF`,`geoRecBackStatus`,`georecBackDirKMZ`,`georecBackDirGeoTIFF` FROM `document` WHERE `documentID` = :docID");

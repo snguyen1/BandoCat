@@ -58,7 +58,7 @@ else header('Location: ../../');
                             <td class="Collection_data">
                                 <!-- Catalog Documents Button, Php code sends the collection name to list.php and send variable action=catalog -->
 
-                                    <a class="Collection_Button" id="catalogBtn"  href="./catalog.php?col=<?php echo $collection; ?>" style="text-decoration: none; color: white; display: block">Catalog Document</a>
+                                    <a class="Collection_Button" id="catalogBtn"  href="./fake_catalog.php?col=<?php echo $collection; ?>" style="text-decoration: none; color: white; display: block">Catalog Document</a>
                             </td>
                         </tr>
                         <tr>

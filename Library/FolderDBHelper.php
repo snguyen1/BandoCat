@@ -28,6 +28,7 @@ class FolderDBHelper extends DBHelper
         $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
         if ($dbname != null && $dbname != "")
         {
+
             $this->getConn()->exec('USE ' . $dbname);
             if($iFileNameBack == "")
             {
