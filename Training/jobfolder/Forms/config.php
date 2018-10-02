@@ -167,6 +167,7 @@ function getAuthor($author_id)
 }
 
 
+
 	//ADDING DOCUMENT AUTHOR
 
 		function InsertAuthor($newauthor)
@@ -233,6 +234,7 @@ function getAuthor($author_id)
 		//prevent mutex
 		function check_access($interrupt_id,$map_id)
 	   	{
+
 	   		$user_id = null;
 	   		$progress = null;
 	   		$cmd = mysql_query("SELECT * FROM jobfolderinventory.mapinformation WHERE map_id = '$map_id'");

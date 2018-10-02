@@ -10,13 +10,9 @@ $total_storage = 0;
 $units = explode(' ', 'B KB MB GB TB PB');
 
 
-
-
-
-
-
-
 $DB->TRUNCATE();
+
+
 foreach($collections as $col)
 {
 
@@ -26,14 +22,9 @@ foreach($collections as $col)
 
     date_default_timezone_set("America/Chicago");
 
-    $DB->INSERT_INTO_STORAGE_COLLECTIONS($col['displayname'], format_size($temp),date("Y-m-d h:i:sa"));
+    $DB->INSERT_INTO_STORAGE_COLLECTIONS($col['displayname'].':' , format_size($temp),date("Y-m-d h:i:sa"));
 
 }
-
-
-
-
-
 
 //Disk space management
 
@@ -42,8 +33,6 @@ foreach($collections as $col)
 
 
 
-
-$DB->DISPLAY_STORAGE_INTO_TABLE();
 
 
 function foldersize($path)
@@ -54,7 +43,8 @@ function foldersize($path)
         $cleanPath = rtrim($path, '/') . '/';
 
         foreach ($files as $t) {
-            if ($t <> "." && $t <> "..") {
+            if ($t <> "." && $t <> "..")
+            {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
                     $size = foldersize($currentFile);
@@ -66,8 +56,10 @@ function foldersize($path)
             }
         }
 
+
         return $total_size;
     }
+
 
 
 
@@ -76,7 +68,6 @@ function foldersize($path)
 
 
         global $units;
-
         $mod = 1024;
 
         for ($i = 0; $size > $mod; $i++) {
@@ -84,6 +75,7 @@ function foldersize($path)
         }
 
         $endIndex = strpos($size, ".") + 3;
+
 
         return substr($size, 0, $endIndex) . ' ' . $units[$i];
     }

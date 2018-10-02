@@ -658,7 +658,9 @@ div#dhtmlx_window_active, div#dhx_modal_cover_dv { position: fixed !important; }
 
 
 #chartDocumentCount {
-    margin-top: -50px;
+    margin-top: -20px;
+    width: 400px;
+    height: 400px;
 
 
 }
@@ -673,6 +675,7 @@ div#dhtmlx_window_active, div#dhx_modal_cover_dv { position: fixed !important; }
 
 
 }
+
 
 
 #storage_header{
@@ -691,6 +694,7 @@ div#dhtmlx_window_active, div#dhx_modal_cover_dv { position: fixed !important; }
 }
 
 
+.alnright { text-align: right; }
 
 
 

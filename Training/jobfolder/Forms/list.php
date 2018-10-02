@@ -8,7 +8,8 @@ $session = new SessionManager();
 * Collection, Username
 * Type, Privilege
 */
-if ( !empty($_POST) ) {
+if ( !empty($_POST) )
+{
     $collection = $_POST["col"];
     $username = $_POST["user"];
     $type = $_POST["type"];
@@ -40,6 +41,7 @@ $file_arr = array();
 if($_SESSION["role"] == 1) {
     $pos = -1;
     $listfile = scandir(getcwd());
+
 
     //Conditions to save only xml files to the file_arr array
     foreach ($listfile as $row) {
@@ -73,6 +75,7 @@ if($_SESSION["role"] == 1) {
     <script type="text/javascript" charset="utf8" src="../../../ExtLibrary/jQuery-2.2.3/jquery-2.2.3.js"></script>
     <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="../../../ExtLibrary/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
+
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>

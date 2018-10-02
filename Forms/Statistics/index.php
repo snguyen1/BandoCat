@@ -41,48 +41,48 @@ $collections = $DB->GET_COLLECTION_TABLE();
     <style>
 
         .BlucherMapsLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #FFD700;
 
         }
 
 
         .GreenMapsLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #00BC65;
 
         }
 
 
         .JobFoldersLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #FFAA2A;
 
         }
 
 
         .BlucherFieldBookLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #26A6D0;
 
         }
 
 
         .MapIndices {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #787878;
 
         }
 
 
         .PennyFennerLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #BC8F8F;
 
         }
@@ -90,8 +90,8 @@ $collections = $DB->GET_COLLECTION_TABLE();
 
 
         .FieldBookIndicesLabel {
-            height: 20px;
-            width: 20px;
+            height: 30px;
+            width: 25px;
             background-color: #DCDCDC;
 
         }
@@ -251,11 +251,11 @@ $collections = $DB->GET_COLLECTION_TABLE();
                         <td     id = mapStatGroup style = " vertical-align:top; margin-left:60px; float:right ;  ">
 
 
-                            <div id = mapColumn>
+                            <div id = mapColumn     ">
                                 <h3 id="titleDocumentCount"  style = "margin-bottom: 40px; margin-top:0"> Total Maps per Collection  </h3>
-                                <canvas id="chartDocumentCount" style= "height: 150px; width: 150px; margin-left: -60px; position:relative; bottom: -30px;"
+                                <canvas id="chartDocumentCount" style= "margin-left: -60px;"
                                 ></canvas>
-                                <div class="pulse" id="displayTotal" style = "margin-top: 40px;" >Total: 100000 documents   </div>
+                                <div class="pulse" id="displayTotal" style = "margin-top: 20px;" >Total: 100000 documents   </div>
 
                             </div>
                         </td>
@@ -287,35 +287,40 @@ $collections = $DB->GET_COLLECTION_TABLE();
 
 
 
-                        <td style = "vertical-align:top; " >
+                        <td style = "vertical-align:top;  " >
 
-                            <div id="storage_capacity" style="   margin-top: 0px; border-size: 1px; ">
+                            <div id="storage_capacity" style="  margin-top: 0px; border-size: 1px; ">
                                 <h3 id="storage_header" style = " text-align: center; font-size: 25px; margin-top: 0; margin-bottom: 20px;" >Storage Capacity</h3>
 
 
 
-                                <table style = "  border: solid; border-width: thin;">
+                                <table style = "   border: solid; border-width: thin;    display:flex; justify-content: center;   ">
 
 
-                                 <tr>  <td id="storage_totals" style= " border-color:LightGray; padding:0px; ">
-                                        <img src="../../Images/loading.gif"  style="width:15px; height:15px; visibility:hidden;">
+                                 <tr>  <td id="storage_totals"  style= " border-color:LightGray; padding:0px; ">
+                                        <img src="../../Images/loading.gif"  style="width:20px; height:20px; visibility:hidden;">
 
 
                                      </td>
                                   </tr>
+
+                                  <tr></tr>
+                                    <tr></tr>
+
                                   <tr>
 
 
+
                                      <td  id="storage_info" style= " border-color:LightGray; padding:0px; ">
-                                             <img src="../../Images/loading.gif"  style="width:15px;height:15px; visibility:hidden;">
+                                             <img src="../../Images/loading.gif"  style="width:20px;height:20px; visibility:hidden;">
 
 
                                      </td>
 
                                 </tr>
                                 </table>
-                                <div style = "text-align: center;">
-                                <button  id = "storage_button" type ="button" style = "text-align: center">Update
+                                <div style = "text-align: center;  padding-top: 10px; padding-bottom:20px;  ">
+                                <button  id = "storage_button" type ="button" style = "text-align: center; ">Update
                                 </button>
                                 </div>
                             </div>
@@ -362,6 +367,7 @@ $collections = $DB->GET_COLLECTION_TABLE();
         }
         document.getElementById(tabName).style.display = "block";
         event.currentTarget.className += " active";
+
 
 
         switch(tabName)
@@ -426,7 +432,7 @@ $collections = $DB->GET_COLLECTION_TABLE();
                 document.getElementById("weeklyPerfHeader").style.display = 'block';
                 $('#chartWeeklyReport').remove();
                 $('#chartWeeklyTranscriptionReport').remove();
-                $('#divWeeklyCanvasHolder').append('<canvas id="chartWeeklyReport" height="500" width="1000"><canvas>');
+                $('#divWeeklyCanvasHolder').append('<canvas id="chartWeeklyReport" height=25% width=50%><canvas>');
 
 
                 break;
@@ -947,6 +953,7 @@ $collections = $DB->GET_COLLECTION_TABLE();
                 console.log(data);
                 $('#storage_totals').html(data);
             })
+
 
             $.get('ajax/totalstats_processing.php', function (data) {
                 console.log(data);

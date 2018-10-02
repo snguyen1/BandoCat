@@ -1616,7 +1616,7 @@ class DBHelper
     function INSERT_INTO_STORAGE_All_COLLECTIONS($iallCollections, $isize, $idate) {
 
         /* PREPARE STATEMENT */
-        $call = $this->getConn()->prepare("INSERT INTO storagestatistics VALUES (\"$iallCollections\", \"$isize\", \"$idate\")");
+        $call = $this->getConn()->prepare("INSERT INTO storagestatistics VALUES (\"$iallCollections\" , \"$isize\", \"$idate\")");
         if (!$call)
             trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
         $ret = $call->execute();
@@ -1641,16 +1641,6 @@ class DBHelper
 
 
 
-    function DISPLAY_STORAGE() {
-        $call = $this->getConn()->prepare("SELECT collection, size FROM storage");
-        if (!$call)
-            trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
-        $ret = $call->execute();
-        $returnArray = $call->fetchAll();
-        print_r($returnArray);
-
-        return $ret;
-    }
 
 
     function DISPLAY_STORAGE_INTO_TABLE()
@@ -1662,7 +1652,10 @@ class DBHelper
 
         $query = "SELECT collection, size FROM storage";
 
-        echo "<table  border = '0' cellpadding='0' padding-right='0' padding-left = '0' cellspacing='0'>";
+        echo "<table  border = '0' cellpadding='0' padding-right='0' padding-left = '0' cellspacing='0' style ='font-size: 18px;'  >";
+         
+
+
         $time = "";
 
         if ($result = mysqli_query($call, $query))
@@ -1671,7 +1664,7 @@ class DBHelper
             /* fetch associative array */
             while ($row = mysqli_fetch_assoc($result) )
             {
-                echo "<tr> <td>" , $row["collection"], "</td> <td> " , $row["size"], "</td> </tr> " ;
+                echo "<tr> <td>" , $row["collection"], "</td> <td style = 'padding-left: 20px;'> " , $row["size"], "</td> </tr> " ;
 
             }
             echo "</table>";
@@ -1690,6 +1683,7 @@ class DBHelper
     function DISPLAY_STATS()
     {
 
+
         $call= mysqli_connect($this->getHost(), $this->getUser(), $this->getPwd(), "bandocatdb") or die ("could not connect");
         /* check connection */
         if (!$call)
@@ -1698,7 +1692,8 @@ class DBHelper
         $query = "SELECT stats, size, date FROM storagestatistics";
 
 
-        echo "<table  border = '0' cellpadding='0' padding-right='0' padding-left = '0' cellspacing='0'>";
+        echo "<table border = '0' cellpadding='0' padding-right='0' padding-left = '0' cellspacing='0' style ='font-size: 18px;'>";
+
         $time = "";
 
         if ($result = mysqli_query($call, $query))
@@ -1709,13 +1704,12 @@ class DBHelper
             /* fetch associative array */
             while ($row = mysqli_fetch_assoc($result) )
             {
-                echo "<tr> <td>" , $row["stats"], "</td> <td> " , $row["size"], "</td> </tr>" ;
+                echo "<tr style = 'font-weight: bold'> <td>" , $row["stats"], "</td> <td style = 'padding-left: 30px;'> " , $row["size"], "</td> </tr>" ;
                 $time = $row["date"];
             }
 
 
-
-            echo "<tr><td colspan = 2>" , "Updated: ", $time, "</td></tr>";
+            echo "<tr style = 'font-weight: bold'><td colspan = 2>" , "Updated: ", $time, "</td></tr>";
             echo "</table>";
 
             /* free result set */
