@@ -1307,7 +1307,7 @@ class DBHelper
 
             //bind variables to the above sql statement
             //bind variables to the above sql statement
-            $call->bindParam(':iSubject',$iSubject,PDO::PARAM_STR);
+            $call->bindParam(':iSubject',$iSubject["libraryIndex"],PDO::PARAM_STR);
             $call->execute();
             return $call->fetch(PDO::FETCH_NUM);
         }

@@ -177,7 +177,7 @@ $userticketCount = $DB->GET_USER_CLOSEDTICKET_COUNT($userid);
                     {
                         //case: use dropdown filtering for column that has boolean value (Yes/No or 1/0)
                         case 6: //Status column
-                            var select = $('<select style="width:100%"><option value="">Filter...</option><option value="0">Open</option><option value="1">Closed</option></select>')
+                            var select = $('<select class="form-control form-control-sm"><option value="">Filter...</option><option value="0">Open</option><option value="1">Closed</option></select>')
                                 .appendTo( $(column.footer()).empty() )
                                 .on( 'change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
@@ -196,7 +196,7 @@ $userticketCount = $DB->GET_USER_CLOSEDTICKET_COUNT($userid);
                         case 4:
                         case 5:
                         case 6:
-                            var input = $('<input type="text" style="width:100%" placeholder="Search..." value=""></input>')
+                            var input = $('<input type="text" class="form-control form-control-sm" placeholder="Search..." value=""></input>')
                                 .appendTo( $(column.footer()).empty() )
                                 .on( 'keyup change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
@@ -227,9 +227,6 @@ $userticketCount = $DB->GET_USER_CLOSEDTICKET_COUNT($userid);
                 $(this).addClass('selected');
             }
         } );
-
-        //resize height of the scroller
-        $("#divscroller").height($(window).outerHeight() - $(footer).outerHeight() - $("#page_title").outerHeight() - 35);
     });
 
 

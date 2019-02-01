@@ -183,7 +183,8 @@ class DBHelper
      * $result (assoc array) - return above values in an assoc array
      ***********************************************/
     function SP_GET_COLLECTION_CONFIG($iName)
-    {   //USE is sql for changing to the database supplied after the concat.
+    {
+        //USE is sql for changing to the database supplied after the concat.
         $this->getConn()->exec('USE ' . $this->maindb);
         /* PREPARE STATEMENT */
         //CALL is sql for telling the db to execute the function following call.
