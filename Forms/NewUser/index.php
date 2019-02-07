@@ -28,7 +28,7 @@ $Render = new ControlsRender();
 </head>
 <body>
 <?php include "../../Master/bandocat_mega_menu.php"; ?>
-<div class="container">
+<div class="container" id="main">
     <div class="row">
         <div class="col">
             <!-- Put Page Contents Here -->
@@ -68,14 +68,27 @@ $Render = new ControlsRender();
                             <div class="form-row">
                                 <!-- Password -->
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="passwordGroup">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" placeholder="Password" required>
-                                        <div class="valid-feedback">
+                                        <div class="valid-feedback" id="match">
                                             Looks good!
                                         </div>
-                                        <div class="invalid-feedback">
-                                            These passwords do not match.
+                                        <!-- Invalids -->
+                                        <div class="invalid-feedback" id="lowercase">
+                                            A lower case letter
+                                        </div>
+                                        <div class="invalid-feedback" id="uppercase">
+                                            A capital letter
+                                        </div>
+                                        <div class="invalid-feedback" id="digit">
+                                            A digit
+                                        </div>
+                                        <div class="invalid-feedback" id="special">
+                                            A special character
+                                        </div>
+                                        <div class="invalid-feedback" id="size">
+                                            8 or more characters, max 32
                                         </div>
                                     </div>
                                 </div>
@@ -174,6 +187,17 @@ $Render = new ControlsRender();
         if (footerTop < docHeight)
             $('#footer').css('margin-top', 0 + (docHeight - footerTop) + 'px');
     });
+
+    $( window ).resize(function() {
+        var docHeight = $(window).height();
+        var footerHeight = $('#footer').height();
+        var footerTop = $('#footer').position().top + footerHeight;
+
+        if (footerTop < docHeight)
+        {
+            $('#footer').css('margin-top', 0 + (docHeight - footerTop) + 'px');
+        }
+    });
 </script>
 <!-- Page Level Plugin -->
 <script>
@@ -253,7 +277,7 @@ $Render = new ControlsRender();
                                 else {
                                     event.preventDefault();
                                     event.stopPropagation();
-                                    alert("New user created unsuccessfully, user name already exists.");
+                                    alert("New user created unsuccessfully, username already exists.");
                                 }
                             }
                         });
@@ -265,8 +289,113 @@ $Render = new ControlsRender();
         }, false);
     })();
 
-    $('#retypePassword').keyup(function() {
+    $('#password').keyup(function(e) {
+        var good = 0;
 
+        if(hasLowerCase() === false)
+        {
+            $('#lowercase').removeClass("valid-feedback");
+            $('#lowercase').addClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+        }
+
+        else
+        {
+            $('#lowercase').removeClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+            $('#lowercase').addClass("valid-feedback");
+            $('#passwordGroup').addClass("has-success has-feedback");
+            good++;
+        }
+
+        if(hasUpperCase() === false)
+        {
+            $('#uppercase').removeClass("valid-feedback");
+            $('#uppercase').addClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+        }
+
+        else
+        {
+            $('#uppercase').removeClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+            $('#uppercase').addClass("valid-feedback");
+            $('#passwordGroup').addClass("has-success has-feedback");
+            good++;
+        }
+
+        if(hasDigit() === false)
+        {
+            $('#digit').removeClass("valid-feedback");
+            $('#digit').addClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+        }
+
+        else
+        {
+            $('#digit').removeClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+            $('#digit').addClass("valid-feedback");
+            $('#passwordGroup').addClass("has-success has-feedback");
+            good++;
+        }
+
+        if(hasSpecialCharacter() === false)
+        {
+            $('#special').show();
+            $('#special').removeClass("valid-feedback");
+            $('#special').addClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+        }
+
+        else
+        {
+            $('#special').removeClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+            $('#special').addClass("valid-feedback");
+            $('#passwordGroup').addClass("has-success has-feedback");
+            good++;
+        }
+
+        if(hasSize() === false)
+        {
+            $('#size').removeClass("valid-feedback");
+            $('#size').addClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+        }
+
+        else
+        {
+            $('#size').removeClass("invalid-feedback");
+            $('#passwordGroup').removeClass("has-error has-feedback");
+            $('#size').addClass("valid-feedback");
+            $('#passwordGroup').addClass("has-success has-feedback");
+            good++;
+        }
+
+        // Checking to make sure all cases have been met
+        if(good === 5)
+        {
+            $('#lowercase').hide();
+            $('#uppercase').hide();
+            $('#digit').hide();
+            $('#special').hide();
+            $('#size').hide();
+            $('#match').show();
+        }
+
+        else
+        {
+            $('#lowercase').show();
+            $('#uppercase').show();
+            $('#digit').show();
+            $('#special').show();
+            $('#size').show();
+            $('#match').hide();
+        }
+    });
+
+    $('#retypePassword').keyup(function(e) {
         if(checkPassword() === false)
         {
             $('#invalidRetype').show();
@@ -275,16 +404,13 @@ $Render = new ControlsRender();
         else
         {
             $('#invalidRetype').hide();
-            $('#retypeGroup').addClass("has-succes has-feedback");
+            $('#retypeGroup').addClass("has-success has-feedback");
         }
     });
 
     function checkPassword()
     {
-        var password = $("#password").val();
-        var retypePassword = $("#retypePassword").val();
-
-        return retypePassword === password;
+        return $('#password').val() === $('#retypePassword').val();
     }
 
     function passwordPattern()
@@ -300,6 +426,46 @@ $Render = new ControlsRender();
         var password = $("#password").val();
 
         // Make sure you call check password before calling this function
+        return regex.test(password);
+    }
+
+    function hasLowerCase()
+    {
+        var password = $("#password").val();
+        var regex = new RegExp(/[a-z]/);
+
+        return regex.test(password);
+    }
+
+    function hasUpperCase()
+    {
+        var password = $("#password").val();
+        var regex = new RegExp(/[A-Z]/);
+
+        return regex.test(password);
+    }
+
+    function hasDigit()
+    {
+        var password = $("#password").val();
+        var regex = new RegExp(/[0-9]/);
+
+        return regex.test(password);
+    }
+
+    function hasSpecialCharacter()
+    {
+        var password = $("#password").val();
+        var regex = new RegExp(/\W/);
+
+        return regex.test(password);
+    }
+
+    function hasSize()
+    {
+        var password = $("#password").val();
+        var regex = new RegExp(/(?!.*\s).{8,32}$/);
+
         return regex.test(password);
     }
 </script>

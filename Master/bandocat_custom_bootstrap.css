@@ -75,6 +75,10 @@
 }
 /*********************************************************************************/
 
+.Logo {
+
+}
+
 /*Changing the bootstrap dropdown-item a color*/
 .dropdown-menu a:hover {
     color: #FFFFFF !important;
