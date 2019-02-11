@@ -41,3 +41,12 @@ function validateFormUnderscore(str)
         }
 
 }
+
+// This is for the bug reporting form in the navigation bar
+$('#bugReport').submit(function(event) {
+    console.log($(this).serializeArray());
+    // Preventing default actions of a form
+    event.preventDefault();
+
+
+});

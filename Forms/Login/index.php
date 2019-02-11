@@ -218,7 +218,7 @@ session_start();
                             $('#txt_error').html("User is inactive.<br>Please contact Administrator.");
                             break;
                         case 'Success':
-                            window.location.replace("../Main/");
+                            window.location.replace("../Landing/");
                             break;
                         default: break;
                     }

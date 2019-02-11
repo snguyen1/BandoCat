@@ -2096,6 +2096,39 @@ class DBHelper
         $mysqli->close();
         return $data;
     }
+
+    function GET_ERRORS()
+    {
+        $data = array();
+
+        // Getting connection
+        $mysqli = new mysqli($this->getHost(), $this->getUser(), $this->getPwd(), "bandocatdb");
+
+        // Checking to see if the connection failed
+        if($mysqli->connect_errno)
+        {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+            return false;
+        }
+        $sql = "SELECT * FROM `error`";
+
+        $response = $mysqli->query($sql);
+
+        if ($response)
+        {
+            while($row = mysqli_fetch_assoc($response))
+            {
+                $data[] = $row;
+            }
+        }
+        else
+        {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+        $mysqli->close();
+
+        return $data;
+    }
 }
 
 
