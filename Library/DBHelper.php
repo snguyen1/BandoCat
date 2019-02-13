@@ -2129,6 +2129,23 @@ class DBHelper
 
         return $data;
     }
+
+    function GET_USER_EMAIL($id)
+    {
+        //get appropriate db
+
+        $this->getConn()->exec('USE bandocatdb');
+
+        //select booktitles where needs review = 1
+        // AND `weeklyreport`.`collectionID` = ?'
+        $data = array($id);
+        $sth = $this->getConn()->prepare("SELECT `email` FROM `user` WHERE `userID` = ?");
+        $sth->bindParam(':bookTitle',$booktitle,PDO::PARAM_INT);
+        $sth->execute($data);
+        //return the result
+        $result = $sth->fetchColumn();
+        return $result;
+    }
 }
 
 

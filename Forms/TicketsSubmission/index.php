@@ -69,10 +69,19 @@ require '../../Library/DBHelper.php';
                             <div id="divSubject">
 
                             </div>
+                            <!-- What problems are you experiencing? -->
+                            <div class="form-group">
+                                <label for="error">What's wrong?</label>
+                                <select class="form-control" id="error">
+                                    <?php echo $errorTickets; ?>
+                                </select>
+                                <small class="form-control-plaintext">Please select one only. If more than one applies to your situation, just pick the best one that fits and describe the issue.</small>
+                            </div>
                             <!-- What's Wrong? -->
                             <div class="form-group">
-                                <label for="txtDesc">What's Wrong?</label>
+                                <label for="txtDesc">Please describe the problem</label>
                                 <textarea name = "txtDesc" id="txtDesc" rows = "10" cols = "70" class="form-control" required/></textarea>
+                                <p class="form-control-plaintext" id="counter"></p>
                             </div>
                             <input type = "submit" name = "btnSubmit" value = "Submit" class="btn btn-primary"/>
                         </form>
@@ -101,7 +110,16 @@ require '../../Library/DBHelper.php';
 <script>
     $(document).ready(function() {
 
-        var docHeight = $(window).height();
+        var docHeight = $(window).height() - $('#megaMenu').height();
+        var footerHeight = $('#footer').height();
+        var footerTop = $('#footer').position().top + footerHeight;
+
+        if (footerTop < docHeight)
+            $('#footer').css('margin-top', 0 + (docHeight - footerTop) + 'px');
+    });
+
+    $(window).resize(function() {
+        var docHeight = $(window).height() - $('#megaMenu').height();
         var footerHeight = $('#footer').height();
         var footerTop = $('#footer').position().top + footerHeight;
 
@@ -221,6 +239,11 @@ require '../../Library/DBHelper.php';
             length = 2;
         }
     }
+
+    $('#txtDesc').keyup(function(event) {
+        console.log((250 - $(this).val().length));
+        $("#counter").text("Characters left: " + (250 - $(this).val().length));
+    });
 
 </script>
 </body>

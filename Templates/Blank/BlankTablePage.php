@@ -96,7 +96,7 @@ $session = new SessionManager();
     });
 
     $( window ).resize(function() {
-        var docHeight = $(window).height() -  - $('#megaMenu').height();
+        var docHeight = $(window).height() - $('#megaMenu').height();
         var footerHeight = $('#footer').height();
         var footerTop = $('#footer').position().top + footerHeight;
 

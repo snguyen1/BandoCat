@@ -6,21 +6,43 @@ $bugDB = new DBHelper();
 $errors = $bugDB->GET_ERRORS();
 $bugs = "";
 $errorTickets = "";
+$tempb = "";
+$tempt = "";
 
 foreach($errors as $error)
 {
     // Website bugs
     if($error["website"] == 1)
     {
-        $bugs .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        if($error["description"] == "Other")
+        {
+            $tempb .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        }
+
+        else
+        {
+            $bugs .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        }
     }
 
     // Other errors
     else
     {
-        $errorTickets .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        if($error["description"] == "Other")
+        {
+            $tempt .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        }
+
+        else
+        {
+            $errorTickets .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+        }
     }
 }
+
+// Add Other
+$bugs .= $tempb;
+$errorTickets .= $tempt;
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="megaMenu">
     <a class="navbar-brand" href="../../Forms/Landing/">Bandocat</a>
@@ -307,11 +329,12 @@ foreach($errors as $error)
                         <label for="username" class="col-sm-2 col-form-label">User:</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="username" name="username" value="<?php echo $session->getUsername(); ?>">
+                            <input type="text" hidden value="<?php echo $session->getUserID(); ?>" id="userid" name="userid">
                         </div>
                     </div>
                     <!-- Error types -->
                     <div class="form-group">
-                        <label for="error">What kind of problem are you experiencing?</label>
+                        <label for="error">What is the problem?</label>
                         <select class="form-control" id="error" name="error">
                             <?php echo $bugs; ?>
                         </select>
@@ -319,8 +342,8 @@ foreach($errors as $error)
                     </div>
                     <!-- Problem -->
                     <div class="form-group">
-                        <label for="errorMessage">What is the problem?</label>
-                        <textarea rows="5" class="form-control" id="errorMessage" placeholder="Write your error message here" name="errorMessage"></textarea>
+                        <label for="errorMessage">Please describe it</label>
+                        <textarea rows="5" class="form-control" id="errorMessage" placeholder="Write your description here" name="errorMessage"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -333,4 +356,23 @@ foreach($errors as $error)
     </div>
 </div>
 
+<!-- Response Modal -->
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="answerModalTitle">Success!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="answer"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Javascript for the form found in master.js -->
