@@ -33,16 +33,15 @@ class DBHelper
 
     function __construct()
     {
-
-     $root = substr(getcwd(),0,strpos(getcwd(),"htdocs\\")); //point to xampp// directory
-     $config = parse_ini_file($root . DBHelper::$ini_dir);
-     $this->host = $config['servername'];
-     $this->user = $config['username']; //
-     $this->pwd = $config['password'];
-     $this->maindb = $config['dbname'];
-        /*if not currently connected, attempt to connect to DB*/
-        if ($this->getConn() == null)
-            $this->DB_CONNECT(null);
+        $root = substr(getcwd(),0,strpos(getcwd(),"htdocs\\")); //point to xampp// directory
+        $config = parse_ini_file($root . DBHelper::$ini_dir);
+        $this->host = $config['servername'];
+        $this->user = $config['username']; //
+        $this->pwd = $config['password'];
+        $this->maindb = $config['dbname'];
+           /*if not currently connected, attempt to connect to DB*/
+           if ($this->getConn() == null)
+               $this->DB_CONNECT(null);
     }
 
     /**
