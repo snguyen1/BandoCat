@@ -53,7 +53,7 @@ $errorTickets .= $tempt;
         <ul class="navbar-nav">
             <!-- Main Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="../../Forms/Main/main.php">Main Menu <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../../Forms/Main/">Main Menu <span class="sr-only">(current)</span></a>
             </li>
             <!-- Landing Page -->
             <li class="nav-item">
@@ -347,7 +347,7 @@ $errorTickets .= $tempt;
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p id="errorMessageHelp" class="form-control-plaintext">This form is only for website errors, click this link <a href="">here</a> for other errors.</p>
+                    <p id="errorMessageHelp" class="form-control-plaintext">This form is only for website errors, click this link <a href="../../Forms/TicketsSubmission/">here</a> to submit a ticket.</p>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </div>

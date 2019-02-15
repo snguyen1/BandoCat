@@ -50,7 +50,7 @@ $session = new SessionManager();
 
 <!-- This Script Needs to Be added to Every Page, If the Sizing is off from dynamic content loading, then this will need to be taken away or adjusted -->
 <script>
-    $(document).ready(function() {
+    /*$(document).ready(function() {
 
         var docHeight = $(window).height() - $('#megaMenu').height();
         console.log(docHeight);
@@ -70,7 +70,7 @@ $session = new SessionManager();
         {
             $('#footer').css('margin-top', 0 + (docHeight - footerTop) + 'px');
         }
-    });
+    });*/
 </script>
 </body>
 </html>

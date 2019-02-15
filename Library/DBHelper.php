@@ -1486,7 +1486,7 @@ class DBHelper
                 $ret = $sth->rowCount(); //return number of rows affected (must be 1 or 0)
             return $ret;
         }
-        return false;
+        return 0;
     }
 
 

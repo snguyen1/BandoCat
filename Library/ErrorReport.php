@@ -126,7 +126,7 @@ class ErrorReport
         $data = array($entry["url"], $entry["errorMessage"], $entry["userid"], $entry["error"]);
 
         // Preparing statement
-        $sth = $db->getConn()->prepare("INSERT INTO `error_report` (`url`, `message`, `userID`, `errorID`) VALUES (?, ?, ?, ?)");
+        $sth = $db->getConn()->prepare("INSERT INTO `errorreport` (`url`, `message`, `userID`, `errorID`) VALUES (?, ?, ?, ?)");
         $sth->execute($data);
 
         // Execute

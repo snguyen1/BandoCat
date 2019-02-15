@@ -40,7 +40,7 @@ $admin = $session->isAdmin();
 </div>
 <br>
 <!-- Page Contents -->
-<div class="container-fluid">
+<div class="container">
     <!-- First row of the page -->
     <div class="row">
         <!-- ED RACHEL CONTENT -->

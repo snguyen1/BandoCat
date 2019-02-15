@@ -395,7 +395,7 @@ $readrec = array("POOR","GOOD","EXCELLENT");
 <!-- This Script Needs to Be added to Every Page, If the Sizing is off from dynamic content loading, then this will need to be taken away or adjusted -->
 <script>
     $(document).ready(function() {
-        var docHeight = $(window).height();
+        var docHeight = $(window).height() - $('#megaMenu').height();
         var footerHeight = $('#footer').height();
         var footerTop = $('#footer').position().top + footerHeight;
 
@@ -404,7 +404,7 @@ $readrec = array("POOR","GOOD","EXCELLENT");
     });
 
     $(window).resize(function() {
-        var docHeight = $(window).height();
+        var docHeight = $(window).height() - $('#megaMenu').height();
         var footerHeight = $('#footer').height();
         var footerTop = $('#footer').position().top + footerHeight;
 
