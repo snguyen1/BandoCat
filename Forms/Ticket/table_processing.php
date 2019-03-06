@@ -14,7 +14,7 @@ $sql_details = array(
     'host' => $DB->getHost()
 );
 
-$data = $DB->GET_USER_TICKETS($userID);
+$data = $DB->GET_ALL_TICKET_DATA();
 
 //var_dump($data);
-echo json_encode(array("data" =>$data));
+echo json_encode(array("data" => $data));

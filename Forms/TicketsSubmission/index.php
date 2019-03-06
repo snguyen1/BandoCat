@@ -71,8 +71,8 @@ require '../../Library/DBHelper.php';
                             </div>
                             <!-- What problems are you experiencing? -->
                             <div class="form-group">
-                                <label for="error">What's wrong?</label>
-                                <select class="form-control" id="error">
+                                <label for="errorTicket">What's wrong?</label>
+                                <select class="form-control" id="errorTicket">
                                     <?php echo $errorTickets; ?>
                                 </select>
                                 <small class="form-control-plaintext">Please select one only. If more than one applies to your situation, just pick the best one that fits and describe the issue.</small>
@@ -80,7 +80,7 @@ require '../../Library/DBHelper.php';
                             <!-- What's Wrong? -->
                             <div class="form-group">
                                 <label for="txtDesc">Please describe the problem</label>
-                                <textarea name = "txtDesc" id="txtDesc" rows = "10" cols = "70" class="form-control" required/></textarea>
+                                <textarea name = "txtDesc" id="txtDesc" rows = "10" cols = "70" class="form-control" maxlength="250" required/></textarea>
                                 <p class="form-control-plaintext" id="counter"></p>
                             </div>
                             <input type = "submit" name = "btnSubmit" value = "Submit" class="btn btn-primary"/>
@@ -132,14 +132,19 @@ require '../../Library/DBHelper.php';
 
     var libArray = [];
     var length;
+
+
     $( document ).ready(function() {
         // Setting length = 2
         length = 2;
+
 
         /* attach a submit handler to the form */
         $('#frm_ticket').submit(function (event) {
             // Making sure libarray is empty
             libArray = [];
+            var flag = 1;
+            var check = [];
 
             /* stop form from submitting normally */
             event.preventDefault();
@@ -147,8 +152,27 @@ require '../../Library/DBHelper.php';
             /*Converts the list of Library indexes into a JSON format*/
             $.each($("input[name*='txtSubject']"), function (index, libIndex) {
                 libArray.push({"libraryIndex": libIndex.value});
+
+                // Checking for duplicates
+                if(checkDuplicates(check, libIndex.value) === -1)
+                {
+                    check.push(libIndex.value);
+                }
+
+                else
+                {
+                    flag = 0;
+                }
+
                 console.log(libArray);
             });
+
+            // Exit if duplicat values
+            if(flag === 0)
+            {
+                alert("The library indexes you enter must be unique, not the same.");
+                return;
+            }
 
             // Building Subject String
             if(libArray.length > 1)
@@ -177,25 +201,35 @@ require '../../Library/DBHelper.php';
             }
 
             var strLib = JSON.stringify(libArray);
-            console.log(subject);
+            //console.log($('#errorTicket').val());
 
             /* Send the data using post */
             $.ajax({
                 type: 'post',
                 url: 'index_processing.php',
-                data: {dbname: $('#ddlDBname :selected').val(), subject: subject, description: $('#txtDesc').val(), libIndex: strLib},
+                data: {dbname: $('#ddlDBname :selected').val(), subject: subject, description: $('#txtDesc').val(), libIndex: strLib, error: $('#errorTicket').val()},
                 success:function(data){
+                    data = JSON.parse(data);
+                    console.log(data);
 
-                    if(data == "true")
+                    // Getting the status
+                    var status = data;
+                    if(status["status"] === true)
                     {
-                        alert("Ticket Submitted!");
+                        alert(status["message"]);
                         window.close();
                     }
-                    else alert("Ticket failed to submit!");
+                    else alert(status["message"]);
                 }
             });
         });
     });
+
+    function checkDuplicates(array, value)
+    {
+        // Returns -1 if the item could not be found
+        return array.indexOf(value);
+    }
 
     /**********************************************
      * Function: add_fields
@@ -241,10 +275,24 @@ require '../../Library/DBHelper.php';
     }
 
     $('#txtDesc').keyup(function(event) {
+        var characters = 250 - $(this).val().length;
+
+        if(characters >= 0)
+        {
+            $("#counter").text("Characters left: " + characters);
+        }
         console.log((250 - $(this).val().length));
-        $("#counter").text("Characters left: " + (250 - $(this).val().length));
+
     });
 
+    function maxLength(el) {
+        if (!('maxLength' in el)) {
+            var max = el.attributes.maxLength.value;
+            el.onkeypress = function () {
+                if (this.value.length >= max) return false;
+            };
+        }
+    }
 </script>
 </body>
 </html>

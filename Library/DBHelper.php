@@ -520,6 +520,83 @@ class DBHelper
     }
 
     /**********************************************
+     * Function: SP_TICKET_INSERT_ERROR
+     * Description: Inserts a ticket into the DB when a user submits a ticket but includes an error selected from a ddl
+     * Parameter(s):
+     * $iSubject (in string) - Subject or library index
+     * $iPosterID (in int) - userID of submitter
+     * $iCollectionID (in int) - collectionID in which the ticket submit for
+     * $iDescription (in string) - description of what goes wrong
+     * iErrorID (in int) - the errorID of the error the user selected
+     * Return value(s): true if success, false if fail
+     ***********************************************/
+    function SP_TICKET_INSERT_ERROR($iSubject, $iPosterID, $iCollectionID, $iDescription, $iLibraryIndex, $error, $iDocuments)
+    {
+        //Switch to correct DB
+        $this->getConn()->exec('USE ' . $this->maindb);
+
+        /* PREPARE STATEMENT */
+        /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
+        //The ? in the functions parameter list is a variable that we bind a few lines down.
+        //CALL is sql for calling the function built into the db at localhost/phpmyadmin
+        $call = $this->getConn()->prepare("CALL SP_TICKET_INSERT_ERROR(?,?,?,?,?,?,?)");
+
+        //Error handling
+        if (!$call)
+            trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
+        //bind parameters to the sql statement
+        $call->bindParam(1, $iSubject, PDO::PARAM_STR, strlen($iSubject));
+        $call->bindParam(2, $iPosterID, PDO::PARAM_INT);
+        $call->bindParam(3, $iCollectionID, PDO::PARAM_INT);
+        $call->bindParam(4, $iDescription, PDO::PARAM_STR, strlen($iDescription));
+        $call->bindParam(5, $iLibraryIndex, PDO::PARAM_STR, strlen($iLibraryIndex));
+        $call->bindParam(6, $error, PDO::PARAM_INT);
+        $call->bindParam(7, $iDocuments, PDO::PARAM_STR, strlen($iDocuments));
+
+        /* EXECUTE STATEMENT */
+        $call->execute();
+        if ($call)
+            return true;
+        return false;
+    }
+
+    function GET_ALL_TICKET_DATA()
+    {
+        //switch to correct db
+        $this->getConn()->exec('USE ' . $this->maindb);
+        /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
+        //SQL update updates an existing record in the db
+        $sth = $this->getConn()->prepare("SELECT `ticketID`, `displayname`, `subject`, `submissiondate`, `solveddate`, `lastseen`, 
+`status`, `error`.`error`, `notes`, `description`, `collection`.`name`, `collection`.`name`, `collection`.`templateID`, `jsonlink`, `user`.`username`  FROM `ticket` INNER JOIN `collection` ON (`ticket`.`collectionID` = `collection`.`collectionID`) 
+INNER JOIN `user` ON (`ticket`.`posterID` = `user`.`userID`) LEFT JOIN `error` ON (`ticket`.`errorID` = `error`.`errorID`)");
+
+        if (!$sth)
+            trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
+
+        $sth->execute();
+        $ret = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $ret;
+    }
+
+    function GET_USER_TICKETS($userID)
+    {
+        //switch to correct db
+        $this->getConn()->exec('USE ' . $this->maindb);
+        /* Prepares the SQL query, and returns a statement handle to be used for further operations on the statement*/
+        //SQL update updates an existing record in the db
+        $sth = $this->getConn()->prepare("SELECT `ticketID`, `displayname`, `subject`, `submissiondate`, `solveddate`, `lastseen`, 
+`status`, `error`.`error`, `notes`, `description`, `collection`.`name`, `collection`.`name`, `collection`.`templateID`, `jsonlink`  FROM `ticket` INNER JOIN `collection` ON (`ticket`.`collectionID` = `collection`.`collectionID`) 
+INNER JOIN `user` ON (`ticket`.`posterID` = `user`.`userID`) LEFT JOIN `error` ON (`ticket`.`errorID` = `error`.`errorID`) WHERE `posterID` = :id");
+
+        if (!$sth)
+            trigger_error("SQL failed: " . $this->getConn()->errorCode() . " - " . $this->conn->errorInfo()[0]);
+        $sth->bindParam(':id', $userID, PDO::PARAM_INT, 11);
+        $sth->execute();
+        $ret = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $ret;
+    }
+
+    /**********************************************
      * Function: TICKET_UPDATE
      * Description: UPDATE TICKET ON ADMIN Submitting an updated ticket
      * Parameter(s):
@@ -2145,28 +2222,82 @@ class DBHelper
         $result = $sth->fetchColumn();
         return $result;
     }
+
+    // Check if a document exists by the library index
+    function CHECK_DOCUMENT_EXISTS_LIBRARY_INDEX($collection, $libraryIndex)
+    {
+        // Need to switch databases first
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+
+        // Preparing query and binding the parameter
+        $sth = $this->getConn()->prepare("SELECT `documentID` FROM `document` WHERE `libraryIndex` LIKE :libraryIndex");
+        $sth->bindParam(':libraryIndex', $libraryIndex, PDO::PARAM_STR);
+
+        // Checking to make sure query statement executes
+        if($sth->execute())
+        {
+            $documentID = $sth->fetchColumn();
+            return $documentID;
+        }
+
+        else
+        {
+            return false;
+        }
+    }
+
+    // Get database name by collection ID
+    function GET_COLLECTION_DATABASE_NAME($id)
+    {
+        // Getting the connection to the bandocatdb
+        $this->getConn()->exec('USE bandocatdb');
+
+        // Creating array for query
+        $data = array($id);
+
+        // Preparing query and binding the parameter
+        $sth = $this->getConn()->prepare("SELECT `name`, `dbname` FROM `collection` WHERE `collectionID` = ?");
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+
+        // Executing
+        if($sth->execute($data) !== false)
+        {
+            // Only gets first column though
+            // This statement is only getting the name
+            return $sth->fetchColumn();
+        }
+
+        else
+        {
+            return false;
+        }
+    }
+
+    // Find a documents id based on library index and collection name
+    function FIND_DOCUMENT_BY_LIBRARY_INDEX($libraryIndex, $collection)
+    {
+        // Need to switch databases first
+        //get appropriate db
+        $dbname = $this->SP_GET_COLLECTION_CONFIG(htmlspecialchars($collection))['DbName'];
+        $this->getConn()->exec('USE ' . $dbname);
+
+        // Preparing query and binding the parameter
+        $sth = $this->getConn()->prepare("SELECT `documentID` FROM `document` WHERE `libraryIndex` = :libraryIndex");
+        $sth->bindParam(':libraryIndex', $libraryIndex, PDO::PARAM_STR);
+
+        // Executing
+        if($sth->execute() !== false)
+        {
+            // Only gets first column though
+            // This statement is only getting the name
+            return $sth->fetchColumn();
+        }
+
+        else
+        {
+            return false;
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -14,28 +14,28 @@ foreach($errors as $error)
     // Website bugs
     if($error["website"] == 1)
     {
-        if($error["description"] == "Other")
+        if($error["error"] == "Other")
         {
-            $tempb .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+            $tempb .= '<option value="' . $error["errorID"] . '">' . $error["error"] . '</option>';
         }
 
         else
         {
-            $bugs .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+            $bugs .= '<option value="' . $error["errorID"] . '">' . $error["error"] . '</option>';
         }
     }
 
     // Other errors
     else
     {
-        if($error["description"] == "Other")
+        if($error["error"] == "Other")
         {
-            $tempt .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+            $tempt .= '<option value="' . $error["errorID"] . '">' . $error["error"] . '</option>';
         }
 
         else
         {
-            $errorTickets .= '<option value="' . $error["errorID"] . '">' . $error["description"] . '</option>';
+            $errorTickets .= '<option value="' . $error["errorID"] . '">' . $error["error"] . '</option>';
         }
     }
 }
@@ -324,7 +324,7 @@ $errorTickets .= $tempt;
                             <input type="text" readonly class="form-control-plaintext" id="url" name="url" value="<?php $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; echo $actual_link; ?>">
                         </div>
                     </div>
-                    <!-- URL -->
+                    <!-- User -->
                     <div class="form-group row">
                         <label for="username" class="col-sm-2 col-form-label">User:</label>
                         <div class="col-sm-10">

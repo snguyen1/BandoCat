@@ -127,10 +127,9 @@ class ErrorReport
 
         // Preparing statement
         $sth = $db->getConn()->prepare("INSERT INTO `errorreport` (`url`, `message`, `userID`, `errorID`) VALUES (?, ?, ?, ?)");
-        $sth->execute($data);
 
         // Execute
-        if($sth->execute() == false)
+        if($sth->execute($data) == false)
         {
             return ["Error report could not be filed successfully.", false];
         }

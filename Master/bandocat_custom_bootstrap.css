@@ -5,7 +5,7 @@ html {
     min-height: 100%;
 }
 body {
-    margin-bottom: 150px; /* Margin bottom by footer height */
+    margin-bottom: 165px; /* Margin bottom by footer height */
 }
 #footer {
     position: absolute;
