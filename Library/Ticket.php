@@ -313,6 +313,11 @@ class Ticket extends DBHelper
         $this->libraryIndex = $libraryIndex;
     }
 
+    public function CHECK_DUPLICATE_LIBRARY_INDEXES($array)
+    {
+        return array_diff_key( $array , array_unique( $array ) );
+    }
+
     /**********************************************
      * Function: PROCESS_TICKET_EVENT
      * Description: This function will be used to navigate the request to the correct function and will also handle preprocessing.
@@ -361,12 +366,22 @@ class Ticket extends DBHelper
 
             case "update":
                 {
+                    // Making sure ticket doesnt have duplicated values
+                    if(count($this->CHECK_DUPLICATE_LIBRARY_INDEXES($this->data["documents"])) > 0)
+                    {
+                        $response = array(
+                            "status" => false,
+                            "libraryIndex" => "",
+                            "message" => "One or more library indexes are the same. Each library index must be unique."
+                        );
+                        break;
+                    }
+
                     $response = $this->PROCESS_TICKET_UPDATE();
 
                     // Check if process ticket insert failed
                     if(array_key_exists("message", $response))
                     {
-                        print_r($response);
                         // Library index doesn't exists, stop here and return the response
                         break;
                     }

@@ -128,7 +128,8 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
                     <!-- Problem -->
                     <div class="form-group">
                         <label for="txtDesc">Your Description</label>
-                        <textarea rows="5" class="form-control" id="txtDesc" placeholder="Write your description here" name="txtDesc" required>This is what the user wrote</textarea>
+                        <textarea rows="5" class="form-control" id="txtDesc" placeholder="Write your description here" name="txtDesc" maxlength="250" required>This is what the user wrote</textarea>
+                        <p class="form-control-plaintext" id="counter"></p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -146,7 +147,8 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Response</h5>
+                <h5 class="modal-title" id="responseModalTitle"></h5>
+                <input type="text" hidden value="" id="status">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -383,6 +385,10 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
         // When the user clicks on a row on the data table
         $('#dtable tbody').on('click', 'tr', function () {
             var data = table.row( this ).data();
+
+            // Clear counter for the text area
+            $("#counter").empty();
+
             $('#rowModal').modal('show');
             fillModal(data);
             console.log(data);
@@ -410,9 +416,6 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
 
         if(jsonlink !== null && typeof jsonlink[0] !== 'undefined')
         {
-
-            console.log('here');
-
             // Looping through library indexes
             for(var x = 0; x < jsonlink.length; x++)
             {
@@ -502,6 +505,7 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
     }
 
     $('#txtDesc').keyup(function(event) {
+
         var characters = 250 - $(this).val().length;
 
         if(characters >= 0)
@@ -553,14 +557,54 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
     $('#updateTicket').submit(function(event) {
         // Prevent default behavior
         event.preventDefault();
+        var data = $('#updateTicket').serializeArray();
 
         $.ajax({
             url: "./ticket_operations.php",
             method: "POST",
-            data: {update: true, data: $('#updateTicket').serializeArray()},
+            data: {update: true, data: data},
             success:function(response)
             {
+                response = JSON.parse(response);
                 console.log(response);
+                if(response === true)
+                {
+                    // Adding text to title
+                    $('#responseModalTitle').text("Ticket " + data[0]["value"] + " has been updated");
+                    $('#status').val(true);
+
+                    // Adding text to response modal
+                    $('#responseModalBody').empty();
+                    $('#responseModalBody').append("<p>Your changes have been saved!</p>");
+                    $("#rowModal").modal('hide');
+                    $('#responseModal').modal('show');
+                }
+
+                else if(response["message"] != null)
+                {
+                    // Adding text to title
+                    $('#responseModalTitle').text("Ticket " + data[0]["value"] + " has failed to update");
+                    $('#status').val(false);
+
+                    // Adding text to response modal
+                    $('#responseModalBody').empty();
+                    $('#responseModalBody').append("<p>Your changes could not be saved! " + response["message"] + "</p>");
+                    $("#rowModal").modal('hide');
+                    $('#responseModal').modal('show');
+                }
+
+                else
+                {
+                    // Adding text to title
+                    $('#responseModalTitle').text("Ticket " + data[0]["value"] + " has failed to update");
+                    $('#status').val(false);
+
+                    // Adding text to response modal
+                    $('#responseModalBody').empty();
+                    $('#responseModalBody').append("<p>Your changes could not be saved! The server is not responding properly, please report this bug.</p>");
+                    $("#rowModal").modal('hide');
+                    $('#responseModal').modal('show');
+                }
             }
         });
 
@@ -568,36 +612,55 @@ $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
 
     $('#delete').click(function(event) {
         var answer = confirm("Are you sure you want to delete this ticket?");
-
+        var data = $('#updateTicket').serializeArray();
         // Confirm returns true if the user clicks the okay button
         if(answer === true)
         {
             $.ajax({
                 url: "./ticket_operations.php",
                 method: "POST",
-                data: {delete: true, data: $('#updateTicket').serializeArray()},
+                data: {delete: true, data: data},
                 success:function(response)
                 {
-                    if(response === "true")
+                    console.log(response);
+                    response = JSON.parse(response);
+
+                    if(response === true)
                     {
+                        // Adding text to title
+                        $('#responseModalTitle').text("Ticket " + data[0]["value"] + " has been deleted");
+                        $('#status').val(true);
+
                         // Adding text to response modal
                         $('#responseModalBody').empty();
-                        $('#responseModalBody').append("<p>The ticket has been successfully deleted!</p>");
+                        $('#responseModalBody').append("<p>The ticket was deleted successfully!</p>");
                         $("#rowModal").modal('hide');
                         $('#responseModal').modal('show');
-                        resetTable();
                     }
 
                     else
                     {
+                        // Adding text to title
+                        $('#responseModalTitle').text("Ticket " + data[0]["value"] + " could not be deleted");
+                        $('#status').val(false);
+
                         // Adding text to response modal
                         $('#responseModalBody').empty();
-                        $('#responseModalBody').append("<p>The ticket could not be deleted! Please report this bug!</p>");
+                        $('#responseModalBody').append("<p>The ticket could not be deleted! The server is not responding properly, please report this bug.</p>");
                         $("#rowModal").modal('hide');
                         $('#responseModal').modal('show');
                     }
                 }
             })
+        }
+    });
+
+    // When the reponse modal is clicked closed or is forced to hide, this function executes
+    $('#responseModal').on('hidden.bs.modal', function () {
+        // This will reload the page if a ticket was modified or deleted
+        if($('#status').val() === "true")
+        {
+            location.reload();
         }
     });
 
