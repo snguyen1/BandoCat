@@ -6,6 +6,7 @@ require('../../Library/DBHelper.php');
 $DB = new DBHelper();
 $userid = $session-> getUserID();
 $userticketCount = $DB->GET_USER_CLOSEDTICKET_COUNT($userid);
+// Comment
 ?>
 
 <!doctype html>
