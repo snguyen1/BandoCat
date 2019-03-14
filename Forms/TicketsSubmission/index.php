@@ -4,6 +4,7 @@ $session = new SessionManager();
 require '../../Library/DBHelper.php';
     $DB = new DBHelper();
     $collection_array = $DB->GET_COLLECTION_FOR_DROPDOWN();
+    // Another test commit
 ?>
 <!doctype html>
 <html lang="en">
