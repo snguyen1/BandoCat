@@ -1,0 +1,484 @@
+<data>
+	<!--If the document libraryindex Tutorial is removed renumber all the documents' ids to zero-->
+	<document collection = "maps">
+		<id>0</id>
+		<libraryindex>5RB_30</libraryindex>
+		<title>Map of the W.B. Baker Subdivision of the Cody Partition</title>
+		<subtitle>Situated on the Simpson League and Gregorio Farias Grant</subtitle>
+		<scale>1 in = 1000 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>1</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth>11</startmonth>
+		<startday>29</startday>
+		<startyear>1909</startyear>
+		<endmonth>12</endmonth>
+		<endday>03</endday>
+		<endyear>1909</endyear>
+
+		<fieldbooknumber>2</fieldbooknumber>
+		<fieldbookpage>16</fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname></companyname>
+		<documenttype>Map</documenttype>
+		<documentmedium>Blueprint</documentmedium>
+		<author>W.B. Baker</author>
+
+		<frontimage>5RB-_30.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>5RB-_30.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>1</id>
+		<libraryindex>4R_23.1</libraryindex>
+		<title>Map of the Vicinity of Corpus Christi</title>
+		<subtitle></subtitle>
+		<scale>1 ft = 10 mi</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>1</poi>
+		<coordinates>0</coordinates>
+		<coast>1</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1896</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>EXCELLENT</rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author>J. S. Peter, C. E.</author>
+
+		<frontimage>4R-_23.1.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>4R-_23.1.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>2</id>
+		<libraryindex>4R_23.2</libraryindex>
+		<title>Map of the Vicinity of Corpus Christi</title>
+		<subtitle></subtitle>
+		<scale>1 ft = 10 mi</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>1</poi>
+		<coordinates>0</coordinates>
+		<coast>1</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1896</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>EXCELLENT</rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author>J. S. Peter, C. E.</author>
+
+		<frontimage>4R-_23.2.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>4R-_23.2.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>3</id>
+		<libraryindex>2BR_65</libraryindex>
+		<title>Anna Costello 4 Ac Tract</title>
+		<subtitle></subtitle>
+		<scale>1 in = 200 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth>12</endmonth>
+		<endday></endday>
+		<endyear>1939</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>EXCELLENT</readability>
+		<rectifiability>GOOD</rectifiability>
+		<companyname>Blucher Engineering Co.</companyname>
+		<documenttype></documenttype>
+		<documentmedium>Blueprint</documentmedium>
+		<author></author>
+
+		<frontimage>2BR-_65.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>2BR-_65.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>4</id>
+		<libraryindex>2BR_64</libraryindex>
+		<title>Plat Showing Richardson Petroleum Co. 200-Acre Lease out of Section 185 of F.Z. Bishop Palo Alto Subdivision and Location of Proposed Well No. 1 Wm. A. Harlan</title>
+		<subtitle></subtitle>
+		<scale>1 in = 400 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1941</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname>Blucher Engineering Co.</companyname>
+		<documenttype>Plat</documenttype>
+		<documentmedium>Blueprint</documentmedium>
+		<author></author>
+
+		<frontimage>2BR-_64.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>2BR-_64.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>5</id>
+		<libraryindex>2BR_85</libraryindex>
+		<title>Survey of lot out of Bay View Addition</title>
+		<subtitle></subtitle>
+		<scale>1 in = 40 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth>03</startmonth>
+		<startday>27</startday>
+		<startyear>1950</startyear>
+		<endmonth>10</endmonth>
+		<endday>10</endday>
+		<endyear>1950</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>GOOD</rectifiability>
+		<companyname>Blucher Engineering Company</companyname>
+		<documenttype>Plat</documenttype>
+		<documentmedium>Blueprint</documentmedium>
+		<author>Conrad M. Blucher</author>
+
+		<frontimage>2BR-_85.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>2BR-_85.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>6</id>
+		<libraryindex>BF-1_5</libraryindex>
+		<title>Morning Side</title>
+		<subtitle>A Subdivision of 29.68 Acres of Land Out of Old Port Aransas Cliffs</subtitle>
+		<scale>1 in = 80 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1937</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>GOOD</rectifiability>
+		<companyname>Blucher Engineering Company</companyname>
+		<documenttype>Plat</documenttype>
+		<documentmedium>Blueprint</documentmedium>
+		<author>Conrad M. Blucher</author>
+
+		<frontimage>BF-1_5.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>BF-1_5.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>7</id>
+		<libraryindex>BD_101</libraryindex>
+		<title>Proposed Subd. of Part of J. N. Laughlin Tract prepared for Mickey Benton</title>
+		<subtitle></subtitle>
+		<scale></scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>POOR</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname></companyname>
+		<documenttype>Sketch</documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author></author>
+
+		<frontimage>BD-_101.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>BD-_101.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>8</id>
+		<libraryindex>BA_13</libraryindex>
+		<title>Sketch Showing Sanitary Sewer Lines C, C1, &amp; C2 in Block No. 3, Saxet Heights No. 2</title>
+		<subtitle></subtitle>
+		<scale>1 in = 10 ft</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>GOOD</rectifiability>
+		<companyname></companyname>
+		<documenttype>Sketch</documenttype>
+		<documentmedium>Tracing</documentmedium>
+		<author></author>
+
+		<frontimage>BA-_13.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>BA-_13.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>9</id>
+		<libraryindex>AS-2_9</libraryindex>
+		<title>Map of Part of the Estates of Col. B. L. Kinney and Col. W.w Mann</title>
+		<subtitle>in Nueces County</subtitle>
+		<scale>1 in = 2000 vars</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>1</northarrow>
+		<street>1</street>
+		<poi>1</poi>
+		<coordinates>0</coordinates>
+		<coast>1</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1853</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>EXCELLENT</rectifiability>
+		<companyname></companyname>
+		<documenttype>Plat</documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author></author>
+
+		<frontimage>AS-2_9.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>AS-2_9.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>10</id>
+		<libraryindex>AMFrench-1_25</libraryindex>
+		<title>Map of Kinney County</title>
+		<subtitle></subtitle>
+		<scale>1 in = 4000 vars</scale>
+		<is>1</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>1</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear>1879</endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>GOOD</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname></companyname>
+		<documenttype>Map</documenttype>
+		<documentmedium>Cloth</documentmedium>
+		<author></author>
+
+		<frontimage>AMFrench-1_25.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>AMFrench-1_25.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>11</id>
+		<libraryindex>DI_4</libraryindex>
+		<title>Stencil for Wm. W. Green County Surveyor</title>
+		<subtitle></subtitle>
+		<scale></scale>
+		<is>0</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>EXCELLENT</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author></author>
+
+		<frontimage>DI-_4.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>DI-_4.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+	<document collection = "maps">
+		<id>12</id>
+		<libraryindex>BL_24</libraryindex>
+		<title>Blank sheet</title>
+		<subtitle></subtitle>
+		<scale></scale>
+		<is>0</is>
+		<needsreview>1</needsreview>
+		<northarrow>0</northarrow>
+		<street>0</street>
+		<poi>0</poi>
+		<coordinates>0</coordinates>
+		<coast>0</coast>
+		<customername></customername>
+
+		<startmonth></startmonth>
+		<startday></startday>
+		<startyear></startyear>
+		<endmonth></endmonth>
+		<endday></endday>
+		<endyear></endyear>
+
+		<fieldbooknumber></fieldbooknumber>
+		<fieldbookpage></fieldbookpage>
+		<readability>POOR</readability>
+		<rectifiability>POOR</rectifiability>
+		<companyname></companyname>
+		<documenttype></documenttype>
+		<documentmedium>Paper</documentmedium>
+		<author></author>
+
+		<frontimage>BL-_24.tif</frontimage>
+		<backimage></backimage>
+		<frontthumbnail>BL-_24.jpg</frontthumbnail>
+		<backthumbnail></backthumbnail>
+		<completed>0</completed>
+	</document>
+</data>

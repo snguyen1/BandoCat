@@ -12,11 +12,13 @@ class SessionManager
      * @param $userID
      * @param $role
      */
+    //function saves username, userid and role in session state to be accessed in different page.
     public function __construct()
     {
+
         session_start();
         if(isset($_SESSION['username']) && isset($_SESSION['userID']) || isset($_SESSION['role'])) {
-            $this->userName = $_SESSION['username'];
+            $this->userName = $_SESSION['username']; // saves user name
             $this->userID = $_SESSION['userID'];
             $this->role = $_SESSION['role'];
         }
@@ -29,6 +31,7 @@ class SessionManager
         }
 
 
+        //determines whether the there is a user logged in  with session states.
         if($this->userName == null || $this->userName == ""
              || $this->userID == null || $this->userID == ""
             || $this->role == null || $this->role == "") {
@@ -40,6 +43,7 @@ class SessionManager
     /**
      * @return mixed
      */
+    //getter function for userName
     public function getUserName()
     {
         return $this->userName;

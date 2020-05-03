@@ -19,6 +19,7 @@
  *******************************************/
     $username = htmlspecialchars($_POST["username"]);
     $pwd = $_POST["password"];
+
     if($username == "" || $pwd == "")
     {
         echo "Invalid";

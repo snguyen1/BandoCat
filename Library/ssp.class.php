@@ -22,8 +22,11 @@ class SSP {
      *  @param  array $data    Data from the SQL get
      *  @return array          Formatted data in a row based format
      */
+
+
     static function data_output ( $columns, $data )
     {
+
         $out = array();
         for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
             $row = array();

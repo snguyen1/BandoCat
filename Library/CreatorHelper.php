@@ -96,8 +96,11 @@ class CreatorHelper extends DBHelper
      ***********************************************/
     function COLLECTION_DELETE($iColID)
     {
+
         $this->getConn()->exec('USE ' . $this->maindb);
+        //
         $sth = $this->getConn()->prepare("DELETE FROM `collection` WHERE `collectionID` = :colID");
+
         $sth->bindParam(':colID',$iColID,PDO::PARAM_INT);
         $ret = $sth->execute();
         return $ret;
@@ -111,6 +114,7 @@ class CreatorHelper extends DBHelper
      *               $limit1 (boolean - Default: true) - select only 1 row or all rows
      * Return value(s): false if fail, otherwise, return the database name
      ***********************************************/
+
     function GET_DBNAME_FROM_TEMPLATEID($iTemplateID,$limit1 = true)
     {
         $this->getConn()->exec('USE ' . $this->maindb);
@@ -134,6 +138,8 @@ class CreatorHelper extends DBHelper
      *               $iExistingDBName (string) - existing databasename to be cloned from
      * Return value(s): true if success, false if fail
      ***********************************************/
+
+
     function DATABASE_CLONE_NEW($iNewDBName,$iExistingDBName)
     {
         $query = "CREATE DATABASE IF NOT EXISTS " . $iNewDBName;
@@ -164,12 +170,15 @@ class CreatorHelper extends DBHelper
      ***********************************************/
     function DATABASE_RESET_TABLES_AUTOINCREMENT($iDBName)
     {
+
+        //connects to database
         $this->getConn()->query("USE " . $iDBName);
         $sth = $this->getConn()->prepare("SHOW TABLES");
         $sth->execute();
         $table_lists = $sth->fetchAll(PDO::FETCH_NUM);
         foreach($table_lists as $table)
         {
+            //deletes the rows within the table.
             $sth = $this->getConn()->query("TRUNCATE TABLE " . $table[0]);
             $sth->execute();
         }

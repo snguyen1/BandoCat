@@ -47,6 +47,7 @@ $Render = new ControlsRender();
                                 <!-- Renders the Dropdownlist with the collections -->
                                 <?php $Render->GET_DDL_COLLECTION($DB->GET_COLLECTION_FOR_DROPDOWN_FROM_TEMPLATEID(array(4),false),"bluchermaps");?>
                             </select>
+
                         </form>
                         <!-- Displays the count of maps -->
                         <h4 id="txt_counter" ></h4>

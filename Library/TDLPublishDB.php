@@ -40,6 +40,8 @@ trait TDLPublishTrait
      ***********************************************/
     function PUBLISHING_DOCUMENT_GET_NEXT_IN_QUEUE_ID()
     {
+
+        //query database and sorder.
         $sth = $this->getConn()->prepare("SELECT `documentID` FROM `document` WHERE `dspacePublished` = 2 ORDER BY `documentID` ASC LIMIT 1");
         $ret = $sth->execute();
         if($ret)
@@ -88,6 +90,8 @@ trait TDLPublishTrait
      ***********************************************/
     function PUBLISHING_GET_PUBLISH_QUEUE()
     {
+
+        // connect to database and display documents from document table
         $sth = $this->getConn()->prepare("SELECT `documentID`,`libraryindex`,`dspacePublished` FROM `document` WHERE `dspacePublished` = 2 OR `dspacePublished` = 10 ORDER BY `dspacePublished` DESC,`documentID` ASC");
         $ret = $sth->execute();
         //if(!$ret)
